@@ -1,0 +1,54 @@
+{
+  "name": "react-node-boilterplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for React and Node with Webpack and BrowserSync",
+  "main": "webpack.js",
+  "scripts": {
+    "start": "nodemon --ignore app/ server/server.js",
+    "build": "webpack --config webpack.config.js",
+    "watch": "node webpack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wschwanke/react-node-boilterplate.git"
+  },
+  "keywords": [
+    "reactjs",
+    "nodejs",
+    "webpack",
+    "browsersync"
+  ],
+  "author": "Will Schwanke",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/wschwanke/react-node-boilterplate/issues"
+  },
+  "homepage": "https://github.com/wschwanke/react-node-boilterplate#readme",
+  "dependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "body-parser": "^1.15.2",
+    "browser-sync": "^2.18.5",
+    "cookie-parser": "^1.4.3",
+    "css-loader": "^0.26.1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "lodash": "^4.17.2",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-hot-loader": "^1.3.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.10.5",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^1.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
