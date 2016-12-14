@@ -1,8 +1,7 @@
 {
-<<<<<<< 2fb67011bbc8c40c8f8d180f7a7b539e15c3184f
-  "name": "react-node-boilterplate",
+  "name": "opensauce",
   "version": "1.0.0",
-  "description": "Boilerplate for React and Node with Webpack and BrowserSync",
+  "description": "built on react-node-boilerplate by will schwanke",
   "main": "webpack.js",
   "scripts": {
     "start": "nodemon --ignore app/ server/server.js",
@@ -11,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wschwanke/react-node-boilterplate.git"
+    "url": "git+https://github.com/OpenSauced/OpenSauce"
   },
   "keywords": [
     "reactjs",
@@ -19,12 +18,12 @@
     "webpack",
     "browsersync"
   ],
-  "author": "Will Schwanke",
+  "author": "Will Schwanke and Henry Hedges",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/wschwanke/react-node-boilterplate/issues"
+    "url": "https://github.com/OpenSauced/OpenSauce/issues"
   },
-  "homepage": "https://github.com/wschwanke/react-node-boilterplate#readme",
+  "homepage": "https://github.com/OpenSauced/OpenSauce#readme",
   "dependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
@@ -38,6 +37,7 @@
     "express-session": "^1.14.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "lodash": "^4.17.2",
+    "mongoose": "^4.7.2",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "react": "^15.4.1",
@@ -52,23 +52,4 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
   }
-=======
-  "name": "opensauce",
-  "version": "1.0.0",
-  "description": "Open source recipe books for open source people.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OpenSauced/OpenSauce.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OpenSauced/OpenSauce/issues"
-  },
-  "homepage": "https://github.com/OpenSauced/OpenSauce#readme"
->>>>>>> created db schema and mongo connection - testing next
 }
