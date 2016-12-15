@@ -9,7 +9,15 @@ class App extends Component {
 
   render () {
     return (
-      <div>Welcome to OpenSauce!</div>
+      <div>
+       <h1>Welcome to OpenSauce!</h1>
+
+       <p>TEST ENDPOINTS:</p>
+       <a href="users/rub_duckey/profile">users/rub_duckey/profile</a>
+       <br />
+       <a href="recipes/rub_duckey">recipes/rub_duckey</a>
+      </div>
+      
     )
   }
 };

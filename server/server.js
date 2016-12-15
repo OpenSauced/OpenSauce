@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
 app.use('/users', userRoutes);
+
 app.use('/recipes', recipeRoutes);
 
 // Serve the static client HTML files

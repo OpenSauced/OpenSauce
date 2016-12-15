@@ -6,14 +6,14 @@ var dummyDB = require('../db/dummydata.js')
 // add middleware that is specific to this router here:
 
 //route for users homepage
-router.get('/', function(req,res) {
+router.get('/', function(req, res) {
   res.send('You have reached /users/ ')
 })
 
 //route for a specific user profile /user_name/profile
-router.get('/:user_name/profile', function(req, res) {
-  console.log(req.params.user_name)
-  dummyDB.getUser(req.params.user_name)
+router.get('/:userName/profile', function(req, res) {
+  console.log(req.params.userName)
+  dummyDB.getUser(req.params.userName)
   .then(function(data) {
     res.send(data);
   })
@@ -22,9 +22,9 @@ router.get('/:user_name/profile', function(req, res) {
   })
 })
 
-router.post('/:user_name/profile', function(req, res) {
-  console.log(req.params.user_name)
-  dummyDB.getUser(req.params.user_name)
+router.post('/:userName/profile', function(req, res) {
+  
+  dummyDB.getUser(req.params.userName)
   .then(function(data) {
     res.send(data);
   })
