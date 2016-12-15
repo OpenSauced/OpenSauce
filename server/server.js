@@ -36,6 +36,7 @@ db.connection.on('open', function (){
 
 
 
+
 app.use('/users', userRoutes);
 
 app.use('/recipes', recipeRoutes);
