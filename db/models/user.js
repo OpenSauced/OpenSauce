@@ -6,16 +6,14 @@ var UserSchema = new Schema({
 	last_name: String,
 	email: String,
 	username: String,
-	my_recipes: String,
-	// [{
-	// 	type: Schema.Types.ObjectId,
-	// 	ref: 'Recipe'
-	// }],
-	saved_recipes: String,
-	// [{
-	// 	type: Schema.Types.ObjectId,
-	// 	ref: 'Recipe'
-	// }], 
+	my_recipes:[{
+		type: Schema.Types.ObjectId,
+		ref: 'Recipe'
+	}],
+	saved_recipes:[{
+		type: Schema.Types.ObjectId,
+		ref: 'Recipe'
+	}], 
 	user_image: {
 		image_data: Buffer,
 		image_name: String,

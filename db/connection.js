@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const mongodbUri = 'mongo://'+require('./config.js').mLabObj.username+':'+require('./config.js').mLabObj.password+'@ds133328.mlab.com:33328/heroku_vjlpd3gp';
+const mongodbUri = 'mongodb://'+require('./config.js').mLabObj.username+':'+require('./config.js').mLabObj.password+'@ds133328.mlab.com:33328/heroku_vjlpd3gp';
 mongoose.connect(mongodbUri);
 
 const connection = mongoose.connection;

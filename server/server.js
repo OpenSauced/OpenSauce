@@ -4,6 +4,9 @@ const session = require('express-session');
 const router = require('./router/router.js');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const db = require('../db/connection.js');
+const User = require('../db/models/user.js');
+const Recipe = require('../db/models/recipe.js');
 
 // Use express and export it
 const app = express();
