@@ -7,14 +7,14 @@
 // usage:
 const userModel = require('../models/user.js')
 const xPorts = {
-  findUserById: findUserById
+  // findUserById: findUserById
   //somethingElse: somethingElseFn
 }
 
-function findUserById(req, res) {
-    userModel.findOne({user_name: req}).then((user) => {
-        res.status(200).send(user);
-    })
-}
+// function findUserById(req, res) {
+//     userModel.findOne({user_name: req}).then((user) => {
+//         res.status(200).send(user);
+//     })
+// }
 
 module.exports = xPorts;

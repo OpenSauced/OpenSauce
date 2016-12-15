@@ -31,7 +31,7 @@ db.connection.on('open', function (){
 })
 
 //EXAMPLE OF DB USAGE:
-db.userFunctions.findUserById('fake', 'fake')
+//db.userFunctions.findUserById('fake', 'fake')
 
 
 
