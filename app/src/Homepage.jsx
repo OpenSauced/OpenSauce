@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import AppProfileL from './Components/App/AppProfileL.jsx';
+import HPFeedM from './Components/Homepage/HPFeedM.jsx';
+import AppWidgetsR from './Components/App/AppWidgetsR.jsx';
+
 
 class Homepage extends Component {
   constructor () {
@@ -9,6 +13,9 @@ class Homepage extends Component {
 
   render () {
     return (
+      <div>
+        
+      </div>
       <div>
        <h1>Welcome to OpenSauce!</h1>
 
@@ -21,6 +28,5 @@ class Homepage extends Component {
     )
   }
 };
-
 
 export default Homepage;
