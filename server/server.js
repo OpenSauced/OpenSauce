@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const router = require('./router/router.js');
+const userRoutes = require('./routes/userRoutes.js');
+const recipeRoutes = require('./routes/recipeRoutes.js');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const db = require('./db/connection.js');
@@ -24,12 +26,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 // User cookie-parser to parse cookies we get from Facebook
 app.use(cookieParser());
 
+app.use('/users', userRoutes);
+
+app.use('/recipes', recipeRoutes);
+
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));
 // Serve the static client React files
 app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
-// Serve the node modules
-app.use('/lib', express.static(path.join(__dirname, '/../node_modules')));
 
 // Start the actual server listening on the port variable
 app.listen(module.exports.NODEPORT, function (err) {
