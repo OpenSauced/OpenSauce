@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
@@ -13,7 +12,7 @@ var UserSchema = new Schema({
 	saved_recipes:[{
 		type: Schema.Types.ObjectId,
 		ref: 'Recipe'
-	}], 
+	}],
 	user_image: {
 		image_data: Buffer,
 		image_name: String,

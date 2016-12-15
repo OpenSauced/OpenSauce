@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var RecipeSchema = new Schema({
@@ -14,7 +13,7 @@ var RecipeSchema = new Schema({
 	}],
 	directions: String,
 	likes: Number,
-	tags: [String], 
+	tags: [String],
 	recipe_images: [{
 		image_data: Buffer,
 		image_name: String,

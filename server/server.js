@@ -1,16 +1,11 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const userRoutes = require('./routes/userRoutes.js');
-const recipeRoutes = require('./routes/recipeRoutes.js');
-const db = require('./db/dbRouter.js')
+const db = require('./db/db.js')
 const config = require('./config.js')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-// const db = require('./db/connection.js');
-const User = require('./db/models/user.js');
-const Recipe = require('./db/models/recipe.js');
 
 // Use express and export it
 const app = express();
@@ -27,6 +22,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // User cookie-parser to parse cookies we get from Facebook
 app.use(cookieParser());
+
+
+db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.connection.on('open', function (){
+	console.log('Mongdb connection open');
+})
+
 
 app.use('/users', userRoutes);
 
