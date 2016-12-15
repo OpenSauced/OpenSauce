@@ -1,12 +1,15 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const router = require('./router/router.js');
+const userRoutes = require('./routes/userRoutes.js');
+const recipeRoutes = require('./routes/recipeRoutes.js');
+const db = require('./db/db.js')
+const config = require('./env/config')
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
-const config = require('./db/config.js');
 // Use express and export it
 const app = express();
 module.exports.app = app;
@@ -17,12 +20,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 // User cookie-parser to parse cookies we get from Facebook
 app.use(cookieParser());
+
+db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.connection.on('open', function (){
+	console.log('Mongdb connection open');
+})
+
+app.use('/users', userRoutes);
+
+app.use('/recipes', recipeRoutes);
+
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));
 // Serve the static client React files
 app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
-// Serve the node modules
-app.use('/lib', express.static(path.join(__dirname, '/../node_modules')));
 
 
 //passport app strategy
