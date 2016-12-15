@@ -2,9 +2,10 @@
 // this should do stuff!
 
 //this is all fake!!!!
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var RecipeSchema = new Schema({
+var PhotoSchema = new Schema({
   photoData: {},
   userData: {}
 })

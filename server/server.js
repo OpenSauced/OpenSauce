@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const userRoutes = require('./routes/userRoutes.js');
+const recipeRoutes = require('./routes/recipeRoutes.js');
 const db = require('./db/db.js')
-const config = require('./config.js')
+const config = require('./config')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -24,10 +26,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
 
+
 db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.connection.on('open', function (){
 	console.log('Mongdb connection open');
 })
+
+//EXAMPLE OF DB USAGE:
+// db.userFunctions.findUserById(req, res)
+
+
 
 
 app.use('/users', userRoutes);

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var RecipeSchema = new Schema({
@@ -28,3 +29,6 @@ var RecipeSchema = new Schema({
 const Recipe = mongoose.model('recipe', RecipeSchema);
 
 module.exports = Recipe;
+
+
+//good export!
