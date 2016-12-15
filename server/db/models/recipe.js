@@ -14,7 +14,7 @@ var RecipeSchema = new Schema({
 	}],
 	directions: String,
 	likes: Number,
-	tags: [String], 
+	tags: [String],
 	recipe_images: [{
 		image_data: Buffer,
 		image_name: String,
@@ -29,3 +29,6 @@ var RecipeSchema = new Schema({
 const Recipe = mongoose.model('recipe', RecipeSchema);
 
 module.exports = Recipe;
+
+
+//good export!

@@ -13,7 +13,7 @@ var UserSchema = new Schema({
 	saved_recipes:[{
 		type: Schema.Types.ObjectId,
 		ref: 'Recipe'
-	}], 
+	}],
 	user_image: {
 		image_data: Buffer,
 		image_name: String,
