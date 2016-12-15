@@ -3,7 +3,7 @@ const config = require('../env/config.js')
 
 //define models BEFORE functions
 const userModel = require('./models/user.js')
-const recipeModel = require('./models/Recipe.js')
+const recipeModel = require('./models/recipe.js')
 const photoModel = require('./models/photo.js')
 
 //functions should be able to access the models because they are defined BEFORE

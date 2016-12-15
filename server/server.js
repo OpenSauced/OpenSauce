@@ -16,8 +16,6 @@ module.exports.app = app;
 // Check to see if there is a port environment variable or just use port 4040 instead
 module.exports.NODEPORT = process.env.PORT || 4040;
 
-//app.use(morgan);
-
 // Use body-parser for parsing JSON and URLencoded body data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,7 +31,7 @@ db.connection.on('open', function (){
 })
 
 //EXAMPLE OF DB USAGE:
-db.userFunctions.findUserById('fake', 'fake')
+//db.userFunctions.findUserById('fake', 'fake')
 
 
 

@@ -1,0 +1,170 @@
+/**************************************
+React Routes
+**************************************/
+<Login/>
+
+<SignUp/>
+
+<Homepage/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <HPFeedM/>
+  <AppWidgetsR/>
+    <AppWidgetsRSearch/>
+    <AppWidgetsRAddRecipe/>
+
+<AddRecipe/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <AddRecipeR/>
+    <AddRecipeRUploadImage/>
+    <AddRecipeRManualEntry/>
+    <AddRecipeRSearchAPI/>
+  <AddRecipeRConfirm/>
+    <AddRecipeRConfirmIngredients/>
+      <AddRecipeRConfirmIngredient/>
+    <AddRecipeRConfirmDirections/>
+  <AddRecipeRComplete/>
+    <AppSocialMediaButtons/>
+    <AddRecipeRCompleteIngredients/>
+      <AddRecipeRCompleteIngredient/>
+    <AddRecipeRCompleteImages/>
+      <AddRecipeRCompleteImage/>
+    <AddRecipeRCompleteDirections/>
+
+<ViewRecipe/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <ViewRecipeR/>
+
+<Profile/>
+
+/**************************************
+Components
+**************************************/
+<Homepage>
+</Homepage>
+
+<HPFeedM>
+  state {
+    feedRecipies: []
+  }
+</HPFeedM>
+
+<AppProfileL>
+  state {
+    userId:
+    username:
+    pictureUrl:
+    myRecipies: []
+    favRecipies: []
+  }
+</AppProfileL>
+
+<AppProfileLInfo>
+  props {
+    userId:
+    username:
+    pictureUrl:
+  }
+</AppProfileLInfo>
+
+<AppProfileLInfoMyRecipies>
+  props {
+    myRecipies: []
+  }
+</AppProfileLInfoMyRecipies>
+
+<AppProfileLInfoFavRecipies>
+  props {
+    favRecipies: []
+  }
+</AppProfileLInfoFavRecipies>
+
+<AppWidgetsR>
+
+</AppWidgetsR>
+
+<AppWidgetsRSearch>
+  state {
+    searchInput
+  }
+</AppWidgetsRSearch>
+
+<AppWidgetsRAddRecipe>
+  
+</AppWidgetsRAddRecipe>
+
+<AddRecipe/>
+<AddRecipe/>
+
+<AddRecipeR>
+  state: {
+    recipeImage
+    recipeTitle
+    recipe: [{}]
+  }
+</AddRecipeR>
+
+<AddRecipeRUploadImage>
+  props {
+    recipeImage
+  }
+</AddRecipeRUploadImage>
+
+<AddRecipeRManualEntry>
+</AddRecipeRManualEntry>
+
+<AddRecipeRSearchAPI>
+</AddRecipeRSearchAPI>
+
+<AddRecipeRConfirm>
+</AddRecipeRConfirm>
+
+<AddRecipeRConfirmIngredients>
+</AddRecipeRConfirmIngredients>
+
+<AddRecipeRConfirmIngredient>
+</AddRecipeRConfirmIngredient>
+
+<AddRecipeRConfirmDirections>
+</AddRecipeRConfirmDirections>
+
+<AddRecipeRComplete>
+</AddRecipeRComplete>
+
+<AppSocialMediaButtons>
+</AppSocialMediaButtons>
+
+<AddRecipeRCompleteIngredients>
+</AddRecipeRCompleteIngredients>
+
+<AddRecipeRCompleteIngredient>
+</AddRecipeRCompleteIngredient>
+
+<AddRecipeRCompleteImages>
+</AddRecipeRCompleteImages>
+
+<AddRecipeRCompleteImage>
+</AddRecipeRCompleteImage>
+
+<AddRecipeRCompleteDirections>
+</AddRecipeRCompleteDirections>
+
+
+
+
+
+
+
+
+
+
+
+
