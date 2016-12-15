@@ -1,12 +1,22 @@
 const assert = require('assert');
+const db = require('../server/db/connection.js');
 
-const User = require('../db/models/user.js');
+const User = require('../server/db/models/user.js');
 
-describe('Creating records', function() {
-	it('saves a user', function(done){
+var test = true;
+
+describe('passing a test', () => {
+	it('should return true', (done) =>{
+		assert(test);
+		done();
+	})
+})
+
+describe('Creating records', () => {
+	it('saves a user', (done) => {
 		const henry = new User({ first_name:'Henreh', last_name:'Hedges' });
 		henry.save()
-			.then(function(){
+			.then(() => {
 				assert(!henry.isNew);
 				done();
 			})
