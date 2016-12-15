@@ -7,6 +7,6 @@ import App from './App';
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}/>
+    <Route path="/" component={Homepage}/>
   </Router>
 ),document.getElementById('root'));
