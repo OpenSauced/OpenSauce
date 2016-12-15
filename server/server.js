@@ -4,7 +4,7 @@ const session = require('express-session');
 const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
 const db = require('./db/db.js')
-const config = require('./config')
+const config = require('./env/config')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');

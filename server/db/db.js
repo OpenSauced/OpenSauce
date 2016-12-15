@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('../config.js')
+const config = require('../env/config.js')
 
 //define models BEFORE functions
 const userModel = require('./models/user.js')
