@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 
-class App extends Component {
-  constructor (props) {
-    super(props);
+class Homepage extends Component {
+  constructor () {
+    super();
   }
 
   render () {
@@ -23,4 +23,4 @@ class App extends Component {
 };
 
 
-export default App;
+export default Homepage;

@@ -26,6 +26,10 @@ db.connection.on('open', function (){
 	console.log('Mongdb connection open');
 })
 
+//EXAMPLE OF DB USAGE:
+//db.userFunctions.findUserById('fake', 'fake')
+
+
 app.use('/users', userRoutes);
 
 app.use('/recipes', recipeRoutes);
