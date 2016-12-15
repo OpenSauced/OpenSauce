@@ -1,0 +1,48 @@
+React Routes
+<Login/>
+
+<SignUp/>
+
+<Homepage/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <HPFeedM/>
+  <AppWidgetsR/>
+    <AppWidgetsRSearch/>
+    <AppWidgetsRAddRecipe/>
+
+<AddRecipe/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <AddRecipeR/>
+    <AddRecipeRUploadImage/>
+    <AddRecipeRManualEntry/>
+    <AddRecipeRSearchAPI/>
+  <AddRecipeRConfirm/>
+    <AddRecipeRConfirmIngredients/>
+      <AddRecipeRConfirmIngredient/>
+    <AddRecipeRConfirmDirections/>
+  <AddRecipeRComplete/>
+    <AppSocialMediaButtons/>
+    <AddRecipeRCompleteIngredients/>
+      <AddRecipeRCompleteIngredient/>
+    <AddRecipeRCompleteImages/>
+      <AddRecipeRCompleteImage/>
+    <AddRecipeRCompleteDirections/>
+
+<ViewRecipe/>
+  <AppProfileL/>
+    <AppProfileLInfo/>
+    <AppProfileLInfoMyRecipies/>
+    <AppProfileLInfoFavRecipies/>
+  <ViewRecipeR/>
+
+<Profile/>
+
+
+Components
+
