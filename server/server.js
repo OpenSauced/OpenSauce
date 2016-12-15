@@ -1,13 +1,12 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const db = require('./db/db.js');
+const config = require('./env/config');
 const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
 
-const db = require('./db/db.js')
-const config = require('./env/config')
 const auth = require('./routes/authRoutes.js')
-
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -22,26 +21,15 @@ db.connection.on('open', function() {
     console.log('Mongdb connection open');
 })
 
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
-app.use('/recipes', recipeRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 app.use(express.static(path.join(__dirname, '/../app/public')));
 
 app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
 
 app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
-
-// app.get('/facebook/oauth', passport.authenticate('facebook', {scope: ['email'], failureRedirect: '/login'}), (req, res) => {
-//     let cookie = {
-//         session: req.sessionID,
-//         userID: req.user.id
-//     }
-//     res.cookie('fr-session', cookie, {
-//         maxAge: 9000000,
-//         httpOnly: true
-//     }).redirect('/');
-// });
 
 // Start the actual server listening on the port variable
 app.listen(module.exports.NODEPORT, function(err) {
@@ -55,9 +43,6 @@ app.listen(module.exports.NODEPORT, function(err) {
 })
 
 
-///////////////////////////////////////////////////////////////
-/////////////////////// log routes ///////////////////////////
-/////////////////////////////////////////////////////////////
 //example of a locked route:
 app.get('/locked', auth.ensureAuthenticated, function(req, res) {
     res.send('you are logged in!')
