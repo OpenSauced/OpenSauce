@@ -1,5 +1,5 @@
 {
-  "name": "opensauce",
+  "name": "OpenSauce",
   "version": "1.0.0",
   "description": "built on react-node-boilerplate by will schwanke",
   "main": "webpack.js",
