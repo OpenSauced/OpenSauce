@@ -3,10 +3,12 @@ const express = require('express');
 const session = require('express-session');
 const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
+const db = require('./db/dbRouter.js')
+const config = require('./config.js')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const db = require('./db/connection.js');
+// const db = require('./db/connection.js');
 const User = require('./db/models/user.js');
 const Recipe = require('./db/models/recipe.js');
 
