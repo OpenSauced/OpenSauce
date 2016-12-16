@@ -8,11 +8,11 @@ var UserSchema = new Schema({
 	username: String,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
-		ref: 'Recipe'
+		ref: 'recipes'
 	}],
 	saved_recipes:[{
 		type: Schema.Types.ObjectId,
-		ref: 'Recipe'
+		ref: 'recipes'
 	}],
 	user_image: {
 		image_data: Buffer,

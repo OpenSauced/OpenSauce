@@ -1,7 +1,9 @@
 var express = require('express')
 var router = express.Router()
 
-var dummyDB = require('../db/dummydata.js')
+// var dummyDB = require('../db/dummydata.js')
+var db = require('../db/db.js')
+
 
 // add middleware that is specific to this router here:
 
@@ -23,8 +25,16 @@ router.get('/:userName', function(req, res) {
   })
 })
 
-router.post('/:userName', function(req, res) {
-  
+//route to add a new recipe to the DB
+router.post(':userName/add_recipe', function(req, res) {
+  var username = req.params.userName
+  db.recipeFunctions.addNewRecipe(username, req.recipe)
+  .then((recipe) => {
+  	res.send(recipe);
+  })
+  .catch((err) => {
+  	res.send(err);
+  })
 })
 
 module.exports = router

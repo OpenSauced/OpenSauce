@@ -1,21 +1,52 @@
 //see user functions for example
 const recipeModel = require('../models/recipe.js')
-
-const xPorts = {
-  findRecentRecipes: findRecentRecipes
-}
+const userFunctions = require('./userFunctions.js')
+const xPorts = {}
 
 //returns the most recent 10 recipes
-function findRecentRecipes(req, res) {
-    recipeModel.find().sort({createdAt: 'desc'}).limit(10).then((user) => {
-        res.status(200).send(recipes);
-    })
+xPorts.findRecentRecipes = function() {
+    recipeModel.find().sort({ createdAt: 'desc' }).limit(10)
 }
 
-//returns the recipes created by specific user
-function findUserRecipes(req, res){
-	req.body.user.id 
+//adds a new recipe to the DB
+//calls addRecipeToMyRecipes to update 'my_recipes' in user document
+xPorts.addNewRecipe = function(username, recipe) {
+    return userFunctions.findUserByUserName(username)
+        .then((userObj) => {
+            return userObj
+        })
+        .catch((err) => {
+            console.log("recipeFunctions 1 ", err)
+
+        })
+        .then((user) => {
+            return new recipeModel({
+                    title: recipe.title,
+                    creator: user._id,
+                    ingredients: [{
+                        amount: recipe.ingredients.amount,
+                        measurement: recipe.ingredients.measurement,
+                        ingredient_name: recipe.ingredients.ingredient_name
+                    }],
+                    directions: recipe.directions,
+                    likes: recipe.likes,
+                    recipe_images: [{
+                        image_data: 'null',
+                        image_name: 'null',
+                        mimetype: 'null'
+                    }]
+                })
+                .save()
+                .then((recipe) => {
+                    userFunctions.addRecipeToMyRecipes(user._id, recipe._id)
+                    return recipe;
+                })
+                .catch((err) => {
+                    console.log("recipeFunctions 2 ", err)
+                })
+        })
+
 }
+
 
 module.exports = xPorts;
-

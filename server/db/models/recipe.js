@@ -14,15 +14,14 @@ var RecipeSchema = new Schema({
 	}],
 	directions: String,
 	likes: Number,
-	tags: [String],
 	recipe_images: [{
 		image_data: Buffer,
 		image_name: String,
 		mimetype: String
 	}],
-	created_at: {
-		type: Date,
-		default: Date.now
+	timestamps: { 
+		createdAt: Date, 
+		updatedAt: Date
 	}
 })
 
