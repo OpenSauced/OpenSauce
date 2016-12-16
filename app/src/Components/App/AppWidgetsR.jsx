@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import AppWidgetsRSearch from './AppWidgetsRSearch';
+import AppWidgetsRAddRecipe from './AppWidgetsRSearch';
+
 class AppWidgetsR extends Component {
-  constructor () {
+  constructor() {
     super();
   }
 
-  render () {
+  render() {
     return (
-      <div>AppWidgetsR</div>
+      <div>
+        <h1>AppWidgetsR</h1>
+        <AppWidgetsRSearch/>
+      </div>
     )
   }
 }
