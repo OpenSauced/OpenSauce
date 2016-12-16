@@ -6,8 +6,7 @@ var data = {
       last_name: 'Duckey',
       email_address: 'rub_duckey@duckfarm.com',
       user_name: 'rub_duckey',
-      recipes: ['r001'],
-      saved_recipes: ['r001'],
+      saved_recipies: ['r001'],
       picture: 'u001.jpg'
     }
   ],
@@ -70,5 +69,4 @@ data.getRecipes = (userName) => {
     }, 300);
   });
 }
-
 
