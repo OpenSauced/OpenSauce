@@ -5,7 +5,7 @@ var UserSchema = new Schema({
 	first_name: String,
 	last_name: String,
 	email: String,
-	// username: String,
+	username: String,
 	picture: String,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
