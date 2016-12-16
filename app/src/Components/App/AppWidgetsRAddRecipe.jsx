@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const AppWidgetsRAddRecipe = (props) => {
   return (
-    <div></div>
+    <div>AppWidgetsRAddRecipe</div>
   );
 }
 
