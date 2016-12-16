@@ -57,7 +57,7 @@ describe('Creating recipes', () => {
 describe('adding a recipe to a users saved recipes', () => {
     it('saves a recipe', (done) => {
 
-    	const recipe = {
+        const recipe = {
             title: 'Banana Pie',
             ingredients: [{
                 amount: 1,
@@ -80,8 +80,8 @@ describe('adding a recipe to a users saved recipes', () => {
                 return recipe
             })
             .then((recipe) => {
-            	console.log("creator: ", typeof recipe.creator)
-            	console.log("id: ", typeof recipe._id)
+                console.log("creator: ", typeof recipe.creator)
+                console.log("id: ", typeof recipe._id)
                 return userFunctions.addRecipeToSavedRecipes(recipe.creator, recipe._id)
             })
             .then((user) => {
