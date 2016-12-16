@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import HPFeedMRecipeList from './HPFeedMRecipeList';
+
 class HPFeedM extends Component {
-  constructor ({feedRecipies}) {
-    super(feedRecipies);
+  constructor() {
+    super();
   }
 
-  render () {
+  render() {
     return (
-      <div>HPFeedM</div>
+      <div>
+        <h1>HPFeedM</h1>
+        <HPFeedMRecipeList/>
+      </div>
     )
   }
 }
