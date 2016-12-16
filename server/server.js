@@ -49,15 +49,16 @@ passport.use(new Strategy({ //fill these in!!
 //facebook sends back tokens and profile
 function(accessToken, refreshToken, profile, done) {
   //in the DB?
-    db.User.findOne({fb_id: profile.id}).exec().then((data) => {
+    db.userFunctions.findUserById(profile.id).then((data) => {
         //console.log(data);
         if (!data) { //did we get data back? no;
             console.log('profile', profile)
-            new db.User({
-                userName: profile.displayName,
+            new db.userModel({
+                first_name: profile.displayName.split(" ")[0],
+                last_name: profile.displayName.split(" ")[1],
                 fb_id: profile.id,
                 picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=normal'
-            }).save().then((data) => {}).catch((err) => {
+            }).save().then((data) => { console.log(data) }).catch((err) => {
                 console.error(err);
             })
         }

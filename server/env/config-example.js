@@ -6,7 +6,7 @@ module.exports = {
   fbObj: {
       appId: 'null',
       appSecret: 'null',
-      callbackURL: '/facebook/oauth'
+      callbackURL: 'http://localhost:3000/facebook/oauth'
   }
 }
 
