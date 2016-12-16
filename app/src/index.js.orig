@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 
+<<<<<<< HEAD
+import Homepage from './Homepage.jsx';
+=======
 import Homepage from './Homepage';
 import AddRecipe from './AddRecipe';
+>>>>>>> master
 
 
 ReactDOM.render((
