@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-import Homepage from './Homepage';
-import AddRecipe from './AddRecipe';
+import RouteHomepage from './RouteHomepage';
+import RouteAddRecipe from './RouteAddRecipe';
+import Route404 from './Route404';
 
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={Homepage}/>
-    {
-      <Route path="/addrecipe" component={AddRecipe}/>
-    //<Route path="/:user/:recipeId" component={ViewRecipe}/>
-    }
+    {/* Serves Homepage */}
+    <Route path="/" component={RouteHomepage}/>
+    {/* Recipe Routes */}
+    <Route path="/addrecipe" component={RouteAddRecipe}/>
+    {/* These routes will handle 404 errors */}
+    <Route path="/*" component={Route404}/>
+    <Route path="/**/*" component={Route404}/>
   </Router>
 ),document.getElementById('root'));
