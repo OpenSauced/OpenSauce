@@ -5,7 +5,7 @@ const xPorts = {}
 
 //returns the most recent 10 recipes
 xPorts.findRecentRecipes = function() {
-    recipeModel.find().sort({ createdAt: 'desc' }).limit(10)
+    return recipeModel.find().sort({ createdAt: 'desc' }).limit(10)
 }
 
 //adds a new recipe to the DB
@@ -47,6 +47,10 @@ xPorts.addNewRecipe = function(username, recipe) {
         })
 
 }
+
+// xPorts.increaseLikes = function(recipe){
+// 	likes = likes + 1
+// }
 
 
 module.exports = xPorts;
