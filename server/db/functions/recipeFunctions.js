@@ -48,6 +48,16 @@ xPorts.addNewRecipe = function(username, recipe) {
 
 }
 
+//finds and returns one recipe based on recipe ID
+xPorts.findRecipeById = function(recipeId){
+	return recipeModel.findOne({_id: recipeId})
+	.populate('creator')
+	.exec((err, recipe) => {
+		if (err) console.log("error in recipeFunctions: ", err);
+	})
+
+}
+
 // xPorts.increaseLikes = function(recipe){
 // 	likes = likes + 1
 // }
