@@ -21,17 +21,6 @@ Router.get('/', function(req,res) {
 })
 
 
-//route for a specific user profile /user_name/profile
-// router.get('/:userName', function(req, res) {
-//   console.log(req.params.userName);
-//   dummyDB.getRecipes(req.params.userName)
-//   .then(data => {
-//     res.send(data);
-//   })
-//   .catch(err => {
-//     res.send(err);
-//   })
-// })
 
 //route to add a new recipe to the DB
 Router.post(':userName/add_recipe', function(req, res) {
@@ -42,6 +31,30 @@ Router.post(':userName/add_recipe', function(req, res) {
   })
   .catch((err) => {
   	res.send(err);
+  })
+})
+
+//route to return a single recipe
+Router.get('/:recipeId/recipe', function(req, res){
+  var recipeId = req.params.recipeId
+ db.recipeFunctions.findRecipeById(recipeId)
+ .then((recipe) => {
+    res.send(recipe);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
+Router.get('/save', function(req, res){
+  var recipeId = req.data.recipe._id
+  var userId = req.data.user._id
+  db.recipeFunctions.saveRecipe(userId, recipeId)
+  .then((recipe) => {
+    res.send(recipe);
+  })
+  .catch((err) => {
+    res.send(err);
   })
 })
 

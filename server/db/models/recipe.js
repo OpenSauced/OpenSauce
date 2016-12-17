@@ -5,7 +5,7 @@ var RecipeSchema = new Schema({
 	title: String,
 	creator: {
 		type: Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'users'
 	},
 	ingredients: [{
 		amount: Number,
