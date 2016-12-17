@@ -1,47 +1,43 @@
 const userModel = require('../models/user.js')
 const xPorts = {}
 
-xPorts.findByUserName = function(name) {
-    console.log('looking for user userFunctions.js', name);
-    return userModel.findOne({username: name})
+//returns a user object based on a username
+xPorts.findUserByUserName = function(username) {
+    return userModel.findOne({ username: username })
+        .populate('my_recipes')
+        .populate('saved_recipes')
+        .exec((err, user) => {
+            if (err) console.log("error in userFunctions 1: ", err);
+        })
 }
 
-xPorts.updateSession = function(user, hash) {
-  return xPorts.findByUserName(user.username).then(function(userDB) {
-    userDB.session = hash
-    userDB.update()
-    userDB.save()
-    console.log('saved hash to session userFunctions.js', userDB);
-    return userDB
-  })
+//returns the recipes created by specific user
+xPorts.findUserRecipes = function(username) {
+    xPorts.findUserByUserName(username)
+        .then((user) => {
+            return user.my_recipes
+        })
 }
 
-xPorts.findOrCreateUser = function(userData) {
-    return xPorts.findByUserName(userData.username).then(function(data) {
-        if (!data) { //no data, user isnt in the db
-            console.log('didnt find a user, creating one', userData);
-            xPorts.saveUser({
-                first_name: userData.firstName,
-                last_name: userData.lastName,
-                email: userData.email,
-                session: 'null',
-                username: userData.username,
-                picture: 'null',
-                password: userData.password
-            })
-            return false
-        } else if (data) { //got data
-            return true
+//Adds a recipe id reference to the user's my_recipe object
+xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
+    return userModel.findByIdAndUpdate(user.userId, {
+        $push: {
+            'my_recipes': {
+                ref: recipeId
+            }
         }
     })
 }
 
-xPorts.saveUser = function(user) {
-    // console.log('saving a user', user)
-    new userModel(user).save().then((data) => {
-        console.log('saved a profile')
-    }).catch((err) => {
-        console.error('ERROR IN USER FUNCTIONS SAVING:', err);
+//Adds a recipe id reference to the user's saved recipe object
+xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
+    return userModel.findByIdAndUpdate(user.userId, {
+        $push: {
+            'saved_recipes': {
+                ref: recipeId
+            }
+        }
     })
 }
 
