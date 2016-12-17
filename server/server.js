@@ -5,6 +5,7 @@ const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
 const db = require('./db/db.js')
 const config = require('./env/config')
+const authFn = require('./routes/authRoutes.js')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -67,7 +68,7 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -89,4 +90,9 @@ app.listen(module.exports.NODEPORT, function (err) {
   if (err) { console.error(err); }
   // If there is not an error console log what port the server is running on
   else { console.log('Server running on port %s', module.exports.NODEPORT) }
+})
+
+//example of a locked route:
+app.get('/locked', authFn.ensureAuthenticated, function(req, res) {
+	res.send('you are logged in!')
 })
