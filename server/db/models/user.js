@@ -5,8 +5,9 @@ var UserSchema = new Schema({
 	first_name: String,
 	last_name: String,
 	email: String,
-	username: String,
+	// username: String,
 	picture: String,
+	fb_id: Number,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
 		ref: 'Recipe'

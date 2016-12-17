@@ -12,19 +12,23 @@ xPorts.findByUserName = function(profile) {
     return userModel.findOne({ username: (profile.displayName.split(" ")[0] + '_' + profile.displayName.split(" ")[1]) })
 }
 
-
+xPorts.findById = function(profile) {
+    return userModel.findOne({ fb_id: profile.id })
+}
 
 xPorts.createOrFindUser = function(profile) {
-  return xPorts.findByUserName(profile).then(function(data) {
-    console.log('data inside user functions', data)
+  return xPorts.findById(profile).then(function(data) {
     if (!data) {  //no data, user isnt in the db
-      xPorts.saveUser({ first_name: profile.displayName.split(" ")[0],
-          last_name: profile.displayName.split(" ")[1],
-          username: (profile.displayName.split(" ")[0] + '_' + profile.displayName.split(" ")[1] ),
+      console.log('didnt find a user, creating one', profile);
+      xPorts.saveUser({
+          email: profile.email,
           fb_id: profile.id,
+          first_name: profile.displayName.split(" ")[0],
+          last_name: profile.displayName.split(" ")[1],
+          // username: (profile.displayName.split(" ")[0] + '_' + profile.displayName.split(" ")[1] ),
           picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=normal' })
     } else if (data) { //got data
-      console.log('user exists, returning it', data)
+      console.log('user exists, returning it')
       return data
     }
   })
