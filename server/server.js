@@ -37,9 +37,9 @@ db.connection.on('open', function (){
 
 
 
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
-app.use('/recipes', recipeRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 // Serve the static client HTML files
 app.use(express.static(path.join(__dirname, '/../app/public')));
