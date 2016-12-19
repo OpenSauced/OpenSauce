@@ -7,19 +7,18 @@
 const userModel = require('../models/user.js')
 const xPorts = {}
 
-xPorts.findByUserName = function(profile) {
-    console.log('looking for user');
-    return userModel.findOne({username: profile})
+xPorts.findByUserName = function(name) {
+    console.log('looking for user', name);
+    return userModel.findOne({username: name})
 }
 
-// xPorts.findById = function(id) {
-//     return userModel.findOne({fb_id: .id})
-// }
-
 xPorts.updateSession = function(user, hash) {
-  xPorts.findByUserName(user).then(function(userDB) {
-    userDB.session.session = hash
-    usersDB.session.user = user
+  return xPorts.findByUserName(user.username).then(function(userDB) {
+    userDB.session = hash
+    userDB.update()
+    userDB.save()
+    console.log('saved hash', userDB);
+    return userDB
   })
 }
 
@@ -31,17 +30,13 @@ xPorts.findOrCreateUser = function(userData) {
                 first_name: userData.firstName,
                 last_name: userData.lastName,
                 email: userData.email,
-                // fb_id: userData.id,
+                session: 'null',
                 username: userData.username,
                 picture: 'null',
-                password_hash: userData.password
-                // username: (userData.displayName.split(" ")[0] + '_' + userData.displayName.split(" ")[1] ),
-                // picture: 'https://graph.facebook.com/' + userData.id + '/picture?type=normal'
+                password: userData.password
             })
-            console.log('returning true');
             return false
         } else if (data) { //got data
-            console.log('user exists, returning it')
             return true
         }
     })

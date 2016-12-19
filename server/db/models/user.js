@@ -7,7 +7,7 @@ var UserSchema = new Schema({
 	email: String,
 	username: String,
 	picture: String,
-	password_hash: String,
+	password: String,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
 		ref: 'Recipe'
@@ -21,10 +21,7 @@ var UserSchema = new Schema({
 		image_name: String,
 		mimetype: String
 	},
-	session_data: {
-		session: String,
-		user: String
-	},
+	session: String,
 	created_at: {
 		type: Date,
 		default: Date.now

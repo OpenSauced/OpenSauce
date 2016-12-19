@@ -47,7 +47,7 @@ app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 app.listen(module.exports.NODEPORT, function(err) {
     // If there is an error log it
     if (err) {
-        console.error(err// If there is not an error console log what port the server is running on
+        console.error(err // If there is not an error console log what port the server is running on
         );
     } else {
         console.log('Server running on port %s', module.exports.NODEPORT)
@@ -59,25 +59,44 @@ app.get('/locked', auth.ensureAuthenticated, function(req, res) {
     res.send('you are logged in!')
 })
 
-
 app.get('/signup', function(req, res) {
-	res.sendFile(path.resolve(__dirname + '/../app/public/signup.html'));
+    res.sendFile(path.resolve(__dirname + '/../app/public/signup.html'));
 })
 app.get('/login', function(req, res) {
-	res.sendFile(path.resolve(__dirname + '/../app/public/login.html'));
+    res.sendFile(path.resolve(__dirname + '/../app/public/login.html'));
 })
 
-
 app.post('/login', function(req, res) {
+    auth.login(req.body).then(function(cook) {
+        if (cook) {
+          //cookie chaining!
+          //sets user and session
+          //very hard to verify / fake
+          //we dont verify, we just check and see if the user
+          //has that exact session. Not recreating it. Username is just for lookup
+            res.cookie('session', cook[1], {
+                maxAge: 9000000,
+                httpOnly: true
+            }).cookie('user', cook[0].username, {
+                maxAge: 9000000,
+                httpOnly: true
+            }).redirect('/');
+            console.log('cook', cook);
+            //LOGGED!
+            res.redirect('/')
+        } else if (!cook) {
+            res.end('wrong user and passsword combo')
+        }
+    })
 })
 
 app.post('/signup', function(req, res) {
-	auth.signUp(req.body).then(function(exists) {
-    console.log('.then')
-			if (exists === true) {
-				res.status(200).send('Erorr username taken, please choose another.');
-			} else if (exists === false) {
-				res.status(200).redirect('/login')
-			}
-	})
+    auth.signUp(req.body).then(function(exists) {
+        console.log('.then')
+        if (exists === true) {
+            res.status(200).send('Erorr username taken, please choose another.');
+        } else if (exists === false) {
+            res.status(200).redirect('/login')
+        }
+    })
 })

@@ -22,21 +22,28 @@ auth.signUp = function(userData) {
 }
 
 auth.login = function(user) {
-    return db.getUserByUserName(user.username).then(function(userDB) {
-        if (userDB.password) {
+    return db.userFunctions.findByUserName(user.username).then(function(userDB) {
+      console.log('got a user from the db', userDB);
+        if (userDB !== null) {
             if (user !== [] && user.username === userDB.username) {
                 if (bcrypt.compareSync(user.password, userDB.password)) {
+                  console.log('3');
                     var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
                     return db.userFunctions.updateSession(user, hash).then(function(userDB) {
+                      console.log('4', userDB);
                       return [user, hash]
                     })
                 } else {
-                    var concat = ('worng user/pass combos, comparing ' + user.password + ' ' + userDB.password)
-                    res.status(404).end(concat)
+                  console.log('returning null');
+                  return null;
                 }
-            }
+            } else {
+              console.log('returning null');
+              return null;
+            };
         } else {
-            res.status(404).end('worng user/pass combos')
+          console.log('returning null');
+          return null;
         }
     })
 }
