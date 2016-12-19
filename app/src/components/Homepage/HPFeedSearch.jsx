@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class HPFeedSearch extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div>
-        <input type="text" placeholder="Search..."/>
-      </div>
-    );
-  }
+const HPFeedSearch = ({searchInputValue, handleSearchInputValue}) => {
+  return (
+    <div className="row">
+      <input type="text" placeholder="Search..." value={searchInputValue} onChange={handleSearchInputValue}/>
+    </div>
+  );
 }
 
 export default HPFeedSearch;

@@ -7,8 +7,10 @@ class AppHeader extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to OpenSauce</h1>
+      <div className="container-fluid">
+        <div className="row">
+          <h1>Welcome to OpenSauce</h1>
+        </div>
         {this.props.children}
       </div>
     );
