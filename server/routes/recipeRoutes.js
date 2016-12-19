@@ -4,10 +4,6 @@ var Router = express.Router()
 // var dummyDB = require('../db/dummydata.js')
 var db = require('../db/db.js')
 
-
-// add middleware that is specific to this router here:
-
-
 //route for homepage which returns recent recipes
 Router.get('/', function(req,res) {
   db.recipeFunctions.findRecentRecipes()
@@ -46,22 +42,20 @@ Router.get('/:recipeId/recipe', function(req, res){
   })
 })
 
+//NEEDS TEST
+//route to save a recipe to a user's saved recipes object
 Router.get('/save', function(req, res){
   var recipeId = req.data.recipe._id
   var userId = req.data.user._id
-  db.recipeFunctions.saveRecipe(userId, recipeId)
-  .then((recipe) => {
-    res.send(recipe);
+  db.userFunctions.saveRecipe(userId, recipeId)
+  .then((user) => {
+    res.send(user);
   })
   .catch((err) => {
     res.send(err);
   })
-})
+}) 
 
-//takes a boolean (true=liked, false=unliked)
-//increases or decreases a recipe's like count
-// route.put('api/:userName/like', function(req, res){
 
-// })
 
 module.exports = Router
