@@ -19,9 +19,9 @@ Router.get('/', function(req,res) {
 
 
 //route to add a new recipe to the DB
-Router.post(':userName/add_recipe', function(req, res) {
-  var username = req.params.userName
-  db.recipeFunctions.addNewRecipe(username, req.recipe)
+Router.post('/:username/addrecipe', function(req, res) {
+  var username = req.params.username
+  db.recipeFunctions.addNewRecipe(username, req.body)
   .then((recipe) => {
   	res.send(recipe);
   })
@@ -42,12 +42,11 @@ Router.get('/:recipeId/recipe', function(req, res){
   })
 })
 
-//NEEDS TEST
 //route to save a recipe to a user's saved recipes object
-Router.get('/save', function(req, res){
-  var recipeId = req.data.recipe._id
-  var userId = req.data.user._id
-  db.userFunctions.saveRecipe(userId, recipeId)
+Router.post('/save', function(req, res){
+  var recipeId = req.body.recipe._id
+  var userId = req.body.user._id
+  db.userFunctions.addRecipeToSavedRecipes(userId, recipeId)
   .then((user) => {
     res.send(user);
   })

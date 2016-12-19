@@ -2,7 +2,7 @@ const userModel = require('../models/user.js')
 const xPorts = {}
 
 //returns a user object based on a username
-xPorts.findUserByUserName = function(username) {
+xPorts.findByUserName = function(username) {
     return userModel.findOne({ username: username })
         .populate('my_recipes')
         .populate('saved_recipes')
@@ -13,7 +13,7 @@ xPorts.findUserByUserName = function(username) {
 
 //returns the recipes created by specific user
 xPorts.findUserRecipes = function(username) {
-    xPorts.findUserByUserName(username)
+    xPorts.findByUserName(username)
         .then((user) => {
             return user.my_recipes
         })
@@ -21,20 +21,19 @@ xPorts.findUserRecipes = function(username) {
 
 //Adds a recipe id reference to the user's my_recipe object
 xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
-    userModel.findOne({_id: userId })
+    return userModel.findOneAndUpdate({ _id: userId }, {
+            $push: {
+                'my_recipes': recipeId
+            }
+        })
         .then((user) => {
-        	console.log("USER*********** ", user)
+        	return user
         })
         .catch((err) => {
-            console.log("test userFunctions  ", err)
-        }) // return userModel.findOneAndUpdate({ _id: userId }, {
-        //     $push: {
-        //         'my_recipes': recipeId
-        //     }
-        // })
+            console.log("error in userFunctions 2", err)
+        }) 
 }
 
-//NEEDS TEST
 //Adds a recipe id reference to the user's saved recipe object
 xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
     return userModel.findOneAndUpdate({ _id: userId }, {
@@ -46,7 +45,7 @@ xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
             return userModel.findOne({ _id: oldUser._id })
         })
         .catch((err) => {
-            console.log("test userFunctions  ", err)
+            console.log("error in userFunctions 3", err)
         })
 }
 

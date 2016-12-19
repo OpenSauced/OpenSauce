@@ -11,6 +11,29 @@ class Homepage extends Component {
     super();
   }
 
+  componentDidMount(){
+    this.getProjects()
+  }
+
+  getProjects() {
+    $.ajax({
+      method: 'POST',
+      url: '/api/recipes/save',
+      contentType:'application/json',
+      dataType: 'json',
+      data: JSON.stringify({recipe:{{_id: 58584e7d758633cb226f86f2}}, user: {{_id: 585864496f1d6320b3f2d5ea}}}),
+      success: function(user) {
+         console.log(user)
+      },
+      error: function(xhr, status, err) {
+          console.error( status, err.toString());
+      }
+    });
+  }
+
+
+
+
   render() {
     return (
       <div>
