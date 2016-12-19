@@ -69,11 +69,11 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
     auth.login(req.body).then(function(cook) {
         if (cook) {
-          //cookie chaining!
-          //sets user and session
-          //very hard to verify / fake
-          //we dont verify, we just check and see if the user
-          //has that exact session. Not recreating it. Username is just for lookup
+            //cookie chaining!
+            //sets user and session
+            //very hard to verify / fake
+            //we dont verify, we just check and see if the user
+            //has that exact session. Not recreating it. Username is just for lookup
             res.cookie('session', cook[1], {
                 maxAge: 9000000,
                 httpOnly: true
@@ -88,6 +88,12 @@ app.post('/login', function(req, res) {
             res.end('wrong user and passsword combo')
         }
     })
+})
+
+app.get('/logout', function(req, res) {
+  res.clearCookie("user");
+  res.clearCookie("session");
+    res.redirect('/')
 })
 
 app.post('/signup', function(req, res) {

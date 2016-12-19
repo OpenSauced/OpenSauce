@@ -1,14 +1,18 @@
 var bcrypt = require('bcrypt-nodejs');
 var cookie = require('cookie');
+const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
 
 const auth = {}
 
 auth.ensureAuthenticated = function(req, res, next) {
-    // if (req.isAuthenticated())
-    return next();
-    // else
-    //   res.end('this route is locked, please log in')
+  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
+    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+      return next();
+    } else {
+      res.end('this route is locked, please log in')
+    }
+  })
 }
 
 module.exports = auth
