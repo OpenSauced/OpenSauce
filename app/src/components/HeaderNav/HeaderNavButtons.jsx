@@ -5,7 +5,7 @@ import HeaderNavButton from './HeaderNavButton';
 const HeaderNavButtons = () => {
   return (
     <div>
-      <HeaderNavButton name="My Recipies"/>
+      <HeaderNavButton name="My Recipes"/>
       <HeaderNavButton name="Add Recipe"/>
     </div>
   );

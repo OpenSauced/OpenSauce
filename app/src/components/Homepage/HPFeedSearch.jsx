@@ -7,7 +7,9 @@ class HPFeedSearch extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <input type="text" placeholder="Search..."/>
+      </div>
     );
   }
 }

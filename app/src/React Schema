@@ -8,8 +8,8 @@ React Routes
 <Homepage/>
   <AppProfileL/>
     <AppProfileLInfo/>
-    <AppProfileLInfoMyRecipies/>
-    <AppProfileLInfoFavRecipies/>
+    <AppProfileLInfoMyRecipes/>
+    <AppProfileLInfoFavRecipes/>
   <HPFeedM/>
   <AppWidgetsR/>
     <AppWidgetsRSearch/>
@@ -18,8 +18,8 @@ React Routes
 <AddRecipe/>
   <AppProfileL/>
     <AppProfileLInfo/>
-    <AppProfileLInfoMyRecipies/>
-    <AppProfileLInfoFavRecipies/>
+    <AppProfileLInfoMyRecipes/>
+    <AppProfileLInfoFavRecipes/>
   <AddRecipeR/>
     <AddRecipeRUploadImage/>
     <AddRecipeRManualEntry/>
@@ -39,8 +39,8 @@ React Routes
 <ViewRecipe/>
   <AppProfileL/>
     <AppProfileLInfo/>
-    <AppProfileLInfoMyRecipies/>
-    <AppProfileLInfoFavRecipies/>
+    <AppProfileLInfoMyRecipes/>
+    <AppProfileLInfoFavRecipes/>
   <ViewRecipeR/>
 
 <Profile/>
@@ -53,7 +53,7 @@ Components
 
 <HPFeedM>
   state {
-    feedRecipies: []
+    feedRecipes: []
   }
 </HPFeedM>
 
@@ -62,8 +62,8 @@ Components
     userId:
     username:
     pictureUrl:
-    myRecipies: []
-    favRecipies: []
+    myRecipes: []
+    favRecipes: []
   }
 </AppProfileL>
 
@@ -75,17 +75,17 @@ Components
   }
 </AppProfileLInfo>
 
-<AppProfileLInfoMyRecipies>
+<AppProfileLInfoMyRecipes>
   props {
-    myRecipies: []
+    myRecipes: []
   }
-</AppProfileLInfoMyRecipies>
+</AppProfileLInfoMyRecipes>
 
-<AppProfileLInfoFavRecipies>
+<AppProfileLInfoFavRecipes>
   props {
-    favRecipies: []
+    favRecipes: []
   }
-</AppProfileLInfoFavRecipies>
+</AppProfileLInfoFavRecipes>
 
 <AppWidgetsR>
 

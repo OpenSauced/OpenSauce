@@ -11,7 +11,7 @@ class HPFeed extends Component {
   }
 
   componentDiDMount() {
-    this.state {
+    this.state = {
       searchInputValue: ''
     };
   }
@@ -24,7 +24,7 @@ class HPFeed extends Component {
     return (
       <div>
         <AppHeader>
-          <HPFeedSearch />
+          <HPFeedSearch/>
         </AppHeader>
         <HPFeedRecipeList/>
       </div>

@@ -8,7 +8,8 @@ class AppHeader extends Component {
   render() {
     return (
       <div>
-        <AppHeaderTitle/>
+        <h1>Welcome to OpenSauce</h1>
+        {this.props.children}
       </div>
     );
   }

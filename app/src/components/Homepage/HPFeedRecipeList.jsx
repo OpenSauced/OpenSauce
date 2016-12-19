@@ -2,7 +2,7 @@ import React from 'react';
 
 import HPFeedRecipe from './HPFeedRecipe';
 
-const HPFeedRecipeList = () => {
+const HPFeedRecipeList = (recipes) => {
   return (
     <div>
       <h3>HPFeedRecipeList</h3>
