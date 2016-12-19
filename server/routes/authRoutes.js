@@ -1,5 +1,4 @@
 var bcrypt = require('bcrypt-nodejs');
-var cookie = require('cookie');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
 
