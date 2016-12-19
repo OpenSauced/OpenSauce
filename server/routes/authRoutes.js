@@ -27,26 +27,23 @@ auth.signUp = function(userData) {
 
 auth.login = function(user) {
     return db.userFunctions.findByUserName(user.username).then(function(userDB) {
-      console.log('got a user from the db', userDB);
         if (userDB !== null) {
             if (user !== [] && user.username === userDB.username) {
                 if (bcrypt.compareSync(user.password, userDB.password)) {
-                  console.log('3');
                     var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
                     return db.userFunctions.updateSession(user, hash).then(function(userDB) {
-                      console.log('4', userDB);
                       return [user, hash]
                     })
                 } else {
-                  console.log('returning null');
+                  console.log('returning null in login auth.js 1');
                   return null;
                 }
             } else {
-              console.log('returning null');
+              console.log('returning null in login auth.js 2');
               return null;
             };
         } else {
-          console.log('returning null');
+          console.log('returning null in login auth.js 3');
           return null;
         }
     })

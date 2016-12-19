@@ -8,7 +8,7 @@ const userModel = require('../models/user.js')
 const xPorts = {}
 
 xPorts.findByUserName = function(name) {
-    console.log('looking for user', name);
+    console.log('looking for user userFunctions.js', name);
     return userModel.findOne({username: name})
 }
 
@@ -17,7 +17,7 @@ xPorts.updateSession = function(user, hash) {
     userDB.session = hash
     userDB.update()
     userDB.save()
-    console.log('saved hash', userDB);
+    console.log('saved hash to session userFunctions.js', userDB);
     return userDB
   })
 }
