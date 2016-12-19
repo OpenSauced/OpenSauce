@@ -38,3 +38,8 @@ jspm_packages
 
 server/env/*
 !server/env/config-example.js
+
+app/public/dist
+
+# hidden files
+.DS_Store
