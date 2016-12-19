@@ -11,7 +11,8 @@ xPorts.findRecentRecipes = function() {
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
 xPorts.addNewRecipe = function(username, recipe) {
-    return userFunctions.findUserByUserName(username)
+    console.log(recipe)
+    return userFunctions.findByUserName(username)
         .then((userObj) => {
             return userObj
         })

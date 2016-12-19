@@ -26,7 +26,7 @@ describe('Creating records', () => {
 })
 
 describe('Creating recipes', () => {
-    it.only('saves a recipe', (done) => {
+    it('saves a recipe', (done) => {
         const recipe = {
             title: 'Cherry Pie',
             ingredients: [{
