@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Nav from './components/Nav/Nav'
+//import Nav from './components/Nav/Nav'
 import AppProfile from './components/App/AppProfile';
 import HPFeed from './components/Homepage/HPFeed';
 import AppWidgets from './components/App/AppWidgets';
@@ -14,7 +14,7 @@ class RouteHomepage extends Component {
   render() {
     return (
       <div>
-      <Nav/>
+      {/*<Nav/>*/}
         <div>
           <AppProfile/>
           <HPFeed/>
@@ -22,7 +22,7 @@ class RouteHomepage extends Component {
         </div>
         <div>
           <h1>Welcome to OpenSauce!</h1>
-
+          
           <p>TEST ENDPOINTS: (dummy data)</p>
           
           <br />
