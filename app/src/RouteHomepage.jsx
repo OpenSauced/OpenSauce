@@ -14,15 +14,14 @@ class RouteHomepage extends Component {
   render() {
     return (
       <div>
-      {/*<Nav/>*/}
+      <Nav/>
         <div>
           <AppProfile/>
           <HPFeed/>
           <AppWidgets/>
         </div>
         <div>
-          <h1>Welcome to OpenSauce!</h1>
-          
+
           <p>TEST ENDPOINTS: (dummy data)</p>
           
           <br />
