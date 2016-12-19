@@ -37,7 +37,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]stage-0,presets[]=es2015']
       },
       {
         test: /\.css$/,

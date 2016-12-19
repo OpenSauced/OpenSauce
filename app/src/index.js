@@ -6,7 +6,7 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 //TODO: add reducers file
 import { Provider, createStore } from 'react-redux';
 //writing "from './reducers'" will default to './reducers/index.js'
-import reducers from './reducers'
+//import reducers from './reducers'
 
 //Routes for views
 import RouteHomepage from './RouteHomepage';
