@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Nav from './components/Nav/Nav'
 import AppProfile from './components/App/AppProfile';
 import HPFeed from './components/Homepage/HPFeed';
 import AppWidgets from './components/App/AppWidgets';
@@ -13,6 +14,7 @@ class RouteHomepage extends Component {
   render() {
     return (
       <div>
+      <Nav/>
         <div>
           <AppProfile/>
           <HPFeed/>
