@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
+
 const db = require('./db/db.js')
 const config = require('./env/config')
 const auth = require('./routes/authRoutes.js')
@@ -59,17 +60,24 @@ app.get('/locked', auth.ensureAuthenticated, function(req, res) {
 })
 
 
-app.get('/signup', auth.ensureAuthenticated, function(req, res) {
+app.get('/signup', function(req, res) {
 	res.sendFile(path.resolve(__dirname + '/../app/public/signup.html'));
 })
-app.get('/login', auth.ensureAuthenticated, function(req, res) {
+app.get('/login', function(req, res) {
 	res.sendFile(path.resolve(__dirname + '/../app/public/login.html'));
 })
 
 
-app.post('/login', auth.ensureAuthenticated, function(req, res) {
-    // res.send('you are logged in!')
+app.post('/login', function(req, res) {
 })
-app.post('/singup', auth.ensureAuthenticated, function(req, res) {
-    // res.send('you are logged in!')
+
+app.post('/signup', function(req, res) {
+	auth.signUp(req.body).then(function(exists) {
+    console.log('.then')
+			if (exists === true) {
+				res.status(200).send('Erorr username taken, please choose another.');
+			} else if (exists === false) {
+				res.status(200).redirect('/login')
+			}
+	})
 })

@@ -5,9 +5,9 @@ var UserSchema = new Schema({
 	first_name: String,
 	last_name: String,
 	email: String,
-	// username: String,
+	username: String,
 	picture: String,
-	fb_id: Number,
+	password_hash: String,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
 		ref: 'Recipe'
@@ -20,6 +20,10 @@ var UserSchema = new Schema({
 		image_data: Buffer,
 		image_name: String,
 		mimetype: String
+	},
+	session_data: {
+		session: String,
+		user: String
 	},
 	created_at: {
 		type: Date,
