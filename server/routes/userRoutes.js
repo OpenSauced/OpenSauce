@@ -24,7 +24,7 @@ router.get('/:userName/profile', function(req, res) {
 })
 
 //route to save a recipe to a user's saved recipes object
-Router.post('/save', function(req, res){
+router.post('/save', function(req, res){
   var recipeId = req.body.recipe._id
   var userId = req.body.user._id
   db.userFunctions.addRecipeToSavedRecipes(userId, recipeId)
