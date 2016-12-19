@@ -19,6 +19,14 @@ var RecipeSchema = new Schema({
 		image_name: String,
 		mimetype: String
 	}],
+	forked_parent:{
+		type: Schema.Types.ObjectId,
+		ref: 'recipes'
+	},
+	forked_children:[{
+		type: Schema.Types.ObjectId,
+		ref: 'recipes'
+	}],
 	timestamps: { 
 		createdAt: Date, 
 		updatedAt: Date

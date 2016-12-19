@@ -58,9 +58,8 @@ xPorts.findRecipeById = function(recipeId){
 
 }
 
-// xPorts.increaseLikes = function(recipe){
-// 	likes = likes + 1
-// }
+
+
 
 
 module.exports = xPorts;
