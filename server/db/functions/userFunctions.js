@@ -1,7 +1,7 @@
 const userModel = require('../models/user.js')
 const xPorts = {}
 
-xPorts.findByUserNameFast = function(name) {
+xPorts.findByUserName = function(name) {
     console.log('looking for user userFunctions.js', name);
     return userModel.findOne({username: name})
 }
