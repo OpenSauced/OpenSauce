@@ -7,9 +7,11 @@ const recipeRoutes = require('./routes/recipeRoutes.js');
 const db = require('./db/db.js')
 const config = require('./env/config')
 const auth = require('./routes/authRoutes.js')
+const upload = require('./routes/uploadRoutes.js')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+var cloudinary = require('cloudinary');
 
 const app = express();
 module.exports.app = app;
@@ -32,18 +34,6 @@ app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
 
 app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 
-// app.get('/facebook/oauth', passport.authenticate('facebook', {scope: ['email'], failureRedirect: '/login'}), (req, res) => {
-//     let cookie = {
-//         session: req.sessionID,
-//         userID: req.user.id
-//     }
-//     res.cookie('fr-session', cookie, {
-//         maxAge: 9000000,
-//         httpOnly: true
-//     }).redirect('/');
-// });
-
-// Start the actual server listening on the port variable
 app.listen(module.exports.NODEPORT, function(err) {
     // If there is an error log it
     if (err) {
@@ -54,10 +44,6 @@ app.listen(module.exports.NODEPORT, function(err) {
     }
 })
 
-
-///////////////////////////////////////////////////////////////
-/////////////////////// log routes ///////////////////////////
-/////////////////////////////////////////////////////////////
 //example of a locked route:
 app.get('/locked', auth.ensureAuthenticated, function(req, res) {
     res.send('you are logged in!')
@@ -73,11 +59,6 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
     auth.login(req.body).then(function(cook) {
         if (cook) {
-            //cookie chaining!
-            //sets user and session
-            //very hard to verify / fake
-            //we dont verify, we just check and see if the user
-            //has that exact session. Not recreating it. Username is just for lookup
             res.cookie('session', cook[1], {
                 maxAge: 9000000,
                 httpOnly: true

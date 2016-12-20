@@ -25,7 +25,15 @@ var UserSchema = new Schema({
 	created_at: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	bio: String,
+	location: {
+		State: String,
+		Country: String,
+		Zip: String
+	},
+	favorite_food: String,
+	secondary_signup_needed: String,
 })
 
 const User = mongoose.model('user', UserSchema);
