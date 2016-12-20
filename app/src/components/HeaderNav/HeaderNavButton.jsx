@@ -1,8 +1,9 @@
 import React from 'react';
+import { Router, Link } from 'react-router';
 
-const HeaderNavButton = ({name}) => {
+const HeaderNavButton = ({name, link}) => {
   return (
-    <div>{name}</div>
+    <div><Link to={link}>{name}</Link></div>
   );
 }
 

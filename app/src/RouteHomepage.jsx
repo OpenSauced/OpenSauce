@@ -24,7 +24,7 @@ class RouteHomepage extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader>
+        <AppHeader title={'Welcome to OpenSauce'}>
           <HPFeedSearch searchInputValue={this.state.searchInputValue} handleSearchInputValue={this.handleSearchInputValue}/>
         </AppHeader>
         <HPFeed/>
@@ -32,6 +32,6 @@ class RouteHomepage extends Component {
       </div>
     );
   }
-};
+}
 
 export default RouteHomepage;

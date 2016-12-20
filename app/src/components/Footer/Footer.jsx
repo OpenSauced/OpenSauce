@@ -2,8 +2,8 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer class="row footer">
-      <span>OpenSaucetest</span>
+    <footer className="row footer">
+      <span>OpenSauce</span>
     </footer>
   );
 }

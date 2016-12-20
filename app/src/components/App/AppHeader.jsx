@@ -9,9 +9,13 @@ class AppHeader extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <h1>Welcome to OpenSauce</h1>
+          <h1>{this.props.title}</h1>
         </div>
-        {this.props.children}
+        {
+          // This will check to see if a child component has
+          // been passed into the header and then render it in the view
+          this.props.children ? this.props.children : null
+        }
       </div>
     );
   }
