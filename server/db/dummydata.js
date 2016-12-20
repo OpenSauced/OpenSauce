@@ -6,7 +6,6 @@ var data = {
       last_name: 'Duckey',
       email_address: 'rub_duckey@duckfarm.com',
       user_name: 'rub_duckey',
-      recipes: ['r001'],
       saved_recipies: ['r001'],
       picture: 'u001.jpg'
     }
@@ -63,7 +62,7 @@ data.getRecipes = (userName) => {
         || 'User not found in Database'
       console.log(userId)
       var recipes = data.recipes
-        .filter(x => x.creator === userId) //Get All recipies that match user ID
+        .filter(x => x.creator === userId) //Get All recipes that match user ID
       console.log(recipes)
       resolve(recipes);
       reject('Unexpected Dummy DB Error');

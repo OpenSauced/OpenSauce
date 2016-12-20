@@ -4,10 +4,24 @@ import HPFeedRecipe from './HPFeedRecipe';
 
 const HPFeedRecipeList = () => {
   return (
-    <div>
-      <h3>HPFeedRecipeList</h3>
+    <ul className="row">
       <HPFeedRecipe/>
-    </div>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+      <HPFeedRecipe/>
+    </ul>
   );
 }
 

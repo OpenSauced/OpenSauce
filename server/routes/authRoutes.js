@@ -1,21 +1,11 @@
+var express = require('express')
+var router = express.Router()
+const path = require('path');
 var bcrypt = require('bcrypt-nodejs');
-var cookie = require('cookie');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
 
 const auth = {}
-
-auth.ensureAuthenticated = function(req, res, next) {
-  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
-    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
-      return next();
-    } else {
-      res.end('this route is locked, please log in')
-    }
-  })
-}
-
-module.exports = auth
 
 auth.signUp = function(userData) {
     //hash gen
@@ -48,3 +38,63 @@ auth.login = function(user) {
         }
     })
 }
+
+router.get('/signup', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
+})
+router.get('/login', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../../app/public/login.html'));
+})
+
+router.ensureAuthenticated = function(req, res, next) {
+  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
+    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+      return next();
+    } else {
+      res.end('this route is locked, please log in')
+    }
+  })
+}
+
+router.post('/login', function(req, res) {
+    auth.login(req.body).then(function(cook) {
+        if (cook) {
+            //cookie chaining!
+            //sets user and session
+            //very hard to verify / fake
+            //we dont verify, we just check and see if the user
+            //has that exact session. Not recreating it. Username is just for lookup
+            res.cookie('session', cook[1], {
+                maxAge: 9000000,
+                httpOnly: true
+            }).cookie('user', cook[0].username, {
+                maxAge: 9000000,
+                httpOnly: true
+            }).redirect('/');
+            console.log('cook', cook);
+            //LOGGED!
+            res.redirect('/')
+        } else if (!cook) {
+            res.end('wrong user and passsword combo')
+        }
+    })
+})
+
+router.get('/logout', function(req, res) {
+  res.clearCookie("user");
+  res.clearCookie("session");
+    res.redirect('/')
+})
+
+router.post('/signup', function(req, res) {
+    auth.signUp(req.body).then(function(exists) {
+        console.log('.then')
+        if (exists === true) {
+            res.status(200).send('Erorr username taken, please choose another.');
+        } else if (exists === false) {
+            res.status(200).redirect('/login')
+        }
+    })
+})
+
+module.exports = router
