@@ -80,18 +80,52 @@ describe('adding a recipe to a users saved recipes', () => {
                 return recipe
             })
             .then((recipe) => {
-            	console.log("creator: ", typeof recipe.creator)
-            	console.log("id: ", typeof recipe._id)
                 return userFunctions.addRecipeToSavedRecipes(recipe.creator, recipe._id)
             })
             .then((user) => {
-                console.log("USER&^%%*%#*^$) ", user)
-                console.log(user.saved_recipes)
                 assert(user.saved_recipes.length);
                 done();
             })
             .catch((err) => {
                 console.log("test error ", err)
+            })
+    })
+})
+
+describe('forking a recipe from an existing recipe', ()=>{
+    it.only('should fork a recipe and return a new recipe object', (done) =>{
+            const recipe = {
+            title: 'chocolate cake',
+            ingredients: [{
+                amount: 1,
+                measurement: 'box',
+                ingredient_name: 'cake mix'
+            }, {
+                amount: 1,
+                measurement: 'container',
+                ingredient_name: 'chocolate frosting'
+            }, {
+                amount: 1,
+                measurement: 'oz',
+                ingredient_name: 'sprinkles'
+            }],
+            directions: 'Bake cake. Frost cake. Add sprinkles over top.',
+        }
+        recipeFunctions.addNewRecipe('been', recipe)
+            .then((recipe) => {
+                  var forkedRecipe = {
+                        title: recipe.title,
+                        ingredients: recipe.ingredients,
+                        directions: recipe.directions,
+                    }
+                return recipeFunctions.saveForkedRecipe('bjorn', forkedRecipe, recipe._id)
+            })
+        .then((forkedRecipe) => {
+                assert(!forkedRecipe.isNew);
+                done()
+        })
+        .catch((err) => {
+                console.log("last test error ", err)
             })
     })
 })

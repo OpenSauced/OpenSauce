@@ -13,7 +13,6 @@ var RecipeSchema = new Schema({
 		ingredient_name: String
 	}],
 	directions: String,
-	likes: Number,
 	recipe_images: [{
 		image_data: Buffer,
 		image_name: String,
@@ -21,7 +20,8 @@ var RecipeSchema = new Schema({
 	}],
 	forked_parent:{
 		type: Schema.Types.ObjectId,
-		ref: 'recipes'
+		ref: 'recipes',
+		default: null
 	},
 	forked_children:[{
 		type: Schema.Types.ObjectId,
