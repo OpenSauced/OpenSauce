@@ -8,7 +8,7 @@ var dummyDB = require('../db/dummydata.js')
 
 //route for messages homepage
 router.get('/', function(req,res) {
-  res.send('You have reached /recipies/ ')
+  res.send('You have reached /recipes/ ')
 })
 
 //route for a specific user profile /user_name/profile

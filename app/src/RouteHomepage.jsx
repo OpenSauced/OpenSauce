@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
 
-import AppProfile from './components/App/AppProfile';
+import HeaderNav from './components/HeaderNav/HeaderNav';
+import AppHeader from './components/App/AppHeader';
+import HPFeedSearch from './components/Homepage/HPFeedSearch';
 import HPFeed from './components/Homepage/HPFeed';
-import AppWidgets from './components/App/AppWidgets';
+import Footer from './components/Footer/Footer';
 
 
 class RouteHomepage extends Component {
   constructor() {
     super();
+    this.handleSearchInputValue = this.handleSearchInputValue.bind(this);
+    this.state = {
+      searchInputValue: ''
+    };
+  }
+
+  handleSearchInputValue(e) {
+    this.setState({searchInputValue: e.target.value});
   }
 
   render() {
     return (
-      <div>
-        <div>
-          <AppProfile/>
-          <HPFeed/>
-          <AppWidgets/>
-        </div>
-        <div>
-          <h1>Welcome to OpenSauce!</h1>
-
-          <p>TEST ENDPOINTS: (dummy data)</p>
-          
-          <br />
-          <a href="recipes/rub_duckey">recipes/rub_duckey</a>
-        </div>
+      <div className="container-fluid">
+        <HeaderNav/>
+        <AppHeader>
+          <HPFeedSearch searchInputValue={this.state.searchInputValue} handleSearchInputValue={this.handleSearchInputValue}/>
+        </AppHeader>
+        <HPFeed/>
+        <Footer/>
       </div>
     );
   }
