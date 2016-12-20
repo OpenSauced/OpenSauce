@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-export default class SearchBar extends Component {
+import { fetchRecipes } from '../actions/index'
+
+class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = { term: '' }
@@ -16,9 +18,15 @@ export default class SearchBar extends Component {
   onFormSubmit(event) {
     event.preventDefault()
     this.setState({term: ''})
+    //this.props.fetchRecipes()
+  }
+  componentDidMount() {
+    this.props.fetchRecipes()
+
   }
 
   render() {
+    console.log('RECIPES: ',this.props.recipes)
     return (
       <form
         className="input-group"
@@ -40,3 +48,15 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+const  mapStateToProps = (state) => {
+  return {
+    recipes: state.recipes,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators ({ fetchRecipes }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

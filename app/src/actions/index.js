@@ -2,12 +2,11 @@ import axios from 'axios'
 
 export const FETCH_RECIPES = 'FETCH_RECIPES'
 
-export const fetchRecipes = (data) => {
+export const fetchRecipes = () => {
   
-  const request = axios.get('http://localhost:3000/recipes/rub_duckey')
-  
+  const request = axios.get('http://localhost:3000/api/recipes/')
   return {
-    type: FETCH_WEATHER,
+    type: FETCH_RECIPES,
     payload: request
 
   }
