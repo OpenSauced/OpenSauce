@@ -9,7 +9,7 @@ import RouteHomepage from './RouteHomepage';
 import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
-import SearchBar from './containers/SearchBar'
+import SearchBar from './containers/SearchBar';
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -27,9 +27,7 @@ ReactDOM.render((
 
       {/* Current User Profile Settings route */}
       <Route path="/profile" component={RouteProfile}/>
-      
-      {/* Add Recipe route */}
-      <Route path="/addrecipe" component={RouteAddRecipe}/>
+
       {/* Signup route */}
       <Route path="/signup" component={RouteSignup}/>
       

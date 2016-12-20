@@ -12,8 +12,8 @@ const HPFeedRecipe = () => {
         in leo dapibus semper venenatis semper neque. Nam consequat, nunc elementum faucibus lacinia, mauris 
         elit egestas elit, non posuere odio justestsetsetto mollis nunc.</p>
         <div className="row recipe_card-fork_like-cont">
-          <button className="recipe_card-fork_button col-xs-4" type="button">Fork Recipe</button>
-          <button className="recipe_card-like_button col-xs-4" type="button">Like Recipe</button>
+          <a className="recipe_card-fork_button col-xs-4">Fork Recipe</a>
+          <a className="recipe_card-like_button col-xs-4">Like Recipe</a>
         </div>
       </div>
     </li>

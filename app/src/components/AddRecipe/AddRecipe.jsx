@@ -11,7 +11,7 @@ class AddRecipe extends Component {
   render() {
     return (
       <div class="row add_recipe">
-
+        
       </div>
     );
   }

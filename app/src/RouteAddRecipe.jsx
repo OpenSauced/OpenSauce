@@ -4,7 +4,8 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
-import AddRecipe from './components/AddRecipe/AddRecipe';
+import AddRecipe from './components/AddRecipe/AddRecipeManual';
+import AddRecipeTypeOfInsert from './components/AddRecipe/AddRecipeTypeOfInsert';
 
 class RouteAddRecipe extends Component {
   constructor() {
@@ -15,8 +16,11 @@ class RouteAddRecipe extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={'Catchy Phrase'}/>
-        <AddRecipe/>
+        <AppHeader title={'Catchy Phrase'}>
+          <AddRecipeTypeOfInsert/>
+        </AppHeader>
+        <AddRecipeManual/>
+        <AddRecipeLink/>
         <Footer/>
       </div>
     );
