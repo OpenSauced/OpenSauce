@@ -1,8 +1,9 @@
 import React from 'react';
+import { Router, Link } from 'react-router';
 
-const HeaderNavLogo = ({}) => {
+const HeaderNavLogo = () => {
   return (
-    <div>Logo</div>
+    <div className="col-xs-4"><Link to="/">Logo</Link></div>
   );
 }
 

@@ -4,9 +4,9 @@ import HeaderNavButton from './HeaderNavButton';
 
 const HeaderNavButtons = () => {
   return (
-    <div>
-      <HeaderNavButton name="My Recipes"/>
-      <HeaderNavButton name="Add Recipe"/>
+    <div className="col-xs-4">
+      <HeaderNavButton name="My Recipes" link="/myrecipes"/>
+      <HeaderNavButton name="Add Recipe" link="/addrecipe"/>
     </div>
   );
 }
