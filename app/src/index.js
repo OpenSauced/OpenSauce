@@ -25,6 +25,8 @@ ReactDOM.render((
       <Route path="/" component={RouteHomepage}/>
       {/* Current User Profile Settings route */}
       <Route path="/profile" component={RouteProfile}/>
+      {/* Add Recipe route */}
+      <Route path="/addrecipe" component={RouteAddRecipe}/>
       {/* Signup route */}
       <Route path="/signup" component={RouteSignup}/>
       {/* Login route */}

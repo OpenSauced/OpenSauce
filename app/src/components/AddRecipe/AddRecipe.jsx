@@ -18,8 +18,6 @@ class AddRecipe extends Component {
         <AddRecipeUploadImage/>
         <AddRecipeManualEntry/>
         <AddRecipeSearchAPI/>
-        <h1>AddRecipeConfirm</h1>
-
       </div>
     );
   }

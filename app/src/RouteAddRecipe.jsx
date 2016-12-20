@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import HeaderNav from './components/HeaderNav/HeaderNav';
+import AppHeader from './components/App/AppHeader';
+import Footer from './components/Footer/Footer';
+
 import AddRecipe from './components/AddRecipe/AddRecipe';
 
 class RouteAddRecipe extends Component {
@@ -9,8 +13,11 @@ class RouteAddRecipe extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
+        <HeaderNav/>
+        <AppHeader title={'Catchy Phrase'}/>
         <AddRecipe/>
+        <Footer/>
       </div>
     );
   }

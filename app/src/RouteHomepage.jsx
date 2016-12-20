@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
+import Footer from './components/Footer/Footer';
+
 import HPFeedSearch from './components/Homepage/HPFeedSearch';
 import HPFeed from './components/Homepage/HPFeed';
-import Footer from './components/Footer/Footer';
 
 
 class RouteHomepage extends Component {

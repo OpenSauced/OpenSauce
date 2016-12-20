@@ -19,7 +19,7 @@ class RouteProfile extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={`Welcome ${this.state.username}!`}></AppHeader>
+        <AppHeader title={`Welcome ${this.state.username}!`}/>
         <ProfileSettings/>
         <Footer/>
       </div>
