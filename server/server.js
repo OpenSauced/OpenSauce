@@ -3,10 +3,10 @@ const express = require('express');
 const session = require('express-session');
 const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
+const authRoutes = require('./routes/authRoutes.js')
 
 const db = require('./db/db.js')
 const config = require('./env/config')
-const auth = require('./routes/authRoutes.js')
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -25,6 +25,7 @@ db.connection.on('open', function() {
 app.use('/users', userRoutes);
 
 app.use('/recipes', recipeRoutes);
+app.use('/auth/', authRoutes)
 
 app.use(express.static(path.join(__dirname, '/../app/public')));
 
@@ -54,59 +55,16 @@ app.listen(module.exports.NODEPORT, function(err) {
     }
 })
 
+const ensureAuthenticated = function(req, res, next) {
+  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
+    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+      return next();
+    } else {
+      res.end('this route is locked, please log in')
+    }
+  })
+}
 
-///////////////////////////////////////////////////////////////
-/////////////////////// log routes ///////////////////////////
-/////////////////////////////////////////////////////////////
-//example of a locked route:
-app.get('/locked', auth.ensureAuthenticated, function(req, res) {
+app.get('/locked', ensureAuthenticated, function(req, res) {
     res.send('you are logged in!')
-})
-
-app.get('/signup', function(req, res) {
-    res.sendFile(path.resolve(__dirname + '/../app/public/signup.html'));
-})
-app.get('/login', function(req, res) {
-    res.sendFile(path.resolve(__dirname + '/../app/public/login.html'));
-})
-
-app.post('/login', function(req, res) {
-    auth.login(req.body).then(function(cook) {
-        if (cook) {
-            //cookie chaining!
-            //sets user and session
-            //very hard to verify / fake
-            //we dont verify, we just check and see if the user
-            //has that exact session. Not recreating it. Username is just for lookup
-            res.cookie('session', cook[1], {
-                maxAge: 9000000,
-                httpOnly: true
-            }).cookie('user', cook[0].username, {
-                maxAge: 9000000,
-                httpOnly: true
-            }).redirect('/');
-            console.log('cook', cook);
-            //LOGGED!
-            res.redirect('/')
-        } else if (!cook) {
-            res.end('wrong user and passsword combo')
-        }
-    })
-})
-
-app.get('/logout', function(req, res) {
-  res.clearCookie("user");
-  res.clearCookie("session");
-    res.redirect('/')
-})
-
-app.post('/signup', function(req, res) {
-    auth.signUp(req.body).then(function(exists) {
-        console.log('.then')
-        if (exists === true) {
-            res.status(200).send('Erorr username taken, please choose another.');
-        } else if (exists === false) {
-            res.status(200).redirect('/login')
-        }
-    })
 })
