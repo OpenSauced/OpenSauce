@@ -51,7 +51,7 @@ router.ensureAuthenticated = function(req, res, next) {
     if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
       return next();
     } else {
-      res.end('this route is locked, please log in')
+      res.redirect('/auth/login/')
     }
   })
 }
