@@ -13,11 +13,10 @@ class AddRecipe extends Component {
 
   render() {
     return (
-      <div>
-        <h1>AddRecipe</h1>
-        <AddRecipeUploadImage/>
-        <AddRecipeManualEntry/>
-        <AddRecipeSearchAPI/>
+      <div class="row add_recipe">
+        <div className="col-xs-4">
+
+        </div>
       </div>
     );
   }
