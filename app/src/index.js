@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 //Router Stuff
 import RouteLogin from './RouteLogin';
@@ -20,7 +20,7 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render((
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       {/* Homepage route */}
       <Route path="/" component={RouteHomepage}/>
       {/* Current User Profile Settings route */}
