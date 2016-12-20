@@ -71,7 +71,7 @@ xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
             }
         })
         .then((user) => {
-            return user
+        	return user
         })
         .catch((err) => {
             console.log("error in userFunctions 2", err)

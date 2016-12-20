@@ -21,10 +21,10 @@ Router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
   db.recipeFunctions.addNewRecipe(username, req.body)
   .then((recipe) => {
-    res.send(recipe);
+  	res.send(recipe);
   })
   .catch((err) => {
-    res.send(err);
+  	res.send(err);
   })
 })
 
