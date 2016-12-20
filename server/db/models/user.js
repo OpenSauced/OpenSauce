@@ -10,11 +10,11 @@ var UserSchema = new Schema({
 	password: String,
 	my_recipes:[{
 		type: Schema.Types.ObjectId,
-		ref: 'Recipe'
+		ref: 'recipes'
 	}],
 	saved_recipes:[{
 		type: Schema.Types.ObjectId,
-		ref: 'Recipe'
+		ref: 'recipes'
 	}],
 	user_image: {
 		image_data: Buffer,
@@ -28,6 +28,6 @@ var UserSchema = new Schema({
 	}
 })
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('users', UserSchema);
 
 module.exports = User;

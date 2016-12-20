@@ -5,7 +5,7 @@ var RecipeSchema = new Schema({
 	title: String,
 	creator: {
 		type: Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'users'
 	},
 	ingredients: [{
 		amount: Number,
@@ -14,19 +14,26 @@ var RecipeSchema = new Schema({
 	}],
 	directions: String,
 	likes: Number,
-	tags: [String],
 	recipe_images: [{
 		image_data: Buffer,
 		image_name: String,
 		mimetype: String
 	}],
-	created_at: {
-		type: Date,
-		default: Date.now
+	forked_parent:{
+		type: Schema.Types.ObjectId,
+		ref: 'recipes'
+	},
+	forked_children:[{
+		type: Schema.Types.ObjectId,
+		ref: 'recipes'
+	}],
+	timestamps: { 
+		createdAt: Date, 
+		updatedAt: Date
 	}
 })
 
-const Recipe = mongoose.model('recipe', RecipeSchema);
+const Recipe = mongoose.model('recipes', RecipeSchema);
 
 module.exports = Recipe;
 
