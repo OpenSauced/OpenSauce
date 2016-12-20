@@ -40,6 +40,16 @@ Router.get('/:recipeId/recipe', function(req, res){
   })
 })
 
-
+//save a forked recipe
+Router.post('/:username/saveforkedrecipe', function(req, res){
+var username = req.params.username
+  db.recipeFunctions.saveForkedRecipe(username, req.body.recipe, req.body.parentId)
+  .then((recipe) => {
+    res.send(recipe);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
 
 module.exports = Router
