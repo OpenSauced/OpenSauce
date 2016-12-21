@@ -16,7 +16,7 @@ router.get('/', function(req,res) {
   })
 })
 
-
+//saves a recipe to the DB
 router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
   db.recipeFunctions.addNewRecipe(username, req.body)
@@ -46,6 +46,20 @@ var username = req.params.username
   db.recipeFunctions.saveForkedRecipe(username, req.body.recipe, req.body.parentId)
   .then((recipe) => {
     res.send(recipe);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
+//go grab a recipe from a url (only works for epicurious currently) 
+//return a recipe object for user to confirm and save to the DB
+router.get('/scrapeRecipe', function(req, res){
+  var url = req.query.url
+  console.log("DATA ***********", req.query)
+  db.recipeFunctions.getRecipefromUrl(url)
+  .then((recipe) => {
+    res.send(recipe)
   })
   .catch((err) => {
     res.send(err);
