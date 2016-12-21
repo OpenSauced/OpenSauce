@@ -43,6 +43,7 @@ router.get('/signup', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
 })
 
+//Broken function, BenS is fixing
 router.ensureAuthenticated = function(req, res, next) {
     if (req.path === '/auth/logout' || '/auth/login' || '/auth/signup') return next();
     db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
