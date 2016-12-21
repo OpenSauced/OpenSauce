@@ -1,15 +1,15 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const userRoutes = require('./routes/userRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 const authRoutes = require('./routes/authRoutes.js')
 
 const db = require('./db/db.js')
 const config = require('./env/config')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const upload = require('./routes/uploadRoutes.js')
+const uploadRoutes = require('./routes/uploadRoutes.js')
 
 const app = express();
 module.exports.app = app;
@@ -25,6 +25,7 @@ db.connection.on('open', function() {
 app.use('/api/users', userRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/auth/', authRoutes)
+app.use('/upload/', uploadRoutes)
 
 app.use(express.static(path.join(__dirname, '/../app/public')));
 

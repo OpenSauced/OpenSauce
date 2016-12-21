@@ -15,6 +15,8 @@ router.get('/', function(req, res) {
 //also returns an array of references to user's recipes and saved recipes
 router.get('/:userName/profile', function(req, res) {
   var username = req.params.userName
+  req.params.password = null;
+  req.params.location = null;
   db.userFunctions.findByUserName(username).then((user) => {
     res.send(user)
   })
@@ -34,7 +36,7 @@ router.post('/save', function(req, res){
   .catch((err) => {
     res.send(err);
   })
-}) 
+})
 
 
 module.exports = router

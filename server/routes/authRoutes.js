@@ -7,6 +7,23 @@ const db = require('./../db/db.js')
 
 const auth = {}
 
+router.ensureAuthenticated = function(req, res, next) {
+    db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
+        console.log('userDB', userDB);
+        if (userDB === null) {
+            res.redirect('/auth/logout')
+        } else if (userDB !== null) {
+            if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+                return next();
+            } else {
+                res.redirect('/auth/logout')
+            }
+        } else {
+            res.redirect('/auth/logout')
+        }
+    })
+}
+
 auth.signUp = function(userData) {
     //hash gen
     var hash = bcrypt.hashSync(userData.password, bcrypt.genSaltSync(7331));
@@ -22,19 +39,19 @@ auth.login = function(user) {
                 if (bcrypt.compareSync(user.password, userDB.password)) {
                     var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
                     return db.userFunctions.updateSession(user, hash).then(function(userDB) {
-                      return [user, hash]
+                        return [user, hash]
                     })
                 } else {
-                  console.log('returning null in login auth.js 1');
-                  return null;
+                    console.log('returning null in login auth.js 1');
+                    return null;
                 }
             } else {
-              console.log('returning null in login auth.js 2');
-              return null;
+                console.log('returning null in login auth.js 2');
+                return null;
             };
         } else {
-          console.log('returning null in login auth.js 3');
-          return null;
+            console.log('returning null in login auth.js 3');
+            return null;
         }
     })
 }
@@ -45,16 +62,6 @@ router.get('/signup', function(req, res) {
 router.get('/login', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../../app/public/login.html'));
 })
-
-router.ensureAuthenticated = function(req, res, next) {
-  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
-    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
-      return next();
-    } else {
-      res.end('this route is locked, please log in')
-    }
-  })
-}
 
 router.post('/login', function(req, res) {
     auth.login(req.body).then(function(cook) {
@@ -81,9 +88,9 @@ router.post('/login', function(req, res) {
 })
 
 router.get('/logout', function(req, res) {
-  res.clearCookie("user");
-  res.clearCookie("session");
-    res.redirect('/')
+    res.clearCookie("user");
+    res.clearCookie("session");
+    res.redirect('/auth/login')
 })
 
 router.post('/signup', function(req, res) {
@@ -92,7 +99,7 @@ router.post('/signup', function(req, res) {
         if (exists === true) {
             res.status(200).send('Erorr username taken, please choose another.');
         } else if (exists === false) {
-            res.status(200).redirect('/login')
+            res.status(200).redirect('/auth/login')
         }
     })
 })

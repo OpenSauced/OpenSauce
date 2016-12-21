@@ -16,6 +16,23 @@ xPorts.updateSession = function(user, hash) {
   })
 }
 
+xPorts.addBio = function (user, bio) {
+
+}
+
+xPorts.addLocation = function (user, location) {
+
+}
+
+xPorts.addPhotoUrl = function (user, url) {
+  return xPorts.findByUserName(user).then(function(userDB){
+    userDB.profilePicture = url
+    userDB.update();
+    user.save();
+    return userDB
+  })
+}
+
 xPorts.findOrCreateUser = function(userData) {
     return xPorts.findByUserName(userData.username).then(function(data) {
         if (!data) { //no data, user isnt in the db
@@ -75,7 +92,7 @@ xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
         })
         .catch((err) => {
             console.log("error in userFunctions 2", err)
-        }) 
+        })
 }
 
 //Adds a recipe id reference to the user's saved recipe object
