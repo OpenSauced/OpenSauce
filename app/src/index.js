@@ -32,7 +32,7 @@ ReactDOM.render((
       <Route path="/signup" component={RouteSignup}/>
       
       {/* Login route */}
-      <Route path="/signup" component={RouteSignup}/>
+      <Route path="/login" component={RouteLogin}/>
 
       {/* Recipe Routes */}
       <Route path="/addrecipe" component={RouteAddRecipe}/>
