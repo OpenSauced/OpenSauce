@@ -11,11 +11,18 @@ class SearchBar extends Component {
   }
 
   onInputChange(event) {
-    this.setState({term: event.target.value})
+    //create a case and match it to the element id, update state accordingly
+    switch(event.target.id) {
+    case 'pizzaparty':
+        this.setState({term: event.target.value})
+        break;
+    }
+    return null
   }
 
   onFormSubmit(event) {
     event.preventDefault()
+
     this.setState({term: ''})
     //this.props.fetchRecipes()
   }
@@ -34,6 +41,7 @@ class SearchBar extends Component {
         <input
           placeholder="Search for recipes..."
           className="form-control"
+          id="pizzaparty"
           value={this.state.term}
           onChange={this.onInputChange.bind(this)}
         />
