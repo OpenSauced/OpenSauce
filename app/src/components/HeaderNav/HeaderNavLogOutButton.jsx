@@ -11,6 +11,7 @@ const HeaderNavLogOutButton = ({name, link}) => {
 }
 
 const logOut = () => {
+  
   //GET request to delete cookies, logging you out
   axios.get('/auth/logout')
 }
