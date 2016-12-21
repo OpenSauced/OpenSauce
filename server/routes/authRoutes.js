@@ -58,6 +58,9 @@ router.ensureAuthenticated = function(req, res, next) {
 
 router.post('/login', function(req, res) {
     auth.login(req.body).then(function(cook) {
+    ////    TODO-Henry: Get username from cookie
+    ////  try setting the cookie to a variable and access it somewhere else
+    ////
         if (cook) {
             //cookie chaining!
             //sets user and session

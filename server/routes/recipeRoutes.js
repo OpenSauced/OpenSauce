@@ -1,14 +1,14 @@
 var express = require('express')
-var Router = express.Router()
+var router = express.Router()
 
 // var dummyDB = require('../db/dummydata.js')
 var db = require('../db/db.js')
 
 //route for homepage which returns recent recipes
-Router.get('/', function(req,res) {
+router.get('/', function(req,res) {
   db.recipeFunctions.findRecentRecipes()
   .then((recipes) => {
-    console.log(recipes)
+    console.log('recipeRoutes.js - recipes:', recipes)
     res.send(recipes)
   })
   .catch((err) => {
@@ -17,7 +17,7 @@ Router.get('/', function(req,res) {
 })
 
 
-Router.post('/:username/addrecipe', function(req, res) {
+router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
   db.recipeFunctions.addNewRecipe(username, req.body)
   .then((recipe) => {
@@ -29,7 +29,7 @@ Router.post('/:username/addrecipe', function(req, res) {
 })
 
 //route to return a single recipe
-Router.get('/:recipeId/recipe', function(req, res){
+router.get('/:recipeId/recipe', function(req, res){
   var recipeId = req.params.recipeId
  db.recipeFunctions.findRecipeById(recipeId)
  .then((recipe) => {
@@ -41,7 +41,7 @@ Router.get('/:recipeId/recipe', function(req, res){
 })
 
 //save a forked recipe
-Router.post('/:username/saveforkedrecipe', function(req, res){
+router.post('/:username/saveforkedrecipe', function(req, res){
 var username = req.params.username
   db.recipeFunctions.saveForkedRecipe(username, req.body.recipe, req.body.parentId)
   .then((recipe) => {
@@ -52,4 +52,4 @@ var username = req.params.username
   })
 })
 
-module.exports = Router
+module.exports = router

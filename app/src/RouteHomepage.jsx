@@ -62,3 +62,4 @@ function mapStateToProps (state) {
 export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage) 
 
 ///// Make button to test fn?
+//// Make RouteHomepage into a container
