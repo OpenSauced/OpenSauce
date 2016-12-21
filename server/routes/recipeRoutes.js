@@ -8,7 +8,6 @@ var db = require('../db/db.js')
 router.get('/', function(req,res) {
   db.recipeFunctions.findRecentRecipes()
   .then((recipes) => {
-    console.log('recipeRoutes.js - recipes:', recipes)
     res.send(recipes)
   })
   .catch((err) => {
@@ -56,7 +55,6 @@ var username = req.params.username
 //return a recipe object for user to confirm and save to the DB
 router.get('/scrapeRecipe', function(req, res){
   var url = req.query.url
-  console.log("DATA ***********", req.query)
   db.recipeFunctions.getRecipefromUrl(url)
   .then((recipe) => {
     res.send(recipe)

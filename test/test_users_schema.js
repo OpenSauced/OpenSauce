@@ -99,7 +99,6 @@ describe('getting the html from a link', () => {
     it.only('should return the html from a link', (done) => {
         recipeFunctions.getRecipefromUrl('http://www.epicurious.com/recipes/food/views/key-lime-pie-108125')
         .then((recipe) => {
-            console.log("RECIPE OBJECT_________", recipe)
         })
     })
 })

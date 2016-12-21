@@ -32,7 +32,7 @@ router.get('/:username/profile', function(req, res) {
 
 router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
-    console.log(cooks)
+    console.log("Henry's cookie console log", cooks)
     res.end(cooks)
 })
 
