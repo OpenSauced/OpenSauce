@@ -5,6 +5,7 @@ import UserReducer from './UserReducer'
 const rootReducer = combineReducers({
   recipes: RecipesReducer,
   userData: UserReducer
+
 });
 
 export default rootReducer;

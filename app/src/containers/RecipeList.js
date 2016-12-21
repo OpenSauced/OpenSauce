@@ -23,7 +23,7 @@ class RecipeList extends Component {
   }
 
   render() {
-    console.log('RECIPES: ', this.props.recipes)
+    console.log('PROPS: ', this.props)
     return (
       <div>
         {this.props.recipes.map(this.renderRecipes)}
