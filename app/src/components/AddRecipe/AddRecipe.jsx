@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import AddRecipeUploadImage from './AddRecipeUploadImage';
-import AddRecipeManualEntry from './AddRecipeManualEntry';
-import AddRecipeSearchAPI from './AddRecipeSearchAPI';
-
-import AddRecipeConfirm from './AddRecipeConfirm';
+//import AddRecipeManualEntry from './AddRecipeManualEntry';
+//import AddRecipeSearchAPI from './AddRecipeSearchAPI';
 
 class AddRecipe extends Component {
   constructor() {
@@ -13,13 +10,7 @@ class AddRecipe extends Component {
 
   render() {
     return (
-      <div>
-        <h1>AddRecipe</h1>
-        <AddRecipeUploadImage/>
-        <AddRecipeManualEntry/>
-        <AddRecipeSearchAPI/>
-        <h1>AddRecipeConfirm</h1>
-
+      <div className="row add_recipe">
       </div>
     );
   }

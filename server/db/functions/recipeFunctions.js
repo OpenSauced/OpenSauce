@@ -1,6 +1,7 @@
 //see user functions for example
 const recipeModel = require('../models/recipe.js')
 const userFunctions = require('./userFunctions.js')
+const axios = require('axios')
 const xPorts = {}
 
 //returns the most recent 10 recipes
@@ -21,22 +22,8 @@ xPorts.addNewRecipe = function(username, recipe) {
 
         })
         .then((user) => {
-            return new recipeModel({
-                    title: recipe.title,
-                    creator: user._id,
-                    ingredients: [{
-                        amount: recipe.ingredients.amount,
-                        measurement: recipe.ingredients.measurement,
-                        ingredient_name: recipe.ingredients.ingredient_name
-                    }],
-                    directions: recipe.directions,
-                    likes: recipe.likes,
-                    recipe_images: [{
-                        image_data: 'null',
-                        image_name: 'null',
-                        mimetype: 'null'
-                    }]
-                })
+            recipe.creator = user._id
+            return new recipeModel(recipe)
                 .save()
                 .then((recipe) => {
                     userFunctions.addRecipeToMyRecipes(user._id, recipe._id)
@@ -59,8 +46,76 @@ xPorts.findRecipeById = function(recipeId){
 
 }
 
+// xPorts.forkRecipe = function(username, recipeId){
+//     return xPorts.findRecipeById(recipeId)
+//     .then((recipe)=>{
+//         console.log("ID___________", recipe._id)
+//         var forkedRecipe = {
+//             title: recipe.title,
+//             ingredients: recipe.ingredients,
+//             directions: recipe.directions,
+//             forked_parent: recipe._id
+//         }
+//         return xPorts.addNewRecipe(username, forkedRecipe)
+//     })
+//     .catch((err) => {
+//         console.log("recipeFunctions 3 ", err)
+//     })
+// }
 
+//takes a forked recipe from client and saves it to the DB
+xPorts.saveForkedRecipe = function(username, recipe, parentId) {
+    recipe.forked_parent = parentId
+    return xPorts.addNewRecipe(username, recipe)
+    .then((forkedRecipe)=>{
+        xPorts.addChildRecipe(parentId, forkedRecipe._id)
+        return forkedRecipe
+    })
+    .catch((err) => {
+        console.log("recipeFunctions 3 ", err)
+    })
+}
 
+//adds a child (forked) recipe to a parent recipe
+//called when a forked recipe is saved to the DB
+xPorts.addChildRecipe = function(parentId, childId){
+        return recipeModel.findOneAndUpdate({ _id: parentId }, {
+            $push: {
+                'forked_children': childId
+            }
+        })
+        .then((recipe) => {
+            return recipe
+        })
+        .catch((err) => {
+            console.log("error in recipeFunctions 4", err)
+        }) 
 
+}
+
+//takes a url supplied by the client and returns the html for the page
+xPorts.fetchHtml = function(url){
+    return axios.get(url)
+}
+
+xPorts.getRecipefromHtml = function(url){
+    return fetchHtml(url)
+    .then((html) => {
+        if (url.indexOf('epicurious') !== -1){
+            parseEpicurious(html)
+        } else if(url.indexOf('foodnetwork') !== -1){
+            parseFoodNetwork(html)
+        } else {
+            throw err;
+        }
+    })
+    .catch((err) => {
+            console.log("error in recipeFunctions 5", err)
+    })
+}
+
+xPorts.parseEpicurious = function(html){
+   
+}
 
 module.exports = xPorts;

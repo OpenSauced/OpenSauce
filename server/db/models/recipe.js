@@ -7,21 +7,19 @@ var RecipeSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'users'
 	},
-	ingredients: [{
-		amount: Number,
-		measurement: String,
-		ingredient_name: String
-	}],
+	description: String,
+	ingredients: [String],
 	directions: String,
-	likes: Number,
 	recipe_images: [{
-		image_data: Buffer,
-		image_name: String,
-		mimetype: String
+		image_data: {type: Buffer, default: null},
+		image_name: {type: String, default: null},
+		mimetype: {type: String, default: null},
+		placeholder: {type: String, default: 'https://placehold.it/900x600'}
 	}],
 	forked_parent:{
 		type: Schema.Types.ObjectId,
-		ref: 'recipes'
+		ref: 'recipes',
+		default: null
 	},
 	forked_children:[{
 		type: Schema.Types.ObjectId,
