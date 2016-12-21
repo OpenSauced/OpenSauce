@@ -4,7 +4,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 //Router Stuff
 import RouteLogin from './RouteLogin';
-import RouteSignup from './RouteSignup';
+import RouteSignup from './RouteSignUp';
 import RouteHomepage from './RouteHomepage';
 import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
@@ -32,7 +32,7 @@ ReactDOM.render((
       <Route path="/signup" component={RouteSignup}/>
       
       {/* Login route */}
-      <Route path="/signup" component={RouteSignup}/>
+      <Route path="/login" component={RouteLogin}/>
 
       {/* Recipe Routes */}
       <Route path="/addrecipe" component={RouteAddRecipe}/>
