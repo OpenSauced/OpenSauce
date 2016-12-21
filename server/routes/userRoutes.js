@@ -30,7 +30,7 @@ router.get('/:username/profile', function(req, res) {
   })
 })
 
-router.get('/teeest', function(req, res) {
+router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
     console.log(cooks)
     res.end(cooks)

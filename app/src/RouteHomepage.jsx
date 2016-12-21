@@ -30,7 +30,7 @@ class RouteHomepage extends Component {
 
   // Once username can get got from cookie, comment back in
   componentDidMount() {
-    axios.get('/api/users/teeest')
+    axios.get('/api/users/getUserCookie')
     .then((cookie) => {
      var username = cookie.data;
      this.props.getUserData(username).then((data) => console.log('getUserData', data))
