@@ -1,6 +1,7 @@
 //see user functions for example
 const recipeModel = require('../models/recipe.js')
 const userFunctions = require('./userFunctions.js')
+const axios = require('axios')
 const xPorts = {}
 
 //returns the most recent 10 recipes
@@ -21,22 +22,8 @@ xPorts.addNewRecipe = function(username, recipe) {
 
         })
         .then((user) => {
-            return new recipeModel({
-                    title: recipe.title,
-                    creator: user._id,
-                    forked_parent: recipe.forked_parent,
-                    ingredients: [{
-                        amount: recipe.ingredients.amount,
-                        measurement: recipe.ingredients.measurement,
-                        ingredient_name: recipe.ingredients.ingredient_name
-                    }],
-                    directions: recipe.directions,
-                    recipe_images: [{
-                        image_data: 'null',
-                        image_name: 'null',
-                        mimetype: 'null'
-                    }]
-                })
+            recipe.creator = user._id
+            return new recipeModel(recipe)
                 .save()
                 .then((recipe) => {
                     userFunctions.addRecipeToMyRecipes(user._id, recipe._id)
@@ -101,9 +88,34 @@ xPorts.addChildRecipe = function(parentId, childId){
             return recipe
         })
         .catch((err) => {
-            console.log("error in userFunctions 2", err)
+            console.log("error in recipeFunctions 4", err)
         }) 
 
+}
+
+//takes a url supplied by the client and returns the html for the page
+xPorts.fetchHtml = function(url){
+    return axios.get(url)
+}
+
+xPorts.getRecipefromHtml = function(url){
+    return fetchHtml(url)
+    .then((html) => {
+        if (url.indexOf('epicurious') !== -1){
+            parseEpicurious(html)
+        } else if(url.indexOf('foodnetwork') !== -1){
+            parseFoodNetwork(html)
+        } else {
+            throw err;
+        }
+    })
+    .catch((err) => {
+            console.log("error in recipeFunctions 5", err)
+    })
+}
+
+xPorts.parseEpicurious = function(html){
+   
 }
 
 module.exports = xPorts;

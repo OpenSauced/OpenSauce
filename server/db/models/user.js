@@ -17,9 +17,10 @@ var UserSchema = new Schema({
 		ref: 'recipes'
 	}],
 	user_image: {
-		image_data: Buffer,
-		image_name: String,
-		mimetype: String
+		image_data: {type: Buffer, default: null},
+		image_name: {type: String, default: null},
+		mimetype: {type: String, default: null},
+		placeholder: {type: String, default: 'https://placehold.it/900x600'}
 	},
 	session: String,
 	created_at: {
