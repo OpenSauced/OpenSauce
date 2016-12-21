@@ -37,6 +37,8 @@ ReactDOM.render((
 
       {/* Recipe Routes */}
       <Route path="/addrecipe" component={RouteAddRecipe}/>
+      
+      {/* Test Routes*/}
       <Route path="/search" component={SearchBar}/>
       <Route path="/RecipeList" component={RecipeList}/>
 
