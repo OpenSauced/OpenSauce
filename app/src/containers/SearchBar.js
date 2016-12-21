@@ -50,7 +50,7 @@ class SearchBar extends Component {
 
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes,
+    recipes: state.recipes
   }
 }
 
