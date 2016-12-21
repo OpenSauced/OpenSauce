@@ -11,7 +11,7 @@ class HeaderNav extends Component {
 
   render() {
     return (
-      <nav className="row">
+      <nav className="row header_nav">
         <HeaderNavLogo/>
         <HeaderNavButtons/>
         <HeaderNavProfile/>
