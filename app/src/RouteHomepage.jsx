@@ -28,15 +28,17 @@ class RouteHomepage extends Component {
     this.setState({searchInputValue: e.target.value});
   }
 
+  /* Once username can get got from cookie, comment back in
   componentDidMount() {
     this.props.getUserData()
     //TODO - H: get cookie, need username to insert in userdata
      // axios.get('/auth/getCookie/').then((cookie){
   }
+  */
 
   render() {
   {/* Console log for username - if props are present, this should work*/}
-    console.log('RouteHomepage.js - USERNAME: ', this.props.userInfo.username)
+    //console.log('RouteHomepage.js - USERNAME: ', this.props.userInfo.username)
     return (
       <div className="container-fluid">
         <HeaderNav/>
@@ -61,5 +63,4 @@ function mapStateToProps (state) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage) 
 
-///// Make button to test fn?
-//// Make RouteHomepage into a container
+

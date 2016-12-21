@@ -15,7 +15,7 @@ export const fetchRecipes = () => {
 
 
 // add 'username' as an argument
-export const getUserData = (username) => {
+export const getUserData = () => {
 
   //get userdata via axios request (jump to /server/routes/userRoutes)
   //TODO: Get username to insert in url
