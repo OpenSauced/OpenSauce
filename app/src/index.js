@@ -27,7 +27,7 @@ ReactDOM.render((
 
       {/* Current User Profile Settings route */}
       <Route path="/profile" component={RouteProfile}/>
-
+                
       {/* Signup route */}
       <Route path="/signup" component={RouteSignup}/>
       
