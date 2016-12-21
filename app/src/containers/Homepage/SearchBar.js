@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchRecipes } from '../actions/index'
+import { fetchRecipes } from '../../actions/index'
 
 class SearchBar extends Component {
   constructor(props) {

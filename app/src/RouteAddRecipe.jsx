@@ -4,7 +4,7 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
-import AddRecipe from './components/AddRecipe/AddRecipe';
+import AddRecipe from './containers/AddRecipe/AddRecipe';
 import AddRecipeTypeOfInsert from './components/AddRecipe/AddRecipeTypeOfInsert';
 
 class RouteAddRecipe extends Component {

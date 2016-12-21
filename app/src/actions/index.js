@@ -9,7 +9,6 @@ export const fetchRecipes = () => {
   return {
     type: FETCH_RECIPES,
     payload: request
-
   }
 }
 
@@ -18,7 +17,7 @@ export const fetchRecipes = () => {
 export const getUserData = ( username ) => {
   //get userdata via axios request (jump to /server/routes/userRoutes)
   //TODO: Get username to insert in url
-  const request = axios.get('/api/users/'+username+'/profile')
+  const request = axios.get(`/api/users/${username}/profile`)
   
   //return for dispatch in component - App.js
   return {

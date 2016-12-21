@@ -1,10 +1,10 @@
 const userModel = require('../models/user.js')
 const xPorts = {}
 
-xPorts.findByUserName = function(name) {
-    console.log('looking for user userFunctions.js', name);
-    return userModel.findOne({username: name})
-}
+// xPorts.findByUserName = function(name) {
+//     console.log('looking for user userFunctions.js', name);
+//     return userModel.findOne({username: name})
+// }
 
 xPorts.updateSession = function(user, hash) {
     return xPorts.findByUserName(user.username).then(function(userDB) {

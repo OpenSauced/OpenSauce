@@ -11,8 +11,6 @@ import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import SearchBar from './containers/SearchBar';
 
-
-
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
