@@ -60,7 +60,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   console.log('RoutHompage.js - STATE: ', state.userData)
-  return { userInfo: state.userData }
+  return { userData: state.userData }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage) 

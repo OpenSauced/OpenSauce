@@ -5,8 +5,6 @@ var router = express.Router()
 // var dummyDB = require('../db/dummydata.js')
 var db = require('../db/db.js')
 
-// add middleware that is specific to this router here:
-
 //route for users homepage
 router.get('/', function(req, res) {
   res.send('You have reached /api/users/ ')
@@ -34,12 +32,6 @@ router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
     console.log("Henry's cookie console log", cooks)
     res.end(cooks)
-})
-
-////
-/// GET A cookie from client (need username specifically)
-///
-router.get('/getCookie/', function(req, res){
 })
 
 //route to save a recipe to a user's saved recipes object

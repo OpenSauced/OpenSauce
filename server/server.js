@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, '/../app/public')));
 app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
 
 // This will catch ANY other routes that did not come before this and serve index.html
+// Routes are not locked yet - add authRoutes.ensureAuthenticated 
 app.use('*', express.static(path.join(__dirname, '/../app/public/index.html')));
 
 app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));

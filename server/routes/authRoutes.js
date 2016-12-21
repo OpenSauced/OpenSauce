@@ -42,25 +42,27 @@ auth.login = function(user) {
 router.get('/signup', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
 })
-router.get('/login', function(req, res) {
-    res.sendFile(path.resolve(__dirname + '/../../app/public/login.html'));
-})
 
 router.ensureAuthenticated = function(req, res, next) {
-  db.userFunctions.findByUserName(req.cookies.user).then(function(userDB){
-    if(req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
-      return next();
-    } else {
-      res.redirect('/auth/login/')
-    }
-  })
+    if (req.path === '/auth/logout' || '/auth/login' || '/auth/signup') return next();
+    db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
+        console.log('userDB', userDB);
+        if (userDB === null) {
+            res.redirect('/auth/logout')
+        } else if (userDB !== null) {
+            if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+                return next();
+            } else {
+                res.redirect('/auth/logout')
+            }
+        } else {
+            res.redirect('/auth/logout')
+        }
+    })
 }
 
 router.post('/login', function(req, res) {
     auth.login(req.body).then(function(cook) {
-    ////    TODO-Henry: Get username from cookie
-    ////  try setting the cookie to a variable and access it somewhere else
-    ////
         if (cook) {
             //cookie chaining!
             //sets user and session
@@ -86,11 +88,12 @@ router.post('/login', function(req, res) {
 router.get('/logout', function(req, res) {
   res.clearCookie("user");
   res.clearCookie("session");
-    res.redirect('/')
+  res.redirect('/login');
 })
 
 router.post('/signup', function(req, res) {
-    auth.signUp(req.body).then(function(exists) {
+    auth.signUp(req.body)
+    .then(function(exists) {
         console.log('.then')
         if (exists === true) {
             res.status(200).send('Erorr username taken, please choose another.');

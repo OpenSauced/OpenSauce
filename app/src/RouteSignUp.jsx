@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
+import SignUp from './components/SignUp/SignUp'
 
-class RouteSignup extends Component {
+class RouteSignUp extends Component {
   constructor() {
     super();
   }
@@ -12,11 +13,10 @@ class RouteSignup extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <HeaderNav/>
-        <Footer/>
+        <SignUp/>
       </div>
     );
   }
 }
 
-export default RouteSignup;
+export default RouteSignUp;
