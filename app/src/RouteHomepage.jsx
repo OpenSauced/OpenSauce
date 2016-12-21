@@ -28,13 +28,15 @@ class RouteHomepage extends Component {
     this.setState({searchInputValue: e.target.value});
   }
 
-  /* Once username can get got from cookie, comment back in
+  // Once username can get got from cookie, comment back in
   componentDidMount() {
-    this.props.getUserData()
-    //TODO - H: get cookie, need username to insert in userdata
-     // axios.get('/auth/getCookie/').then((cookie){
+    axios.get('/api/users/teeest')
+    .then((cookie) => {
+     var username = cookie.data;
+     this.props.getUserData(username).then((data) => console.log('getUserData', data))
+    })
   }
-  */
+  
 
   render() {
   {/* Console log for username - if props are present, this should work*/}
@@ -57,8 +59,8 @@ function mapDispatchToProps (dispatch) {
 }
 
 function mapStateToProps (state) {
-  console.log('RoutHompage.js - STATE: ', state.userInfo)
-  return { userInfo: state.userInfo }
+  console.log('RoutHompage.js - STATE: ', state.userData)
+  return { userInfo: state.userData }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage) 

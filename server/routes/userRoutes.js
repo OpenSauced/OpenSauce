@@ -1,4 +1,5 @@
 var express = require('express')
+const cookieParser = require('cookie-parser');
 var router = express.Router()
 
 // var dummyDB = require('../db/dummydata.js')
@@ -27,6 +28,12 @@ router.get('/:username/profile', function(req, res) {
    .catch(function(err) {
     res.send(err);
   })
+})
+
+router.get('/teeest', function(req, res) {
+    var cooks = req.cookies.user
+    console.log(cooks)
+    res.end(cooks)
 })
 
 ////
