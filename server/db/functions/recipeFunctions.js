@@ -12,7 +12,6 @@ xPorts.findRecentRecipes = function() {
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
 xPorts.addNewRecipe = function(username, recipe) {
-    console.log(recipe)
     return userFunctions.findByUserName(username)
         .then((userObj) => {
             return userObj
@@ -37,12 +36,12 @@ xPorts.addNewRecipe = function(username, recipe) {
 }
 
 //finds and returns one recipe based on recipe ID
-xPorts.findRecipeById = function(recipeId){
-	return recipeModel.findOne({_id: recipeId})
-	.populate('creator')
-	.exec((err, recipe) => {
-		if (err) console.log("error in recipeFunctions: ", err);
-	})
+xPorts.findRecipeById = function(recipeId) {
+    return recipeModel.findOne({ _id: recipeId })
+        .populate('creator')
+        .exec((err, recipe) => {
+            if (err) console.log("error in recipeFunctions: ", err);
+        })
 
 }
 
@@ -67,19 +66,19 @@ xPorts.findRecipeById = function(recipeId){
 xPorts.saveForkedRecipe = function(username, recipe, parentId) {
     recipe.forked_parent = parentId
     return xPorts.addNewRecipe(username, recipe)
-    .then((forkedRecipe)=>{
-        xPorts.addChildRecipe(parentId, forkedRecipe._id)
-        return forkedRecipe
-    })
-    .catch((err) => {
-        console.log("recipeFunctions 3 ", err)
-    })
+        .then((forkedRecipe) => {
+            xPorts.addChildRecipe(parentId, forkedRecipe._id)
+            return forkedRecipe
+        })
+        .catch((err) => {
+            console.log("recipeFunctions 3 ", err)
+        })
 }
 
 //adds a child (forked) recipe to a parent recipe
 //called when a forked recipe is saved to the DB
-xPorts.addChildRecipe = function(parentId, childId){
-        return recipeModel.findOneAndUpdate({ _id: parentId }, {
+xPorts.addChildRecipe = function(parentId, childId) {
+    return recipeModel.findOneAndUpdate({ _id: parentId }, {
             $push: {
                 'forked_children': childId
             }
@@ -89,33 +88,67 @@ xPorts.addChildRecipe = function(parentId, childId){
         })
         .catch((err) => {
             console.log("error in recipeFunctions 4", err)
-        }) 
+        })
 
+}
+
+//return a recipe object from a url
+xPorts.getRecipefromUrl = function(url) {
+    return xPorts.fetchHtml(url)
+        .then((html) => {
+            if (url.indexOf('epicurious') !== -1) {
+                return xPorts.parseEpicurious(html)
+            } else {
+                throw err;
+            }
+        })
+        .catch((err) => {
+            console.log("error in recipeFunctions 5", err)
+        })
 }
 
 //takes a url supplied by the client and returns the html for the page
-xPorts.fetchHtml = function(url){
+xPorts.fetchHtml = function(url) {
     return axios.get(url)
 }
 
-xPorts.getRecipefromHtml = function(url){
-    return fetchHtml(url)
-    .then((html) => {
-        if (url.indexOf('epicurious') !== -1){
-            parseEpicurious(html)
-        } else if(url.indexOf('foodnetwork') !== -1){
-            parseFoodNetwork(html)
-        } else {
-            throw err;
-        }
+//parse the html and return a recipe object
+// that is returned from a get request to epicurious
+xPorts.parseEpicurious = function(html) {
+    newHtml = html.data.replace(/(\r\n|\n|\r)/gm, "");
+
+    var recipe = {}
+
+    var pullTitle = newHtml.match(/<h1 itemprop="name">(.*?)\</g);
+    var titleArray = []
+    pullTitle.forEach(function(title) {
+        titleArray.push(title.match(/<h1 itemprop="name">(.*?)\</).pop())
     })
-    .catch((err) => {
-            console.log("error in recipeFunctions 5", err)
+    recipe.title = titleArray[0]
+
+    var pullDescription = newHtml.match(/itemprop="description"><p>(.*?)\</g);
+    var descriptionArray = []
+    pullDescription.forEach(function(description) {
+        descriptionArray.push(description.match(/itemprop="description"><p>(.*?)\</).pop())
     })
+    recipe.description = descriptionArray[0]
+
+    var ingredients = newHtml.match(/\<li class="ingredient" itemprop="ingredients">(.*?)\</g);
+    var ingredientsArray = []
+    ingredients.forEach(function(ingredient) {
+        ingredientsArray.push(ingredient.match(/\<li class="ingredient" itemprop="ingredients">(.*?)\</).pop())
+    })
+    recipe.ingredients = ingredientsArray
+
+    var pullDirections = newHtml.match(/\<li class="preparation-step">(.*?)\</g);
+    var directionsArray = []
+    pullDirections.forEach(function(direction) {
+        directionsArray.push(direction.match(/\<li class="preparation-step">(.*?)\</).pop())
+    })
+    recipe.directions = directionsArray.join(' ')
+
+    return recipe
 }
 
-xPorts.parseEpicurious = function(html){
-   
-}
 
 module.exports = xPorts;

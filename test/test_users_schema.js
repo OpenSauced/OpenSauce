@@ -95,11 +95,10 @@ describe('forking a recipe from an existing recipe', ()=>{
     })
 })
 
-// describe('getting the html from a link', () => {
-//     it('should return the html from a link', (done) => {
-//         recipeFunctions.fetchHtml('http://www.epicurious.com/recipes/food/views/key-lime-pie-108125')
-//         .then((html) => {
-//             console.log("HTML in TEST_________", html)
-//         })
-//     })
-// })
+describe('getting the html from a link', () => {
+    it.only('should return the html from a link', (done) => {
+        recipeFunctions.getRecipefromUrl('http://www.epicurious.com/recipes/food/views/key-lime-pie-108125')
+        .then((recipe) => {
+        })
+    })
+})
