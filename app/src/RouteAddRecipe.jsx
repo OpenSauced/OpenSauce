@@ -10,6 +10,14 @@ import AddRecipeTypeOfInsert from './components/AddRecipe/AddRecipeTypeOfInsert'
 class RouteAddRecipe extends Component {
   constructor() {
     super();
+
+    this.state = {
+      renderInputs: 'manual'
+    }
+  }
+
+  handleSelectHowToAddRecipe(e) {
+    
   }
 
   render() {
@@ -19,7 +27,7 @@ class RouteAddRecipe extends Component {
         <AppHeader title={'Catchy Phrase'}>
           <AddRecipeTypeOfInsert/>
         </AppHeader>
-        <AddRecipe recipeId={this.props.location.query.recipe}/>
+        <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
         <Footer/>
       </div>
     );
