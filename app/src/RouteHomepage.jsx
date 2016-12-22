@@ -46,4 +46,20 @@ class RouteHomepage extends Component {
   }
 }
 
+<<<<<<< b362bf8c05696002e61757782afca1c356b73fde
 export default RouteHomepage;
+=======
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators ({ getUserData }, dispatch)
+}
+
+function mapStateToProps (state) {
+  console.log('RoutHompage.js - STATE: ', state.userData)
+  return { userData: state.userData }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage) 
+
+
+//d
+>>>>>>> rebasing
