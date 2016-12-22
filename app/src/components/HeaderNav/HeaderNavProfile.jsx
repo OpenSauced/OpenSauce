@@ -6,44 +6,35 @@ import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+//Axios
+import axios from 'axios'
+
 class HeaderNavProfile extends Component {
   constructor() {
     super();
   }
 
-  // Once username can get got from cookie, comment back in
-  componentWillMount() {
-     this.props.getUserData();
-  }
-
   render() {
-    if (this.props.userData) {
-      return (
-        <div className="col-xs-4">
-          <div className="row">
-            <img src={this.props.userData.user_image.public_url} alt="" title=""/>
-          </div>
-          <div className="row">
-            <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
-          </div>
-          <div className="row">
-            <Link to="/profile">View Profile Settings</Link>
-          </div>
-        </div>
-      );
-    }
+    console.log(this.props.userData)
     return (
-      <div className="col-xs-4"></div>
+      <div className="col-xs-4">
+        <div className="row"> HI
+          {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}
+        </div>
+        <div className="row">
+          <span>Hey!</span>
+        </div>
+        <div className="row">
+          <Link to="/profile">View Profile Settings</Link>
+        </div>
+      </div>
     );
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({ getUserData }, dispatch)
-}
+export default HeaderNavProfile;
 
-function mapStateToProps (state) {
-  return state.userData
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderNavProfile)
+////// Don't delete 
+            // {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}
+            // <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+            // <Link to="/profile">View Profile Settings</Link>

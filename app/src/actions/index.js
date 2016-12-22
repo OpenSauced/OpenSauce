@@ -12,18 +12,12 @@ export const fetchRecipes = () => {
   }
 }
 
-
 // add 'username' as an argument
-export const getUserData = () => {
+export const getUserData = ( username ) => {
+  console.log('username :', username)
   //get userdata via axios request (jump to /server/routes/userRoutes)
   //TODO: Get username to insert in url
-  const request = axios.get('/api/users/getUserCookie')
-    .then((cookie) => {
-      return axios.get(`/api/users/${cookie.data}/profile`);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+  const request = axios.get(`/api/users/${username}/profile`)
 
   //return for dispatch in component - App.js
   return {

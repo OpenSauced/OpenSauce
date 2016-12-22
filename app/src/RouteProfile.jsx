@@ -5,21 +5,19 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
-import ProfileSettings from './components/Profile/ProfileSettings'
+import ProfileSettings from './components/Profile/ProfileSettings';
+import { connect } from 'react-redux';
 
 class RouteProfile extends Component {
   constructor() {
     super();
-    this.state = {
-      username: 'Will'
-    }
   }
 
   render() {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={`Welcome ${this.state.username}!`}/>
+        <AppHeader title={`Welcome ${this.props.userData.username}!`}/>
         <ProfileSettings/>
         <Footer/>
       </div>
@@ -27,11 +25,9 @@ class RouteProfile extends Component {
   }
 }
 
-export default RouteProfile;
+function mapStateToProps (state) {
+  console.log('RouteProfile.js - STATE: ', state.userData)
+  return { userData: state.userData }
+}
 
-// function mapStateToProps (state) {
-//   console.log('RoutHompage.js - STATE: ', state.userData)
-//   return { userData: state.userData }
-// }
-
-// export default connect(mapStateToProps)(RouteProfile) 
+export default connect(mapStateToProps)(RouteProfile) 

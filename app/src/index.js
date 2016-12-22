@@ -14,37 +14,56 @@ import RouteViewRecipe from './RouteViewRecipe'
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
+import ReduxPromise from 'redux-promise';
+
+//Redux reducers and actions
+import axios from 'axios'
 import reducers from './reducers';
-import ReduxPromise from 'redux-promise'
+import { getUserData } from './actions/index';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const store = createStoreWithMiddleware(reducers);
 
-ReactDOM.render((
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory}>
-      {/* Homepage route */}
-      <Route path="/" component={RouteHomepage}/>
+////////Working on this- Henry
+// Setting redux state before the app can render - this wraps DOM.render
+// axios
+// .get('/api/users/getUserCookie')
+// .then(
+//   (cookie) => {
+//      var username = cookie.data;
+//      store.dispatch(getUserData(username)).then((data) => renderShezit())
+//   }
+// )
 
-      {/* Current User Profile Settings route */}
-      <Route path="/profile" component={RouteProfile}/>
+// function renderShezit () {
+  ReactDOM.render((
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        {/* Homepage route */}
+        <Route path="/" component={RouteHomepage}/>
 
-      {/* Signup route */}
-      <Route path="/signup" component={RouteSignUp}/>
+        {/* Current User Profile Settings route */}
+        <Route path="/profile" component={RouteProfile}/>
+                  
+        {/* Signup route */}
+        <Route path="/signup" component={RouteSignUp}/>
+        
+        {/* Login route */ }
+        <Route path="/login" component={RouteLogin}/>
 
-      {/* Login route */}
-      <Route path="/login" component={RouteLogin}/>
+        {/* Recipe Routes */}
+        <Route path="/addrecipe" component={RouteAddRecipe}/>
+        
+        {/* Test Routes*/}
 
-      {/* Recipe Routes */}
-      <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
-      <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
-      
-      {/* Test Routes*/}
 
-      {/* These routes will handle 404 errors */}
-      <Route path="/*" component={Route404}/>
-      <Route path="/**/*" component={Route404}/>
+        {/* These routes will handle 404 errors */}
+        <Route path="/*" component={Route404}/>
+        <Route path="/**/*" component={Route404}/>
+        
+      </Router>
+    </Provider>
+  ), document.getElementById('root'));
+// }
 
-    </Router>
-  </Provider>
-), document.getElementById('root'));

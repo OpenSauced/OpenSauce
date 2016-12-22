@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import HeaderNavLogo from './HeaderNavLogo';
 import HeaderNavButtons from './HeaderNavButtons';
@@ -16,6 +17,8 @@ class HeaderNav extends Component {
         <HeaderNavButtons/>
         <HeaderNavProfile/>
       </nav>
+
+     
     );
   }
 }
