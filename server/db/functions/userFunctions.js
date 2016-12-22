@@ -28,6 +28,15 @@ xPorts.secondarySignupCheck = function(user) {
   })
 }
 
+xPorts.saveUserFn = function(user) {
+  console.log('saving user...');
+    new userModel(user).save().then((data) => {
+      console.log('saved user!', data);
+    }).catch((err) => {
+        console.error('ERROR IN USER FUNCTIONS SAVING:', err);
+    })
+}
+
 xPorts.updateInfoBatch = function(user, data) {
   console.log('updateInfoBatch', data);
     return xPorts.addBio(user, data.Bio).then(function() {
@@ -74,7 +83,9 @@ xPorts.findOrCreateUser = function(userData) {
     return xPorts.findByUserName(userData.username).then(function(data) {
         if (!data) { //no data, user isnt in the db
             console.log('didnt find a user, creating one', userData);
-            xPorts.saveUser({
+            console.log('calling save user', xPorts);
+            xPorts.saveUserFn()
+            xPorts.saveUserFn({
                 first_name: userData.firstName,
                 last_name: userData.lastName,
                 email: userData.email,
@@ -82,19 +93,13 @@ xPorts.findOrCreateUser = function(userData) {
                 username: userData.username,
                 picture: 'null',
                 password: userData.password,
-                secondary_signup_needed: True
+                secondary_signup_needed: 'True'
             })
+            console.log('returned faslse');
             return false
         } else if (data) { //got data
             return true
         }
-    })
-}
-
-xPorts.saveUser = function(user) {
-    new userModel(user).save().then((data) => {
-    }).catch((err) => {
-        console.error('ERROR IN USER FUNCTIONS SAVING:', err);
     })
 }
 
