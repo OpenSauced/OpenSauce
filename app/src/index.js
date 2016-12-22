@@ -10,8 +10,8 @@ import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import SearchBar from './containers/SearchBar';
-import RecipeList from './containers/RecipeList';
-import AddRecipe from './containers/AddRecipe';
+
+
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -40,9 +40,7 @@ ReactDOM.render((
       <Route path="/addrecipe" component={RouteAddRecipe}/>
       
       {/* Test Routes*/}
-      <Route path="/search" component={SearchBar}/>
-      <Route path="/RecipeList" component={RecipeList}/>
-      <Route path="/AddRecipeTest" component={AddRecipe}/>
+
 
       {/* These routes will handle 404 errors */}
       <Route path="/*" component={Route404}/>
