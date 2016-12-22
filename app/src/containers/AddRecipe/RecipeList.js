@@ -7,29 +7,25 @@ import { fetchRecipes } from '../../actions/index'
 class RecipeList extends Component {
   componentWillMount() {
     //Check the route here and fetch by user or not depending on the route.
-    switch(this.props.route) {
-      case '/myrecipes':
-        //this.props.user.userData.my_recipes
-        console.log(this.props.user)
-        break
-      default:
+    if (!this.props.route) {
         this.props.fetchRecipes()
     }
-    
   }
 
   renderRecipes(recipe) {
     return(
-      <div key={recipe._id}>
-        <div>{recipe.title}</div>
-        <div>{recipe.directions}</div>
-        <div>{recipe.title}</div>
-      </div>
+      <ul className="row">
+        <div key={recipe._id}>
+          <div>{recipe.title}</div>
+          <div>{recipe.directions}</div>
+          <div>{recipe.title}</div>
+        </div>
+      </ul>
     )
   }
 
   render() {
-    console.log('PROPS: ', this.props)
+    //console.log('PROPS: ', this.props)
     return (
       <div>
         {this.props.recipes.map(this.renderRecipes)}
