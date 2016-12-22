@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
 
 //Redux and async functions
 import { getUserData } from '../../actions/index';
@@ -26,8 +27,29 @@ class AddRecipeManual extends Component {
 
   componentWillMount() {
     this.props.getUserData();
+    if(this.props.recipeId){
+      this.getRecipeFromDB(this.props.recipeId)
+    } 
   }
-
+  
+  getRecipeFromDB(recipeId) {
+    $.ajax({
+      url: '/api/recipes/' + recipeId,
+      success: function(recipe) {
+        console.log("RECIPE ", recipe)
+          this.setState({ 
+            title: recipe.title,
+            description: recipe.description,
+            ingredients: recipe.ingredients,
+            directions: recipe.directions,
+            forkedParent: recipe._id
+           });
+      }.bind(this),
+      error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+      }.bind(this),
+    });
+  }
   onInputChange(event) {
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
@@ -65,8 +87,10 @@ class AddRecipeManual extends Component {
       data: recipe,
       dataType: 'json'
     })
-    .then((data) => {
-      console.log('Getting current data? ', data);
+    .then((recipe) => {
+      console.log('Getting current data? ', recipe);
+      const path = `/viewrecipe/${recipe._id}`
+      browserHistory.push(path);
     })
     .catch((err) => {
       console.error('Getting current error? ', err);

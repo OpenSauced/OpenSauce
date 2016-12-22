@@ -14,10 +14,20 @@ class RouteAddRecipe extends Component {
     this.state = {
       renderInputs: 'manual'
     }
+    this.handleSelectHowToAddRecipe = this.handleSelectHowToAddRecipe.bind(this);
   }
 
   handleSelectHowToAddRecipe(e) {
-    
+    // console.log("Getting current click?", e.target.name)
+    let render = ''
+    if(e.target.name === 'manual'){
+      render = 'manual'
+    } else {
+      render = 'link'
+    }
+    this.setState({
+        renderInputs: render
+      })
   }
 
   render() {
@@ -25,7 +35,7 @@ class RouteAddRecipe extends Component {
       <div className="container-fluid">
         <HeaderNav/>
         <AppHeader title={'Catchy Phrase'}>
-          <AddRecipeTypeOfInsert/>
+          <AddRecipeTypeOfInsert renderClick={this.handleSelectHowToAddRecipe}/>
         </AppHeader>
         <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
         <Footer/>

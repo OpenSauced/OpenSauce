@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
+
 
 const AddRecipeFromLink = (props) => {
-
+	console.log("getting current user?", props)
+	var username = props.userData.username
 	var formSubmit = function(e) {
     e.preventDefault();
     $.ajax({
-      url: '/api/recipes/scraperecipe' + ,
+      url: '/api/recipes/scraperecipe',
       type: 'POST',
       data: {
-        username: this.props.username,
+        username: username,
         url: $('input[name=url]').val()
       },
       success: function (recipe) {
         console.log("recipe was saved to the DB", recipe);
-        //route to recipe page with recipe._id!!!!!!!!!
-      },
+
+ 		const path = `/viewrecipe/${recipe._id}`
+      browserHistory.push(path);      },
       error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
       }
 
   })
+}
 
   return (
   	<div>
@@ -33,4 +38,6 @@ const AddRecipeFromLink = (props) => {
   );
 };
 
-export default AddRecipeFromLink;
+export default AddRecipeFromLink
+
+
