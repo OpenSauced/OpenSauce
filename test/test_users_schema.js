@@ -14,16 +14,16 @@ describe('passing a test', () => {
     })
 })
 
-describe('Creating records', () => {
-    it('saves a user', (done) => {
-        const henry = new User({ first_name: 'Henreh', last_name: 'Hedges' });
-        henry.save()
-            .then(() => {
-                assert(!henry.isNew);
-                done();
-            })
-    });
-})
+// describe('Creating records', () => {
+//     it('saves a user', (done) => {
+//         const henry = new User({ first_name: 'Henreh', last_name: 'Hedges' });
+//         henry.save()
+//             .then(() => {
+//                 assert(!henry.isNew);
+//                 done();
+//             })
+//     });
+// })
 
 describe('Creating recipes', () => {
     it('saves a recipe', (done) => {
@@ -33,7 +33,7 @@ describe('Creating recipes', () => {
             ingredients: ['1 can cherries', '1 cup sugar', '16 oz pie dough'],
             directions: 'Mix sugar and cherries together. Roll out pie dough and place in pie pan. Add cherries to pie and cover with remaining dough. Bake for 45 minutes at 400 degrees'
         }
-        var cherryPie = recipeFunctions.addNewRecipe('been', recipe)
+        var cherryPie = recipeFunctions.addNewRecipe('bjorn', recipe)
             .then((recipe) => {
                 console.log(recipe)
                 assert(!cherryPie.isNew);
@@ -96,7 +96,7 @@ describe('forking a recipe from an existing recipe', ()=>{
 })
 
 describe('getting the html from a link', () => {
-    it.only('should return the html from a link', (done) => {
+    it('should return the html from a link', (done) => {
         recipeFunctions.getRecipefromUrl('http://www.epicurious.com/recipes/food/views/key-lime-pie-108125')
         .then((recipe) => {
         })

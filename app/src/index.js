@@ -10,6 +10,9 @@ import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import SearchBar from './containers/Homepage/SearchBar';
+import RecipeList from './containers/RecipeList';
+import AddRecipe from './containers/AddRecipe';
+import RouteViewRecipe from './RouteViewRecipe'
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -36,6 +39,7 @@ ReactDOM.render((
 
       {/* Recipe Routes */}
       <Route path="/addrecipe" component={RouteAddRecipe}/>
+      <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
 
       {/* Test Routes*/}
 
