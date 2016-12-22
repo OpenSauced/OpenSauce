@@ -22,6 +22,14 @@ class RouteHomepage extends Component {
     this.setState({searchInputValue: e.target.value});
   }
 
+  componentDidMount() {
+    axios.get('/api/users/getUserCookie')
+    .then((cookie) => {
+     var username = cookie.data;
+     this.props.getUserData(username).then((data) => console.log('getUserData', data))
+    })
+  }
+  
   render() {
   {/* Console log for username - if props are present, this should work*/}
     //console.log('RouteHomepage.js - USERNAME: ', this.props.userInfo.username)
