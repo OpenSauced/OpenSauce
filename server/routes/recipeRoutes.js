@@ -52,10 +52,15 @@ var username = req.params.username
 })
 
 //go grab a recipe from a url (only works for epicurious currently) 
-//return a recipe object for user to confirm and save to the DB
-router.get('/scrapeRecipe', function(req, res){
-  var url = req.query.url
+//save it to the DB
+//send recipe object back to client
+router.post('/scraperecipe', function(req, res){
+  var url = req.body.url
+  var username = req.body.username
   db.recipeFunctions.getRecipefromUrl(url)
+  .then((recipe, username) => {
+    db.recipeFunctions.addNewRecipe(username, recipe)
+  })
   .then((recipe) => {
     res.send(recipe)
   })
