@@ -11,6 +11,15 @@ export default class AddRecipe extends Component {
     }
   }
 
+  componentWillMount(){
+    if(this.props.recipeId){
+    console.log('forking a recipe')
+  } else {
+    console.log('adding a new recipe')
+  }
+  }
+  
+
   onInputChange(event) {
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
@@ -35,7 +44,6 @@ export default class AddRecipe extends Component {
   } 
 
   renderIngredients(item, index, collection) {
-
     return (
       <div>
         <input
@@ -81,6 +89,7 @@ export default class AddRecipe extends Component {
   }
 
   render() {
+
     return(
       <form
         className=""

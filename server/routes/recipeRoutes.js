@@ -28,7 +28,7 @@ router.post('/:username/addrecipe', function(req, res) {
 })
 
 //route to return a single recipe
-router.get('/:recipeId/recipe', function(req, res){
+router.get('/:recipeId', function(req, res){
   var recipeId = req.params.recipeId
  db.recipeFunctions.findRecipeById(recipeId)
  .then((recipe) => {

@@ -19,7 +19,7 @@ class RouteAddRecipe extends Component {
         <AppHeader title={'Catchy Phrase'}>
           <AddRecipeTypeOfInsert/>
         </AppHeader>
-        <AddRecipe/>
+        <AddRecipe recipeId={this.props.location.query.recipe}/>
         <Footer/>
       </div>
     );
