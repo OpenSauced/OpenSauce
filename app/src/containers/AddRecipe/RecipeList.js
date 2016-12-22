@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import { fetchRecipes } from '../../actions/index'
+//Components
+import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe';
 
 class RecipeList extends Component {
   componentWillMount() {
@@ -14,31 +13,30 @@ class RecipeList extends Component {
 
   renderRecipes(recipe) {
     return(
-      <ul className="row">
-        <div key={recipe._id}>
-          <div>{recipe.title}</div>
-          <div>{recipe.directions}</div>
-          <div>{recipe.title}</div>
-        </div>
+      <ul className="row" key={recipe._id}>  
+        <HPFeedRecipe recipe={recipe}/>
       </ul>
     )
   }
 
   render() {
-    //console.log('PROPS: ', this.props)
+    console.log('RECIPE LIST PROPS: ', this.props)
     return (
-      <div>
+      <ul className="row">
         {this.props.recipes.map(this.renderRecipes)}
-      </div>
+      </ul>
     )
   }
 }
 
+
 // REDUX STUFF
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchRecipes } from '../../actions/index'
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes,
-    user: state.userData
+    recipes: state.recipes
   }
 }
  
