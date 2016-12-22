@@ -12,12 +12,12 @@ router.get('/', function(req, res) {
 
 //route for a specific user profile /user_name/profile;
 //also returns an array of references to user's recipes and saved recipes
-router.get('/:username/profile', function(req, res) {
-  var username = req.params.username
-  console.log("cookie? ",req)
-  db.userFunctions
-  .findByUserName(username)
-  .then((user) => {
+
+router.get('/:userName/profile', function(req, res) {
+  var username = req.params.userName
+  req.params.password = null;
+  req.params.location = null;
+  db.userFunctions.findByUserName(username).then((user) => {
     user.password = null;
     user.location = null;
     user.session = null;
@@ -30,7 +30,6 @@ router.get('/:username/profile', function(req, res) {
 
 router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
-    console.log("Henry's cookie console log", cooks)
     res.end(cooks)
 })
 
@@ -45,7 +44,7 @@ router.post('/save', function(req, res){
   .catch((err) => {
     res.send(err);
   })
-}) 
+})
 
 
 module.exports = router

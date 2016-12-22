@@ -29,23 +29,23 @@ ReactDOM.render((
 
       {/* Current User Profile Settings route */}
       <Route path="/profile" component={RouteProfile}/>
-                
+
       {/* Signup route */}
       <Route path="/signup" component={RouteSignUp}/>
-      
+
       {/* Login route */}
       <Route path="/login" component={RouteLogin}/>
 
       {/* Recipe Routes */}
       <Route path="/addrecipe" component={RouteAddRecipe}/>
-      
+
       {/* Test Routes*/}
 
 
       {/* These routes will handle 404 errors */}
       <Route path="/*" component={Route404}/>
       <Route path="/**/*" component={Route404}/>
-      
+
     </Router>
   </Provider>
 ), document.getElementById('root'));
