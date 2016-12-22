@@ -38,13 +38,4 @@ class RouteHomepage extends Component {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({ getUserData }, dispatch)
-}
-
-function mapStateToProps (state) {
-  console.log('RoutHompage.js - STATE: ', state.userData)
-  return { userData: state.userData }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RouteHomepage);
+export default RouteHomepage;
