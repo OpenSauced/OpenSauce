@@ -11,6 +11,7 @@ import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import SearchBar from './containers/SearchBar';
 import RecipeList from './containers/RecipeList';
+import App from './components/app/app.jsx';
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -18,34 +19,39 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import ReduxPromise from 'redux-promise'
 
+// {/* Homepage route */}
+// <Route path="/homepage" component={RouteHomepage}/>
+
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render((
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
-      {/* Homepage route */}
-      <Route path="/" component={RouteHomepage}/>
+      <Route path='/' component={App}>
+        {/* <IndexRoute component={RouteHomepage}/> */}
+        <IndexRoute component={RouteHomepage} />
 
-      {/* Current User Profile Settings route */}
-      <Route path="/profile" component={RouteProfile}/>
-                
-      {/* Signup route */}
-      <Route path="/signup" component={RouteSignup}/>
-      
-      {/* Login route */}
-      <Route path="/login" component={RouteLogin}/>
+        <Route path="/home" component={RouteHomepage}/>
+        {/* Current User Profile Settings route */}
+        <Route path="/profile" component={RouteProfile}/>
 
-      {/* Recipe Routes */}
-      <Route path="/addrecipe" component={RouteAddRecipe}/>
-      
-      {/* Test Routes*/}
-      <Route path="/search" component={SearchBar}/>
-      <Route path="/RecipeList" component={RecipeList}/>
+        {/* Signup route */}
+        <Route path="/signup" component={RouteSignup}/>
 
-      {/* These routes will handle 404 errors */}
-      <Route path="/*" component={Route404}/>
-      <Route path="/**/*" component={Route404}/>
-      
+        {/* Login route */}
+        <Route path="/login" component={RouteLogin}/>
+
+        {/* Recipe Routes */}
+        <Route path="/addrecipe" component={RouteAddRecipe}/>
+
+        {/* Test Routes*/}
+        <Route path="/search" component={SearchBar}/>
+        <Route path="/RecipeList" component={RecipeList}/>
+
+        {/* These routes will handle 404 errors */}
+        <Route path="/*" component={Route404}/>
+        <Route path="/**/*" component={Route404}/>
+      </Route>
     </Router>
   </Provider>
 ), document.getElementById('root'));

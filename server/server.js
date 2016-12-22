@@ -22,17 +22,22 @@ db.connection.on('open', function() {
     console.log('Mongdb connection open');
 })
 
-app.use('/api/users', userRoutes);
-app.use('/api/recipes', recipeRoutes);
-app.use('/auth/', authRoutes)
-app.use('/upload/', uploadRoutes)
+app.use('/api/users', authRoutes.ensureAuthenticated, userRoutes);
+app.use('/api/recipes', authRoutes.ensureAuthenticated, recipeRoutes);
+app.use('/auth/', authRoutes.ensureAuthenticated, authRoutes)
+app.use('/upload/', authRoutes.ensureAuthenticated, uploadRoutes)
 
-app.use(express.static(path.join(__dirname, '/../app/public')));
+app.use(authRoutes.ensureAuthenticated, express.static(path.join(__dirname, '/../app/public')));
 
 app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
 
+// app.get('/', authRoutes.ensureAuthenticated, function(req, res) {
+//   res.end('wow')
+// })
 // This will catch ANY other routes that did not come before this and serve index.html
-app.use('*', express.static(path.join(__dirname, '/../app/public/index.html')));
+// app.use('/*', authRoutes.ensureAuthenticated, express.static(path.join(__dirname, '/../app/public/index.html')));
+
+app.get('*', authRoutes.ensureAuthenticated, express.static(path.join(__dirname, '/../app/public/index.html')));
 
 app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 

@@ -5,26 +5,35 @@ var bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
 
-const auth = {}
+// const auth = {}
 
 router.ensureAuthenticated = function(req, res, next) {
-    db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
-        console.log('userDB', userDB);
-        if (userDB === null) {
-            res.redirect('/auth/logout')
-        } else if (userDB !== null) {
-            if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
-                return next();
+  console.log('first pass');
+    if (req.url === '/logout' || req.url === '/login' || req.url === '/signup') {
+        // console.log('test passed, allowed');
+        return next();
+    } else {
+        db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
+            console.log('userDB', userDB);
+            if (userDB == null) {
+                console.log('one');
+                res.redirect('/auth/logout')
+            } else if (userDB !== null) {
+                if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
+                    return next();
+                } else {
+                  console.log('two');
+                    res.redirect('/auth/logout')
+                }
             } else {
+              console.log('three');
                 res.redirect('/auth/logout')
             }
-        } else {
-            res.redirect('/auth/logout')
-        }
-    })
+        })
+    }
 }
 
-auth.signUp = function(userData) {
+router.signUp = function(userData) {
     //hash gen
     var hash = bcrypt.hashSync(userData.password, bcrypt.genSaltSync(7331));
     userData.password = hash
@@ -32,7 +41,7 @@ auth.signUp = function(userData) {
     return db.userFunctions.findOrCreateUser(userData)
 }
 
-auth.login = function(user) {
+router.login = function(user) {
     return db.userFunctions.findByUserName(user.username).then(function(userDB) {
         if (userDB !== null) {
             if (user !== [] && user.username === userDB.username) {
@@ -42,15 +51,15 @@ auth.login = function(user) {
                         return [user, hash]
                     })
                 } else {
-                    console.log('returning null in login auth.js 1');
+                    console.log('returning null in login router.js 1');
                     return null;
                 }
             } else {
-                console.log('returning null in login auth.js 2');
+                console.log('returning null in login router.js 2');
                 return null;
             };
         } else {
-            console.log('returning null in login auth.js 3');
+            console.log('returning null in login router.js 3');
             return null;
         }
     })
@@ -64,7 +73,7 @@ router.get('/login', function(req, res) {
 })
 
 router.post('/login', function(req, res) {
-    auth.login(req.body).then(function(cook) {
+    router.login(req.body).then(function(cook) {
         if (cook) {
             //cookie chaining!
             //sets user and session
@@ -93,8 +102,10 @@ router.get('/logout', function(req, res) {
     res.redirect('/auth/login')
 })
 
+router.secondarySignupCheck
+
 router.post('/signup', function(req, res) {
-    auth.signUp(req.body).then(function(exists) {
+    router.signUp(req.body).then(function(exists) {
         console.log('.then')
         if (exists === true) {
             res.status(200).send('Erorr username taken, please choose another.');
