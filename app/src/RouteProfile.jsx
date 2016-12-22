@@ -28,3 +28,10 @@ class RouteProfile extends Component {
 }
 
 export default RouteProfile;
+
+// function mapStateToProps (state) {
+//   console.log('RoutHompage.js - STATE: ', state.userData)
+//   return { userData: state.userData }
+// }
+
+// export default connect(mapStateToProps)(RouteProfile) 
