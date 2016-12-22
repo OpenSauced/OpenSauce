@@ -24,14 +24,3 @@ class HeaderNav extends Component {
 }
 
 export default HeaderNav;
-
-
-      //  <nav class="navbar navbar-default">
-      //   <div class="container-fluid">
-      //     <div class="navbar-header">
-      //       <Link className="navbar-brand" to='/'>
-      //         <img alt="Brand" src="../../../icons/logo/OpenSauce.png"/>
-      //       </Link>
-      //     </div>
-      //   </div>
-      // </nav>

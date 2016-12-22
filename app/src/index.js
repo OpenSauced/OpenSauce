@@ -25,17 +25,18 @@ import { getUserData } from './actions/index';
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
+////////Working on this- Henry
 // Setting redux state before the app can render - this wraps DOM.render
-axios
-.get('/api/users/getUserCookie')
-.then(
-  (cookie) => {
-     var username = cookie.data;
-     store.dispatch(getUserData(username)).then((data) => renderShezit())
-  }
-)
+// axios
+// .get('/api/users/getUserCookie')
+// .then(
+//   (cookie) => {
+//      var username = cookie.data;
+//      store.dispatch(getUserData(username)).then((data) => renderShezit())
+//   }
+// )
 
-function renderShezit () {
+// function renderShezit () {
   ReactDOM.render((
     <Provider store={store}>
       <Router history={browserHistory}>
@@ -64,5 +65,5 @@ function renderShezit () {
       </Router>
     </Provider>
   ), document.getElementById('root'));
-}
+// }
 

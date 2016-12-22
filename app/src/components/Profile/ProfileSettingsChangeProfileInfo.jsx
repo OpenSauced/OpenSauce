@@ -25,9 +25,8 @@ class ProfileSettingsChangeProfileInfo extends Component {
   }
 
   concatUsername () {
-    console.log('PROFSETTINGSCHGPROFINFO state/props: ', this.props)
-    var first = this.props.userData.firstName;
-    var last = this.props.userData.lastName;
+    var first = this.props.userData.first_name;
+    var last = this.props.userData.last_name;
     var fullName = first +" "+ last;
     return fullName;
   }
@@ -66,8 +65,7 @@ class ProfileSettingsChangeProfileInfo extends Component {
 }
 
 function mapStateToProps (state) {
-  console.log('RouteProfile.js - STATE: ', state)
-  return { userData: state.userData }
+  return state.userData
 }
 
 export default connect(mapStateToProps)(ProfileSettingsChangeProfileInfo);
