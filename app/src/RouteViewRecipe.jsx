@@ -7,7 +7,11 @@ import Footer from './components/Footer/Footer';
 
 import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
 import ViewRecipe from './components/ViewRecipe/ViewRecipe.jsx'
-//buttons for saving and forking
+
+//Redux and async functions
+import { getUserData } from './actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
 class RouteViewRecipe extends Component {
@@ -21,6 +25,7 @@ class RouteViewRecipe extends Component {
 
   componentWillMount() {
     this.getRecipeFromDB(this.props.params.recipe);
+    this.props.getUserData();
   }
 
 getRecipeFromDB(recipeId) {
@@ -37,12 +42,13 @@ getRecipeFromDB(recipeId) {
   }
 
   saveRecipe() {
+    console.log("getting current this? " ,this)
 	$.ajax({
       url: '/api/users/save',
       type: 'POST',
       data: {
-      	recipeId: recipeId,
-      	//userId:
+      	recipeId: this.state.recipe._id,
+      	userId: this.props.userData._id
       },
       success: function(recipe) {
       	console.log('Saved the recipe to the user!')
@@ -68,7 +74,7 @@ if(this.state.recipe.title){
        <HeaderNav/>
         <AppHeader title={this.state.recipe.title}>
         <div>
-        	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe} forkRecipe={this.forkRecipe}/>
+        	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
         </div>
         </AppHeader>
 
@@ -81,6 +87,14 @@ if(this.state.recipe.title){
 }
 };
 
-export default RouteViewRecipe;
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators ({ getUserData }, dispatch)
+}
+
+function mapStateToProps (state) {
+  return state.userData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
 
 
