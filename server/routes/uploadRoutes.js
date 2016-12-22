@@ -39,12 +39,4 @@ router.post('/completeRegistration/', authRoutes.ensureAuthenticated, upload.sin
   }
 });
 
-
-router.post('/test/image', function(req, res) {
-  cloudinary.uploader.upload("my_picture.jpg", function(result) {
-    console.log(result)
-  });
-  res.end(200)
-})
-
 module.exports = router

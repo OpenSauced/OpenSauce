@@ -11,7 +11,6 @@ xPorts.updateSession = function(user, hash) {
         userDB.session = hash
         userDB.update()
         userDB.save()
-        console.log('saved hash to session userFunctions.js', userDB);
         return userDB
     })
 }
@@ -40,7 +39,6 @@ xPorts.updateInfoBatch = function(user, data) {
 
 xPorts.addBio = function(user, bio) {
     return xPorts.findByUserName(user).then(function(userDB) {
-      console.log('updating bio', bio);
         userDB.bio = bio
         userDB.update()
         userDB.save()
@@ -62,7 +60,6 @@ xPorts.addLocation = function(user, location) {
 xPorts.addPhotoUrl = function(user, result) {
     console.log('finding a user for image add', user);
     return xPorts.findByUserName(user).then(function(userDB) {
-        console.log('got back', userDB, result);
         userDB.user_image.public_url = result.url
         userDB.user_image.secure_url = result.secure_url
         userDB.user_image.public_id = result.public_id
@@ -95,9 +92,7 @@ xPorts.findOrCreateUser = function(userData) {
 }
 
 xPorts.saveUser = function(user) {
-    // console.log('saving a user', user)
     new userModel(user).save().then((data) => {
-        console.log('saved a profile')
     }).catch((err) => {
         console.error('ERROR IN USER FUNCTIONS SAVING:', err);
     })

@@ -8,25 +8,19 @@ const db = require('./../db/db.js')
 // const auth = {}
 
 router.ensureAuthenticated = function(req, res, next) {
-  console.log('first pass');
     if (req.url === '/logout' || req.url === '/login' || req.url === '/signup') {
-        // console.log('test passed, allowed');
         return next();
     } else {
         db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
-            console.log('userDB', userDB);
             if (userDB == null) {
-                console.log('one');
                 res.redirect('/auth/logout')
             } else if (userDB !== null) {
                 if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
                     return next();
                 } else {
-                  console.log('two');
                     res.redirect('/auth/logout')
                 }
             } else {
-              console.log('three');
                 res.redirect('/auth/logout')
             }
         })
@@ -34,10 +28,8 @@ router.ensureAuthenticated = function(req, res, next) {
 }
 
 router.signUp = function(userData) {
-    //hash gen
     var hash = bcrypt.hashSync(userData.password, bcrypt.genSaltSync(7331));
     userData.password = hash
-    //return promise
     return db.userFunctions.findOrCreateUser(userData)
 }
 
@@ -75,11 +67,8 @@ router.get('/login', function(req, res) {
 router.post('/login', function(req, res) {
     router.login(req.body).then(function(cook) {
         if (cook) {
-            //cookie chaining!
-            //sets user and session
-            //very hard to verify / fake
-            //we dont verify, we just check and see if the user
-            //has that exact session. Not recreating it. Username is just for lookup
+          //got a cookie?
+          //yum, better save it
             res.cookie('session', cook[1], {
                 maxAge: 9000000,
                 httpOnly: true
