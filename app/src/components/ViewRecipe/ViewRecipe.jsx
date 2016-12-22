@@ -6,7 +6,7 @@ import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
 
 const ViewRecipe = ({recipe}) => {
-	
+	if (recipe){
   return (
     <div>
    <RecipeDescription recipeDescription={recipe.description} />
@@ -19,7 +19,8 @@ const ViewRecipe = ({recipe}) => {
   );
 }
 
-
+return ''
+}
 
 export default ViewRecipe;
 

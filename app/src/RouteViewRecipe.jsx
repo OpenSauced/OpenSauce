@@ -5,13 +5,10 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
+import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
 import ViewRecipe from './components/ViewRecipe/ViewRecipe.jsx'
 //buttons for saving and forking
-//container for recipe stuff
 
-//recipe id will be passed down in props
-
-//do i need to pass props down to sub-components?
 
 class RouteViewRecipe extends Component {
   constructor() {
@@ -22,13 +19,11 @@ class RouteViewRecipe extends Component {
     };
   }
 
-  //will mount 
-  componentDidMount() {
+  componentWillMount() {
     this.getRecipeFromDB(this.props.params.recipe);
   }
 
 getRecipeFromDB(recipeId) {
-	console.log("HERE?? in view route")
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
@@ -41,13 +36,40 @@ getRecipeFromDB(recipeId) {
     });
   }
 
+  saveRecipe() {
+	$.ajax({
+      url: '/api/users/save',
+      type: 'POST',
+      data: {
+      	recipeId: recipeId,
+      	//userId:
+      },
+      success: function(recipe) {
+      	console.log('Saved the recipe to the user!')
+      }.bind(this),
+      error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+      }.bind(this),
+    });
+  }
+
+    forkRecipe() {
+	var title = this.state.recipe.title
+	var description = this.state.recipe.description
+	var ingredients =this.state.recipe.ingredients
+	var directions = this.state.recipe.directions
+	var parentId = this.state.recipe._id
+  }
+
   render() {
 if(this.state.recipe.title){
     return (
       <div className="container-fluid">
        <HeaderNav/>
         <AppHeader title={this.state.recipe.title}>
-          
+        <div>
+        	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe} forkRecipe={this.forkRecipe}/>
+        </div>
         </AppHeader>
 
         <ViewRecipe recipe={this.state.recipe} />
