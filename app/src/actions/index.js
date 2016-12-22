@@ -2,6 +2,11 @@ import axios from 'axios'
 
 export const FETCH_RECIPES = 'FETCH_RECIPES';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const GET_USER_RECIPES = 'GET_USER_RECIPES';
+
+// export const getUserRecipes = () => {
+//   const recipes 
+// }
 
 export const fetchRecipes = () => {
  

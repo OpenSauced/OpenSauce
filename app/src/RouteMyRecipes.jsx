@@ -4,18 +4,24 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
-const RouteMyRecipes = ({}) => {
-  return (
-    <div className="container-fluid">
-      <HeaderNav/>
-      <AppHeader title={'Catchy Phrase'}>
-      </AppHeader>
-      <div>
-        INSERT MY COMPONENT HERE
+import RecipeList from './containers/AddRecipe/RecipeList.js'
+
+
+class RouteMyRecipes  extends Component {
+  render() {
+    
+    return (
+      <div className="container-fluid">
+        <HeaderNav/>
+        <AppHeader title={'Catchy Phrase'}>
+        </AppHeader>
+        <div>
+          <RecipeList route={this.props.route.path}/>
+        </div>
+        <Footer/>
       </div>
-      <Footer/>
-    </div>
-  );
+    );
+  }
 }
 
 export default RouteMyRecipes;

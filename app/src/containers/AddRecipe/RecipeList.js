@@ -5,8 +5,17 @@ import { bindActionCreators } from 'redux'
 import { fetchRecipes } from '../../actions/index'
 
 class RecipeList extends Component {
-  componentDidMount() {
-    this.props.fetchRecipes()
+  componentWillMount() {
+    //Check the route here and fetch by user or not depending on the route.
+    switch(this.props.route) {
+      case '/myrecipes':
+        //this.props.user.userData.my_recipes
+        console.log(this.props.user)
+        break
+      default:
+        this.props.fetchRecipes()
+    }
+    
   }
 
   renderRecipes(recipe) {
@@ -32,10 +41,11 @@ class RecipeList extends Component {
 // REDUX STUFF
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    user: state.userData
   }
 }
-
+ 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({ fetchRecipes }, dispatch)
 }
