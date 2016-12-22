@@ -17,7 +17,7 @@ xPorts.updateSession = function(user, hash) {
 
 xPorts.secondSignupDisable = function(user) {
     return xPorts.findByUserName(user).then(function(userDB) {
-        userDB.secondary_signup_needed = false
+        userDB.secondary_signup_needed = 'false'
         userDB.save()
     })
 }

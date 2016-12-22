@@ -9,7 +9,6 @@ const db = require('./../db/db.js')
 
 router.ensureAuthenticated = function(req, res, next) {
     if (req.url === '/login' || req.url === '/signup') {
-      // console.log('yes it equal to /login');
         return next();
     } else {
         db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
@@ -61,26 +60,6 @@ router.login = function(user) {
 router.get('/signup', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
 })
-
-// //Broken function, BenS is fixing
-// router.ensureAuthenticated = function(req, res, next) {
-//     if (req.path === '/auth/logout' || '/auth/login' || '/auth/signup') return next();
-//     db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
-//         console.log('userDB', userDB);
-//         if (userDB === null) {
-//             res.redirect('/auth/logout')
-//         } else if (userDB !== null) {
-//             if (req.cookies.session === userDB.session && req.cookies.session !== undefined && userDB.session !== undefined) {
-//                 return next();
-//             } else {
-//                 res.redirect('/auth/logout')
-//             }
-//         } else {
-//             res.redirect('/auth/logout')
-//         }
-//     })
-// }
-
 
 router.post('/login', function(req, res) {
     router.login(req.body).then(function(cook) {
