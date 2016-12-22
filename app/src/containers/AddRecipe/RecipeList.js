@@ -4,9 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import { fetchRecipes } from '../../actions/index'
 
-//Sub Component Calls
-//import 
-
 class RecipeList extends Component {
   componentDidMount() {
     this.props.fetchRecipes()
