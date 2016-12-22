@@ -16,14 +16,23 @@ class HeaderNavProfile extends Component {
   componentDidMount() {
     axios.get('/api/users/getUserCookie')
     .then((cookie) => {
-     var username = cookie.data;
-     this.props.getUserData(username);
+     this.props.getUserData(cookie.data);
     })
   }
 
   render() {
     return (
-      <div className="col-xs-4"><Link to="/profile">View Profile</Link></div>
+      <div className="col-xs-4">
+        <div className="row">
+          <img src={this.props.userData.user_image.public_url} alt="" title=""/>
+        </div>
+        <div className="row">
+          <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+        </div>
+        <div className="row">
+          <Link to="/profile">View Profile Settings</Link>
+        </div>
+      </div>
     );
   }
 }
@@ -34,7 +43,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   //console.log('RoutHompage.js - STATE: ', state.userData)
-  return { userInfo: state.userData }
+  return state.userData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNavProfile)
