@@ -9,8 +9,10 @@ import RouteHomepage from './RouteHomepage';
 import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
+import MyRecipes from './RouteMyRecipes'
 import SearchBar from './containers/Homepage/SearchBar';
 import RouteViewRecipe from './RouteViewRecipe'
+
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -44,12 +46,14 @@ function renderApplication () {
         
         {/* Login route */ }
         <Route path="/login" component={RouteLogin}/>
-
+     
         {/* Recipe Routes */}
-      <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
-      <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>        
-        {/* Test Routes*/}
 
+        <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
+        <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
+        <Route path="/myrecipes" component={MyRecipes}/>
+        
+        {/* Test Routes*/}
 
         {/* These routes will handle 404 errors */}
         <Route path="/*" component={Route404}/>
