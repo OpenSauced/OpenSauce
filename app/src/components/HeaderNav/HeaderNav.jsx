@@ -29,6 +29,7 @@ class HeaderNav extends Component {
   }
 }
 
+
 function mapStateToProps (state) {
   return state.userData
 }
