@@ -18,11 +18,11 @@ class HeaderNavProfile extends Component {
     console.log(this.props.userData)
     return (
       <div className="col-xs-4">
-        <div className="row"> HI
-          {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}
+        <div className="row">
+          <img src={this.props.userData.user_image.public_url} alt="" title=""/>
         </div>
         <div className="row">
-          <span>Hey!</span>
+          <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
         </div>
         <div className="row">
           <Link to="/profile">View Profile Settings</Link>
@@ -32,7 +32,12 @@ class HeaderNavProfile extends Component {
   }
 }
 
-export default HeaderNavProfile;
+function mapStateToProps (state) {
+  return state.userData
+}
+
+export default connect(mapStateToProps)(HeaderNavProfile);
+
 
 ////// Don't delete 
             // {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}

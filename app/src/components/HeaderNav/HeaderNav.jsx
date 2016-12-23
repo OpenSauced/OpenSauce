@@ -5,6 +5,14 @@ import HeaderNavLogo from './HeaderNavLogo';
 import HeaderNavButtons from './HeaderNavButtons';
 import HeaderNavProfile from './HeaderNavProfile';
 
+//Redux and async functions
+import { getUserData } from '../../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+//Axios
+import axios from 'axios'
+
 class HeaderNav extends Component {
   constructor() {
     super();
@@ -16,11 +24,13 @@ class HeaderNav extends Component {
         <HeaderNavLogo/>
         <HeaderNavButtons/>
         <HeaderNavProfile/>
-      </nav>
-
-     
+      </nav>     
     );
   }
 }
 
-export default HeaderNav;
+function mapStateToProps (state) {
+  return state.userData
+}
+
+export default connect(mapStateToProps)(HeaderNav);
