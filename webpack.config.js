@@ -25,23 +25,15 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin('bundle.css', {allChunks: false}),
   ],
 
   resolve: {
-    extensions: ['', '.js', '.jsx', 'css']
+    extensions: ['', '.js', '.jsx']
   },
 
   module: {
     loaders: [
-      // {
-      //   test: /\.jsx?$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
-      //   // query: {
-      //   //   presets: ['react', 'es2015', 'stage-0']
-      //   // }
-      // },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
@@ -55,9 +47,25 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-0']
         }
       },
+      // {
+      //   test: /\.scss$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!sass-loader")
+      // },
+      // {
+      //   test: /\.css$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+      // }
+      {
+        test: /\.scss$/,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ["style-loader", "css-loader", "autoprefixer-loader", "sass-loader"]
+      },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader", {allChunks: false})
+        exclude: /(node_modules|bower_components)/,
+        loaders: ["style-loader", "css-loader"]
       }
     ]
   }

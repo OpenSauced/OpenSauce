@@ -18,14 +18,20 @@ class HeaderNavProfile extends Component {
    
     return (
       <div className="col-xs-4">
-        <div className="row">
-          <img src={this.props.userData.user_image.public_url} alt="" title=""/>
+        <div className="row flex-items-xs-right">
+          <div className="col-xs-4">
+            <img src={this.props.userData.user_image.public_url} alt="" title=""/>
+          </div>
         </div>
-        <div className="row">
-          <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+        <div className="row flex-items-xs-right">
+          <div className="col-xs-4">
+            <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+          </div>
         </div>
-        <div className="row">
-          <Link to="/profile">View Profile Settings</Link>
+        <div className="row flex-items-xs-right">
+          <div className="col-xs-4">
+            <Link to="/profile">View Profile Settings</Link>
+          </div>
         </div>
       </div>
     );

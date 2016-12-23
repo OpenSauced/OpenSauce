@@ -1,10 +1,18 @@
 import React from 'react';
-import Login from './components/Login/Login'
+
+//Main homepage components
+import HeaderNav from './components/HeaderNav/HeaderNav';
+import AppHeader from './components/App/AppHeader';
+import Footer from './components/Footer/Footer';
+
+import Login from './components/Login/Login';
 
 const RouteLogin = ({}) => {
   return (
-    <div>
+    <div className="container-fluid">
+      <AppHeader title={'Login'}/>
       <Login/>
+      <Footer/>
     </div>
   );
 }

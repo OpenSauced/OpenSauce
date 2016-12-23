@@ -25,14 +25,22 @@ app.use('/api/users', userRoutes);
 app.use('/api/recipes', authRoutes.ensureAuthenticated,  recipeRoutes);
 app.use('/auth/', authRoutes)
 
+app.get('/login', function(req, res) {
+  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
+})
 
-app.use(authRoutes.ensureAuthenticated, express.static(path.join(__dirname, '/../app/public')));
+app.get('/signup', function(req, res) {
+  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
+})
 
-app.use('/dist', express.static(path.join(__dirname, '/../app/public/dist')));
+
+app.use(express.static(path.join(__dirname, '/../app/public')));
+
+//app.use('/dist', express.static(path.join(__dirname, '/../app/public/')));
 
 // This will catch ANY other routes that did not come before this and serve index.html
 // Routes are not locked yet - add authRoutes.ensureAuthenticated
-app.use('/*', express.static(path.join(__dirname, '/../app/public/index.html')));
+app.use('/*', authRoutes.ensureAuthenticated, express.static(path.join(__dirname, '/../app/public/index.html')));
 
 app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 

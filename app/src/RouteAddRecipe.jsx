@@ -18,7 +18,6 @@ class RouteAddRecipe extends Component {
   }
 
   handleSelectHowToAddRecipe(e) {
-    // console.log("Getting current click?", e.target.name)
     let render = ''
     if(e.target.name === 'manual'){
       render = 'manual'

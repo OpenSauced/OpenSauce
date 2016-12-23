@@ -17,7 +17,7 @@ class RouteProfile extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={`Welcome ${this.props.userData.username}!`}/>
+        <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
         <ProfileSettings/>
         <Footer/>
       </div>
@@ -26,8 +26,7 @@ class RouteProfile extends Component {
 }
 
 function mapStateToProps (state) {
-  console.log('RouteProfile.js - STATE: ', state.userData)
-  return { userData: state.userData }
+  return state.userData 
 }
 
 export default connect(mapStateToProps)(RouteProfile) 

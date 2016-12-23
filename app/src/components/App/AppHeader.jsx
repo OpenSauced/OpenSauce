@@ -8,7 +8,7 @@ class AppHeader extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="row">
+        <div className="row flex-items-xs-center">
           <h1>{this.props.title}</h1>
         </div>
         {

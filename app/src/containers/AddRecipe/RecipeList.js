@@ -17,16 +17,13 @@ class RecipeList extends Component {
 
   renderRecipes(recipe) {
     return(
-      <ul className="row" key={recipe._id}>  
-        <HPFeedRecipe recipe={recipe}/>
-      </ul>
+      <HPFeedRecipe key={recipe._id} recipe={recipe}/>
     )
   }
 
   render() {
-    
     return (
-      <ul className="row">
+      <ul className="row recipe_card">
         {this.props.recipes.map(this.renderRecipes)}
       </ul>
     )
