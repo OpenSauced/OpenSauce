@@ -25,6 +25,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/recipes', authRoutes.ensureAuthenticated,  recipeRoutes);
 app.use('/auth/', authRoutes)
 
+app.get('/completeRegistration', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../app/public/signup2.html'));
+})
+
 app.get('/login', function(req, res) {
  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
 })

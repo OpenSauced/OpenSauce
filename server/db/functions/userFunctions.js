@@ -112,17 +112,6 @@ xPorts.updatePassword = function(user, passHash) {
     })
 }
 
-xPorts.updatePhotoUrl = function(user, public_url, secure_url, public_id, signature) {
-    return xPorts.findByUserName(user).then(function(userDB) {
-        userDB.user_image.public_url = public_url
-        userDB.user_image.secure_url = secure_url
-        userDB.user_image.signature = signature
-        userDB.user_image.public_id = public_id
-        userDB.update()
-        userDB.save()
-    })
-}
-
 xPorts.updateUsername = function(user, newName) {
     return xPorts.findByUserName(user).then(function(userDB) {
         userDB.username = newName

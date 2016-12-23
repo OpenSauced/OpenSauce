@@ -7,17 +7,17 @@ class ChangeEmail extends Component {
 
   render() {
     return (
-      <form action="/auth/updateInfo/email" method="post">
+      <form action="/api/users/updateInfo/email" method="post">
         <div>
           <label forHtml="newEmail">Email:</label>
-          <input 
-            type="text" 
-            name="newEmail" 
+          <input
+            type="text"
+            name="newEmail"
           />
           <label forHtml="password">Password:</label>
-          <input 
-            type="text" 
-            name="password" 
+          <input
+            type="text"
+            name="password"
           />
         </div>
         <div>

@@ -7,12 +7,12 @@ class ChangeBio extends Component {
 
   render() {
     return (
-      <form action="/auth/updateInfo/bio" method="post">
+      <form action="/api/users/updateInfo/bio" method="post">
         <div>
           <label forHtml="newBio">Bio:</label>
-          <input 
-            type="text" 
-            name="newBio" 
+          <input
+            type="text"
+            name="newBio"
           />
         </div>
         <div>

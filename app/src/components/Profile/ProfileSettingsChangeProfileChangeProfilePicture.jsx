@@ -7,15 +7,15 @@ class ChangeProfilePicture extends Component {
 
   render() {
     return (
-      <form action="/auth/updateInfo/photo" method="post">
-        <div>
-          <label forHtml="newPhoto">Profile Picture:</label>
-          <input type="file" name="profilePicture" accept="image/*"/>
-        </div>
-        <div>
-          <input type="submit" value="Save"/>
-        </div>
-      </form>
+
+      <form action="/api/users/uploadImage/" method="post" enctype="multipart/form-data" target="_top">
+            <label for="ProfilePicture">Profile Picture:</label>
+            <input type="file" name="ProfilePicture" accept="image/*"/>
+            <div>
+                <input type="submit" value="save"/>
+            </div>
+        </form>
+
     );
   }
 }
