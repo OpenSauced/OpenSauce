@@ -3,13 +3,6 @@ import React, { Component } from 'react';
 class ChangeProfilePicture extends Component {
   constructor() {
     super();
-    this.state = {
-      newPhoto: ''
-    }
-  }
-
-  handleOptionInputOnChange = (e) => {
-    this.setState({newPassword: e.target.value})
   }
 
   render() {
