@@ -108,6 +108,7 @@ xPorts.updatePassword = function(user, passHash) {
         userDB.password = passHash
         userDB.update()
         userDB.save()
+        return userDB
     })
 }
 
@@ -127,6 +128,7 @@ xPorts.updateUsername = function(user, newName) {
         userDB.username = newName
         userDB.update()
         userDB.save()
+        return userDB
     })
 }
 
@@ -135,6 +137,7 @@ xPorts.updateEmail = function(user, email) {
         userDB.email = email
         userDB.update()
         userDB.save()
+        return userDB
     })
 }
 
@@ -143,6 +146,7 @@ xPorts.updateBio = function(user, bio) {
         userDB.bio = bio
         userDB.update()
         userDB.save()
+        return userDB
     })
 }
 
