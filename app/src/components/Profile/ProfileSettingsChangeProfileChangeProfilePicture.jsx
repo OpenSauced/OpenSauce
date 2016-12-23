@@ -7,8 +7,7 @@ class ChangeProfilePicture extends Component {
 
   render() {
     return (
-
-      <form action="/api/users/uploadImage/" method="post" enctype="multipart/form-data" target="_top">
+      <form action="/api/users/updateInfo/profilePicture" method="post" enctype="multipart/form-data" target="_top">
             <label for="ProfilePicture">Profile Picture:</label>
             <input type="file" name="ProfilePicture" accept="image/*"/>
             <div>

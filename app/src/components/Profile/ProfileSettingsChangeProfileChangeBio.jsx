@@ -7,7 +7,7 @@ class ChangeBio extends Component {
 
   render() {
     return (
-      <form action="/api/users/updateInfo/bio" method="post">
+      <form action="/api/users/updateInfo/bio" method="post" enctype="multipart/form-data" target="_top">
         <div>
           <label forHtml="newBio">Bio:</label>
           <input

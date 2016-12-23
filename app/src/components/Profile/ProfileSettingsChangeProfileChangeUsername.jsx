@@ -7,7 +7,7 @@ class ChangeUsername extends Component {
 
   render() {
     return (
-      <form action="/api/users/updateInfo/username" method="post">
+      <form action="/api/users/updateInfo/username" method="post" enctype="multipart/form-data" target="_top">
         <div>
           <label forHtml="newUsername">Username:</label>
           <input

@@ -7,7 +7,7 @@ class ChangePassword extends Component {
 
   render() {
     return (
-      <form action="/api/users/updateInfo/password" method="post">
+      <form action="/api/users/updateInfo/password" method="post" enctype="multipart/form-data" target="_top">
         <div>
           <label forHtml="password">Old Password:</label>
             <input
