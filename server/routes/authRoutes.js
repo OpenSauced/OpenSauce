@@ -138,8 +138,8 @@ router.post('/updateInfo/:type', function(req, res) {
     } else if (type === 'username') {
         router.verifyPassword(user, req.body.password).then(function(verified) {
             if (verified) {
-                db.userFunctions.updateUsername(user, req.newUsername).then(function(userDB) {
-                  res.clearCookie('user').cookie('user', req.newUsername, {
+                db.userFunctions.updateUsername(user, req.body.newUsername).then(function(userDB) {
+                  res.clearCookie('user').cookie('user', req.body.newUsername, {
                       maxAge: 9000000,
                       httpOnly: true
                   }).redirect('/')
