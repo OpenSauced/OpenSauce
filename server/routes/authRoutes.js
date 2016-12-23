@@ -11,11 +11,9 @@ const db = require('./../db/db.js')
 // EXAMPLE -----------------------
 // router.verifyPassword(user, password).then(function(verified) {
 //     if (verified) {
-//         do
-//             stuff
+//         do stuff
 //     } else {
-//         dont do
-//             stuff
+//         dont do stuff
 //     }
 // })
 router.verifyPassword = function(user, plainPass) {
@@ -48,17 +46,22 @@ router.ensureAuthenticated = function(req, res, next) {
     }
 }
 
+//actual sign up function
 router.signUp = function(userData) {
     var hash = bcrypt.hashSync(userData.password, bcrypt.genSaltSync(7331));
     userData.password = hash
     return db.userFunctions.findOrCreateUser(userData)
 }
 
+//actial login function
 router.login = function(user) {
     return router.verifyPassword(user.username, user.password).then(function(verified) {
         if (verified) {
+            //cool you got verified, now lets give you a session
+            //this could be its own function... whatever...
             return db.userFunctions.findByUserName(user.username).then(function(userDB) {
-                var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
+                //not really a hash. whatever. bcrypt was too slow.
+                var hash = Math.floor(Math.random() * 100000000000)
                 return db.userFunctions.updateSession(user, hash).then(function(userDB) {
                     return [userDB, hash]
                 })
@@ -104,8 +107,7 @@ router.get('/logout', function(req, res) {
     res.redirect('/login');
 })
 
-router.secondarySignupCheck
-
+// router.secondarySignupCheck
 router.post('/signup', function(req, res) {
     router.signUp(req.body).then(function(exists) {
         console.log('.then')
@@ -115,6 +117,66 @@ router.post('/signup', function(req, res) {
             res.status(200).redirect('/login')
         }
     })
+})
+
+router.get('/updateInfo/:type', function(req, res) {
+    var user = req.cookie.user
+    var type = req.params.type
+    if (type === 'password') {
+        router.verifyPassword(user, req.password).then(function(verified) {
+            if (verified) {
+                db.userFunctions.updatePassword(user, req.newPassword).then(function(userDB) {
+                    res.end('good')
+                }).catch(function(err) {
+                    console.log('err:', err);
+                    res.end('bad')
+                })
+            } else {
+                res.end('bad')
+            }
+        })
+    } else if (type === 'username') {
+        router.verifyPassword(user, req.password).then(function(verified) {
+            if (verified) {
+                db.userFunctions.updateUsername(user, req.newUsername).then(function(userDB) {
+                    res.end('good')
+                }).catch(function(err) {
+                    console.log('err:', err);
+                    res.end('bad')
+                })
+            } else {
+                res.end('bad')
+            }
+        })
+
+    } else if (type === 'email') {
+        router.verifyPassword(user, req.password).then(function(verified) {
+            if (verified) {
+                db.userFunctions.updateEmail(user, req.newEmail).then(function(userDB) {
+                    res.end('good')
+                }).catch(function(err) {
+                    console.log('err:', err);
+                    res.end('bad')
+                })
+            } else {
+                res.end('bad')
+            }
+        })
+    } else if (type === 'bio') {
+        db.userFunctions.updateBio(user, req.newBio).then(function(userDB) {
+            res.end('good')
+        }).catch(function(err) {
+            console.log('err:', err);
+            res.end('bad')
+        })
+    } else if (type === 'photo') {
+        //   db.userFunctions.updateBio(user, req.newBio).then(function(userDB){
+        //     res.end('good')
+        //   }).catch(function(err){
+        //     console.log('err:', err);
+        res.end('bad')
+        //   })
+    }
 })
 
 module.exports = router
