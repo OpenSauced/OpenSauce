@@ -5,6 +5,8 @@ export default (state = [], action) => {
     case FETCH_RECIPES:
       //console.log('FETCH_RECIPES PAYLOAD: ', action.payload.data)
       return action.payload.data
+    case GET_USER_DATA:
+      return action.payload.data.my_recipes
   }
   return state;
 }

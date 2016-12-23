@@ -8,7 +8,7 @@ class RecipeList extends Component {
     //Check the route here and fetch by user or not depending on the route.
     switch(this.props.route) {
       case '/myrecipes':
-      
+      this.props.getUserData()
       break;      
       default:
       this.props.fetchRecipes() 
@@ -46,7 +46,7 @@ const  mapStateToProps = (state) => {
 }
  
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes }, dispatch)
+  return bindActionCreators ({ fetchRecipes, getUserData }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
