@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 //Components
 import ProfileSettingsChangeProfileInput from './ProfileSettingsChangeProfileInput';
-import ChangeProfile from './ProfileSettingsChangeProfileChangePassword';
+import ChangePassword from './ProfileSettingsChangeProfileChangePassword';
+import ChangeEmail from './ProfileSettingsChangeProfileChangeEmail';
+import ChangeUsername from './ProfileSettingsChangeProfileChangeUsername';
+import ChangeName from './ProfileSettingsChangeProfileName';
+import ChangeBio from './ProfileSettingsChangeProfileChangeBio';
+import ChangeProfilePicture from './ProfileSettingsChangeProfileChangeProfilePicture';
 
 //Redux
 import { connect } from 'react-redux';
@@ -10,25 +15,6 @@ import { connect } from 'react-redux';
 class ProfileSettingsChangeProfileInfo extends Component {
   constructor() {
     super();
-    this.state = {
-      options: {
-        displayName: '',
-        emailAddress: '',
-        currentPassword: '*',
-        newPassword: ''
-      }
-    }
-  }
-
-  handleOptionInputOnChange(e) {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  concatUsername () {
-    var first = this.props.userData.first_name;
-    var last = this.props.userData.last_name;
-    var fullName = first +" "+ last;
-    return fullName;
   }
 
   render() {
@@ -37,28 +23,38 @@ class ProfileSettingsChangeProfileInfo extends Component {
           <h2>User Profile Settings</h2>
           <div className="row">
             <div className="col-xs">
-              <h3>Change Your Display Name</h3>
-              <label>
-                <span>Your Name:</span>
-                <input type="text" name="displayName" value={this.concatUsername()} onChange={this.handleOptionInputOnChange}/>
-              </label>
+              <h3>Change Your UserName</h3>
+              <ChangeUsername/>
             </div>
           </div>
           <hr/>
           <div className="row">
-            <h3>Change Your Email</h3>
             <div className="col-xs">
-              <label>
-                <span>Email:</span>
-                <input type="text" name="emailAddress" value={this.props.userData.email} onChange={this.handleOptionInputOnChange}/>
-              </label>
+              <h3>Change Your Name</h3>
+              <ChangeName/>
+            </div>
+          </div>
+          <hr/>
+          <div className="row">
+            <div className="col-xs">
+              <h3>Change Your Email</h3>
+              <ChangeEmail/>
             </div>
           </div>
           <hr/>
           <div className="row">
             <h3>Change Your Password</h3>
-            <ChangeProfile/>
+            <ChangePassword/>
           </div>
+          <div className="row">
+            <h3>Change Your Bio</h3>
+            <ChangeBio/>
+          </div>
+          <div className="row">
+            <h3>Change Your Photo</h3>
+            <ChangeProfilePicture/>
+          </div>
+
         </div>
     );
   }

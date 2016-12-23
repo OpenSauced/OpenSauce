@@ -23,25 +23,25 @@ xPorts.secondSignupDisable = function(user) {
 }
 
 xPorts.secondarySignupCheck = function(user) {
-  return xPorts.findByUserName(user).then(function(userDB) {
-      return userDB.secondary_signup_needed
-  })
+    return xPorts.findByUserName(user).then(function(userDB) {
+        return userDB.secondary_signup_needed
+    })
 }
 
 xPorts.saveUserFn = function(user) {
-  console.log('saving user...');
+    console.log('saving user...');
     new userModel(user).save().then((data) => {
-      console.log('saved user!', data);
+        console.log('saved user!', data);
     }).catch((err) => {
         console.error('ERROR IN USER FUNCTIONS SAVING:', err);
     })
 }
 
 xPorts.updateInfoBatch = function(user, data) {
-  console.log('updateInfoBatch', data);
+    console.log('updateInfoBatch', data);
     return xPorts.addBio(user, data.Bio).then(function() {
-        return xPorts.addLocation(user, [data.Country, data.State, data.zip]).then(function(){
-          return xPorts.secondSignup(user)
+        return xPorts.addLocation(user, [data.Country, data.State, data.zip]).then(function() {
+            return xPorts.secondSignup(user)
         })
     })
 }
@@ -49,6 +49,16 @@ xPorts.updateInfoBatch = function(user, data) {
 xPorts.addBio = function(user, bio) {
     return xPorts.findByUserName(user).then(function(userDB) {
         userDB.bio = bio
+        userDB.update()
+        userDB.save()
+        return userDB
+    })
+}
+
+xPorts.updateName = function(user, reqBody) {
+    return xPorts.findByUserName(user).then(function(userDB) {
+        userDB.first_name = reqBody.firstName
+        userDB.last_name = reqBody.lastName
         userDB.update()
         userDB.save()
         return userDB
@@ -100,6 +110,42 @@ xPorts.findOrCreateUser = function(userData) {
         } else if (data) { //got data
             return true
         }
+    })
+}
+
+xPorts.updatePassword = function(user, passHash) {
+    return xPorts.findByUserName(user).then(function(userDB) {
+        userDB.password = passHash
+        userDB.update()
+        userDB.save()
+        return userDB
+    })
+}
+
+xPorts.updateUsername = function(user, newName) {
+    return xPorts.findByUserName(user).then(function(userDB) {
+        userDB.username = newName
+        userDB.update()
+        userDB.save()
+        return userDB
+    })
+}
+
+xPorts.updateEmail = function(user, email) {
+    return xPorts.findByUserName(user).then(function(userDB) {
+        userDB.email = email
+        userDB.update()
+        userDB.save()
+        return userDB
+    })
+}
+
+xPorts.updateBio = function(user, bio) {
+    return xPorts.findByUserName(user).then(function(userDB) {
+        userDB.bio = bio
+        userDB.update()
+        userDB.save()
+        return userDB
     })
 }
 

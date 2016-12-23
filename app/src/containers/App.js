@@ -4,9 +4,9 @@ import '../assets/styles/main.scss';
 import '../assets/styles/recipe_card.scss';
 
 export default class App extends Component {
-  componentWillMount() {
+  // componentWillMount() {
 
-  }
+  // }
   render() {
     return (
       <div>

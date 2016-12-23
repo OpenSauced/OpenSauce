@@ -12,10 +12,6 @@ export default function userReducer (state = {}, action) {
           //REFACTOR THIS TO action.payload.data.userData and change it everywhere else.
         }
       )
-    //change some user info
-    //TODO: what user info exactly?
-    // case "CHANGE_USER_INFO" :
-    //   return state - action.number
     default:
       return state
   }

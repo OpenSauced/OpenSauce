@@ -18,19 +18,23 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.connection.on('open', function() {
-    console.log('Mongdb connection open');
+   console.log('Mongdb connection open');
 })
 
 app.use('/api/users', userRoutes);
 app.use('/api/recipes', authRoutes.ensureAuthenticated,  recipeRoutes);
 app.use('/auth/', authRoutes)
 
+app.get('/uploadPhoto/', function(req, res) {
+  res.sendFile( path.join(__dirname, '/../app/public/signup2.html'))
+})
+
 app.get('/login', function(req, res) {
-  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
+ res.sendFile( path.join(__dirname, '/../app/public/index.html') )
 })
 
 app.get('/signup', function(req, res) {
-  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
+ res.sendFile( path.join(__dirname, '/../app/public/index.html') )
 })
 
 
@@ -46,15 +50,11 @@ app.use(session({secret: 'git baked', resave: true, saveUninitialized: true}));
 
 // Start the actual server listening on the port variable
 app.listen(module.exports.NODEPORT, function(err) {
-    // If there is an error log it
-    if (err) {
-        console.error(err // If there is not an error console log what port the server is running on
-        );
-    } else {
-        console.log('Server running on port %s', module.exports.NODEPORT)
-    }
-})
-
-app.get('/locked', authRoutes.ensureAuthenticated, function(req, res) {
-    res.send('you are logged in!')
+   // If there is an error log it
+   if (err) {
+       console.error(err // If there is not an error console log what port the server is running on
+       );
+   } else {
+       console.log('Server running on port %s', module.exports.NODEPORT)
+   }
 })

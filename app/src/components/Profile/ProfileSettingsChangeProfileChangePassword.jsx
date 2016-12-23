@@ -7,20 +7,25 @@ class ChangePassword extends Component {
 
   render() {
     return (
-      <div>
-        YOU CAN CHANGE YOUR PASSWORD (O.0)..... not now, but you will be able to...
-      </div>
+      <form action="/api/users/updateInfo/password" method="post" enctype="multipart/form-data" target="_top">
+        <div>
+          <label forHtml="password">Old Password:</label>
+            <input
+              type="text"
+              name="password"
+            />
+          <label forHtml="newPassword">New Password:</label>
+          <input
+            type="text"
+            name="newPassword"
+          />
+        </div>
+        <div>
+          <input type="submit" value="Save"/>
+        </div>
+      </form>
     );
   }
 }
 
 export default ChangePassword;
-
-///// Working on this - redux
-
-// function mapStateToProps (state) {
-//   console.log('RouteProfile.js - STATE: ', state.userData)
-//   return { userData: state.userData }
-// }
-
-// export default connect(mapStateToProps)(RouteProfile) 

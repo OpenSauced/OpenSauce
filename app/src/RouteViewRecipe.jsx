@@ -28,7 +28,7 @@ class RouteViewRecipe extends Component {
    
   }
 
-getRecipeFromDB(recipeId) {
+  getRecipeFromDB(recipeId) {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
@@ -42,48 +42,48 @@ getRecipeFromDB(recipeId) {
 
   saveRecipe() {
     console.log("getting current this? " ,this)
-	$.ajax({
-      url: '/api/users/save',
-      type: 'POST',
-      data: {
-      	recipeId: this.state.recipe._id,
-      	userId: this.props.userData._id
-      },
-      success: function(recipe) {
-      	console.log('Saved the recipe to the user!')
-      }.bind(this),
-      error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-      }.bind(this),
+  	 $.ajax({
+        url: '/api/users/save',
+        type: 'POST',
+        data: {
+        	recipeId: this.state.recipe._id,
+        	userId: this.props.userData._id
+        },
+        success: function(recipe) {
+        	console.log('Saved the recipe to the user!')
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+        }.bind(this),
     });
   }
 
-    forkRecipe() {
-	var title = this.state.recipe.title
-	var description = this.state.recipe.description
-	var ingredients =this.state.recipe.ingredients
-	var directions = this.state.recipe.directions
-	var parentId = this.state.recipe._id
+  forkRecipe() {
+  	var title = this.state.recipe.title
+  	var description = this.state.recipe.description
+  	var ingredients =this.state.recipe.ingredients
+  	var directions = this.state.recipe.directions
+  	var parentId = this.state.recipe._id
   }
 
   render() {
-if(this.state.recipe.title){
-    return (
-      <div className="container-fluid">
-       <HeaderNav/>
-        <AppHeader title={this.state.recipe.title}>
-        <div>
-        	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
-        </div>
-        </AppHeader>
+    if(this.state.recipe.title){
+      return (
+        <div className="container-fluid">
+         <HeaderNav/>
+          <AppHeader title={this.state.recipe.title}>
+          <div>
+          	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
+          </div>
+          </AppHeader>
 
-        <ViewRecipe recipe={this.state.recipe} />
-        <Footer/>
-      </div>
-    );
+          <ViewRecipe recipe={this.state.recipe} />
+          <Footer/>
+        </div>
+      );
+    }
+    return <div></div>
   }
-  return <div></div>
-}
 };
 
 function mapDispatchToProps (dispatch) {

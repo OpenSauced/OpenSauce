@@ -30,9 +30,9 @@ class RouteHomepage extends Component {
     this.setState({searchInputValue: e.target.value});
   }
 
-  componentDidMount() {
+  // componentDidMount() {
     
-  }
+  // }
   
   render() {
   {/* Console log for username - if props are present, this should work*/}
