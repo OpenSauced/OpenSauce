@@ -4,9 +4,7 @@ import axios from 'axios';
 
 const HeaderNavLogOutButton = ({name, link}) => {
   return (
-    <div>
-        <Link to={link} onClick={logOut}>{name}</Link>
-    </div>
+    <div className="col-xs-3"><Link to={link} onClick={logOut}>{name}</Link></div>
   );
 }
 

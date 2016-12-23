@@ -3,7 +3,7 @@ import { Router, Link } from 'react-router';
 
 const HeaderNavButton = ({name, link}) => {
   return (
-    <div><Link to={link}>{name}</Link></div>
+    <div className="col-xs-3"><Link to={link}>{name}</Link></div>
   );
 }
 
