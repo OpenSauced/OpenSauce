@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 export default class App extends Component {
-  componentWillMount() {
+  // componentWillMount() {
 
-  }
+  // }
   render() {
     return (
       <div>

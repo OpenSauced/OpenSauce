@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 
-class ChangePassword extends Component {
+class ChangeUsername extends Component {
   constructor() {
     super();
     this.state = {
-      newPassword: ''
+      newUserName: ''
     }
   }
 
   handleOptionInputOnChange = (e) => {
-    this.setState({newPassword: e.target.value})
+    this.setState( {newUserName: e.target.value} )
   }
 
   render() {
     return (
-      <form action="/api/updateInfo/password" method="post">
+      <form action="/api/updateInfo/username" method="post">
         <div>
-          <label for="pwd">Password:</label>
+          <label for="name">Name:</label>
           <input 
             type="text" 
-            name="password" 
-            value={this.state.newPassword} 
+            name="newUserName" 
+            value={this.state.newUserName} 
             onChange={this.handleOptionInputOnChange}
           />
         </div>
@@ -29,4 +29,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword;
+export default ChangeUsername;
