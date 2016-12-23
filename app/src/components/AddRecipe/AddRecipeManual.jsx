@@ -33,7 +33,6 @@ class AddRecipeManual extends Component {
         console.log("id" ,this.props.recipeId)
         this.getRecipeFromDB(this.props.recipeId)
       } 
-
     })
   }
   
@@ -158,6 +157,7 @@ class AddRecipeManual extends Component {
           this.state.ingredients.map((ingredient, index) => {
             return (
               <AddRecipeManualList
+                key={index}
                 ingredient={this.state.ingredients[index]}
                 index={index}
                 handleIngredientOnChange={this.onIngredientChange}

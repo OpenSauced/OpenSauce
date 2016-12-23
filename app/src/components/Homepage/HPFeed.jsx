@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import HPFeedRecipeList from './HPFeedRecipeList';
+import RecipeList from '../../containers/AddRecipe/RecipeList';
 
 class HPFeed extends Component {
   constructor() {
@@ -10,7 +10,7 @@ class HPFeed extends Component {
 
   render() {
     return (
-      <HPFeedRecipeList/>
+      <RecipeList/>
     )
   }
 }

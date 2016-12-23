@@ -2,6 +2,11 @@ import axios from 'axios'
 
 export const FETCH_RECIPES = 'FETCH_RECIPES';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const GET_USER_RECIPES = 'GET_USER_RECPES'
+
+export const setUserRecipes = () => {
+   
+}
 
 export const fetchRecipes = () => {
  
@@ -14,7 +19,7 @@ export const fetchRecipes = () => {
 
 //get userdata via axios request (jump to /server/routes/userRoutes)
 export const getUserData = ( username ) => {
- 
+ console.log('FETCHING USER DATA' )
 // Added the 'get cookie for username here' route - must send a get request to find the username
  const request = axios.get('/api/users/getUserCookie')
    .then((cookie) => {

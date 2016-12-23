@@ -25,7 +25,7 @@ class RouteViewRecipe extends Component {
 
   componentWillMount() {
     this.getRecipeFromDB(this.props.params.recipe);
-    this.props.getUserData();
+   
   }
 
 getRecipeFromDB(recipeId) {

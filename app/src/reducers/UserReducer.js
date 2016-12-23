@@ -9,6 +9,7 @@ export default function userReducer (state = {}, action) {
       //console.log('USERREDUCER - action.payload', action.payload)
       return Object.assign({}, state, {
           userData: action.payload.data
+          //REFACTOR THIS TO action.payload.data.userData and change it everywhere else.
         }
       )
     //change some user info
