@@ -120,8 +120,11 @@ router.post('/signup', function(req, res) {
 })
 
 router.post('/updateInfo/:type', function(req, res) {
+    console.log('req type stuff=============================',req.params)
+    console.log('req  cookie stuff-------------------------', req.cookies)
     var user = req.cookies.user
     var type = req.params.type
+    console.log('req type stuff',req.params)
     if (type === 'password') {
         router.verifyPassword(user, req.password).then(function(verified) {
             if (verified) {

@@ -5,7 +5,8 @@ import ProfileSettingsChangeProfileInput from './ProfileSettingsChangeProfileInp
 import ChangePassword from './ProfileSettingsChangeProfileChangePassword';
 import ChangeEmail from './ProfileSettingsChangeProfileChangeEmail';
 import ChangeUsername from './ProfileSettingsChangeProfileChangeUsername';
-
+import ChangeBio from './ProfileSettingsChangeProfileChangeBio';
+import ChangeProfilePicture from './ProfileSettingsChangeProfileChangeProfilePicture';
 
 //Redux
 import { connect } from 'react-redux';
@@ -39,11 +40,11 @@ class ProfileSettingsChangeProfileInfo extends Component {
           </div>
           <div className="row">
             <h3>Change Your Bio</h3>
-            {/*<ChangeBio/>*/}
+            <ChangeBio/>
           </div>
           <div className="row">
             <h3>Change Your Photo</h3>
-            {/*<ChangePhoto/>*/}
+            <ChangeProfilePicture/>
           </div>
 
         </div>
