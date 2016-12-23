@@ -26,17 +26,22 @@ class AddRecipeManual extends Component {
   }
 
   componentWillMount() {
-    this.props.getUserData();
-    if(this.props.recipeId){
-      this.getRecipeFromDB(this.props.recipeId)
-    } 
+    this.props.getUserData()
+    .then((user) => {
+      console.log("id in componentWillMount ", this.props.recipeId)
+      if(this.props.recipeId){
+        console.log("id" ,this.props.recipeId)
+        this.getRecipeFromDB(this.props.recipeId)
+      } 
+
+    })
   }
   
   getRecipeFromDB(recipeId) {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-        console.log("RECIPE ", recipe)
+        console.log("RECIPE ", recipe.directions)
           this.setState({ 
             title: recipe.title,
             description: recipe.description,
