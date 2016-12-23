@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 //Router Stuff
+import App from './containers/App'
 import RouteLogin from './RouteLogin';
 import RouteSignUp from './RouteSignUp';
 import RouteHomepage from './RouteHomepage';
@@ -35,29 +36,31 @@ function renderApplication () {
   ReactDOM.render((
     <Provider store={store}>
       <Router history={browserHistory}>
-        {/* Homepage route */}
-        <Route path="/" component={RouteHomepage}/>
-
-        {/* Current User Profile Settings route */}
-        <Route path="/profile" component={RouteProfile}/>
+        
+        <Route path="/" component={App}>
+          {/* Homepage route */}
+          <IndexRoute component={RouteHomepage}/>
+          {/* Current User Profile Settings route */}
+          <Route path="/profile" component={RouteProfile}/>
                   
-        {/* Signup route */}
-        <Route path="/signup" component={RouteSignUp}/>
+          {/* Signup route */}
+          <Route path="/signup" component={RouteSignUp}/>
         
-        {/* Login route */ }
-        <Route path="/login" component={RouteLogin}/>
+          {/* Login route */ }
+          <Route path="/login" component={RouteLogin}/>
      
-        {/* Recipe Routes */}
+          {/* Recipe Routes */}
+          <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
+          <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
+          <Route path="/myrecipes" component={MyRecipes}/>
 
-        <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
-        <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
-        <Route path="/myrecipes" component={MyRecipes}/>
-        
-        {/* Test Routes*/}
+          {/* Test Routes*/}
 
-        {/* These routes will handle 404 errors */}
-        <Route path="/*" component={Route404}/>
-        <Route path="/**/*" component={Route404}/>
+          {/* These routes will handle 404 errors */}
+          <Route path="/*" component={Route404}/>
+          <Route path="/**/*" component={Route404}/>
+
+        </Route>
         
       </Router>
     </Provider>

@@ -6,9 +6,16 @@ import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe';
 class RecipeList extends Component {
   componentWillMount() {
     //Check the route here and fetch by user or not depending on the route.
-    if (!this.props.route) {
-        this.props.fetchRecipes()
+    
+    switch(this.props.route) {
+      case '/myrecipes':
+      
+      
+      break;      
+      default:
+      this.props.fetchRecipes() 
     }
+
   }
 
   renderRecipes(recipe) {
@@ -33,10 +40,11 @@ class RecipeList extends Component {
 // REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchRecipes } from '../../actions/index'
+import { fetchRecipes, getUserData } from '../../actions/index'
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    userData: state.userData
   }
 }
  
