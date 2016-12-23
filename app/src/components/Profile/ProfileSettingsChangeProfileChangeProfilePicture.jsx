@@ -9,8 +9,11 @@ class ChangeProfilePicture extends Component {
     return (
       <form action="/auth/updateInfo/photo" method="post">
         <div>
-          <label for="profilePicture">Profile Picture:</label>
+          <label forHtml="newPhoto">Profile Picture:</label>
           <input type="file" name="profilePicture" accept="image/*"/>
+        </div>
+        <div>
+          <input type="submit" value="Save"/>
         </div>
       </form>
     );

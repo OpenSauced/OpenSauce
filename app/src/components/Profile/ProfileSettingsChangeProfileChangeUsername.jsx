@@ -3,26 +3,25 @@ import React, { Component } from 'react';
 class ChangeUsername extends Component {
   constructor() {
     super();
-    this.state = {
-      newUserName: ''
-    }
-  }
-
-  handleOptionInputOnChange = (e) => {
-    this.setState( {newUserName: e.target.value} )
   }
 
   render() {
     return (
       <form action="/auth/updateInfo/username" method="post">
         <div>
-          <label for="name">Name:</label>
+          <label forHtml="newUsername">Username:</label>
           <input 
             type="text" 
-            name="newUserName" 
-            value={this.state.newUserName} 
-            onChange={this.handleOptionInputOnChange}
+            name="newUsername" 
           />
+          <label forHtml="password">Password:</label>
+          <input 
+            type="text" 
+            name="password" 
+          />
+        </div>
+        <div>
+          <input type="submit" value="Save"/>
         </div>
       </form>
     );
