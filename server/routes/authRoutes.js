@@ -5,7 +5,17 @@ var bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
 
-// const auth = {}
+//takes a user, and a plain password text, returns true or false.
+//thx bCrypt
+router.verifyPassword = function(user, plainPass) {
+    return db.userFunctions.findByUserName(user).then(function(userDB) {
+        if (user !== null && userDB !== null && userDB !== []) {
+          return bcrypt.compareSync(plainPass, userDB.password) //resolves as bool
+        } else {
+          return false
+        }
+    })
+}
 
 router.ensureAuthenticated = function(req, res, next) {
     if (req.url === '/login' || req.url === '/signup') {
@@ -64,8 +74,8 @@ router.get('/signup', function(req, res) {
 router.post('/login', function(req, res) {
     router.login(req.body).then(function(cook) {
         if (cook) {
-          //got a cookie?
-          //yum, better save it
+            //got a cookie?
+            //yum, better save it
             res.cookie('session', cook[1], {
                 maxAge: 9000000,
                 httpOnly: true
@@ -83,11 +93,11 @@ router.post('/login', function(req, res) {
 })
 
 router.get('/logout', function(req, res) {
-  console.log('loaded logout');
-  res.clearCookie("user");
-  res.clearCookie("session");
-  // res.end('LOG')
-  res.redirect('/login');
+    console.log('loaded logout');
+    res.clearCookie("user");
+    res.clearCookie("session");
+    // res.end('LOG')
+    res.redirect('/login');
 })
 
 router.secondarySignupCheck
