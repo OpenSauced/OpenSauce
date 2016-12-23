@@ -2,7 +2,7 @@ import React from 'react';
 
 const AddRecipeManualList = ({ingredient, index, handleIngredientOnChange, handleRemoveIngredient}) => {
   return (
-    <div>
+    <div key={index}>
       <input
         key={index}
         id={`ingredients-${index}`}

@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import AddRecipeFromLink from './AddRecipeFromLink';
-
 import AddRecipeManual from './AddRecipeManual'
-import AddRecipeSearchAPI from './AddRecipeSearchAPI'
+
 
 
 class AddRecipe extends Component {
