@@ -120,15 +120,12 @@ router.post('/signup', function(req, res) {
 })
 
 router.post('/updateInfo/:type', function(req, res) {
-    console.log('req type stuff=============================',req.params)
-    console.log('req  cookie stuff-------------------------', req.cookies)
     var user = req.cookies.user
     var type = req.params.type
-    console.log('req type stuff',req.params)
     if (type === 'password') {
-        router.verifyPassword(user, req.password).then(function(verified) {
+        router.verifyPassword(user, req.body.password).then(function(verified) {
             if (verified) {
-                db.userFunctions.updatePassword(user, req.newPassword).then(function(userDB) {
+                db.userFunctions.updatePassword(user, req.body.newPassword).then(function(userDB) {
                     res.end('good')
                 }).catch(function(err) {
                     console.log('err:', err);
@@ -139,10 +136,13 @@ router.post('/updateInfo/:type', function(req, res) {
             }
         })
     } else if (type === 'username') {
-        router.verifyPassword(user, req.password).then(function(verified) {
+        router.verifyPassword(user, req.body.password).then(function(verified) {
             if (verified) {
                 db.userFunctions.updateUsername(user, req.newUsername).then(function(userDB) {
-                    res.end('good')
+                  res.clearCookie('user').cookie('user', req.newUsername, {
+                      maxAge: 9000000,
+                      httpOnly: true
+                  }).redirect('/')
                 }).catch(function(err) {
                     console.log('err:', err);
                     res.end('bad')
@@ -153,9 +153,9 @@ router.post('/updateInfo/:type', function(req, res) {
         })
 
     } else if (type === 'email') {
-        router.verifyPassword(user, req.password).then(function(verified) {
+        router.verifyPassword(user, req.body.password).then(function(verified) {
             if (verified) {
-                db.userFunctions.updateEmail(user, req.newEmail).then(function(userDB) {
+                db.userFunctions.updateEmail(user, req.body.newEmail).then(function(userDB) {
                     res.end('good')
                 }).catch(function(err) {
                     console.log('err:', err);
@@ -166,14 +166,14 @@ router.post('/updateInfo/:type', function(req, res) {
             }
         })
     } else if (type === 'bio') {
-        db.userFunctions.updateBio(user, req.newBio).then(function(userDB) {
+        db.userFunctions.updateBio(user, req.body.newBio).then(function(userDB) {
             res.end('good')
         }).catch(function(err) {
             console.log('err:', err);
             res.end('bad')
         })
     } else if (type === 'photo') {
-        //   db.userFunctions.updateBio(user, req.newBio).then(function(userDB){
+        //   db.userFunctions.updateBio(user, req.body.newBio).then(function(userDB){
         //     res.end('good')
         //   }).catch(function(err){
         //     console.log('err:', err);
