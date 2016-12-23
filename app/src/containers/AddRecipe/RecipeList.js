@@ -6,16 +6,13 @@ import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe';
 class RecipeList extends Component {
   componentWillMount() {
     //Check the route here and fetch by user or not depending on the route.
-    
     switch(this.props.route) {
       case '/myrecipes':
-      
       
       break;      
       default:
       this.props.fetchRecipes() 
     }
-
   }
 
   renderRecipes(recipe) {
@@ -27,7 +24,7 @@ class RecipeList extends Component {
   }
 
   render() {
-    console.log('RECIPE LIST PROPS: ', this.props)
+    
     return (
       <ul className="row">
         {this.props.recipes.map(this.renderRecipes)}

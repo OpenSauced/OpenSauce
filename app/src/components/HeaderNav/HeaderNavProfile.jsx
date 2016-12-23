@@ -15,7 +15,7 @@ class HeaderNavProfile extends Component {
   }
 
   render() {
-    console.log(this.props.userData)
+   
     return (
       <div className="col-xs-4">
         <div className="row">

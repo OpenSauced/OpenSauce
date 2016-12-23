@@ -14,7 +14,6 @@ import MyRecipes from './RouteMyRecipes'
 import SearchBar from './containers/Homepage/SearchBar';
 import RouteViewRecipe from './RouteViewRecipe'
 
-
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -28,9 +27,7 @@ import { getUserData } from './actions/index';
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-
 store.dispatch( getUserData() ).then( (data) => renderApplication () )
-
 
 function renderApplication () {
   ReactDOM.render((

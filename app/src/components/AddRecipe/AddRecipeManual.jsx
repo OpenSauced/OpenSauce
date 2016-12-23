@@ -33,7 +33,6 @@ class AddRecipeManual extends Component {
         console.log("id" ,this.props.recipeId)
         this.getRecipeFromDB(this.props.recipeId)
       } 
-
     })
   }
   

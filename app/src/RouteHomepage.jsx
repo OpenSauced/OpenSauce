@@ -31,11 +31,7 @@ class RouteHomepage extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/users/getUserCookie')
-    .then((cookie) => {
-     var username = cookie.data;
-     this.props.getUserData(username).then((data) => console.log('RouteHomepage - getUserData result: ', data))
-    })
+    
   }
   
   render() {
