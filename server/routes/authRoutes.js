@@ -72,9 +72,9 @@ router.login = function(user) {
     })
 }
 
-router.get('/signup', function(req, res) {
-    res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
-})
+// router.get('/signup', function(req, res) {
+//     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
+// })
 
 router.post('/login', function(req, res) {
     router.login(req.body).then(function(cook) {
@@ -119,8 +119,8 @@ router.post('/signup', function(req, res) {
     })
 })
 
-router.get('/updateInfo/:type', function(req, res) {
-    var user = req.cookie.user
+router.post('/updateInfo/:type', function(req, res) {
+    var user = req.cookies.user
     var type = req.params.type
     if (type === 'password') {
         router.verifyPassword(user, req.password).then(function(verified) {
