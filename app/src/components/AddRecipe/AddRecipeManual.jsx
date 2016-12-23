@@ -157,6 +157,7 @@ class AddRecipeManual extends Component {
           this.state.ingredients.map((ingredient, index) => {
             return (
               <AddRecipeManualList
+                key={index}
                 ingredient={this.state.ingredients[index]}
                 index={index}
                 handleIngredientOnChange={this.onIngredientChange}
