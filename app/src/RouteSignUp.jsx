@@ -13,7 +13,9 @@ class RouteSignUp extends Component {
   render() {
     return (
       <div className="container-fluid">
+        <AppHeader title={'Sign Up'}/>
         <SignUp/>
+        <Footer/>
       </div>
     );
   }

@@ -133,7 +133,6 @@ class AddRecipeManual extends Component {
                 <span>Recipe Title:</span>
                 <input
                   placeholder="Please enter Recipe Name"
-                  className=""
                   id="recipe-title"
                   value={this.state.title}
                   onChange={this.onInputChange.bind(this)}
