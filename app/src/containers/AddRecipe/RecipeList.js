@@ -23,7 +23,7 @@ class RecipeList extends Component {
 
   render() {
     return (
-      <ul className="row">
+      <ul className="row recipe_card">
         {this.props.recipes.map(this.renderRecipes)}
       </ul>
     )

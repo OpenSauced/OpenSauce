@@ -74,9 +74,10 @@ class AddRecipeManual extends Component {
   onFormSubmit(e) {
     e.preventDefault();
 
-    let ingredients = this.state.ingredients.filter((ingredient) => {
-      ingredient.replace(' ', '') === '' ? null : ingredient; 
-    });
+    let ingredients = this.state.ingredients;
+    // .filter((ingredient) => {
+    //   ingredient.replace(' ', '') === '' ? null : ingredient; 
+    // });
 
     let recipe = {
       title: this.state.title,
@@ -124,53 +125,60 @@ class AddRecipeManual extends Component {
 
   render() {
     return (
-      <form className="" onSubmit={this.onFormSubmit.bind(this)}>
-        <h3>Recipe Title:</h3>
-        <input
-          placeholder="Please enter Recipe Name"
-          className=""
-          id="recipe-title"
-          value={this.state.title}
-          onChange={this.onInputChange.bind(this)}
-        />
+      <div className="row">
+        <div className="container">
+          <form onSubmit={this.onFormSubmit.bind(this)}>
+            <div className="row">
+              <label forHtml="">
+                <span>Recipe Title:</span>
+                <input
+                  placeholder="Please enter Recipe Name"
+                  className=""
+                  id="recipe-title"
+                  value={this.state.title}
+                  onChange={this.onInputChange.bind(this)}
+                />
+              </label>
+            </div>
+            <h3>Recipe Description:</h3>
+            <textarea
+              placeholder="Please enter a description"
+              className=""
+              id="recipe-description"
+              value={this.state.description}
+              onChange={this.onInputChange.bind(this)}
+            ></textarea>
 
-        <h3>Recipe Description:</h3>
-        <input
-          placeholder="Please enter a description"
-          className=""
-          id="recipe-description"
-          value={this.state.description}
-          onChange={this.onInputChange.bind(this)}
-        />
+            <h3>Directions </h3>
+            <textarea
+              placeholder="Please enter directions"
+              className=""
+              id="recipe-directions"
+              value={this.state.directions}
+              onChange={this.onInputChange.bind(this)}
+            ></textarea>
 
-        <h3>Directions </h3>
-        <input
-          placeholder="Please enter directions"
-          className=""
-          id="recipe-directions"
-          value={this.state.directions}
-          onChange={this.onInputChange.bind(this)}
-        />
-
-        <h3>Ingredients</h3>
-        {
-          this.state.ingredients.map((ingredient, index) => {
-            return (
-              <AddRecipeManualList
-                key={index}
-                ingredient={this.state.ingredients[index]}
-                index={index}
-                handleIngredientOnChange={this.onIngredientChange}
-                handleRemoveIngredient={this.removeIngredient}
-              />
-            )
-          })
-        }
-        <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
-        <span className="">
-          <button type="submit" className="btn btn-secondary">Submit</button>
-        </span>
-      </form>
+            <h3>Ingredients</h3>
+            {
+              this.state.ingredients.map((ingredient, index) => {
+                return (
+                  <AddRecipeManualList
+                    key={index}
+                    ingredient={this.state.ingredients[index]}
+                    index={index}
+                    handleIngredientOnChange={this.onIngredientChange}
+                    handleRemoveIngredient={this.removeIngredient}
+                  />
+                )
+              })
+            }
+            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+            <span className="">
+              <button type="submit" className="btn btn-secondary">Submit</button>
+            </span>
+          </form>
+        </div>
+      </div>
     );
   }
 }
