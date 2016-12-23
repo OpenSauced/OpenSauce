@@ -7,12 +7,23 @@ const db = require('./../db/db.js')
 
 //takes a user, and a plain password text, returns true or false.
 //thx bCrypt
+//this is promise based
+// EXAMPLE -----------------------
+// router.verifyPassword(user, password).then(function(verified) {
+//     if (verified) {
+//         do
+//             stuff
+//     } else {
+//         dont do
+//             stuff
+//     }
+// })
 router.verifyPassword = function(user, plainPass) {
     return db.userFunctions.findByUserName(user).then(function(userDB) {
         if (user !== null && userDB !== null && userDB !== []) {
-          return bcrypt.compareSync(plainPass, userDB.password) //resolves as bool
+            return bcrypt.compareSync(plainPass, userDB.password) //resolves as bool
         } else {
-          return false
+            return false
         }
     })
 }
@@ -44,25 +55,16 @@ router.signUp = function(userData) {
 }
 
 router.login = function(user) {
-    return db.userFunctions.findByUserName(user.username).then(function(userDB) {
-        if (userDB !== null) {
-            if (user !== [] && user.username === userDB.username) {
-                if (bcrypt.compareSync(user.password, userDB.password)) {
-                    var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
-                    return db.userFunctions.updateSession(user, hash).then(function(userDB) {
-                        return [user, hash]
-                    })
-                } else {
-                    console.log('returning null in login router.js 1');
-                    return null;
-                }
-            } else {
-                console.log('returning null in login router.js 2');
-                return null;
-            };
+    return router.verifyPassword(user.username, user.password).then(function(verified) {
+        if (verified) {
+            return db.userFunctions.findByUserName(user.username).then(function(userDB) {
+                var hash = bcrypt.hashSync(userDB.username + userDB.email, bcrypt.genSaltSync(7331));
+                return db.userFunctions.updateSession(user, hash).then(function(userDB) {
+                    return [userDB, hash]
+                })
+            })
         } else {
-            console.log('returning null in login router.js 3');
-            return null;
+            return null
         }
     })
 }
@@ -89,6 +91,8 @@ router.post('/login', function(req, res) {
         } else if (!cook) {
             res.end('wrong user and passsword combo')
         }
+    }).catch(function(err) {
+        res.end('wrong user and pass combo')
     })
 })
 
