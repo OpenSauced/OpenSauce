@@ -32,7 +32,6 @@ getRecipeFromDB(recipeId) {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-      	console.log("RECIPE ", recipe)
           this.setState({ recipe: recipe });
       }.bind(this),
       error: function(xhr, status, err) {

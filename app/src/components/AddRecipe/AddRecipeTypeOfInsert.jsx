@@ -1,10 +1,10 @@
 import React from 'react';
 
-const AddRecipeTypeOfInsert = ({}) => {
+const AddRecipeTypeOfInsert = ({renderClick}) => {
   return (
     <div className="row">
-      <div className="col-xs-6">Type New Recipe</div>
-      <div className="col-xs-6">Get Recipe from Other Site</div>
+      <button name="manual" className="col-xs-6" onClick={renderClick}>Type New Recipe</button>
+      <button name="link" className="col-xs-6" onClick={renderClick}>Get Recipe from Other Site</button>
     </div>
   );
 }
