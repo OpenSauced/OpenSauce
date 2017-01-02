@@ -31,14 +31,12 @@ xPorts.scrapeFoodNetwork = function (url) {
       listItem: 'div.ingredients ul li'
     },
     directions: {
-      listItem: 'div.directions ul li'
-    },
-    categories: {
-      listItem: 'div.categories ul li'
+      listItem: 'ul.recipe-directions-list li'
     }
   })
-  .then(page => {
-    console.log(page);
+  .then(recipeObj => {
+    console.log(recipeObj);
+    return recipeObj
   });
 };
 
