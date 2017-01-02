@@ -16,6 +16,7 @@ const commentFunctions = require('./functions/commentFunctions.js')
 const photoFunctions = require('./functions/photoFunctions.js')
 const recipeFunctions = require('./functions/recipeFunctions.js')
 const userFunctions = require('./functions/userFunctions.js')
+const scraperFunctions = require('./functions/scraperFunctions.js')
 
 
 
@@ -30,7 +31,8 @@ const xPorts = {
   commentFunctions: commentFunctions,
   photoFunctions: photoFunctions,
   recipeFunctions: recipeFunctions,
-  userFunctions: userFunctions
+  userFunctions: userFunctions,
+  scraperFunctions: scraperFunctions
 }
 
 module.exports = xPorts;
