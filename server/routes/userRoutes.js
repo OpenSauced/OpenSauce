@@ -37,11 +37,6 @@ router.get('/:userName/profile', function(req, res) {
     })
 })
 
-router.get('/getUserCookie', function(req, res) {
-    var cooks = req.cookies.user
-    res.end(cooks)
-})
-
 //route to save a recipe to a user's saved recipes object
 router.post('/save', function(req, res) {
     var recipeId = req.body.recipeId
