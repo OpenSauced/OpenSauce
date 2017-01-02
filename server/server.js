@@ -44,7 +44,7 @@ app.get('/', authRoutes.ensureAuthenticated, function(req, res) {
 app.use(express.static(path.join(__dirname, '/../app/public')));
 app.use('/assets/icons/*', express.static(path.join(__dirname, '/../app/public/assets/icons/')));
 
-//app.use('/dist', express.static(path.join(__dirname, '/../app/public/')));
+// app.use('/dist', express.static(path.join(__dirname, '/../app/public/')));
 
 // This will catch ANY other routes that did not come before this and serve index.html
 // Routes are not locked yet - add authRoutes.ensureAuthenticated

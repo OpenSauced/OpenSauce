@@ -37,6 +37,8 @@ xPorts.addNewRecipe = function(username, recipe) {
 
 //finds and returns one recipe based on recipe ID
 xPorts.findRecipeById = function(recipeId) {
+     console.log("recipeID", recipeId)
+
     return recipeModel.findOne({ _id: recipeId })
         .populate('creator')
         .exec((err, recipe) => {
