@@ -76,6 +76,11 @@ router.login = function(user) {
 //     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
 // })
 
+router.get('/getUserCookie', function(req, res) {
+    var cooks = req.cookies.user
+    res.end(cooks)
+})
+
 router.post('/login', function(req, res) {
     router.login(req.body).then(function(cook) {
         if (cook) {
