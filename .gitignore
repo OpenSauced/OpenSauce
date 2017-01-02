@@ -39,7 +39,9 @@ jspm_packages
 server/env/*
 !server/env/config-example.js
 
-app/public/dist
+# app/public/dist/*
+app/public/dist/bundle.js
+app/public/dist/bundle.css
 
 # hidden files
 .DS_Store
