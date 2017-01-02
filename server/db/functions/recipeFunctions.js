@@ -80,37 +80,6 @@ xPorts.addChildRecipe = function(parentId, childId) {
 
 }
 
-//return a recipe object from a url
-xPorts.getRecipefromUrl = function(url) {
-    // CAN delete one scraper fns are implemeneted
-    console.log("in getRecipefromUrl")
-    return xPorts.fetchHtml(url)
-        .then((html) => {
-            if (url.indexOf('epicurious') !== -1) {
-                return xPorts.parseEpicurious(html)
-            } else {
-                throw err;
-            }
-        })
-        .catch((err) => {
-            console.log("error in recipeFunctions 5", err)
-        })
-}
-
-
-
-    // return xPorts.fetchHtml(url)
-    //     .then((html) => {
-    //         if (url.indexOf('epicurious') !== -1) {
-    //             return xPorts.scrapeEpicurious(html)
-    //         } else {
-    //             throw err;
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log("error in recipeFunctions 5", err)
-    //     })
-}
 
 module.exports = xPorts;
 
@@ -130,4 +99,21 @@ module.exports = xPorts;
 //     .catch((err) => {
 //         console.log("recipeFunctions 3 ", err)
 //     })
+// }
+
+//return a recipe object from a url
+// xPorts.getRecipefromUrl = function(url) {
+//     // CAN delete once scraper fns are implemeneted
+//     return xPorts.fetchHtml(url)
+//         .then((html) => {
+//             if (url.indexOf('epicurious') !== -1) {
+//                 return xPorts.parseEpicurious(html)
+//             } else {
+//                 throw err;
+//             }
+//         })
+//         .catch((err) => {
+//             console.log("error in recipeFunctions 5", err)
+//         })
+// }
 // }

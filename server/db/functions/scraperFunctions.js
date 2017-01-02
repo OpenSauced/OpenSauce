@@ -3,15 +3,11 @@ const userFunctions = require('./userFunctions.js');
 const axios = require('axios');
 const scrapeIt = require('scrape-it');
 
-// Export object with methods
 const xPorts = {};
-
-
-
 
 ///////////////////////////////////////////////////////////
 /////                                                 /////
-/////     supported site parse/scraping functions     /////
+/////     supported site scraping functions           /////
 /////                                                 /////
 ///////////////////////////////////////////////////////////
 
@@ -21,6 +17,9 @@ const xPorts = {};
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
 xPorts.scrapeEpicurious = function (url) {
     console.log('scrapeEpicurious ', url)
+    //use scrape-it to scrape Epicurious
+    // scrapeIt( url, {
+    // })
 }
 
 // receives FULL url to do parsing
@@ -66,7 +65,7 @@ module.exports = xPorts;
  //  }
 
 
-/*
+/* old epicurious scraper
   // newHtml = html.data.replace(/(\r\n|\n|\r)/gm, "");
 
     // var recipe = {}
