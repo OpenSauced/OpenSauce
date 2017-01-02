@@ -37,8 +37,12 @@ app.get('/signup', function(req, res) {
  res.sendFile( path.join(__dirname, '/../app/public/index.html') )
 })
 
+app.get('/', authRoutes.ensureAuthenticated, function(req, res) {
+ res.sendFile( path.join(__dirname, '/../app/public/index.html') )
+})
 
 app.use(express.static(path.join(__dirname, '/../app/public')));
+app.use('/assets/icons/*', express.static(path.join(__dirname, '/../app/public/assets/icons/')));
 
 //app.use('/dist', express.static(path.join(__dirname, '/../app/public/')));
 
