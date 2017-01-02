@@ -15,24 +15,18 @@ class HeaderNavProfile extends Component {
   }
 
   render() {
-   
+
     return (
-      <div className="col-xs-4">
-        <div className="row flex-items-xs-right">
+      <div className="col-sm-4">
           <div className="col-xs-4">
             <img src={this.props.userData.user_image.public_url} alt="" title=""/>
-          </div>
         </div>
-        <div className="row flex-items-xs-right">
           <div className="col-xs-4">
             <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
           </div>
-        </div>
-        <div className="row flex-items-xs-right">
           <div className="col-xs-4">
             <Link to="/profile">View Profile Settings</Link>
           </div>
-        </div>
       </div>
     );
   }
@@ -45,7 +39,7 @@ function mapStateToProps (state) {
 export default connect(mapStateToProps)(HeaderNavProfile);
 
 
-////// Don't delete 
+////// Don't delete
             // {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}
             // <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
             // <Link to="/profile">View Profile Settings</Link>

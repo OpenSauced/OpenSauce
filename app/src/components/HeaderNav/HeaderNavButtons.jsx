@@ -5,8 +5,8 @@ import HeaderNavLogOutButton from './HeaderNavLogOutButton'
 
 const HeaderNavButtons = () => {
   return (
-    <div className="col-xs-4">
-      <div className="row flex-items-xs-right">
+    <div className="col-sm-4">
+      <div >
         <HeaderNavButton name="My Recipes" link="/myrecipes"/>
         <HeaderNavButton name="Add Recipe" link="/addrecipe"/>
         {/* Redirects to RouterLogin, and the component will send a GET request to delete user cookies*/}
