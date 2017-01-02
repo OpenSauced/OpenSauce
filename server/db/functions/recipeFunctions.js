@@ -6,7 +6,8 @@ const xPorts = {}
 
 //returns the most recent 10 recipes
 xPorts.findRecentRecipes = function() {
-    return recipeModel.find().sort({ createdAt: 'desc' }).limit(10)
+    return recipeModel.find()
+    .sort( [['_id', -1]] )
 }
 
 //adds a new recipe to the DB
