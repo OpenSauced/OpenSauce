@@ -23,6 +23,7 @@ export const getUserData = ( username ) => {
 // Added the 'get cookie for username here' route - must send a get request to find the username
  const request = axios.get('/auth/getUserCookie')
    .then((cookie) => {
+    console.log('cookie', cookie)
      return axios.get(`/api/users/${cookie.data}/profile`);
    })
    .catch((err) => {

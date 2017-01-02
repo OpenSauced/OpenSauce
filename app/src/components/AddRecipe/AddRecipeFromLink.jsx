@@ -2,24 +2,28 @@ import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
 
-const AddRecipeFromLink = (props) => {
-	console.log("getting current user?", props)
-	var username = props.userData.username
-	var formSubmit = function(e) {
+class AddRecipeFromLink extends Component {
+   constructor() {
+    super();
+  }
+
+  scrapeRecipe(e){
+  console.log("getting current user?", props)
     e.preventDefault();
     $.ajax({
       url: '/api/recipes/scraperecipe',
       type: 'POST',
       data: {
-        username: username,
+        username: props.userData.username,
         url: $('input[name=url]').val()
       },
       success: function (recipe) {
         console.log("recipe was saved to the DB", recipe);
 
- 		const path = `/viewrecipe/${recipe._id}`
- 		console.log("getting current path?", path)
-      browserHistory.push(path);      },
+    const path = `/viewrecipe/${recipe._id}`
+    console.log("getting current path?", path)
+      browserHistory.push(path);      
+    },
       error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
       }

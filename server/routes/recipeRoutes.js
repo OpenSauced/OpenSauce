@@ -29,11 +29,9 @@ router.post('/:username/addrecipe', function(req, res) {
 
 //route to return a single recipe
 router.get('/:recipeId', function(req, res){
-  console.log("in get recipe")
   var recipeId = req.params.recipeId
  db.recipeFunctions.findRecipeById(recipeId)
  .then((recipe) => {
-  console.log("recipe in recipe route: ", recipe)
     res.send(recipe);
   })
   .catch((err) => {
@@ -59,8 +57,8 @@ var username = req.params.username
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
-  db.recipeFunctions.getRecipefromUrl(url)
-  .then((recipe, username) => {
+  return db.recipeFunctions.getRecipefromUrl(url)
+  .then((recipe) => {
     return db.recipeFunctions.addNewRecipe(username, recipe)
   })
   .then((recipe) => {
