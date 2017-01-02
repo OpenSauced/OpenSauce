@@ -43,16 +43,22 @@ class ProfileSettingsChangeProfileInfo extends Component {
           </div>
           <hr/>
           <div className="row">
-            <h3>Change Your Password</h3>
-            <ChangePassword/>
+            <div className="col-xs">
+              <h3>Change Your Password</h3>
+              <ChangePassword/>
+            </div>
           </div>
           <div className="row">
-            <h3>Change Your Bio</h3>
-            <ChangeBio/>
+            <div className="col-xs">
+              <h3>Change Your Bio</h3>
+              <ChangeBio/>
+            </div>
           </div>
           <div className="row">
-            <h3>Change Your Photo</h3>
-            <ChangeProfilePicture/>
+            <div className="col-xs">
+              <h3>Change Your Photo</h3>
+              <ChangeProfilePicture/>
+            </div>
           </div>
 
         </div>

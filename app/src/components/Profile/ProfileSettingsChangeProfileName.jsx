@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ChangeUsername extends Component {
+class ChangeName extends Component {
   constructor() {
     super();
   }
@@ -22,8 +22,7 @@ class ChangeUsername extends Component {
           <label forHtml="password">Password:</label>
           <input
             type="text"
-            name="password"
-          />
+            name="password"/>
         </div>
         <div>
           <input type="submit" value="Save"/>
@@ -33,4 +32,4 @@ class ChangeUsername extends Component {
   }
 }
 
-export default ChangeUsername;
+export default ChangeName;
