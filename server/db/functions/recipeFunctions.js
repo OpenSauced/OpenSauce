@@ -13,6 +13,7 @@ xPorts.findRecentRecipes = function() {
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
 xPorts.addNewRecipe = function(username, recipe) {
+    console.log("in add new recipe function")
     return userFunctions.findByUserName(username)
         .then((userObj) => {
             return userObj
@@ -41,7 +42,7 @@ xPorts.findRecipeById = function(recipeId) {
     return recipeModel.findOne({ _id: recipeId })
         .populate('creator')
         .exec((err, recipe) => {
-            if (err) console.log("error in recipeFunctions: ", err);
+            if (err) console.log("recipeFunctions 3: ", err);
         })
 
 }
@@ -95,6 +96,7 @@ xPorts.addChildRecipe = function(parentId, childId) {
 
 //return a recipe object from a url
 xPorts.getRecipefromUrl = function(url) {
+    console.log("in getRecipefromUrl")
     return xPorts.fetchHtml(url)
         .then((html) => {
             if (url.indexOf('epicurious') !== -1) {
