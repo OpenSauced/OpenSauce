@@ -57,13 +57,19 @@ var username = req.params.username
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
+  return db.scraperFunctions.scrapeRecipe(url)
+  .then((recipe) => {
+  return db.recipeFunctions.addNewRecipe(username, recipe)
+  })
+  .then((recipe) => {
+    res.send(recipe)
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+   
 
-  if (url.indexOf('epicurious') !== -1) {
-    return db.scraperFunctions.scrapeEpicurious(url)
-  } 
-  else if (url.indexOf('foodnetwork') !== -1) {
-    return db.scraperFunctions.scrapeFoodNetwork(url)
-  } 
 
 // for previous Epicrious fn
   // return db.recipeFunctions.getRecipefromUrl(url)
@@ -77,6 +83,6 @@ router.post('/scraperecipe', function(req, res){
   //   res.send(err);
   // })
 
-})
+// })
 
 module.exports = router

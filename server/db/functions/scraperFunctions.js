@@ -11,36 +11,96 @@ const xPorts = {};
 /////                                                 /////
 ///////////////////////////////////////////////////////////
 
+xPorts.scrapeRecipe = function(url){
+if (url.indexOf('epicurious') !== -1) {
+    return xPorts.scrapeEpicurious(url)
+  } 
+ else if (url.indexOf('foodnetwork') !== -1) {
+    return xPorts.scrapeFoodNetwork(url)
+}
+else if (url.indexOf('allrecipes') !== -1){
+    return xPorts.scrapeAllRecipes(url)
+}
+}
+
 
 //parse the html and return a recipe object
 // that is returned from a get request to epicurious
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
 xPorts.scrapeEpicurious = function (url) {
     console.log('scrapeEpicurious ', url)
-    //use scrape-it to scrape Epicurious
-    // scrapeIt( url, {
-    // })
+    return scrapeIt( url, {
+    title: 'div.title-source h1',
+    ingredients: {
+      listItem: 'li.ingredient'
+    },
+    directions: {
+      listItem: 'li.preparation-step'
+    },
+    description: 'div.dek p'
+  })
+  .then(recipeObj => {
+    
+    var directions = recipeObj.directions.join(' ');
+
+    recipeObj.directions = directions
+    return recipeObj
+  });
 }
 
 // receives FULL url to do parsing
 xPorts.scrapeFoodNetwork = function (url) {
-  console.log('foodnetwork ',url)
-  scrapeIt( url, {
+  return scrapeIt( url, {
     title: "head title",
     ingredients: {
       listItem: 'div.ingredients ul li'
     },
     directions: {
-      listItem: 'div.directions ul li'
-    },
-    categories: {
-      listItem: 'div.categories ul li'
+      listItem: 'ul.recipe-directions-list li'
     }
   })
-  .then(page => {
-    console.log(page);
+  .then(recipeObj => {
+
+    var directions = recipeObj.directions.join(' ');
+
+    recipeObj.directions = directions
+    return recipeObj
   });
 };
+
+xPorts.scrapeAllRecipes = function (url) {
+    return scrapeIt( url, {
+    title: 'h1.recipe-summary__h1',
+    ingredients: {
+      listItem: 'span.recipe-ingred_txt'
+    },
+    directions: {
+      listItem: 'span.recipe-directions__list--item'
+    },
+    description: 'div.submitter__description',
+  })
+  .then(recipeObj => {
+    for(var i = 0; i < recipeObj.ingredients.length; i++){
+        if(recipeObj.ingredients[i] === 'Add all ingredients to list'){
+            var ingredients = []
+            ingredients = recipeObj.ingredients.slice(0, i)
+            recipeObj.ingredients = ingredients;
+            break
+        }
+    }
+
+    for(var i = 0; i < recipeObj.directions.length; i++){
+        if(typeof recipeObj.directions[i] === 'object'){
+            var directions = []
+            directions = recipeObj.directions.slice(0, i)
+            recipeObj.directions = directions.join(' ');
+            break 
+    }
+}
+    return recipeObj;
+  
+})
+}
 
 module.exports = xPorts;
 
