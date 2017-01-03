@@ -17,8 +17,13 @@ router.get('/', function(req,res) {
 
 router.get('/search', function(req, res){
   var term = req.query.term
-  res.send(db.recipeFunctions.searchRecipes(term))
-
+  db.recipeFunctions.searchRecipes(term)
+  .then((recipes) => {
+    res.send(recipes)
+  })
+  .catch((err) => {
+    res.send(err)
+  })
 })
 
 //saves a recipe to the DB

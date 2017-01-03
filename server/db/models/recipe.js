@@ -32,6 +32,8 @@ var RecipeSchema = new Schema({
 	url: String
 })
 
+RecipeSchema.index({title: 'text', descrption: 'text', directions: 'text'})
+
 const Recipe = mongoose.model('recipes', RecipeSchema);
 
 module.exports = Recipe;
