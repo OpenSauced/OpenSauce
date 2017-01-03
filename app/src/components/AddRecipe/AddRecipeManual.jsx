@@ -130,7 +130,7 @@ class AddRecipeManual extends Component {
         <div className="container">
           <form onSubmit={this.onFormSubmit.bind(this)}>
             <div className="row">
-              <label forHtml="">
+              <label htmlFor="">
                 <span>Recipe Title:</span>
                 <input
                   placeholder="Please enter Recipe Name"

@@ -15,11 +15,11 @@ const AddRecipeFromLink = (props) => {
         url: $('input[name=url]').val()
       },
       success: function (recipe) {
-        console.log("recipe was saved to the DB", recipe);
-        const path = `/viewrecipe/${recipe._id}`
-        console.log("getting current path?", path)
-        browserHistory.push(path);      
-      },
+      console.log("recipe was saved to the DB", recipe);
+ 		  const path = `/viewrecipe/${recipe._id}`
+ 		  console.log("getting current path?", path)
+      browserHistory.push(path);
+    },
       error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
       }
@@ -40,4 +40,3 @@ const AddRecipeFromLink = (props) => {
 };
 
 export default AddRecipeFromLink
-
