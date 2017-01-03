@@ -12,6 +12,14 @@ body {
   width: 100%;
 }
 
+.recipeCardBtn {
+    margin: 0 1%;
+}
+
+.searchHomePageContainer {
+  margin-bottom: 20px
+}
+
 .navProfPic {
     overflow: hidden;
     border: 1px solid;
@@ -56,6 +64,10 @@ body {
 .nav > li > a {
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.navbar {
+  padding: 0 !important;
 }
 
 .navbar-toggle {

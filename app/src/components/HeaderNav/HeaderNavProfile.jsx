@@ -5,6 +5,7 @@ import { Router, Link } from 'react-router';
 import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import HeaderNavLogOutButton from './HeaderNavLogOutButton'
 
 //Axios
 import axios from 'axios'
@@ -26,6 +27,7 @@ class HeaderNavProfile extends Component {
               <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
               <Link style={{'padding': '0px'}} to="/profile">View Profile Settings</Link>
             </li>
+            <HeaderNavLogOutButton name="Logout" link="/login"/>
           </ul>
       </li>
     );

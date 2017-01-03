@@ -11,7 +11,7 @@ class ProfileSettings extends Component {
   render() {
     return (
       <div className="row">
-        <ProfileSettingsUserImage/>
+        {/* <ProfileSettingsUserImage/> */}
         <ProfileSettingsChangeProfileInfo/>
       </div>
     );
