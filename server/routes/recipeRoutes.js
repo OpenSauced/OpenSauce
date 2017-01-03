@@ -59,7 +59,6 @@ router.post('/scraperecipe', function(req, res){
   var username = req.body.username
   return db.scraperFunctions.scrapeRecipe(url)
   .then((recipe) => {
-    console.log("RECIPE________", recipe)
   return db.recipeFunctions.addNewRecipe(username, recipe)
   })
   .then((recipe) => {

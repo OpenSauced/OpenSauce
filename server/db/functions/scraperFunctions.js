@@ -22,6 +22,8 @@ else if (url.indexOf('allrecipes') !== -1){
     return xPorts.scrapeAllRecipes(url)
 }
 }
+
+
 //parse the html and return a recipe object
 // that is returned from a get request to epicurious
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
@@ -38,6 +40,10 @@ xPorts.scrapeEpicurious = function (url) {
     description: 'div.dek p'
   })
   .then(recipeObj => {
+    
+    var directions = recipeObj.directions.join(' ');
+
+    recipeObj.directions = directions
     return recipeObj
   });
 }
@@ -54,6 +60,10 @@ xPorts.scrapeFoodNetwork = function (url) {
     }
   })
   .then(recipeObj => {
+
+    var directions = recipeObj.directions.join(' ');
+
+    recipeObj.directions = directions
     return recipeObj
   });
 };
@@ -67,10 +77,9 @@ xPorts.scrapeAllRecipes = function (url) {
     directions: {
       listItem: 'span.recipe-directions__list--item'
     },
-    description: 'div.submitter__description'
+    description: 'div.submitter__description',
   })
   .then(recipeObj => {
-    console.log("INGREDIENTS BEFORE________", recipeObj.ingredients)
     for(var i = 0; i < recipeObj.ingredients.length; i++){
         if(recipeObj.ingredients[i] === 'Add all ingredients to list'){
             var ingredients = []
@@ -84,12 +93,13 @@ xPorts.scrapeAllRecipes = function (url) {
         if(typeof recipeObj.directions[i] === 'object'){
             var directions = []
             directions = recipeObj.directions.slice(0, i)
-            recipeObj.directions = directions;
-            break
-        }
+            recipeObj.directions = directions.join(' ');
+            break 
     }
+}
     return recipeObj;
-  })
+  
+})
 }
 
 module.exports = xPorts;
