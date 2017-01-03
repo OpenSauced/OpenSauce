@@ -57,15 +57,10 @@ var username = req.params.username
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
-
-  if (url.indexOf('epicurious') !== -1) {
-    return db.scraperFunctions.scrapeEpicurious(url)
-  } 
-  else if (url.indexOf('foodnetwork') !== -1) {
-    return db.scraperFunctions.scrapeFoodNetwork(url)
-  } 
+  return db.scraperFunctions.scrapeRecipe(url)
   .then((recipe) => {
-    return db.recipeFunctions.addNewRecipe(username, recipe)
+    console.log("RECIPE________", recipe)
+  return db.recipeFunctions.addNewRecipe(username, recipe)
   })
   .then((recipe) => {
     res.send(recipe)
@@ -73,6 +68,9 @@ router.post('/scraperecipe', function(req, res){
   .catch((err) => {
     res.send(err);
   })
+})
+   
+
 
 // for previous Epicrious fn
   // return db.recipeFunctions.getRecipefromUrl(url)
@@ -86,6 +84,6 @@ router.post('/scraperecipe', function(req, res){
   //   res.send(err);
   // })
 
-})
+// })
 
 module.exports = router

@@ -11,7 +11,14 @@ const xPorts = {};
 /////                                                 /////
 ///////////////////////////////////////////////////////////
 
-
+xPorts.scrapeRecipe = function(url){
+if (url.indexOf('epicurious') !== -1) {
+    return xPorts.scrapeEpicurious(url)
+  } 
+ else if (url.indexOf('foodnetwork') !== -1) {
+    return xPorts.scrapeFoodNetwork(url)
+}
+}
 //parse the html and return a recipe object
 // that is returned from a get request to epicurious
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
@@ -25,7 +32,7 @@ xPorts.scrapeEpicurious = function (url) {
 // receives FULL url to do parsing
 xPorts.scrapeFoodNetwork = function (url) {
   console.log('foodnetwork ',url)
-  scrapeIt( url, {
+  return scrapeIt( url, {
     title: "head title",
     ingredients: {
       listItem: 'div.ingredients ul li'
@@ -35,7 +42,6 @@ xPorts.scrapeFoodNetwork = function (url) {
     }
   })
   .then(recipeObj => {
-    console.log(recipeObj);
     return recipeObj
   });
 };
