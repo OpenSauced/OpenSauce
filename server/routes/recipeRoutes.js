@@ -62,12 +62,28 @@ var username = req.params.username
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
-  return db.scraperFunctions.scrapeRecipe(url)
+  return db.scraperFunctions.lookUpRecipeByUrl(url)
   .then((recipe) => {
-  return db.recipeFunctions.addNewRecipe(username, recipe)
-  })
-  .then((recipe) => {
-    res.send(recipe)
+    if (recipe === null){
+      return db.scraperFunctions.scrapeRecipe(url)
+      .then((recipe) => {
+        recipe.url = url
+        return db.recipeFunctions.addNewRecipe(username, recipe)
+      })
+      .catch((err) => {
+        res.send(err);
+      })
+      .then((recipe) => {
+        recipe.alreadyExists = false
+        res.send(recipe)
+      })
+      .catch((err) => {
+        res.send(err);
+      })
+    } else {
+      recipe.alreadyExists = true
+      res.send(recipe)
+    }
   })
   .catch((err) => {
     res.send(err);

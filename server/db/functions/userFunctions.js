@@ -13,6 +13,9 @@ xPorts.updateSession = function(user, hash) {
         userDB.save()
         return userDB
     })
+    .catch((err) => {
+        console.error('ERROR IN USER FUNCTIONS UPDATE SESSION:', err);
+    })
 }
 
 xPorts.secondSignupDisable = function(user) {
@@ -20,11 +23,17 @@ xPorts.secondSignupDisable = function(user) {
         userDB.secondary_signup_needed = 'false'
         userDB.save()
     })
+    .catch((err) => {
+        console.error('ERROR IN USER FUNCTIONS SECOND SIGN UP:', err);
+    })
 }
 
 xPorts.secondarySignupCheck = function(user) {
     return xPorts.findByUserName(user).then(function(userDB) {
         return userDB.secondary_signup_needed
+    })
+    .catch((err) => {
+        console.error('ERROR IN USER FUNCTIONS SECONDARY SIGN UP:', err);
     })
 }
 
