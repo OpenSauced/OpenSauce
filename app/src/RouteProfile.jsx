@@ -19,7 +19,9 @@ class RouteProfile extends Component {
   }
 
   handleSelectChangeProfile(e) {
-    // you will be clicking on one of two buttons in AppRecipeTypeOfInsert.js
+    // Clicking on a button in ProfileSettings will trigger this function to run.
+    // This function sets state and will modify what shows up on the screen through
+    //    ProfileSettingsChangeProfileInfo component.
     let render = '';
 
     switch (e.target.name)  {
@@ -57,12 +59,14 @@ class RouteProfile extends Component {
       <div className="container-fluid">
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
+        
         <div className="row">
           {/*side bar for selecting what you want to change*/}
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
           {/*selected change will show up here*/}
           <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
         </div>
+
         <Footer/>
       </div>
     );

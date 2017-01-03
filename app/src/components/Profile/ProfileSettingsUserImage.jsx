@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileSettingsUserImage ({image}) { 
+const ProfileSettingsUserImage = ({image}) => { 
     return (
       <div>
         Profile image will go here
@@ -11,6 +11,8 @@ const ProfileSettingsUserImage ({image}) {
 export default ProfileSettingsUserImage;
 
 // Todo: get profile image to show up
+// ++ Redux works on its parent component, but for some reason there is trouble getting 
+//    access to the redux props (mapStateToProps)
 
 // class ProfileSettingsUserImage extends Component { 
 //   constructor() {
