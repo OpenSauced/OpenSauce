@@ -21,8 +21,7 @@ class ProfileSettingsChangeProfileInfo extends Component {
 
     this.componentObj = {
       profile: <h1> Your current profile <br/>
-        (TODO: fill with current profile info, <br/>
-        having trouble getting props from mapStateToProps)
+        (TODO: fill with current profile info)
       </h1>,
       name: <ChangeName/>,
       username: <ChangeUsername/>,

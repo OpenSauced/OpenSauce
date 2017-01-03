@@ -26,31 +26,24 @@ class RouteProfile extends Component {
       case 'name':
         render = 'name'
         break;
-
       case 'username':
         render = 'username'
         break;
-        
       case 'bio':
         render = 'bio'
         break;
-        
       case 'email':
         render = 'email'
         break;
-        
       case 'password':
         render = 'password'
         break;
-        
       case 'profilePicture':
         render = 'profilePicture'
         break;
-        
       default:
         render = 'profile'
-        break;
-        
+        break;  
     }
 
     this.setState({
@@ -65,7 +58,9 @@ class RouteProfile extends Component {
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
         <div className="row">
+          {/*side bar for selecting what you want to change*/}
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
+          {/*selected change will show up here*/}
           <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
         </div>
         <Footer/>

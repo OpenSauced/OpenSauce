@@ -2,18 +2,28 @@ import React, { Component } from 'react';
 
 import ProfileSettingsUserImage from './ProfileSettingsUserImage';
 
+import { connect } from 'react-redux'
+
 class ProfileSettings extends Component {
   constructor() {
     super();  
+
+    this.data = "";
   }
+
+  // Attempting to put image into image component below
+  // componentDidMount () {
+  //   this.data = this.props.data;
+  //   console.log('component did mount', this.data) // this shows up as undefined
+ //}
 
   render() {
     return (
       // this will show up as a sidebar on the profile settings page
       <div className="col-xs-3">
 
-        <ProfileSettingsUserImage/>
-        
+        <ProfileSettingsUserImage data={'image goes here'}/>
+
         {/* Each of these buttons corresponds to a case in RouteProfile
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
@@ -30,4 +40,8 @@ class ProfileSettings extends Component {
   }
 }
 
-export default ProfileSettings;
+function mapStateToProps (state){
+  return state.userData
+}
+
+export default connect(mapStateToProps)(ProfileSettings);
