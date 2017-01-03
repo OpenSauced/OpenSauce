@@ -93,8 +93,6 @@ xPorts.findOrCreateUser = function(userData) {
     return xPorts.findByUserName(userData.username).then(function(data) {
         if (!data) { //no data, user isnt in the db
             console.log('didnt find a user, creating one', userData);
-            console.log('calling save user', xPorts);
-            xPorts.saveUserFn()
             xPorts.saveUserFn({
                 first_name: userData.firstName,
                 last_name: userData.lastName,
