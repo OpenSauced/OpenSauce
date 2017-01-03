@@ -8,10 +8,10 @@ class RecipeList extends Component {
     //Check the route here and fetch by user or not depending on the route.
     switch(this.props.route) {
       case '/myrecipes':
-      this.props.getUserData()
-      break;      
+        this.props.getUserData()
+        break;      
       default:
-      this.props.fetchRecipes() 
+        this.props.fetchRecipes() 
     }
   }
 
