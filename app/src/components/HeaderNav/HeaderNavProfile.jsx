@@ -5,6 +5,7 @@ import { Router, Link } from 'react-router';
 import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import HeaderNavLogOutButton from './HeaderNavLogOutButton'
 
 //Axios
 import axios from 'axios'
@@ -15,25 +16,20 @@ class HeaderNavProfile extends Component {
   }
 
   render() {
-   
+
     return (
-      <div className="col-xs-4">
-        <div className="row flex-items-xs-right">
-          <div className="col-xs-4">
-            <img src={this.props.userData.user_image.public_url} alt="" title=""/>
-          </div>
-        </div>
-        <div className="row flex-items-xs-right">
-          <div className="col-xs-4">
-            <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
-          </div>
-        </div>
-        <div className="row flex-items-xs-right">
-          <div className="col-xs-4">
-            <Link to="/profile">View Profile Settings</Link>
-          </div>
-        </div>
-      </div>
+      <li className="dropdown">
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile <span className="caret"></span></a>
+        <ul className="dropdown-menu" >
+            <li className="navProfPic" style={{'background-image':"url('" + this.props.userData.user_image.public_url + "')"}} />
+            <li role="separator" className="divider"></li>
+            <li className="">
+              <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+              <Link style={{'padding': '0px'}} to="/profile">View Profile Settings</Link>
+            </li>
+            <HeaderNavLogOutButton name="Logout" link="/login"/>
+          </ul>
+      </li>
     );
   }
 }
@@ -45,7 +41,7 @@ function mapStateToProps (state) {
 export default connect(mapStateToProps)(HeaderNavProfile);
 
 
-////// Don't delete 
+////// Don't delete
             // {/*<img src={this.props.userData.user_image.public_url} alt="" title=""/>*/}
             // <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
             // <Link to="/profile">View Profile Settings</Link>

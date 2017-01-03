@@ -32,7 +32,6 @@ class ProfileSettings extends Component {
         <button name="email"          onClick={ this.props.renderClick }> Change your email </button>
         <button name="password"       onClick={ this.props.renderClick }> Change your password </button>
         <button name="profilePicture" onClick={ this.props.renderClick }> Change your profile picture </button>
-      
       </div>
     );
   }

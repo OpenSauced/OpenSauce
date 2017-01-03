@@ -2,17 +2,19 @@ import React from 'react';
 
 const HPFeedRecipe = ({recipe}) => {
   return (
-    <li className="col-xs-12 col-sm-4 recipe_card-cont">
-      <div className="recipe_card-box">
-        <img src="" alt="" title="" className="recipe_card-image"/>
-        <h2 className="recipe_card-title"><a href={`/viewrecipe/${recipe._id}`}>{recipe.title}</a></h2>
-        <p className="recipe_card-desc">{recipe.description}</p>
-        <div className="row flex-items-xs-center recipe_card-fork_like-cont">
-          <a href={`/addrecipe?recipe=${recipe._id}`} className="recipe_card-fork_button col-xs-4">Fork Recipe</a>
-          <a className="recipe_card-like_button col-xs-4">Like Recipe</a>
+    <div className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <li className="card recipe">
+      <img className="card-img-top" src="/assets/tempRecipe.svg" alt="Card image cap"/>
+      <div className="card-block">
+        <div className="row flex-items-xs-center recipe_card-fork_like-cont" style={{'margin-bottom':'1.25rem'}}>
+          <a href={`/addrecipe?recipe=${recipe._id}`} className="btn btn-primary recipeCardBtn">Fork Recipe</a>
+          <a className="btn btn-secondary recipe_card-like_button recipeCardBtn">Like Recipe</a>
         </div>
+        <h2 className="card-title"><a href={`/viewrecipe/${recipe._id}`}>{recipe.title}</a></h2>
+        <p className="card-text">{recipe.description}</p>
       </div>
     </li>
+  </div>
   );
 }
 

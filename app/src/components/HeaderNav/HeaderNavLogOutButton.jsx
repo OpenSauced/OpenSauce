@@ -4,12 +4,12 @@ import axios from 'axios';
 
 const HeaderNavLogOutButton = ({name, link}) => {
   return (
-    <div className="col-xs-3"><Link to={link} onClick={logOut}>{name}</Link></div>
+    <li><Link to={link} onClick={logOut}>{name}</Link></li>
   );
 }
 
 const logOut = () => {
-  
+
   //GET request to delete cookies, logging you out
   axios.get('/auth/logout')
 }

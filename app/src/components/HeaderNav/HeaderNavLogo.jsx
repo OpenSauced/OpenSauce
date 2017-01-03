@@ -3,15 +3,16 @@ import { Router, Link } from 'react-router';
 
 const HeaderNavLogo = () => {
   return (
-    <div className="col-xs-4">
+    <div className="navbar-brand col-xs-4">
       <Link to={'/'}>
-        <img 
-          src='/assets/icons/cookbook.svg' 
-          alt="Fork a recipe icon" 
-          height="120" 
-          width="120" 
+        <img
+          src='/assets/icons/cookbook.svg'
+          alt="Main Logo Icon"
+          height="50"
+          width="50"
         />
-      </Link>  
+        <div className="navName">OpenSauce!</div>
+      </Link>
     </div>
   );
 }
