@@ -7,22 +7,44 @@ class ProfileSettings extends Component {
   constructor() {
     super();
     this.state = {
-      currentPage: 'ProfileSettings'
+      renderInputs: 'ProfileSettings'
     }
+    this.handleSelectHowToAddRecipe = this.handleSelectHowToAddRecipe.bind(this);
   }
 
+  //old testing function, use if wanted
   changeState () {
     console.log('cliiiiiiiiiiiiiiiiiiiiiiiiiiiicked')
     console.log('this.state ', this.state)
+  }
+
+  handleSelectHowToChangeProfile(e) {
+    // you will be clicking on one of two buttons in AppRecipeTypeOfInsert.js
+    let render = '';
+
+    if(e.target.name === 'manual'){
+      render = 'manual';
+    } else {
+      render = 'link';
+    };
+
+    this.setState({
+      renderInputs: render
+    });
+    
   }
 
   render() {
     return (
       <div className="row">
         <div className="col-xs-3">
-          <div id="ProfileChangeName" onClick={this.changeState.bind(this)} > Change User Profile Image </div>
+          {/*<div id="ProfileChangeName" onClick={this.changeState.bind(this)} > Change User Profile Image </div>*/}
+          {/* add and change name of ProfileSettingsUserImage to reflect pattern in 
+              RouteAddRecipe > AddRecipe > AddRecipeTypeofInsert
+             */}
         </div>
-        <ProfileSettingsChangeProfileInfo/>
+        {/* TODO: add reference to render props in the below component */}
+        <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
       </div>
     );
   }

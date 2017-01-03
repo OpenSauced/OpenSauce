@@ -17,13 +17,15 @@ class ProfileSettingsChangeProfileInfo extends Component {
     super();
   }
 
+  // TODO: change this to reflect this.props.renderInputs
+
   render() {
     return (
         <div className="col-xs-9">
           <h2>User Profile Settings</h2>
           <div className="row">
             <div className="col-xs">
-              <h3>Change Your UserName</h3>
+              <h3>Change Your Username</h3>
               <ChangeUsername/>
             </div>
           </div>

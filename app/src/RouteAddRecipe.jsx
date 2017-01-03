@@ -18,15 +18,18 @@ class RouteAddRecipe extends Component {
   }
 
   handleSelectHowToAddRecipe(e) {
-    let render = ''
+    // you will be clicking on one of two buttons in AppRecipeTypeOfInsert.js
+    let render = '';
+
     if(e.target.name === 'manual'){
-      render = 'manual'
+      render = 'manual';
     } else {
-      render = 'link'
-    }
+      render = 'link';
+    };
+
     this.setState({
-        renderInputs: render
-      })
+      renderInputs: render
+    });
   }
 
   render() {
