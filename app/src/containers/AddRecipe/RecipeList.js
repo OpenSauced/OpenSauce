@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 
 //Components
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
-import SearchBar from '../HomePage/SearchBar'
+import SearchBar from '../Homepage/SearchBar'
+
+// REDUX STUFF
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchRecipes, getUserData } from '../../actions/index'
 
 class RecipeList extends Component {
   componentWillMount() {
@@ -36,10 +41,6 @@ class RecipeList extends Component {
   }
 }
 
-// REDUX STUFF
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { fetchRecipes, getUserData } from '../../actions/index'
 const  mapStateToProps = (state) => {
   return {
     recipes: state.recipes,
