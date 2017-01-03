@@ -1,3 +1,60 @@
+// NAV : #fff39d
+
 body {
-  background-color: #fff;
+    background-color: #fff;
+}
+
+#navButtonContainer {
+  overflow: hidden;
+}
+
+.navProfPic {
+    overflow: hidden;
+    border: 1px solid;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto !important;
+    border: 5px solid grey;
+    background-size: cover;
+    display: block;
+    border-radius: 60px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+//image and seperator have no padding
+.dropdown-menu .divider {
+  padding: 2px !important;
+  background-color: grey;
+  margin-top: 10px;
+}
+
+.dropdown-menu {
+    overflow: hidden;
+    left: 50% !important;
+    margin-left: -61%;
+}
+
+.dropdown-menu > li {
+  padding: 5px !important;
+  text-align: center;
+}
+
+.dropdown-menu > li > a {
+  color: #0275d8;
+}
+
+.navbar-brand {
+    height: 80px;
+    padding: 0;
+}
+
+.nav > li > a {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.navbar-toggle {
+    padding: 10px;
+    margin: 25px 15px 25px 0;
 }

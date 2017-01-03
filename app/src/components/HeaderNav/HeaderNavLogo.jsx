@@ -3,9 +3,10 @@ import { Router, Link } from 'react-router';
 
 const HeaderNavLogo = () => {
   return (
-    <div className="col-sm-4">
-      <Link to="/"><img src='/assets/icons/mustache-chef.svg' alt="Fork a recipe icon" height="150" width="150" /></Link>
-    </div>
+    <a className="navbar-brand" href="/">
+      <img className="navLogo" src='/assets/icons/cookbook.svg' alt="Main Logo Icon" height="50" width="50" />
+      <div className="navName">OpenSauce!</div>
+    </a>
   );
 }
 
