@@ -22,7 +22,9 @@ class AddRecipe extends Component {
   render() {
 
     return(
-      this.props.renderInputs === 'manual' ? <AddRecipeManual recipeId={this.props.recipeId}/> : <AddRecipeFromLink userData={this.props.userData}/>
+      this.props.renderInputs === 'manual' 
+      ? <AddRecipeManual recipeId={this.props.recipeId}/> 
+      : <AddRecipeFromLink userData={this.props.userData}/>
     )
   }
 }
