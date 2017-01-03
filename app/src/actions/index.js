@@ -1,20 +1,26 @@
 import axios from 'axios'
 
-export const FETCH_RECIPES = 'FETCH_RECIPES';
+
 export const GET_USER_DATA = 'GET_USER_DATA';
-export const GET_USER_RECIPES = 'GET_USER_RECPES'
+export const SEARCH_RECIPES = 'SEARCH_RECIPES'
+export const FETCH_RECIPES = 'FETCH_RECIPES';
 
-export const setUserRecipes = () => {
 
+export const searchRecipes = (term) => {
+  const url = `/api/recipes/search?term=${term}`
+  const request = axios.get(url)
+  return {
+    type: SEARCH_RECIPES,
+    payload: request
+  }
 }
 
 export const fetchRecipes = () => {
-
- const request = axios.get('http://localhost:3000/api/recipes/')
- return {
+  const request = axios.get('/api/recipes/')
+  return {
    type: FETCH_RECIPES,
    payload: request
- }
+  }
 }
 
 //get userdata via axios request (jump to /server/routes/userRoutes)

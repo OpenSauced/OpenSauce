@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import { fetchRecipes } from '../../actions/index'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -12,27 +8,25 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     //create a case and match it to the element id, update state accordingly
+    //you may remove the switch if if only one search field is needed.
     switch(event.target.id) {
-    case 'pizzaparty':
-        this.setState({term: event.target.value})
-        break;
+    case 'searchfield':
+      this.setState({term: event.target.value})
+      break;
     }
     return null
   }
 
   onFormSubmit(event) {
     event.preventDefault()
-
+    this.props.searchRecipes(this.state.term)
+    console.log('Submitting Search Term: ', this.state.term)
     this.setState({term: ''})
-    //this.props.fetchRecipes()
-  }
-  componentDidMount() {
-    this.props.fetchRecipes()
 
   }
-
+ 
   render() {
-    console.log('RECIPES: ',this.props.recipes)
+    //console.log('RECIPES: ', this.props.recipes)
     return (
       <form
         className="input-group"
@@ -41,7 +35,7 @@ class SearchBar extends Component {
         <input
           placeholder="Search for recipes..."
           className="form-control"
-          id="pizzaparty"
+          id="searchfield"
           value={this.state.term}
           onChange={this.onInputChange.bind(this)}
         />
@@ -56,6 +50,11 @@ class SearchBar extends Component {
   }
 }
 
+//REDUX STUFF
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { searchRecipes } from '../../actions/index'
+
 const  mapStateToProps = (state) => {
   return {
     recipes: state.recipes
@@ -63,7 +62,7 @@ const  mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes }, dispatch)
+  return bindActionCreators ({ searchRecipes }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

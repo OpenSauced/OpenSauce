@@ -15,6 +15,11 @@ router.get('/', function(req,res) {
   })
 })
 
+router.get('/search', function(req, res){
+  var term = req.query.term
+  res.send(term)
+})
+
 //saves a recipe to the DB
 router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
