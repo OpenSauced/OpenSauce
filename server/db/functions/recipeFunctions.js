@@ -83,6 +83,18 @@ xPorts.addChildRecipe = function(parentId, childId) {
 
 }
 
+//SEARCH RECIPES STUFF!!
+xPorts.searchRecipes = function(term) {
+  return term
+  // return recipeModel.find({
+  //   $or: [
+  //     {
+
+  //     },
+  //   ]
+  // })
+}
+
 
 module.exports = xPorts;
 
