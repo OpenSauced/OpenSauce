@@ -40,4 +40,3 @@ const AddRecipeFromLink = (props) => {
 };
 
 export default AddRecipeFromLink
-

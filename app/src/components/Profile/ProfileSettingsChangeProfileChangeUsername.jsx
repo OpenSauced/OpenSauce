@@ -7,14 +7,14 @@ class ChangeUsername extends Component {
 
   render() {
     return (
-      <form action="/api/users/updateInfo/username" method="post" enctype="multipart/form-data" target="_top">
+      <form action="/api/users/updateInfo/username" method="post" encType="multipart/form-data" target="_top">
         <div>
-          <label forHtml="newUsername">Username:</label>
+          <label htmlFor="newUsername">Username:</label>
           <input
             type="text"
             name="newUsername"
           />
-          <label forHtml="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="text"
             name="password"
