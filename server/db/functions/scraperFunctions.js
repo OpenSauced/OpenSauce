@@ -46,6 +46,7 @@ xPorts.scrapeEpicurious = function (url) {
     recipeObj.directions = directions
     return recipeObj
   });
+
 }
 
 // receives FULL url to do parsing

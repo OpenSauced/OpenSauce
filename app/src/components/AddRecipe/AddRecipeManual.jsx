@@ -54,6 +54,7 @@ class AddRecipeManual extends Component {
       }.bind(this),
     });
   }
+  
   onInputChange(event) {
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
