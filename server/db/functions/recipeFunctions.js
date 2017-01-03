@@ -32,8 +32,12 @@ xPorts.addNewRecipe = function(username, recipe) {
                     return recipe;
                 })
                 .catch((err) => {
-                    console.log("recipeFunctions 2 ", err)
+                    console.log("recipeFunctions 1.1 ", err)
                 })
+        })
+        .catch((err) => {
+            console.log("recipeFunctions 1.2 ", err)
+
         })
 
 }
@@ -43,7 +47,7 @@ xPorts.findRecipeById = function(recipeId) {
     return recipeModel.findOne({ _id: recipeId })
         .populate('creator')
         .exec((err, recipe) => {
-            if (err) console.log("recipeFunctions 3: ", err);
+            if (err) console.log("recipeFunctions 2: ", err);
         })
 
 }

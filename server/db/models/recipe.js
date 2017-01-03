@@ -28,7 +28,8 @@ var RecipeSchema = new Schema({
 	timestamps: { 
 		createdAt: Date, 
 		updatedAt: Date
-	}
+	},
+	url: String
 })
 
 const Recipe = mongoose.model('recipes', RecipeSchema);

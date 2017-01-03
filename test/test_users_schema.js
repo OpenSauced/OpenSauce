@@ -5,6 +5,8 @@ const User = require('../server/db/models/user.js');
 const recipeFunctions = require('../server/db/functions/recipeFunctions.js')
 const userFunctions = require('../server/db/functions/userFunctions.js')
 
+const axios = require('axios')
+
 var test = true;
 
 describe('passing a test', () => {
@@ -102,3 +104,21 @@ describe('getting the html from a link', () => {
         })
     })
 })
+
+
+// describe('saving recipe from a link', () => {
+//     it.only('should return the recipe or save the recipe and return it', (done) => {
+//         axios.post('127.0.0.1:4040/api/recipes/scraperecipe', {
+//             url: 'http://www.epicurious.com/recipes/food/views/our-favorite-creamy-mashed-potatoes',
+//             username: 'carolyn'
+//         })
+//         .then((recipe) => {
+//             console.log('RECIPE___________________', recipe)
+//             assert(typeof recipe === 'object');
+//             done()
+//         })
+//         .catch((err) => {
+//                 console.log("last test error ", err)
+//             })
+//     })
+// })
