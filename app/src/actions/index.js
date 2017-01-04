@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SEARCH_RECIPES = 'SEARCH_RECIPES'
 export const FETCH_RECIPES = 'FETCH_RECIPES';
@@ -10,16 +9,6 @@ export const locationDidUpdate = (data) => {
   return {
     type: 'DO_NOTHING',
     payload: null
-  }
-}
-
-export const searchRecipes = (term) => {
-  const url = `/api/recipes/search?term=${term}`
-  const request = axios.get(url)
-  
-  return {
-    type: SEARCH_RECIPES,
-    payload: request
   }
 }
 
@@ -52,9 +41,9 @@ export const getUserData = ( username ) => {
 }
 
 export const routeDispatcher = (store, location) =>  {
-  console.log("ROUTE DISPATCHER WAS CALLED!")
-  console.log(store.getState().userData)
-  console.log(location)
+  //console.log("ROUTE DISPATCHER WAS CALLED!")
+  //console.log(store.getState().userData)
+  //console.log(location)
   switch (location.pathname) {
     case '/':
     store.dispatch(fetchRecipes(location.search))
