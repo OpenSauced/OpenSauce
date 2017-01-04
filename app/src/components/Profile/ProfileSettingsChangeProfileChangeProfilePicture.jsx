@@ -15,8 +15,7 @@ class ChangeProfilePicture extends Component {
     }
 
     onDrop(files) {
-        console.log(files);
-        this.setState({files: files});
+        this.setState( { files: files } );
     }
 
     onOpenClick() {

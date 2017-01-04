@@ -14,12 +14,13 @@ class RecipeList extends Component {
     //Check the route here and fetch by user or not depending on the route.
     switch(this.props.route) {
       case '/myrecipes':
-      //console.log('GETTING USER DATA: ', this.props.route)
-      this.props.getUserData()
-      break;      
+        //console.log('GETTING USER DATA: ', this.props.route)
+        this.props.getUserData()
+        break;      
       default:
-      //console.log('GETTING ALL RECIPIES DATA: ', this.props.route)
-      this.props.fetchRecipes() 
+        //console.log('GETTING ALL RECIPIES DATA: ', this.props.route)
+        this.props.fetchRecipes()
+        break; 
     }
   }
 
