@@ -29,12 +29,14 @@ router.get('/', function(req,res) {
 //saves a recipe to the DB
 router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
+
   db.recipeFunctions.addNewRecipe(username, req.body)
+  .catch((err) => {
+    console.log('in the catch!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    res.send(500, err);
+  })
   .then((recipe) => {
   	res.send(recipe);
-  })
-  .catch((err) => {
-  	res.send(err);
   })
 })
 
@@ -42,11 +44,11 @@ router.post('/:username/addrecipe', function(req, res) {
 router.get('/:recipeId', function(req, res){
   var recipeId = req.params.recipeId
  db.recipeFunctions.findRecipeById(recipeId)
+   .catch((err) => {
+    res.send(err);
+  })
  .then((recipe) => {
     res.send(recipe);
-  })
-  .catch((err) => {
-    res.send(err);
   })
 })
 
@@ -58,13 +60,15 @@ var username = req.params.username
     res.send(recipe);
   })
   .catch((err) => {
-    res.send(err);
+    res.send(500, err);
   })
 })
 
 //go grab a recipe from a url 
-//save it to the DB
-//send recipe object back to client
+  //save it to the DB
+  //send recipe object back to client
+//if invalid website or no recipe is scraped
+  //it sends back and error
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username

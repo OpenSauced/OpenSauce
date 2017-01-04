@@ -37,7 +37,7 @@ xPorts.scrapeRecipe = function(url) {
 
         return xPorts.scrapeAllRecipes(url)
     } else {
-        return 'banana foot'
+        return 'getting current data?'
     }
 
 }
