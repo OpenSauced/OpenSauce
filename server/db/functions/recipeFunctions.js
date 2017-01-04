@@ -104,7 +104,7 @@ xPorts.checkRecipeTitleRepeats = function(user, recipeTitle) {
     console.log("checkRecipeTitleRepeats", recipeTitle)
     for (var i = 0; i < user.my_recipes.length; i++) {
         if (user.my_recipes[i].title === recipeTitle) {
-            throw new Error()
+            throw new Error("Sorry! You've already created a recipe for " + recipeTitle + " . Add a new recipe instead!")
         } 
     }
     return user

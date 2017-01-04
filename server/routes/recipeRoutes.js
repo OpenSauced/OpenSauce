@@ -32,7 +32,7 @@ router.post('/:username/addrecipe', function(req, res) {
 
   db.recipeFunctions.addNewRecipe(username, req.body)
   .catch((err) => {
-    console.log('in the catch!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log("THE ERROR. DUN DUN DUUUUUN ", err)
     res.send(500, err);
   })
   .then((recipe) => {
@@ -76,7 +76,7 @@ router.post('/scraperecipe', function(req, res){
   .then((recipe) => {
     if (recipe === null){
       if(db.scraperFunctions.scrapeRecipe(url) === 'getting current data?') {
-          res.send(500)
+          res.sendStatus(500)
         }
       return db.scraperFunctions.scrapeRecipe(url)
       .then((recipe) => {

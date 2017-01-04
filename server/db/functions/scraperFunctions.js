@@ -28,14 +28,23 @@ xPorts.scrapeRecipe = function(url) {
     if (url.indexOf('epicurious') !== -1) {
         console.log("in epicurious")
         return xPorts.scrapeEpicurious(url)
+        .catch((err) => {
+    console.log("scrape recipe error ", err)
+  })
     } else if (url.indexOf('foodnetwork') !== -1) {
                 console.log("food network")
 
         return xPorts.scrapeFoodNetwork(url)
+        .catch((err) => {
+    console.log("scrape recipe error ", err)
+  })
     } else if (url.indexOf('allrecipes') !== -1) {
                 console.log("allrecipes")
 
         return xPorts.scrapeAllRecipes(url)
+        .catch((err) => {
+    console.log("scrape recipe error ", err)
+  })
     } else {
         return 'getting current data?'
     }
