@@ -11,9 +11,10 @@ var RecipeSchema = new Schema({
 	ingredients: {type: [String], required: true},
 	directions: {type: String, required: true},
 	recipe_images: [{
-		image_data: {type: Buffer, default: null},
-		image_name: {type: String, default: null},
-		mimetype: {type: String, default: null},
+		public_url: String,
+		secure_url: String,
+		public_id: String,
+		signature: String,
 		placeholder: {type: String, default: 'https://placehold.it/900x600'}
 	}],
 	forked_parent:{

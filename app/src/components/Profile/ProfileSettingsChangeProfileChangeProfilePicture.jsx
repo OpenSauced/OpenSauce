@@ -11,39 +11,20 @@ class ChangeProfilePicture extends Component {
         };
 
         this.onDrop = this.onDrop.bind(this);
-        this.onOpenClick = this.onOpenClick.bind(this);
     }
 
     onDrop(files) {
         this.setState( { files: files } );
     }
 
-    onOpenClick() {
-        this.handleImageUpload();
-    }
-
-    handleImageUpload() {
-        axios({
-            method: 'POST',
-            url: '/api/users/updateInfo/profilePicture',
-            data: {
-                file: this.state.files[0].preview
-            },
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then((res) => {
-            console.log(res);
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
-
     render() {
         return (
-            <form action="/api/users/updateInfo/profilePicture" method="post" enctype="multipart/form-data" target="_top">
-                <label className="col-xs-2 col-form-label" for="ProfilePicture">Profile Picture:</label>
-                <input className="form-control" type="file" name="ProfilePicture" accept="image/*"/>
+            <form action="/api/users/updateInfo/profilePicture" method="post" encType="multipart/form-data" target="_top">
+                <label className="col-xs-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
+                {/*<input className="form-control" type="file" name="ProfilePicture" accept="image/*"/>*/}
+                <Dropzone className="form-control" name="ProfilePicture" ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop}>
+                    <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
                 <div>
                     <input type="submit" value="save"/>
                 </div>
