@@ -52,6 +52,12 @@ export const routeDispatcher = (store, location) =>  {
     case '/myrecipes':
     store.dispatch(getUserData())
     break
+
+    case '/profile':
+    console.log(location)
+    break
+
+
   }
 
 }
