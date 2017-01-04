@@ -99,7 +99,8 @@ class AddRecipeManual extends Component {
       browserHistory.push(path);
     })
     .catch((err) => {
-      console.error('Getting current error? ', err);
+      console.error('Recipe did not post. Please enter all required information', err);
+      alert('Recipe did not post. Please enter all required information')
     })
   }
 

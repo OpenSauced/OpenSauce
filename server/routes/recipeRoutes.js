@@ -62,7 +62,7 @@ var username = req.params.username
   })
 })
 
-//go grab a recipe from a url (only works for epicurious currently) 
+//go grab a recipe from a url 
 //save it to the DB
 //send recipe object back to client
 router.post('/scraperecipe', function(req, res){
@@ -71,17 +71,24 @@ router.post('/scraperecipe', function(req, res){
   return db.scraperFunctions.lookUpRecipeByUrl(url)
   .then((recipe) => {
     if (recipe === null){
+      if(db.scraperFunctions.scrapeRecipe(url) === 'getting current data?') {
+          res.send(500)
+        }
       return db.scraperFunctions.scrapeRecipe(url)
       .then((recipe) => {
         recipe.url = url
         return db.recipeFunctions.addNewRecipe(username, recipe)
       })
       .catch((err) => {
-        res.send(err);
+        res.send(500, err);
       })
       .then((recipe) => {
+        if(recipe.message === 'recipes validation failed'){
+          res.send(500)
+        } else {
         recipe.alreadyExists = false
         res.send(recipe)
+      }
       })
       .catch((err) => {
         res.send(err);
@@ -94,6 +101,7 @@ router.post('/scraperecipe', function(req, res){
   .catch((err) => {
     res.send(err);
   })
+  res.send(500);
 })
    
 

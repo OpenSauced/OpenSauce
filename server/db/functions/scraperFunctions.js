@@ -24,13 +24,22 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
+    console.log("in scrape recipe")
     if (url.indexOf('epicurious') !== -1) {
+        console.log("in epicurious")
         return xPorts.scrapeEpicurious(url)
     } else if (url.indexOf('foodnetwork') !== -1) {
+                console.log("food network")
+
         return xPorts.scrapeFoodNetwork(url)
     } else if (url.indexOf('allrecipes') !== -1) {
+                console.log("allrecipes")
+
         return xPorts.scrapeAllRecipes(url)
+    } else {
+        return 'banana foot'
     }
+
 }
 
 
@@ -39,6 +48,8 @@ xPorts.scrapeRecipe = function(url) {
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
 
 xPorts.scrapeEpicurious = function(url) {
+        console.log("in epicurious")
+
     return scrapeIt(url, {
             title: 'div.title-source h1',
             ingredients: {
@@ -63,6 +74,8 @@ xPorts.scrapeEpicurious = function(url) {
 
 // receives FULL url to do parsing
 xPorts.scrapeFoodNetwork = function(url) {
+                    console.log("food network")
+
     return scrapeIt(url, {
             title: "head title",
             ingredients: {
@@ -85,6 +98,8 @@ xPorts.scrapeFoodNetwork = function(url) {
 };
 
 xPorts.scrapeAllRecipes = function(url) {
+                    console.log("allrecipes")
+
     return scrapeIt(url, {
             title: 'h1.recipe-summary__h1',
             ingredients: {
