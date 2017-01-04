@@ -7,13 +7,21 @@ import { connect } from 'react-redux'
 class ProfileSettings extends Component {
   constructor() {
     super();  
+
+    this.data = "";
   }
+
+  // Attempting to put image into image component below
+  // componentDidMount () {
+  //   this.data = this.props.data;
+  //   console.log('component did mount', this.data) // this shows up as undefined
+ //}
 
   render() {
     // This component will show up as a sidebar on the 'Change Profile' page
     return (
       <div className="col-xs-3">
-        <ProfileSettingsUserImage image={this.props.userData.user_image}/>
+        <ProfileSettingsUserImage data={'image goes here'}/>
         {/* Each of the buttons below corresponds to a case in RouteProfile
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
@@ -24,7 +32,6 @@ class ProfileSettings extends Component {
         <button name="email"          onClick={ this.props.renderClick }> Change your email </button>
         <button name="password"       onClick={ this.props.renderClick }> Change your password </button>
         <button name="profilePicture" onClick={ this.props.renderClick }> Change your profile picture </button>
-      
       </div>
     );
   }

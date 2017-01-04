@@ -7,20 +7,17 @@ class ChangeName extends Component {
 
     render() {
         return (
-            <div>
-                <h1> Current name: {this.props.data.first_name + ' ' + this.props.data.last_name} </h1>
-                <form action="/api/users/updateInfo/name" method="post" enctype="multipart/form-data" target="_top">
-                    <label className="col-xs-2 col-form-label" forHtml="firstName">First Name:</label>
-                    <input className="form-control" type="text" name="firstName" required/>
-                    <label className="col-xs-2 col-form-label" forHtml="lastName">Last Name:</label>
-                    <input className="form-control" type="text" name="lastName" required/>
-                    <label className="col-xs-2 col-form-label" forHtml="password">Password:</label>
-                    <input className="form-control" type="text" name="password"/>
-                    <div>
-                        <input type="submit" value="Save"/>
-                    </div>
-                </form>
-            </div>
+            <form action="/api/users/updateInfo/name" method="post" enctype="multipart/form-data" target="_top">
+                <label className="col-xs-2 col-form-label" forHtml="firstName">First Name:</label>
+                <input className="form-control" type="text" name="firstName" required/>
+                <label className="col-xs-2 col-form-label" forHtml="lastName">Last Name:</label>
+                <input className="form-control" type="text" name="lastName" required/>
+                <label className="col-xs-2 col-form-label" forHtml="password">Password:</label>
+                <input className="form-control" type="text" name="password"/>
+                <div>
+                    <input type="submit" value="Save"/>
+                </div>
+            </form>
         );
     }
 }
