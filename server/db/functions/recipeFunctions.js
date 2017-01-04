@@ -16,9 +16,6 @@ xPorts.findRecentRecipes = function() {
         ])
 }
 
-/*
- return recipeModel.find().sort( [ [ '_id', -1 ]])
-*/
 
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document

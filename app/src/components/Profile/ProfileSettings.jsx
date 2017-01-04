@@ -7,15 +7,7 @@ import { connect } from 'react-redux'
 class ProfileSettings extends Component {
   constructor() {
     super();  
-
-    this.data = "";
   }
-
-  // Attempting to put image into image component below
-  // componentDidMount () {
-  //   this.data = this.props.data;
-  //   console.log('component did mount', this.data) // this shows up as undefined
- //}
 
   render() {
     // This component will show up as a sidebar on the 'Change Profile' page

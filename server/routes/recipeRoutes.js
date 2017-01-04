@@ -1,7 +1,5 @@
 var express = require('express')
 var router = express.Router()
-
-// var dummyDB = require('../db/dummydata.js')
 var db = require('../db/db.js')
 
 //route for homepage which returns recent recipes

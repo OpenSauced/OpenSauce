@@ -44,7 +44,6 @@ export const clearRecipes = (recipes) => {
 
 //get userdata via axios request (jump to /server/routes/userRoutes)
 export const getUserData = ( username ) => {
-// console.log('FETCHING USER DATA' )
 // Added the 'get cookie for username here' route - must send a get request to find the username
  const request = axios.get('/auth/getUserCookie')
    .then((cookie) => {
@@ -71,21 +70,18 @@ export const routeDispatcher = (location) =>  {
 
   switch (location.pathname) {
     case '/':
-    getStore().dispatch(clearRecipes())
-    getStore().dispatch(fetchRecipes(location.search))
-    break
+      getStore().dispatch(clearRecipes())
+      getStore().dispatch(fetchRecipes(location.search))
+      break
 
     case '/myrecipes':
-    getStore().dispatch(clearRecipes())
-    getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
-    
-    break
+      getStore().dispatch(clearRecipes())
+      getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
+      break
 
     case '/profile':
-    console.log(location)
-    break
-
-
+      console.log(location)
+      break
   }
 
 }
