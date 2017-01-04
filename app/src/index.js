@@ -11,7 +11,6 @@ import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import MyRecipes from './RouteMyRecipes'
-import SearchBar from './containers/Homepage/SearchBar';
 import RouteViewRecipe from './RouteViewRecipe'
 
 //Redux Stuff
@@ -33,19 +32,19 @@ function renderApplication () {
   ReactDOM.render((
     <Provider store={store}>
       <Router history={browserHistory}>
-        
+
         <Route path="/" component={App}>
           {/* Homepage route */}
           <IndexRoute component={RouteHomepage}/>
           {/* Current User Profile Settings route */}
           <Route path="/profile" component={RouteProfile}/>
-                  
+
           {/* Signup route */}
           <Route path="/signup" component={RouteSignUp}/>
-        
+
           {/* Login route */ }
           <Route path="/login" component={RouteLogin}/>
-     
+
           {/* Recipe Routes */}
           <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
           <Route path="/viewrecipe/:recipe" component={RouteViewRecipe}/>
@@ -58,9 +57,8 @@ function renderApplication () {
           <Route path="/**/*" component={Route404}/>
 
         </Route>
-        
+
       </Router>
     </Provider>
   ), document.getElementById('root'));
 }
-

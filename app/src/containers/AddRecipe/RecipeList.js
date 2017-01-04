@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 //Components
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
-import SearchBar from '../HomePage/SearchBar'
 
 class RecipeList extends Component {
   componentWillMount() {
@@ -11,10 +10,10 @@ class RecipeList extends Component {
       case '/myrecipes':
       //console.log('GETTING USER DATA: ', this.props.route)
       this.props.getUserData()
-      break;      
+      break;
       default:
       //console.log('GETTING ALL RECIPIES DATA: ', this.props.route)
-      this.props.fetchRecipes() 
+      this.props.fetchRecipes()
     }
   }
 
@@ -26,12 +25,9 @@ class RecipeList extends Component {
 
   render() {
     return (
-      <div>
-        <SearchBar />
         <ul className="row recipe_card">
           {this.props.recipes.map(this.renderRecipes)}
         </ul>
-      </div>
     )
   }
 }
@@ -46,7 +42,7 @@ const  mapStateToProps = (state) => {
     userData: state.userData
   }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({ fetchRecipes, getUserData }, dispatch)
 }

@@ -6,7 +6,7 @@ const HPFeedRecipe = ({recipe}) => {
     <li className="card recipe">
       <img className="card-img-top" src="/assets/tempRecipe.svg" alt="Card image cap"/>
       <div className="card-block">
-        <div className="row flex-items-xs-center recipe_card-fork_like-cont" style={{'margin-bottom':'1.25rem'}}>
+        <div className="row flex-items-xs-center recipe_card-fork_like-cont" style={{'marginBottom':'1.25rem'}}>
           <a href={`/addrecipe?recipe=${recipe._id}`} className="btn btn-primary recipeCardBtn">Fork Recipe</a>
           <a className="btn btn-secondary recipe_card-like_button recipeCardBtn">Like Recipe</a>
         </div>
