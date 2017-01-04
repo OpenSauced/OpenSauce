@@ -1,31 +1,35 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
+import _ from 'lodash'
 
 class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = { term: '' }
+    this.search = _.debounce((isSubmit) => {this.sendSearch(isSubmit)}, 500)
   }
 
   onInputChange(event) {
-    //create a case and match it to the element id, update state accordingly
-    //you may remove the switch if if only one search field is needed.
-    switch(event.target.id) {
-    case 'searchfield':
-      this.setState({term: event.target.value})
-      break;
-    }
+    this.setState({term: event.target.value})
+    this.search(false)
     return null
+  }
+
+  sendSearch(isSubmit) {
+
+    if (isSubmit) {
+      var url = browserHistory.getCurrentLocation().pathname + '?term=' + this.state.term
+      browserHistory.push(url)
+      this.setState({term: ''})
+    } else {
+      var searchstring = '?term=' + this.state.term
+      this.props.fetchRecipes(searchstring)
+    }
   }
 
   onFormSubmit(event) {
     event.preventDefault()
-    var url = browserHistory.getCurrentLocation().pathname + '?term=' + this.state.term
-    browserHistory.push(url)
-    //this.props.searchRecipes(this.state.term)
-    //console.log('Submitting Search Term: ', this.state.term)
-    this.setState({term: ''})
-
+    this.search(true)
   }
  
   render() {
@@ -56,7 +60,7 @@ class SearchBar extends Component {
 //REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { searchRecipes } from '../../actions/index'
+import { fetchRecipes } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
@@ -65,7 +69,7 @@ const  mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ searchRecipes }, dispatch)
+  return bindActionCreators ({ fetchRecipes }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
