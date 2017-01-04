@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -19,8 +20,10 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault()
-    this.props.searchRecipes(this.state.term)
-    console.log('Submitting Search Term: ', this.state.term)
+    var url = browserHistory.getCurrentLocation().pathname + '?term=' + this.state.term
+    browserHistory.push(url)
+    //this.props.searchRecipes(this.state.term)
+    //console.log('Submitting Search Term: ', this.state.term)
     this.setState({term: ''})
 
   }
