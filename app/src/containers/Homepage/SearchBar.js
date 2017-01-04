@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 
+//REDUX STUFF
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { searchRecipes } from '../../actions/index'
+
 class SearchBar extends Component {
   constructor(props) {
     super(props)
@@ -50,10 +55,6 @@ class SearchBar extends Component {
   }
 }
 
-//REDUX STUFF
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { searchRecipes } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
