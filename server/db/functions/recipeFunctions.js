@@ -6,13 +6,19 @@ const axios = require('axios')
 const scrapeIt = require('scrape-it')
 const xPorts = {}
 
+
 //returns the most recent 10 recipes
 xPorts.findRecentRecipes = function() {
+    //find the last id of the most recent recipe and 
     return recipeModel.find()
         .sort([
             ['_id', -1]
         ])
 }
+
+/*
+ return recipeModel.find().sort( [ [ '_id', -1 ]])
+*/
 
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
