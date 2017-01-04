@@ -11,7 +11,7 @@ export default (state = [], action) => {
 
     case SEARCH_RECIPES:
       console.log('FETCH_RECIPES PAYLOAD: ', action.payload.data)
-      return state
+      return action.payload.data
   }
   return state;
 }

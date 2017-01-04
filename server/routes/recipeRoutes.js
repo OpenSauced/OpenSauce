@@ -6,18 +6,24 @@ var db = require('../db/db.js')
 
 //route for homepage which returns recent recipes
 router.get('/', function(req,res) {
-  db.recipeFunctions.findRecentRecipes()
-  .then((recipes) => {
-    res.send(recipes)
-  })
-  .catch((err) => {
-    res.send(err)
-  })
-})
-
-router.get('/search', function(req, res){
   var term = req.query.term
-  res.send(term)
+  if (req.query.term) {
+    db.recipeFunctions.searchRecipes(term)
+    .then((recipes) => {
+      res.send(recipes)
+    })
+    .catch((err) => {
+      res.send(err)
+    })
+  } else {
+    db.recipeFunctions.findRecentRecipes()
+    .then((recipes) => {
+      res.send(recipes)
+    })
+    .catch((err) => {
+      res.send(err)
+    })
+  }
 })
 
 //saves a recipe to the DB

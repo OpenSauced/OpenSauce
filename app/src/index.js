@@ -11,7 +11,6 @@ import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import MyRecipes from './RouteMyRecipes'
-import SearchBar from './containers/Homepage/SearchBar';
 import RouteViewRecipe from './RouteViewRecipe'
 
 //Redux Stuff
@@ -22,7 +21,7 @@ import ReduxPromise from 'redux-promise';
 //Redux reducers and actions
 import axios from 'axios'
 import reducers from './reducers';
-import { getUserData } from './actions/index';
+import { getUserData, routeDispatcher } from './actions/index';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -30,6 +29,12 @@ const store = createStoreWithMiddleware(reducers);
 store.dispatch( getUserData() ).then( (data) => renderApplication () )
 
 function renderApplication () {
+  
+  routeDispatcher(store, browserHistory.getCurrentLocation())
+  browserHistory.listen((location) => {
+    routeDispatcher(store, location)
+  })
+
   ReactDOM.render((
     <Provider store={store}>
       <Router history={browserHistory}>
