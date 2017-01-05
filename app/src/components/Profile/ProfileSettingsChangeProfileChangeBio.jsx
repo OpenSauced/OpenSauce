@@ -6,6 +6,7 @@ class ChangeBio extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <h1> Current bio: {this.props.data} </h1>
