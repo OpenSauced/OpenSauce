@@ -23,6 +23,7 @@ const HPFeedRecipe = ({recipe}) => {
             </div>
             <h2 className="card-title"><a href={`/viewrecipe/${recipe._id}`}>{recipe.title}</a></h2>
             <p className="card-text">{recipe.description}</p>
+            <p> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
           </div>
         </div>
     </LazyLoad>
