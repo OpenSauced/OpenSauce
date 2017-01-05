@@ -30,9 +30,9 @@ store.dispatch( getUserData() ).then( (data) => renderApplication () )
 
 function renderApplication () {
   
-  routeDispatcher(store, browserHistory.getCurrentLocation())
+  routeDispatcher(browserHistory.getCurrentLocation())
   browserHistory.listen((location) => {
-    routeDispatcher(store, location)
+    routeDispatcher(location)
   })
 
   ReactDOM.render((
@@ -69,3 +69,6 @@ function renderApplication () {
   ), document.getElementById('root'));
 }
 
+export function getStore() {
+    return store;
+}

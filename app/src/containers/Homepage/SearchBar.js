@@ -16,15 +16,15 @@ class SearchBar extends Component {
   }
 
   sendSearch(isSubmit) {
+    
     var location = browserHistory.getCurrentLocation()
     if (isSubmit) {
       var url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
       browserHistory.push(url)
 
-      //this.setState({term: ''})
     } else {
+      this.props.clearRecipes()
       var searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search
-      console.log(searchstring, location.query)
       this.props.fetchRecipes(searchstring)
     }
   }
@@ -63,7 +63,7 @@ class SearchBar extends Component {
 //REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchRecipes, updateSearchTerm } from '../../actions/index'
+import { fetchRecipes, updateSearchTerm, clearRecipes } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
@@ -73,7 +73,7 @@ const  mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes, updateSearchTerm }, dispatch)
+  return bindActionCreators ({ fetchRecipes, updateSearchTerm, clearRecipes }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
