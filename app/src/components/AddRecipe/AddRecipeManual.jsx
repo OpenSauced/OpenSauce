@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
+import Dropzone from 'react-dropzone';
+
 //Redux and async functions
 import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
@@ -85,6 +87,7 @@ class AddRecipeManual extends Component {
       description: this.state.description,
       ingredients: ingredients,
       directions: this.state.directions,
+      files: this.state.images
     }
 
     $.ajax({
@@ -125,11 +128,23 @@ class AddRecipeManual extends Component {
     this.setState({ingredients: newIngredients})
   }
 
+  onDrop(acceptedFiles) {
+    this.setState({
+      files: acceptedFiles
+    });
+    console.log(this.state.files);
+  }
+
   render() {
     return (
       <div className="row">
         <div className="container">
-          <form onSubmit={this.onFormSubmit.bind(this)}>
+          <form onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
+            <div className="row">
+              <Dropzone ref={(node) => { this.dropzone = node; }} multiple={false} accept="image/*" onDrop={this.onDrop}>
+                <div>Try dropping some files here, or click to select files to upload.</div>
+              </Dropzone>
+            </div>
             <div className="row">
               <label htmlFor="">
                 <span>Recipe Title:</span>
