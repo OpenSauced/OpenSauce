@@ -36,7 +36,7 @@ router.post('/:username/addrecipe', function(req, res) {
     res.send(500, err);
   })
   .then((recipe) => {
-  	res.send(recipe);
+    res.send(recipe);
   })
 })
 
@@ -72,56 +72,33 @@ var username = req.params.username
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
-  return db.scraperFunctions.lookUpRecipeByUrl(url)
+  db.scraperFunctions.lookUpRecipeByUrl(url)
   .then((recipe) => {
-    if (recipe === null){
-      if(db.scraperFunctions.scrapeRecipe(url) === 'getting current data?') {
-          res.sendStatus(500)
-        }
-      return db.scraperFunctions.scrapeRecipe(url)
-      .then((recipe) => {
-        recipe.url = url
-        return db.recipeFunctions.addNewRecipe(username, recipe)
+    if (recipe === null) {
+      db.scraperFunctions.scrapeRecipe(url)
+      .catch((err) => {
+        throw new Error(err)
+      })
+      .then((scrapedRecipe) => {
+        scrapedRecipe.url = url
+        return db.recipeFunctions.addNewRecipe(username, scrapedRecipe)
+        .catch((err) => {
+          res.send(500, 'something went very wrong in the save recipe route');
+        })
+        .then((recipeObj) => {
+          res.send(200, recipeObj._id)
+        })
       })
       .catch((err) => {
-        res.send(500, err);
-      })
-      .then((recipe) => {
-        if(recipe.message === 'recipes validation failed'){
-          res.send(500)
-        } else {
-        recipe.alreadyExists = false
-        res.send(recipe)
-      }
-      })
-      .catch((err) => {
-        res.send(err);
-      })
-    } else {
-      recipe.alreadyExists = true
-      res.send(recipe)
+    res.send(500, err)
+  })
+    } else if (recipe !== null) {
+      res.send(200, recipe._id)
     }
   })
   .catch((err) => {
-    res.send(err);
+    res.send(500, err)
   })
-  res.send(500);
 })
-   
-
-
-// for previous Epicrious fn
-  // return db.recipeFunctions.getRecipefromUrl(url)
-  // .then((recipe) => {
-  //   return db.recipeFunctions.addNewRecipe(username, recipe)
-  // })
-  // .then((recipe) => {
-  //   res.send(recipe)
-  // })
-  // .catch((err) => {
-  //   res.send(err);
-  // })
-
-// })
 
 module.exports = router

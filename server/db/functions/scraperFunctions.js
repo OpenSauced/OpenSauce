@@ -8,11 +8,8 @@ const xPorts = {};
 xPorts.lookUpRecipeByUrl = function(url) {
     return recipeModel.findOne({ url: url })
         .populate('creator')
-        .exec((err, recipe) => {
-            if (err) console.log("scraperFunctions 1: ", err);
-        })
-         .catch((err) => {
-            res.send(err);
+        .then((recipe) => {
+            return recipe
         })
 }
 
@@ -24,29 +21,15 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
-    console.log("in scrape recipe")
-    if (url.indexOf('epicurious') !== -1) {
-        console.log("in epicurious")
+    if (url.includes('epicurious') && url.includes('/recipes/')) {
         return xPorts.scrapeEpicurious(url)
-        .catch((err) => {
-    console.log("scrape recipe error ", err)
-  })
     } else if (url.indexOf('foodnetwork') !== -1) {
-                console.log("food network")
-
         return xPorts.scrapeFoodNetwork(url)
-        .catch((err) => {
-    console.log("scrape recipe error ", err)
-  })
-    } else if (url.indexOf('allrecipes') !== -1) {
-                console.log("allrecipes")
-
+    } else if (url.includes('allrecipes') && url.includes('/recipe/')) {
         return xPorts.scrapeAllRecipes(url)
-        .catch((err) => {
-    console.log("scrape recipe error ", err)
-  })
-    } else {
-        return 'getting current data?'
+    } 
+    else {
+        return Promise.reject('This site is not supported')
     }
 
 }
@@ -57,8 +40,6 @@ xPorts.scrapeRecipe = function(url) {
 ///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
 
 xPorts.scrapeEpicurious = function(url) {
-        console.log("in epicurious")
-
     return scrapeIt(url, {
             title: 'div.title-source h1',
             ingredients: {
@@ -69,22 +50,19 @@ xPorts.scrapeEpicurious = function(url) {
             },
             description: 'div.dek p'
         })
+        .catch((err) => {
+            throw new Error('Epicurious Scraping Error')
+        })
         .then(recipeObj => {
-
             var directions = recipeObj.directions.join(' ');
-
-            recipeObj.directions = directions
+            recipeObj.directions = directions;
             return recipeObj
         })
-        .catch((err) => {
-            res.send(err);
-        })
+        
 }
 
 // receives FULL url to do parsing
 xPorts.scrapeFoodNetwork = function(url) {
-                    console.log("food network")
-
     return scrapeIt(url, {
             title: "head title",
             ingredients: {
@@ -94,21 +72,22 @@ xPorts.scrapeFoodNetwork = function(url) {
                 listItem: 'ul.recipe-directions-list li'
             }
         })
+        .catch((err) => {
+            throw new Error('Food Network Scraping Error')
+        })
         .then(recipeObj => {
-
+            console.log("FOOOOOOOOD NETWORRRRRRRRK ", recipeObj)
+            if (recipeObj.ingredients.length < 1){
+                return Promise.reject('This page did not include a recipe')
+            } else {
             var directions = recipeObj.directions.join(' ');
-
             recipeObj.directions = directions
             return recipeObj
-        })
-        .catch((err) => {
-            res.send(err);
+        }
         })
 };
 
 xPorts.scrapeAllRecipes = function(url) {
-                    console.log("allrecipes")
-
     return scrapeIt(url, {
             title: 'h1.recipe-summary__h1',
             ingredients: {
@@ -118,6 +97,9 @@ xPorts.scrapeAllRecipes = function(url) {
                 listItem: 'span.recipe-directions__list--item'
             },
             description: 'div.submitter__description',
+        })
+        .catch((err) => {
+            throw new Error('All Recipes Scraping Error')
         })
         .then(recipeObj => {
             for (var i = 0; i < recipeObj.ingredients.length; i++) {
@@ -139,9 +121,6 @@ xPorts.scrapeAllRecipes = function(url) {
             }
             return recipeObj;
 
-        })
-        .catch((err) => {
-            res.send(err);
         })
 }
 
