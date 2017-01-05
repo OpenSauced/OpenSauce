@@ -3,6 +3,7 @@ var router = express.Router()
 var db = require('../db/db.js')
 
 //route for homepage which returns recent recipes
+
 router.get('/', function(req,res) {
   var term = req.query.term
   if (req.query.term) {
@@ -14,7 +15,10 @@ router.get('/', function(req,res) {
       res.send(err)
     })
   } else {
-    db.recipeFunctions.findRecentRecipes()
+    var skip = req.query.skip
+    var limit = req.query.limit
+    console.log('  query_skip:  ', skip, 'query_limit ', limit)
+    db.recipeFunctions.findRecentRecipes(limit)
     .then((recipes) => {
       res.send(recipes)
     })
