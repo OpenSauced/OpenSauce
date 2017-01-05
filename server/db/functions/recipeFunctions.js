@@ -105,11 +105,7 @@ xPorts.searchRecipes = function(term) {
 
 //GET RECIPES PER USER
 xPorts.findRecipesByUserName = function(username) {
-    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes').exec((err, user) => {
-        if (err)
-            console.log("error in userFunctions 1: ", err);
-        }
-    )
+    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes')
 }
 
 xPorts.checkRecipeTitleRepeats = function(user, recipeTitle) {

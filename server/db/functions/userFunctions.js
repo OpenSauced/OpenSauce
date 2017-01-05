@@ -158,20 +158,7 @@ xPorts.updateBio = function(user, bio) {
 
 //returns a user object based on a username
 xPorts.findByUserName = function(username) {
-    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes').exec((err, user) => {
-        if (err)
-            console.log("error in userFunctions 1: ", err);
-        }
-    )
-}
-
-//returns a user object based on a username
-xPorts.findByUserNamePopulated = function(username) {
-    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes').exec((err, user) => {
-        if (err)
-            console.log("error in userFunctions 1: ", err);
-        }
-    )
+    return userModel.findOne({username: username})
 }
 
 //returns the recipes created by specific user
