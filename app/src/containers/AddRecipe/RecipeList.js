@@ -17,7 +17,7 @@ class RecipeList extends Component {
       <div>
         <SearchBar />
         <ul className="row recipe_card">
-          {this.props.recipes ? this.props.recipes.map(this.renderRecipes) : "LOADING"}
+          {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes) : "NO RESULTS FOUND"  )  : "LOADING"}
         </ul>
       </div>
     )

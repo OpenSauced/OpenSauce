@@ -26,16 +26,16 @@ export const fetchRecipes = (search) => {
 }
 
 export const getUserRecipes = (recipes) => {
-  console.log('DOES THIS WORK: ', getStore())
+  //console.log('DOES THIS WORK: ', getStore())
   return {
-    type: 'GET_USER_RECIPES',
+    type: GET_USER_RECIPES,
     payload: recipes
   }
 }
 
 export const clearRecipes = (recipes) => {
   return {
-    type: 'CLEAR_RECIPES',
+    type: CLEAR_RECIPES,
     payload: null
   }
 }
