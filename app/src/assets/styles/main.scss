@@ -1,15 +1,14 @@
-// NAV : #fff39d
-
 body {
     background-color: #fff;
+    font-size: 16px; //most other sizes are EM so this should scale.
 }
 
 #navButtonContainer {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .recipe img {
-  width: 100%;
+    width: 100%;
 }
 
 .recipeCardBtn {
@@ -17,21 +16,23 @@ body {
 }
 
 .searchBarButtonCombo {
-  width: 100%;
+    width: 100%;
 }
 
 #searchfield {
-  width: 99%;
-  height: 100%;
-  margin-right: 1%;
-}
-
-.searchBarButtonCombo .submitButton {
-  // width: 15%;
+    margin-top: 20px;
+    height: 100%;
 }
 
 .searchHomePageContainer {
-  margin-bottom: 20px
+    padding-bottom: 55px;
+    padding-top: 55px;
+    text-align: center;
+    background-color: lightsteelblue;
+}
+
+.mainTitle, .subTitle {
+  // margin-top: 10px;
 }
 
 .navProfPic {
@@ -50,9 +51,17 @@ body {
 
 //image and seperator have no padding
 .dropdown-menu .divider {
-  padding: 2px !important;
-  background-color: grey;
-  margin-top: 10px;
+    padding: 2px !important;
+    background-color: grey;
+    margin-top: 10px;
+}
+
+.nav-item a {
+  color: white;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+  background-color: black;
 }
 
 .dropdown-menu {
@@ -62,12 +71,12 @@ body {
 }
 
 .dropdown-menu > li {
-  padding: 5px !important;
-  text-align: center;
+    padding: 5px !important;
+    text-align: center;
 }
 
 .dropdown-menu > li > a {
-  color: #0275d8;
+    color: #0275d8;
 }
 
 .navbar-brand {
@@ -81,7 +90,8 @@ body {
 }
 
 .navbar {
-  padding: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .navbar-toggle {

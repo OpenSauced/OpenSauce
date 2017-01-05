@@ -16,9 +16,12 @@ class HeaderNavProfile extends Component {
   }
 
   render() {
+    if (this.props.userData.user_image.public_url === undefined) {
+      this.props.userData.user_image.public_url = './assets/profileTemp.jpg';
+    }
 
     return (
-      <li className="dropdown">
+      <li className="nav-item dropdown">
         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile <span className="caret"></span></a>
         <ul className="dropdown-menu" >
             <li className="navProfPic" style={{'backgroundImage':"url('" + this.props.userData.user_image.public_url + "')"}} />

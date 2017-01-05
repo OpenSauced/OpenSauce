@@ -11,13 +11,12 @@ import HPFeed from './components/Homepage/HPFeed';
 
 const RouteHomepage = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-flex">
       <HeaderNav/>
-      <AppHeader title={'Welcome to OpenSauce'}>
-      </AppHeader>
+      <AppHeader title={'Welcome to OpenSauce'} />
       <HPFeed/>
       <Footer/>
-    </div>
+  </div>
   );
 }
 

@@ -19,11 +19,11 @@ const SignUp = () => {
           </div>
           <div className="row">
             <label htmlFor="username">Username:</label>
-            <input id="username" type="text" name="username"/>
+            <input autoComplete="off" id="username" type="text" name="username"/>
           </div>
           <div className="row">
             <label htmlFor="password">Password:</label>
-            <input id="password" type="password" name="password"/>
+            <input autoComplete="off" id="password" type="password" name="password"/>
           </div>
           <div className="row">
               <input type="submit" value="Sign up"/>

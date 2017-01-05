@@ -30,10 +30,14 @@ class SearchBar extends Component {
     render() {
         //console.log('RECIPES: ', this.props.recipes)
         return (
-            <form className="form-inline" onSubmit={this.onFormSubmit.bind(this)}>
+            <form className="form" onSubmit={this.onFormSubmit.bind(this)}>
                 <div className="form-group searchBarButtonCombo">
-                    <input type="text" placeholder="Search for recipes..." className="col-xs-5 col-sm-10 form-control" id="searchfield" value={this.state.term} onChange={this.onInputChange.bind(this)}/>
-                    <button type="submit" className="submitButton col-xs-2 col-sm-2 btn btn-primary">Submit</button>
+                  <div className="flex-items-xs-center">
+                    <input type="text" autoComplete="off" placeholder="Search for recipes..." className="form-control" id="searchfield" value={this.state.term} onChange={this.onInputChange.bind(this)}/>
+                  </div>
+                  {/* <div className="col-xs-4 col-sm-2">
+                    <button type="submit" className="submitButton btn btn-primary">Submit</button>
+                  </div> */}
                 </div>
             </form>
         )
