@@ -1,5 +1,6 @@
 //see user functions for example
 const recipeModel = require('../models/recipe.js')
+const userModel = require('../models/user.js')
 const userFunctions = require('./userFunctions.js')
 const scraperFunctions = require('./scraperFunctions.js')
 const axios = require('axios')
@@ -90,7 +91,7 @@ xPorts.addChildRecipe = function(parentId, childId) {
 
 }
 
-//SEARCH RECIPES STUFF!!
+//SEARCH RECIPES
 xPorts.searchRecipes = function(term) {
   return recipeModel
     .find(
@@ -99,6 +100,15 @@ xPorts.searchRecipes = function(term) {
     )
     .sort( 
       { score: { $meta: "textScore"} }
+    )
+}
+
+//GET RECIPES PER USER
+xPorts.findRecipesByUserName = function(username) {
+    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes').exec((err, user) => {
+        if (err)
+            console.log("error in userFunctions 1: ", err);
+        }
     )
 }
 

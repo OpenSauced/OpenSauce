@@ -165,6 +165,15 @@ xPorts.findByUserName = function(username) {
     )
 }
 
+//returns a user object based on a username
+xPorts.findByUserNamePopulated = function(username) {
+    return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes').exec((err, user) => {
+        if (err)
+            console.log("error in userFunctions 1: ", err);
+        }
+    )
+}
+
 //returns the recipes created by specific user
 xPorts.findUserRecipes = function(username) {
     xPorts.findByUserName(username).then((user) => {
