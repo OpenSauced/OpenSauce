@@ -44,7 +44,7 @@ export const getUserData = ( username ) => {
 export const routeDispatcher = (store, location) =>  {
   //console.log("ROUTE DISPATCHER WAS CALLED!")
   //console.log(store.getState().userData)
-  console.log('term' in location.query)
+  //console.log('term' in location.query)
 
   store.dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
 
