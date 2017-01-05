@@ -29,12 +29,14 @@ router.get('/', function(req,res) {
 //saves a recipe to the DB
 router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username
+
   db.recipeFunctions.addNewRecipe(username, req.body)
-  .then((recipe) => {
-  	res.send(recipe);
-  })
   .catch((err) => {
-  	res.send(err);
+    console.log("THE ERROR. DUN DUN DUUUUUN ", err)
+    res.send(500, err);
+  })
+  .then((recipe) => {
+    res.send(recipe);
   })
 })
 
@@ -42,11 +44,11 @@ router.post('/:username/addrecipe', function(req, res) {
 router.get('/:recipeId', function(req, res){
   var recipeId = req.params.recipeId
  db.recipeFunctions.findRecipeById(recipeId)
+   .catch((err) => {
+    res.send(err);
+  })
  .then((recipe) => {
     res.send(recipe);
-  })
-  .catch((err) => {
-    res.send(err);
   })
 })
 
@@ -58,58 +60,45 @@ var username = req.params.username
     res.send(recipe);
   })
   .catch((err) => {
-    res.send(err);
+    res.send(500, err);
   })
 })
 
-//go grab a recipe from a url (only works for epicurious currently) 
-//save it to the DB
-//send recipe object back to client
+//go grab a recipe from a url 
+  //save it to the DB
+  //send recipe object back to client
+//if invalid website or no recipe is scraped
+  //it sends back and error
 router.post('/scraperecipe', function(req, res){
   var url = req.body.url
   var username = req.body.username
-  return db.scraperFunctions.lookUpRecipeByUrl(url)
+  db.scraperFunctions.lookUpRecipeByUrl(url)
   .then((recipe) => {
-    if (recipe === null){
-      return db.scraperFunctions.scrapeRecipe(url)
-      .then((recipe) => {
-        recipe.url = url
-        return db.recipeFunctions.addNewRecipe(username, recipe)
+    if (recipe === null) {
+      db.scraperFunctions.scrapeRecipe(url)
+      .catch((err) => {
+        throw new Error(err)
+      })
+      .then((scrapedRecipe) => {
+        scrapedRecipe.url = url
+        return db.recipeFunctions.addNewRecipe(username, scrapedRecipe)
+        .catch((err) => {
+          res.send(500, 'something went very wrong in the save recipe route');
+        })
+        .then((recipeObj) => {
+          res.send(200, recipeObj._id)
+        })
       })
       .catch((err) => {
-        res.send(err);
-      })
-      .then((recipe) => {
-        recipe.alreadyExists = false
-        res.send(recipe)
-      })
-      .catch((err) => {
-        res.send(err);
-      })
-    } else {
-      recipe.alreadyExists = true
-      res.send(recipe)
+    res.send(500, err)
+  })
+    } else if (recipe !== null) {
+      res.send(200, recipe._id)
     }
   })
   .catch((err) => {
-    res.send(err);
+    res.send(500, err)
   })
 })
-   
-
-
-// for previous Epicrious fn
-  // return db.recipeFunctions.getRecipefromUrl(url)
-  // .then((recipe) => {
-  //   return db.recipeFunctions.addNewRecipe(username, recipe)
-  // })
-  // .then((recipe) => {
-  //   res.send(recipe)
-  // })
-  // .catch((err) => {
-  //   res.send(err);
-  // })
-
-// })
 
 module.exports = router

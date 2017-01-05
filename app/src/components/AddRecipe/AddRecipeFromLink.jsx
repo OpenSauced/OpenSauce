@@ -16,12 +16,11 @@ const AddRecipeFromLink = (props) => {
       },
       success: function (recipe) {
       console.log("recipe was saved to the DB", recipe);
- 		  const path = `/viewrecipe/${recipe._id}`
- 		  console.log("getting current path?", path)
+ 		  const path = `/viewrecipe/${recipe}`
       browserHistory.push(path);
     },
       error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
+          console.error("did not post to DB from link ", status, err.toString());
       }
 
     })

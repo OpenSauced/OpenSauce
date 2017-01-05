@@ -9,21 +9,25 @@ const xPorts = {}
 //returns the most recent 10 recipes
 xPorts.findRecentRecipes = function() {
     return recipeModel.find()
-    .sort( [['_id', -1]] )
+        .sort([
+            ['_id', -1]
+        ])
 }
 
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
 xPorts.addNewRecipe = function(username, recipe) {
+    console.log("in add new recipe")
     return userFunctions.findByUserName(username)
         .then((userObj) => {
-            return userObj
+            return xPorts.checkRecipeTitleRepeats(userObj, recipe.title)
         })
         .catch((err) => {
             console.log("recipeFunctions 1 ", err)
-
+            throw err
         })
         .then((user) => {
+            console.log("int the ekjehgsdb;then")
             recipe.creator = user._id
             return new recipeModel(recipe)
                 .save()
@@ -33,11 +37,12 @@ xPorts.addNewRecipe = function(username, recipe) {
                 })
                 .catch((err) => {
                     console.log("recipeFunctions 1.1 ", err)
+                    return err
                 })
         })
         .catch((err) => {
             console.log("recipeFunctions 1.2 ", err)
-
+            throw err
         })
 
 }
@@ -95,39 +100,14 @@ xPorts.searchRecipes = function(term) {
     )
 }
 
+xPorts.checkRecipeTitleRepeats = function(user, recipeTitle) {
+    console.log("checkRecipeTitleRepeats", recipeTitle)
+    for (var i = 0; i < user.my_recipes.length; i++) {
+        if (user.my_recipes[i].title === recipeTitle) {
+            throw new Error("Sorry! You've already created a recipe for " + recipeTitle + " . Add a new recipe instead!")
+        } 
+    }
+    return user
+}
+
 module.exports = xPorts;
-
-
-// xPorts.forkRecipe = function(username, recipeId){
-//     return xPorts.findRecipeById(recipeId)
-//     .then((recipe)=>{
-//         console.log("ID___________", recipe._id)
-//         var forkedRecipe = {
-//             title: recipe.title,
-//             ingredients: recipe.ingredients,
-//             directions: recipe.directions,
-//             forked_parent: recipe._id
-//         }
-//         return xPorts.addNewRecipe(username, forkedRecipe)
-//     })
-//     .catch((err) => {
-//         console.log("recipeFunctions 3 ", err)
-//     })
-// }
-
-//return a recipe object from a url
-// xPorts.getRecipefromUrl = function(url) {
-//     // CAN delete once scraper fns are implemeneted
-//     return xPorts.fetchHtml(url)
-//         .then((html) => {
-//             if (url.indexOf('epicurious') !== -1) {
-//                 return xPorts.parseEpicurious(html)
-//             } else {
-//                 throw err;
-//             }
-//         })
-//         .catch((err) => {
-//             console.log("error in recipeFunctions 5", err)
-//         })
-// }
-// }

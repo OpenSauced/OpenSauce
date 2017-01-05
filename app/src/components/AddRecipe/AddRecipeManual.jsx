@@ -93,13 +93,14 @@ class AddRecipeManual extends Component {
       data: recipe,
       dataType: 'json'
     })
+    .catch((err) => {
+      console.error('Recipe did not post. Please enter all required information', err);
+      alert('Message: ', err)
+    })
     .then((recipe) => {
       console.log('Getting current data? ', recipe);
       const path = `/viewrecipe/${recipe._id}`
       browserHistory.push(path);
-    })
-    .catch((err) => {
-      console.error('Getting current error? ', err);
     })
   }
 

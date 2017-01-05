@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var RecipeSchema = new Schema({
-	title: String,
+	title: {type: String, required: true},
 	creator: {
 		type: Schema.Types.ObjectId,
 		ref: 'user'
 	},
 	description: String,
-	ingredients: [String],
-	directions: String,
+	ingredients: {type: [String], required: true},
+	directions: {type: String, required: true},
 	recipe_images: [{
 		image_data: {type: Buffer, default: null},
 		image_name: {type: String, default: null},

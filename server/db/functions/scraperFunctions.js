@@ -8,11 +8,8 @@ const xPorts = {};
 xPorts.lookUpRecipeByUrl = function(url) {
     return recipeModel.findOne({ url: url })
         .populate('creator')
-        .exec((err, recipe) => {
-            if (err) console.log("scraperFunctions 1: ", err);
-        })
-         .catch((err) => {
-            res.send(err);
+        .then((recipe) => {
+            return recipe
         })
 }
 
@@ -24,13 +21,17 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
-    if (url.indexOf('epicurious') !== -1) {
+    if (url.includes('epicurious') && url.includes('/recipes/')) {
         return xPorts.scrapeEpicurious(url)
     } else if (url.indexOf('foodnetwork') !== -1) {
         return xPorts.scrapeFoodNetwork(url)
-    } else if (url.indexOf('allrecipes') !== -1) {
+    } else if (url.includes('allrecipes') && url.includes('/recipe/')) {
         return xPorts.scrapeAllRecipes(url)
+    } 
+    else {
+        return Promise.reject('This site is not supported')
     }
+
 }
 
 
@@ -49,16 +50,15 @@ xPorts.scrapeEpicurious = function(url) {
             },
             description: 'div.dek p'
         })
+        .catch((err) => {
+            throw new Error('Epicurious Scraping Error')
+        })
         .then(recipeObj => {
-
             var directions = recipeObj.directions.join(' ');
-
-            recipeObj.directions = directions
+            recipeObj.directions = directions;
             return recipeObj
         })
-        .catch((err) => {
-            res.send(err);
-        })
+        
 }
 
 // receives FULL url to do parsing
@@ -72,15 +72,18 @@ xPorts.scrapeFoodNetwork = function(url) {
                 listItem: 'ul.recipe-directions-list li'
             }
         })
+        .catch((err) => {
+            throw new Error('Food Network Scraping Error')
+        })
         .then(recipeObj => {
-
+            console.log("FOOOOOOOOD NETWORRRRRRRRK ", recipeObj)
+            if (recipeObj.ingredients.length < 1){
+                return Promise.reject('This page did not include a recipe')
+            } else {
             var directions = recipeObj.directions.join(' ');
-
             recipeObj.directions = directions
             return recipeObj
-        })
-        .catch((err) => {
-            res.send(err);
+        }
         })
 };
 
@@ -94,6 +97,9 @@ xPorts.scrapeAllRecipes = function(url) {
                 listItem: 'span.recipe-directions__list--item'
             },
             description: 'div.submitter__description',
+        })
+        .catch((err) => {
+            throw new Error('All Recipes Scraping Error')
         })
         .then(recipeObj => {
             for (var i = 0; i < recipeObj.ingredients.length; i++) {
@@ -115,9 +121,6 @@ xPorts.scrapeAllRecipes = function(url) {
             }
             return recipeObj;
 
-        })
-        .catch((err) => {
-            res.send(err);
         })
 }
 
