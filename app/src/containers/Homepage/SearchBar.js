@@ -5,7 +5,6 @@ import _ from 'lodash'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    this.state = { term: '' }
     this.search = _.debounce((isSubmit) => {this.sendSearch(isSubmit)}, 500)
   }
 
@@ -17,13 +16,15 @@ class SearchBar extends Component {
   }
 
   sendSearch(isSubmit) {
-
+    var location = browserHistory.getCurrentLocation()
     if (isSubmit) {
-      var url = browserHistory.getCurrentLocation().pathname + '?term=' + this.props.searchTerm
+      var url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
       browserHistory.push(url)
+
       //this.setState({term: ''})
     } else {
-      var searchstring = '?term=' + this.props.searchTerm
+      var searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search
+      console.log(searchstring, location.query)
       this.props.fetchRecipes(searchstring)
     }
   }
