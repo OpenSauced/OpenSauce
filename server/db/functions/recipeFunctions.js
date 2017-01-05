@@ -6,8 +6,10 @@ const axios = require('axios')
 const scrapeIt = require('scrape-it')
 const xPorts = {}
 
+
 //returns the most recent 10 recipes
-xPorts.findRecentRecipes = function() {
+xPorts.findRecentRecipes = function(currentLimit) {
+    //find the last id of the most recent recipe and 
     return recipeModel.find()
         .sort([
             ['_id', -1]

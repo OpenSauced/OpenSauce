@@ -40,15 +40,11 @@ export const clearRecipes = (recipes) => {
   }
 }
 
-
-
 //get userdata via axios request (jump to /server/routes/userRoutes)
 export const getUserData = ( username ) => {
-// console.log('FETCHING USER DATA' )
 // Added the 'get cookie for username here' route - must send a get request to find the username
  const request = axios.get('/auth/getUserCookie')
    .then((cookie) => {
-    //console.log('cookie', cookie)
      return axios.get(`/api/users/${cookie.data}/profile`);
    })
    .catch((err) => {
@@ -63,29 +59,23 @@ export const getUserData = ( username ) => {
 }
 
 export const routeDispatcher = (location) =>  {
-  //console.log("ROUTE DISPATCHER WAS CALLED!")
-  //console.log(getStore().getState().userData)
-  //console.log('term' in location.query)
 
   getStore().dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
 
   switch (location.pathname) {
     case '/':
-    getStore().dispatch(clearRecipes())
-    getStore().dispatch(fetchRecipes(location.search))
-    break
+      getStore().dispatch(clearRecipes())
+      getStore().dispatch(fetchRecipes(location.search))
+      break
 
     case '/myrecipes':
-    getStore().dispatch(clearRecipes())
-    getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
-    
-    break
+      getStore().dispatch(clearRecipes())
+      getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
+      break
 
     case '/profile':
-    console.log(location)
-    break
-
-
+      console.log(location)
+      break
   }
 
 }
