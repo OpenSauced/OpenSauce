@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ChangePassword extends Component {
+class ChangeEmail extends Component {
     constructor() {
         super();
     }
@@ -8,12 +8,12 @@ class ChangePassword extends Component {
     render() {
         return (
             <div>
-                <h1> Current password: {this.props.data} </h1>
-                <form action="/api/users/updateInfo/password" method="post" enctype="multipart/form-data" target="_top">
-                    <label className="col-xs-2 col-form-label" forHtml="password">Old Password:</label>
+                <h1> Current email: {this.props.data} </h1>
+                <form action="/api/users/updateInfo/email" method="post" enctype="multipart/form-data" target="_top">
+                    <label className="col-xs-2 col-form-label" forHtml="newEmail">Email:</label>
+                    <input className="form-control" type="text" name="newEmail"/>
+                    <label className="col-xs-2 col-form-label" forHtml="password">Password:</label>
                     <input className="form-control" type="text" name="password"/>
-                    <label className="col-xs-2 col-form-label" forHtml="newPassword">New Password:</label>
-                    <input className="form-control" type="text" name="newPassword"/>
                     <div>
                         <input type="submit" value="Save"/>
                     </div>
@@ -23,4 +23,4 @@ class ChangePassword extends Component {
     }
 }
 
-export default ChangePassword;
+export default ChangeEmail;
