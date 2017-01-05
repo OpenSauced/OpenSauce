@@ -5,7 +5,8 @@ import LazyLoad from 'react-lazy-load';
 
 const HPFeedRecipe = ({recipe}) => {
   return (
-    <LazyLoad height={425} offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+
+    <LazyLoad offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}
         <div className="card recipe">
           <img 
@@ -30,5 +31,3 @@ const HPFeedRecipe = ({recipe}) => {
 }
 
 export default HPFeedRecipe;
-
-//       <LazyLoad height={425} offset={100} >      </LazyLoad>

@@ -35,6 +35,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "browser-sync": "^2.18.5",
+    "classnames": "^2.2.5",
     "cloudinary": "^1.4.6",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.26.1",

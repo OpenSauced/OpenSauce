@@ -2,18 +2,25 @@ import React, { Component } from 'react'
 import LazyLoad from 'react-lazy-load'
 import OnVisible, { setDefaultProps } from 'react-on-visible';
 
+import axios from 'axios'
+
+// REDUX STUFF
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchRecipes, getUserData } from '../../actions/index'
+
+//Components
+import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
+import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
+import HPLazyLoader from '../../components/Homepage/HPLazyLoader'
+import SearchBar from '../Homepage/SearchBar'
+
+///Setting Defaults for OnVisibility
 setDefaultProps({
     bounce: true,
     visibleClassName: 'appear',
     percent: 10
 });
-
-import axios from 'axios'
-
-//Components
-import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
-import HPLazyLoader from '../../components/Homepage/HPLazyLoader'
-import SearchBar from '../Homepage/SearchBar'
 
 class RecipeList extends Component {
   constructor () {
@@ -33,8 +40,6 @@ class RecipeList extends Component {
 
   showElem () {
     console.log(this)
-     // var r = this.getBoundingClientRect()
-     // alert("Top/Left: "+r.top+" / "+r.left)
   }
 
   renderRecipes(recipe) {
@@ -50,27 +55,15 @@ class RecipeList extends Component {
         <SearchBar />
         <ul className="row recipe_card">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes) : "NO RESULTS FOUND"  )  : "LOADING"}
-        </ul>
-        {/*<LazyLoad onContentVisible={this.loadMoreReduxRecipes.bind(this)}>
-             <LazyLoad onContentVisible={this.showElem()}>
-          <h1>Loding More Recipes </h1>
-        </LazyLoad>
-
-        <HPLazyLoader/>
-      */}
-        <OnVisible className="my-container">
-          <h1>I will be rendered inside a div that has class 'my-container' only until I become visible, at which point the container will have the classes 'my-container visible'</h1>
-        </OnVisible>
-        
+        </ul>   
       </div>
     )
   }
 }
 
-// REDUX STUFF
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { fetchRecipes, getUserData } from '../../actions/index'
+const getMoreRecipes = () =>{
+
+}
 
 const  mapStateToProps = (state) => {
   return {
@@ -83,3 +76,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
+

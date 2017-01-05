@@ -20,7 +20,6 @@ class HPLazyLoader extends Component {
   // }
 
   showElem () {
-    console.log(this)
      // var r = this.getBoundingClientRect()
      // alert("Top/Left: "+r.top+" / "+r.left)
   }
@@ -28,12 +27,14 @@ class HPLazyLoader extends Component {
   render() {
     return (
       <div>
-        <LazyLoad onContentVisible={this.showElem()}>
-          <h1>Loding More Recipes </h1>
-        </LazyLoad>
+       {()=>{console.log('in the house')}}
       </div>
     )
   }
 }
 
 export default HPLazyLoader
+
+ // <LazyLoad onContentVisible={console.log('visible')}>
+ //          {()=>{console.log('in the house')}}
+ //        </LazyLoad>
