@@ -31,16 +31,16 @@ class RecipeList extends Component {
     }
   }
 
-  loadMoreReduxRecipes () {
-    const newSkip = this.state.skip + this.state.limit;
-    console.log( 'new Skip: ', newSkip )
-    axios.get('/api/recipes/', { params: { skip: newSkip } } )
-    .then( (data) => { this.setState({ skip: newSkip }); })
-  }
+  // loadMoreReduxRecipes () {
+  //   const newSkip = this.state.skip + this.state.limit;
+  //   console.log( 'new Skip: ', newSkip )
+  //   axios.get('/api/recipes/', { params: { skip: newSkip } } )
+  //   .then( (data) => { this.setState({ skip: newSkip }); })
+  // }
 
-  showElem () {
-    console.log(this)
-  }
+  // showElem () {
+  //   console.log(this)
+  // }
 
   renderRecipes(recipe) {
     return(
@@ -59,10 +59,6 @@ class RecipeList extends Component {
       </div>
     )
   }
-}
-
-const getMoreRecipes = () =>{
-
 }
 
 const  mapStateToProps = (state) => {

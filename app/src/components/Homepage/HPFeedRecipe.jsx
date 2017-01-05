@@ -1,5 +1,4 @@
 import React from 'react';
-
 // LazyLoad allows the component to be loaded as  the user scrolls instead of all at once
 import LazyLoad from 'react-lazy-load';
 

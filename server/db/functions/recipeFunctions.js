@@ -16,7 +16,6 @@ xPorts.findRecentRecipes = function(currentLimit) {
         ])
 }
 
-
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
 xPorts.addNewRecipe = function(username, recipe) {

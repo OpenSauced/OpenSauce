@@ -40,14 +40,11 @@ export const clearRecipes = (recipes) => {
   }
 }
 
-
-
 //get userdata via axios request (jump to /server/routes/userRoutes)
 export const getUserData = ( username ) => {
 // Added the 'get cookie for username here' route - must send a get request to find the username
  const request = axios.get('/auth/getUserCookie')
    .then((cookie) => {
-    //console.log('cookie', cookie)
      return axios.get(`/api/users/${cookie.data}/profile`);
    })
    .catch((err) => {
@@ -62,9 +59,6 @@ export const getUserData = ( username ) => {
 }
 
 export const routeDispatcher = (location) =>  {
-  //console.log("ROUTE DISPATCHER WAS CALLED!")
-  //console.log(getStore().getState().userData)
-  //console.log('term' in location.query)
 
   getStore().dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
 
