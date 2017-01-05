@@ -3,12 +3,13 @@ import axios from 'axios'
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SEARCH_RECIPES = 'SEARCH_RECIPES'
 export const FETCH_RECIPES = 'FETCH_RECIPES';
+export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM';
 
-export const locationDidUpdate = (data) => {
-  console.log('locationDidUpdate: ', data)
+export const updateSearchTerm = (term) => {
+ 
   return {
-    type: 'DO_NOTHING',
-    payload: null
+    type: 'UPDATE_SEARCH_TERM',
+    payload: term
   }
 }
 
@@ -43,7 +44,10 @@ export const getUserData = ( username ) => {
 export const routeDispatcher = (store, location) =>  {
   //console.log("ROUTE DISPATCHER WAS CALLED!")
   //console.log(store.getState().userData)
-  //console.log(location)
+  //console.log('term' in location.query)
+
+  store.dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
+
   switch (location.pathname) {
     case '/':
     store.dispatch(fetchRecipes(location.search))
