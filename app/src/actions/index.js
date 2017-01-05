@@ -1,9 +1,13 @@
 import axios from 'axios'
+import { getStore } from '../index.js'
+export const GET_USER_DATA = 'GET_USER_DATA'
 
-export const GET_USER_DATA = 'GET_USER_DATA';
-export const SEARCH_RECIPES = 'SEARCH_RECIPES'
-export const FETCH_RECIPES = 'FETCH_RECIPES';
-export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM';
+//export const SEARCH_RECIPES = 'SEARCH_RECIPES'
+export const FETCH_RECIPES = 'FETCH_RECIPES'
+export const GET_USER_RECIPES = 'GET_USER_RECIPES'
+export const CLEAR_RECIPES = 'CLEAR_RECIPES'
+
+export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM'
 
 export const updateSearchTerm = (term) => {
  
@@ -20,6 +24,23 @@ export const fetchRecipes = (search) => {
    payload: request
   }
 }
+
+export const getUserRecipes = (recipes) => {
+  console.log('DOES THIS WORK: ', getStore())
+  return {
+    type: 'GET_USER_RECIPES',
+    payload: recipes
+  }
+}
+
+export const clearRecipes = (recipes) => {
+  return {
+    type: 'CLEAR_RECIPES',
+    payload: null
+  }
+}
+
+
 
 //get userdata via axios request (jump to /server/routes/userRoutes)
 export const getUserData = ( username ) => {
@@ -41,20 +62,23 @@ export const getUserData = ( username ) => {
  }
 }
 
-export const routeDispatcher = (store, location) =>  {
+export const routeDispatcher = (location) =>  {
   //console.log("ROUTE DISPATCHER WAS CALLED!")
-  //console.log(store.getState().userData)
+  //console.log(getStore().getState().userData)
   //console.log('term' in location.query)
 
-  store.dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
+  getStore().dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
 
   switch (location.pathname) {
     case '/':
-    store.dispatch(fetchRecipes(location.search))
+    getStore().dispatch(clearRecipes())
+    getStore().dispatch(fetchRecipes(location.search))
     break
 
     case '/myrecipes':
-    store.dispatch(getUserData())
+    getStore().dispatch(clearRecipes())
+    getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
+    
     break
 
     case '/profile':

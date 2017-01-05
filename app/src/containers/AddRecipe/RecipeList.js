@@ -12,11 +12,12 @@ class RecipeList extends Component {
   }
 
   render() {
+    
     return (
       <div>
         <SearchBar />
         <ul className="row recipe_card">
-          {this.props.recipes.map(this.renderRecipes)}
+          {this.props.recipes ? this.props.recipes.map(this.renderRecipes) : "LOADING"}
         </ul>
       </div>
     )
