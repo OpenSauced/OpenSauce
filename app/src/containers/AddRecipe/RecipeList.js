@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
 import LazyLoad from 'react-lazy-load'
+import OnVisible, { setDefaultProps } from 'react-on-visible';
+
+setDefaultProps({
+    bounce: true,
+    visibleClassName: 'appear',
+    percent: 10
+});
+
 import axios from 'axios'
 
 //Components
@@ -47,8 +55,12 @@ class RecipeList extends Component {
              <LazyLoad onContentVisible={this.showElem()}>
           <h1>Loding More Recipes </h1>
         </LazyLoad>
-      */}
+
         <HPLazyLoader/>
+      */}
+        <OnVisible className="my-container">
+          <h1>I will be rendered inside a div that has class 'my-container' only until I become visible, at which point the container will have the classes 'my-container visible'</h1>
+        </OnVisible>
         
       </div>
     )
