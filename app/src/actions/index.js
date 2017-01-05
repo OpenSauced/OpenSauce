@@ -28,7 +28,7 @@ export const fetchRecipes = (search) => {
 export const getUserRecipes = (recipes) => {
   
   var username = getStore().getState().userData.userData.username
-  var request = axios.get(`/api/recipes/${username}`)
+  var request = axios.get(`/api/recipes/${username}/userrecipes`)
   
   return {
     type: GET_USER_RECIPES,

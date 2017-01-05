@@ -28,7 +28,7 @@ router.get('/', function(req,res) {
   }
 })
 
-router.get('/:username', function(req, res) {
+router.get('/:username/userrecipes', function(req, res) {
   var username = req.params.username
    db.recipeFunctions.findRecipesByUserName(username)
   .then((recipes) => {
