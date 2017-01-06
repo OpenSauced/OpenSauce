@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.connection.on('open', function() {
-   console.log('Mongdb connection open');
+   console.log('All hail the mongod!');
 })
 
 app.use('/api/users', userRoutes);
