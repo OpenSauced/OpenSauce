@@ -28,6 +28,18 @@ router.get('/', function(req,res) {
   }
 })
 
+router.get('/:username/userrecipes', function(req, res) {
+  var username = req.params.username
+   db.recipeFunctions.findRecipesByUserName(username)
+  .then((recipes) => {
+    res.send(recipes);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
+
 //saves a recipe to the DB
 router.post('/:username/addrecipe', function(req, res) {
   var username = req.params.username

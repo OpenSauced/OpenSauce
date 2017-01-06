@@ -26,10 +26,13 @@ export const fetchRecipes = (search) => {
 }
 
 export const getUserRecipes = (recipes) => {
-  //console.log('DOES THIS WORK: ', getStore())
+  
+  var username = getStore().getState().userData.userData.username
+  var request = axios.get(`/api/recipes/${username}/userrecipes`)
+  
   return {
     type: GET_USER_RECIPES,
-    payload: recipes
+    payload: request
   }
 }
 
