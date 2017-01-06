@@ -20,7 +20,7 @@ class RouteViewRecipe extends Component {
 
     this.state = {
       recipe: {},
-      isSaved: false;
+      isSaved: false
     };
   }
 
