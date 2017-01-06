@@ -11,7 +11,7 @@ class AppHeader extends Component {
   render() {
     var searchBar = this.props.title === "Welcome to OpenSauce" ? <SearchBar /> : <div></div>
     return (
-      <div className="container-fluid searchHomePageContainer">
+      <div className="container-fluid titleBarContainer">
         <div className="row mainTitle flex-items-xs-center">
           <h1>{this.props.title}</h1>
         </div>

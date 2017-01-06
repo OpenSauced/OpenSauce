@@ -1,14 +1,34 @@
 body {
-    background-color: #fff;
+    color: ghostwhite;
+    background-color: ghostwhite;
     font-size: 16px; //most other sizes are EM so this should scale.
+}
+
+a, a:hover, a:active {
+  color: ghostwhite;
 }
 
 #navButtonContainer {
     overflow: hidden;
 }
 
-.recipe img {
+.recipeCard img {
     width: 100%;
+}
+
+.recipeCard, .recipeCard a {
+  width: 100%;
+  color: #373a3c;
+  text-align: center;
+  // margin: 0 4% 0 4% !important;
+}
+
+.card-buttons a {
+  color: white;
+}
+
+.cardRecipeCol {
+  display: flex;
 }
 
 .recipeCardBtn {
@@ -24,15 +44,16 @@ body {
     height: 100%;
 }
 
-.searchHomePageContainer {
+.titleBarContainer {
     padding-bottom: 55px;
     padding-top: 55px;
     text-align: center;
-    background-color: lightsteelblue;
+    background-image: url('/assets/loginBackground.png');
 }
 
 .mainTitle, .subTitle {
-  // margin-top: 10px;
+  // background-color: lightsteelblue;
+  // color: white;/
 }
 
 .navProfPic {
@@ -56,12 +77,14 @@ body {
     margin-top: 10px;
 }
 
-.nav-item a {
-  color: white;
+.navbar-toggle .icon-bar, .navbar-toggle {
+  border-color: ghostwhite;
+  color: ghostwhite;
 }
 
 .nav > li > a:focus, .nav > li > a:hover {
-  background-color: black;
+  color: grey;
+  background-color: ghostwhite;
 }
 
 .dropdown-menu {
@@ -97,4 +120,22 @@ body {
 .navbar-toggle {
     padding: 10px;
     margin: 25px 15px 25px 0;
+}
+
+
+
+// login stuff
+.authPageContainer {
+  background: transparent;
+}
+
+.authPageContent {
+  margin: 5% 0 25% 0;
+  z-index: 99;
+  background-color: ghostwhite !important;
+  border-radius: 25px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  width: 50% !important;
 }
