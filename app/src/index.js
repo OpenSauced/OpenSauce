@@ -21,7 +21,8 @@ import ReduxPromise from 'redux-promise';
 //Redux reducers and actions
 import axios from 'axios'
 import reducers from './reducers';
-import { getUserData, routeDispatcher } from './actions/index';
+import { getUserData } from './actions/index';
+import { routeDispatcher } from './actions/dispatcher';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -30,7 +31,7 @@ store.dispatch( getUserData() ).then( (data) => renderApplication () )
 
 function renderApplication () {
   
-  routeDispatcher(browserHistory.getCurrentLocation())
+  routeDispatcher()
   browserHistory.listen((location) => {
     routeDispatcher(location)
   })
