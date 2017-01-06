@@ -24,29 +24,12 @@ class RouteViewRecipe extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getRecipeFromDB(this.props.params.recipe);
-   
-  }
-
-  getRecipeFromDB(recipeId) {
-    $.ajax({
-      url: '/api/recipes/' + recipeId,
-      success: function(recipe) {
-          this.setState({ recipe: recipe });
-      }.bind(this),
-      error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-      }.bind(this),
-    });
-  }
-
   saveRecipe() {
   	 $.ajax({
         url: '/api/users/save',
         type: 'POST',
         data: {
-        	recipeId: this.state.recipe._id,
+        	recipeId: this.props.currentRecipe._id,
         	userId: this.props.userData._id
         },
         success: function(bool) {
@@ -64,7 +47,7 @@ class RouteViewRecipe extends Component {
         url: '/api/users/remove',
         type: 'POST',
         data: {
-          recipeId: this.state.recipe._id,
+          recipeId: this.props.currentRecipe._id,
           userId: this.props.userData._id
         },
         success: function(bool) {
@@ -78,24 +61,25 @@ class RouteViewRecipe extends Component {
   }
 
   forkRecipe() {
-  	var title = this.state.recipe.title
-  	var description = this.state.recipe.description
-  	var ingredients =this.state.recipe.ingredients
-  	var directions = this.state.recipe.directions
-  	var parentId = this.state.recipe._id
+  	var title = this.props.currentRecipe.title
+  	var description = this.props.currentRecipe.description
+  	var ingredients =this.props.currentRecipe.ingredients
+  	var directions = this.props.currentRecipe.directions
+  	var parentId = this.props.currentRecipe._id
   }
 
   render() {
-    if(this.state.recipe.title){
+    console.log(this.props.currentRecipe)
+    if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
          <HeaderNav/>
-          <AppHeader title={this.state.recipe.title}>
+          <AppHeader title={this.props.currentRecipe.title}>
           <div>
-            <SaveAndForkButtons isSaved={this.state.isSaved} recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/></div>
+            <SaveAndForkButtons isSaved={this.state.isSaved} recipeId={this.props.currentRecipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/></div>
           </AppHeader>
 
-          <ViewRecipe recipe={this.state.recipe} />
+          <ViewRecipe recipe={this.props.currentRecipe} />
           <Footer/>
         </div>
       );
@@ -109,7 +93,10 @@ function mapDispatchToProps (dispatch) {
 }
 
 function mapStateToProps (state) {
-  return state.userData
+  return {
+    userData: state.userData,
+    currentRecipe: state.currentRecipe
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)

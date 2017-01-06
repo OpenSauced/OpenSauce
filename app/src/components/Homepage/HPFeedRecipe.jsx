@@ -21,7 +21,7 @@ const HPFeedRecipe = ({recipe}) => {
                 className="btn btn-primary recipeCardBtn">Fork Recipe</a>
               <a className="btn btn-secondary recipe_card-like_button recipeCardBtn">Like Recipe</a>
             </div>
-            <h2 className="card-title"><a href={`/viewrecipe/${recipe._id}`}>{recipe.title}</a></h2>
+            <h2 className="card-title"><a href={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</a></h2>
             <p className="card-text">{recipe.description}</p>
             <p> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
           </div>
