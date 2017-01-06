@@ -1,4 +1,6 @@
 var express = require('express')
+const multer = require('multer'); // Node.js middleware for handling `multipart/form-data`
+const upload = multer({ dest: 'TempUpload/' }); // set temp location of new files
 var router = express.Router()
 var db = require('../db/db.js')
 
@@ -41,17 +43,18 @@ router.get('/:username/userrecipes', function(req, res) {
 
 
 //saves a recipe to the DB
-router.post('/:username/addrecipe', function(req, res) {
+router.post('/:username/addrecipe', upload.any(), function(req, res) {
   var username = req.params.username
-
-  db.recipeFunctions.addNewRecipe(username, req.body)
-  .catch((err) => {
-    console.log("THE ERROR. DUN DUN DUUUUUN ", err)
-    res.send(500, err);
-  })
-  .then((recipe) => {
-    res.send(recipe);
-  })
+  console.log(req.files);
+  res.sendStatus(200);
+  // db.recipeFunctions.addNewRecipe(username, req.body)
+  // .catch((err) => {
+  //   console.log("THE ERROR. DUN DUN DUUUUUN ", err)
+  //   res.send(500, err);
+  // })
+  // .then((recipe) => {
+  //   res.send(recipe);
+  // })
 })
 
 //route to return a single recipe

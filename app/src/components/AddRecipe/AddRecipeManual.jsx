@@ -18,19 +18,21 @@ class AddRecipeManual extends Component {
       title: '',
       description: '',
       directions: '',
-      ingredients: ['']
+      ingredients: [''],
+      images: null
     }
 
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.addNewIngredient = this.addNewIngredient.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   componentWillMount() {
     this.props.getUserData()
     .then((user) => {
-      console.log("id in componentWillMount ", this.props.recipeId)
+      //console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
         console.log("id" ,this.props.recipeId)
         this.getRecipeFromDB(this.props.recipeId)
@@ -42,7 +44,7 @@ class AddRecipeManual extends Component {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-        console.log("RECIPE ", recipe.directions)
+        //console.log("RECIPE ", recipe.directions)
           this.setState({ 
             title: recipe.title,
             description: recipe.description,
@@ -82,28 +84,36 @@ class AddRecipeManual extends Component {
     //   ingredient.replace(' ', '') === '' ? null : ingredient; 
     // });
 
+console.log(this.state.images)
+
     let recipe = {
       title: this.state.title,
       description: this.state.description,
       ingredients: ingredients,
       directions: this.state.directions,
-      files: this.state.images
+      image: this.state.images[0]
     }
+
+    recipe = new FormData($('#addRecipeManualForm'))
+    console.log(recipe);
 
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData.username}/addrecipe`,
       data: recipe,
-      dataType: 'json'
+      cache: false,
+      contentType: false,
+      processData: false,
     })
+    // $.post(`/api/recipes/${this.props.userData.username}/addrecipe`, $('#addRecipeManualForm'))
     .catch((err) => {
       console.error('Recipe did not post. Please enter all required information', err);
-      alert('Message: ', err)
+      //alert('Message: ', err)
     })
     .then((recipe) => {
-      console.log('Getting current data? ', recipe);
+      //console.log('Getting current data? ', recipe);
       const path = `/viewrecipe/${recipe._id}`
-      browserHistory.push(path);
+      //browserHistory.push(path);
     })
   }
 
@@ -129,19 +139,19 @@ class AddRecipeManual extends Component {
   }
 
   onDrop(acceptedFiles) {
+    console.log(this)
     this.setState({
-      files: acceptedFiles
-    });
-    console.log(this.state.files);
+      images: acceptedFiles
+    }, () => { console.log(this.state.images) } );
   }
 
   render() {
     return (
       <div className="row">
         <div className="container">
-          <form onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
+          <form id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
             <div className="row">
-              <Dropzone ref={(node) => { this.dropzone = node; }} multiple={false} accept="image/*" onDrop={this.onDrop}>
+              <Dropzone multiple={false} onDrop={this.onDrop}>
                 <div>Try dropping some files here, or click to select files to upload.</div>
               </Dropzone>
             </div>
@@ -156,6 +166,7 @@ class AddRecipeManual extends Component {
                 />
               </label>
             </div>
+
             <h3>Recipe Description:</h3>
             <textarea
               placeholder="Please enter a description"
