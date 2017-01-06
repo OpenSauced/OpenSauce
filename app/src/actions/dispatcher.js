@@ -22,6 +22,9 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
       getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
       break
 
+    default:
+      console.log('Route_Dispatcher @', location.pathname, ' : nothing to dispatch')
+
   }
 
 }
