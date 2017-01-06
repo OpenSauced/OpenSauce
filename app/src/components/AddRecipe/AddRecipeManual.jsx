@@ -19,7 +19,7 @@ class AddRecipeManual extends Component {
       description: '',
       directions: '',
       ingredients: [''],
-      images: null
+      images: []
     }
 
     // Function bindings for the component
@@ -84,18 +84,12 @@ class AddRecipeManual extends Component {
     //   ingredient.replace(' ', '') === '' ? null : ingredient; 
     // });
 
-console.log(this.state.images)
-
-    let recipe = {
-      title: this.state.title,
-      description: this.state.description,
-      ingredients: ingredients,
-      directions: this.state.directions,
-      image: this.state.images[0]
-    }
-
-    recipe = new FormData($('#addRecipeManualForm'))
-    console.log(recipe);
+    let recipe = new FormData();
+    recipe.append('title', this.state.title);
+    recipe.append('description', this.state.description);
+    recipe.append('ingredients', JSON.stringify(ingredients));
+    recipe.append('directions', this.state.directions);
+    recipe.append('images', this.state.images[0]);
 
     $.ajax({
       method: 'POST',
@@ -105,15 +99,13 @@ console.log(this.state.images)
       contentType: false,
       processData: false,
     })
-    // $.post(`/api/recipes/${this.props.userData.username}/addrecipe`, $('#addRecipeManualForm'))
     .catch((err) => {
       console.error('Recipe did not post. Please enter all required information', err);
-      //alert('Message: ', err)
     })
     .then((recipe) => {
       //console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe/${recipe._id}`
-      //browserHistory.push(path);
+      const path = `/viewrecipe/${recipe._id}`;
+      browserHistory.push(path);
     })
   }
 
@@ -141,8 +133,8 @@ console.log(this.state.images)
   onDrop(acceptedFiles) {
     console.log(this)
     this.setState({
-      images: acceptedFiles
-    }, () => { console.log(this.state.images) } );
+      images: this.state.images.concat(acceptedFiles)
+    });
   }
 
   render() {
@@ -154,6 +146,9 @@ console.log(this.state.images)
               <Dropzone multiple={false} onDrop={this.onDrop}>
                 <div>Try dropping some files here, or click to select files to upload.</div>
               </Dropzone>
+              {this.state.images.length > 0 ? <div>
+                <div>{this.state.images.map((image) => <img src={image.preview} /> )}</div>
+                </div> : null}
             </div>
             <div className="row">
               <label htmlFor="">
