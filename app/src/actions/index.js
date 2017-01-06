@@ -6,13 +6,14 @@ export const GET_USER_DATA = 'GET_USER_DATA'
 export const FETCH_RECIPES = 'FETCH_RECIPES'
 export const GET_USER_RECIPES = 'GET_USER_RECIPES'
 export const CLEAR_RECIPES = 'CLEAR_RECIPES'
+export const GET_RECIPE_BY_ID = 'GET_RECIPE_BY_ID'
 
 export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM'
 
 export const updateSearchTerm = (term) => {
  
   return {
-    type: 'UPDATE_SEARCH_TERM',
+    type: UPDATE_SEARCH_TERM,
     payload: term
   }
 }
@@ -32,6 +33,16 @@ export const getUserRecipes = (recipes) => {
   
   return {
     type: GET_USER_RECIPES,
+    payload: request
+  }
+}
+
+export const getRecipeById = (recipeId) => {
+  var url = '/api/recipes/' + recipeId
+  var request = axios.get(url)
+  console.log('ACTION DISPATCHED', recipeId)
+  return {
+    type: GET_RECIPE_BY_ID,
     payload: request
   }
 }
