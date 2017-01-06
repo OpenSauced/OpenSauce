@@ -56,11 +56,11 @@ class RouteProfile extends Component {
 
   render() {
     return (
-      <div className="container-flex">
+      <div className="container-flex wholeContainer">
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
 
-        <div className="row">
+        <div className="myProfilePageContainer container-fluid">
           {/*side bar for selecting what you want to change*/}
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
           {/*selected change will show up here*/}

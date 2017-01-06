@@ -11,9 +11,9 @@ class RouteMyRecipes  extends Component {
   render() {
 
     return (
-      <div className="container-flex">
+      <div className="container-flex wholeContainer">
         <HeaderNav/>
-        <AppHeader title={'Catchy Phrase'}>
+        <AppHeader title={'My Recipes'}>
         </AppHeader>
         <div>
           <RecipeList route={this.props.route.path}/>

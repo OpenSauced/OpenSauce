@@ -69,10 +69,10 @@ class RouteViewRecipe extends Component {
   render() {
     if(this.state.recipe.title){
       return (
-        <div className="container-flex">
+        <div className="container-flex wholeContainer">
          <HeaderNav/>
           <AppHeader title={this.state.recipe.title}/>
-          <div className="container-fluid">
+          <div className="row container-fluid recipePageContainer">
             <SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
             <ViewRecipe recipe={this.state.recipe} />
             <Footer/>
