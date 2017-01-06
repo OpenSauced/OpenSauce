@@ -185,17 +185,42 @@ xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
 
 //Adds a recipe id reference to the user's saved recipe object
 xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
-    return userModel.findOneAndUpdate({
-        _id: userId
-    }, {
-        $push: {
-            'saved_recipes': recipeId
-        }
-    }).then((oldUser) => {
-        return userModel.findOne({_id: oldUser._id})
-    }).catch((err) => {
-        console.log("error in userFunctions 3", err)
+    return userModel.findOne({_id: userId})
+    .then((userObj) => {
+        var savedRecipes = userObj.saved_recipes
+        console.log("halp", savedRecipes)
+        console.log(recipeId)
+            if (!savedRecipes.includes(recipeId)){
+                return userModel.findOneAndUpdate({
+                    _id: userId
+                }, {
+                    $push: {
+                        'saved_recipes': recipeId
+                    }
+                }).catch((err) => {
+                    console.log("error in userFunctions 3.1", err)
+                }).then((oldUser) => {
+                    console.log('success push_______________________')
+                    return userModel.findOne({_id: oldUser._id})
+                })
+            } else {
+                console.log("here")
+                return userModel.findOneAndUpdate({
+                    _id: userId
+                }, {
+                    $pull: {
+                        'saved_recipes': recipeId
+                    }
+                }).catch((err) => {
+                    console.log('success remove___________*****************')
+                    console.log("error in userFunctions 3.2", err)
+                }).then((oldUser) => {
+                    return userModel.findOne({_id: oldUser._id})
+                })
+            } 
+        // }
     })
+    
 }
 
 module.exports = xPorts;

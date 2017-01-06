@@ -53,7 +53,7 @@ class RouteViewRecipe extends Component {
         	console.log('Saved the recipe to the user!')
         }.bind(this),
         error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
+            console.error(status, err.toString());
         }.bind(this),
     });
   }
@@ -73,8 +73,7 @@ class RouteViewRecipe extends Component {
          <HeaderNav/>
           <AppHeader title={this.state.recipe.title}>
           <div>
-          	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
-          </div>
+            <SaveAndForkButtons savedRecipes={this.props.userData.saved_recipes} recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>          </div>
           </AppHeader>
 
           <ViewRecipe recipe={this.state.recipe} />
