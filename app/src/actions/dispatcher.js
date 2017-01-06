@@ -22,9 +22,6 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
       getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
       break
 
-    case '/profile':
-      console.log(location)
-      break
   }
 
 }

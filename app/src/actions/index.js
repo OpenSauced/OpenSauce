@@ -60,25 +60,3 @@ export const getUserData = ( username ) => {
    payload: request
  }
 }
-
-export const routeDispatcher = (location) =>  {
-
-  getStore().dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
-
-  switch (location.pathname) {
-    case '/':
-      getStore().dispatch(clearRecipes())
-      getStore().dispatch(fetchRecipes(location.search))
-      break
-
-    case '/myrecipes':
-      getStore().dispatch(clearRecipes())
-      getStore().dispatch(getUserRecipes(getStore().getState().userData.userData.my_recipes))
-      break
-
-    case '/profile':
-      console.log(location)
-      break
-  }
-
-}
