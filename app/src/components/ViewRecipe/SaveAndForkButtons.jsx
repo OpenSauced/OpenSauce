@@ -1,16 +1,14 @@
 var React = require('react');
 import { Link } from 'react-router';
 
-const SaveAndForkButtons = ({recipeId, saveRecipe, forkRecipe, savedRecipes}) => {
-  // savedRecipes.forEach((savedRecipeId) => {
-  //   (savedRecipeId === recipeId) ? renderbluestar : renderblackstar
-  // })
+const SaveAndForkButtons = ({recipeId, saveRecipe, forkRecipe, isSaved}) => {
+  var start = (isSaved) ? <div><i className="fa fa-star fa-3x blue"></i><br></br><div>Remove this Recipe from My Cookbook</div></div>
+  : <div><i className="fa fa-star fa-3x black"></i><br></br><div>Add this Recipe to My Cookbook</div></div>  
+  })
   return (
     <div>
     <div onClick={() => saveRecipe()}>
-    <i className="fa fa-star fa-3x"></i>
-    <br></br>
-    Add this Recipe to My Cookbook
+    {star}
     </div>
     <div>
     <Link to={`/addrecipe?recipe=${recipeId}`}>

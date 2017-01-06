@@ -19,7 +19,8 @@ class RouteViewRecipe extends Component {
     super();
 
     this.state = {
-      recipe: {}
+      recipe: {},
+      isSaved: false;
     };
   }
 
@@ -49,8 +50,9 @@ class RouteViewRecipe extends Component {
         	recipeId: this.state.recipe._id,
         	userId: this.props.userData._id
         },
-        success: function(recipe) {
-        	console.log('Saved the recipe to the user!')
+        success: function(bool) {
+          this.setState({isSaved: bool})
+        	console.log('is saved?????? ', bool)
         }.bind(this),
         error: function(xhr, status, err) {
             console.error(status, err.toString());
@@ -73,7 +75,7 @@ class RouteViewRecipe extends Component {
          <HeaderNav/>
           <AppHeader title={this.state.recipe.title}>
           <div>
-            <SaveAndForkButtons savedRecipes={this.props.userData.saved_recipes} recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>          </div>
+            <SaveAndForkButtons isSaved={this.state.isSaved} recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/></div>
           </AppHeader>
 
           <ViewRecipe recipe={this.state.recipe} />

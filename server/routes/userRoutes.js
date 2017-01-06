@@ -39,11 +39,20 @@ router.get('/:userName/profile', function(req, res) {
 
 //route to save a recipe to a user's saved recipes object
 router.post('/save', function(req, res) {
-    console.log("in the route")
     var recipeId = req.body.recipeId
     var userId = req.body.userId
-    db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).then((user) => {
-        res.send(user);
+    db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).then((bool) => {
+        res.send(bool);
+    }).catch((err) => {
+        res.send(err);
+    })
+})
+
+router.post('/remove', function(req, res){
+    var recipeId = req.body.recipeId
+    var userId = req.body.userId
+    db.userFunctions.RemoveRecipeFromSavedRecipes(userId, recipeId).then((bool) => {
+        res.send(bool);
     }).catch((err) => {
         res.send(err);
     })

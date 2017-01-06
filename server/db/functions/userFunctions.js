@@ -8,33 +8,33 @@ const xPorts = {}
 
 xPorts.updateSession = function(user, hash) {
     return xPorts.findByUserName(user.username).then(function(userDB) {
-        userDB.session = hash
-        userDB.update()
-        userDB.save()
-        return userDB
-    })
-    .catch((err) => {
-        console.error('ERROR IN USER FUNCTIONS UPDATE SESSION:', err);
-    })
+            userDB.session = hash
+            userDB.update()
+            userDB.save()
+            return userDB
+        })
+        .catch((err) => {
+            console.error('ERROR IN USER FUNCTIONS UPDATE SESSION:', err);
+        })
 }
 
 xPorts.secondSignupDisable = function(user) {
     return xPorts.findByUserName(user).then(function(userDB) {
-        userDB.secondary_signup_needed = 'false'
-        userDB.save()
-    })
-    .catch((err) => {
-        console.error('ERROR IN USER FUNCTIONS SECOND SIGN UP:', err);
-    })
+            userDB.secondary_signup_needed = 'false'
+            userDB.save()
+        })
+        .catch((err) => {
+            console.error('ERROR IN USER FUNCTIONS SECOND SIGN UP:', err);
+        })
 }
 
 xPorts.secondarySignupCheck = function(user) {
     return xPorts.findByUserName(user).then(function(userDB) {
-        return userDB.secondary_signup_needed
-    })
-    .catch((err) => {
-        console.error('ERROR IN USER FUNCTIONS SECONDARY SIGN UP:', err);
-    })
+            return userDB.secondary_signup_needed
+        })
+        .catch((err) => {
+            console.error('ERROR IN USER FUNCTIONS SECONDARY SIGN UP:', err);
+        })
 }
 
 xPorts.saveUserFn = function(user) {
@@ -185,42 +185,32 @@ xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
 
 //Adds a recipe id reference to the user's saved recipe object
 xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
-    return userModel.findOne({_id: userId})
-    .then((userObj) => {
-        var savedRecipes = userObj.saved_recipes
-        console.log("halp", savedRecipes)
-        console.log(recipeId)
-            if (!savedRecipes.includes(recipeId)){
-                return userModel.findOneAndUpdate({
-                    _id: userId
-                }, {
-                    $push: {
-                        'saved_recipes': recipeId
-                    }
-                }).catch((err) => {
-                    console.log("error in userFunctions 3.1", err)
-                }).then((oldUser) => {
-                    console.log('success push_______________________')
-                    return userModel.findOne({_id: oldUser._id})
-                })
-            } else {
-                console.log("here")
-                return userModel.findOneAndUpdate({
-                    _id: userId
-                }, {
-                    $pull: {
-                        'saved_recipes': recipeId
-                    }
-                }).catch((err) => {
-                    console.log('success remove___________*****************')
-                    console.log("error in userFunctions 3.2", err)
-                }).then((oldUser) => {
-                    return userModel.findOne({_id: oldUser._id})
-                })
-            } 
-        // }
+    return userModel.findOneAndUpdate({
+        _id: userId
+    }, {
+        $push: {
+            'saved_recipes': recipeId
+        }
+    }).then((oldUser) => {
+        // return userModel.findOne({_id: oldUser._id})
+        return true
+    }).catch((err) => {
+        console.log("error in userFunctions 3", err)
     })
-    
+}
+
+xPorts.RemoveRecipeFromSavedRecipes = function(userId, recipeId) {
+    return userModel.findOneAndUpdate({
+        _id: userId
+    }, {
+        $pull: {
+            'saved_recipes': recipeId
+        }
+    }).catch((err) => {
+        console.log("error in userFunctions 4", err)
+    }).then((oldUser) => {
+        return false
+    })
 }
 
 module.exports = xPorts;
