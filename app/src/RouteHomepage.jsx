@@ -14,8 +14,10 @@ const RouteHomepage = () => {
     <div className="container-flex">
       <HeaderNav/>
       <AppHeader title={'Welcome to OpenSauce'} />
-      <HPFeed/>
-      <Footer/>
+      <div className="container-fluid">
+        <HPFeed/>
+        <Footer/>
+      </div>
   </div>
   );
 }

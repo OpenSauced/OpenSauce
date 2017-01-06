@@ -11,8 +11,10 @@ const RouteLogin = ({}) => {
   return (
     <div className="container-fluid">
       <AppHeader title={'Login'}/>
-      <Login/>
-      <Footer/>
+      <div className="container-fluid">
+        <Login/>
+        <Footer/>
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ class RouteViewRecipe extends Component {
 
   componentWillMount() {
     this.getRecipeFromDB(this.props.params.recipe);
-   
+
   }
 
   getRecipeFromDB(recipeId) {
@@ -69,16 +69,14 @@ class RouteViewRecipe extends Component {
   render() {
     if(this.state.recipe.title){
       return (
-        <div className="container-fluid">
+        <div className="container-flex">
          <HeaderNav/>
-          <AppHeader title={this.state.recipe.title}>
-          <div>
-          	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
+          <AppHeader title={this.state.recipe.title}/>
+          <div className="container-fluid">
+            <SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
+            <ViewRecipe recipe={this.state.recipe} />
+            <Footer/>
           </div>
-          </AppHeader>
-
-          <ViewRecipe recipe={this.state.recipe} />
-          <Footer/>
         </div>
       );
     }
@@ -95,5 +93,3 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
-
-
