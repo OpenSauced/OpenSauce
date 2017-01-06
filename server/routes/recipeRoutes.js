@@ -1,4 +1,10 @@
 var express = require('express')
+const multer = require('multer'); // Node.js middleware for handling `multipart/form-data`
+const upload = multer({ dest: 'TempUpload/' }); // set temp location of new files
+const cloudinary = require('cloudinary');
+const authRoutes = require('./authRoutes.js')
+const path = require('path');
+const fs = require('fs')
 var router = express.Router()
 var db = require('../db/db.js')
 
@@ -41,15 +47,33 @@ router.get('/:username/userrecipes', function(req, res) {
 
 
 //saves a recipe to the DB
-router.post('/:username/addrecipe', function(req, res) {
+router.post('/:username/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), function(req, res) {
   var username = req.params.username
-
-  db.recipeFunctions.addNewRecipe(username, req.body)
+  // console.log('Body: ', req.body);
+  // console.log('Files: ', req.file);
+  db.recipeFunctions.addNewRecipe(username, req.body, req.file)
   .catch((err) => {
     console.log("THE ERROR. DUN DUN DUUUUUN ", err)
     res.send(500, err);
   })
   .then((recipe) => {
+    // checks to see if req.file is empty
+    if (req.file !== undefined) {
+      // upload to cloudinary
+      cloudinary.uploader.upload(req.file.path, (result) => {
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.error('Error on image delete:', err);
+          } else {
+            // adds the photo to the recipe in the database
+            db.recipeFunctions.addPhotoUrl(recipe._id, result)
+            .then(function(recipeDB) {
+              // dont do anything? getting current data?
+            })
+          }
+        });
+      });
+    }
     res.send(recipe);
   })
 })
@@ -107,7 +131,7 @@ router.post('/scraperecipe', function(req, res){
     res.send(500, err)
   })
     } else if (recipe !== null) {
-      res.send(200, recipe._id)
+      res.status(200).send(recipe._id)
     }
   })
   .catch((err) => {
