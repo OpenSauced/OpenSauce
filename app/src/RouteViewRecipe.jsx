@@ -42,7 +42,6 @@ class RouteViewRecipe extends Component {
   }
 
   saveRecipe() {
-    console.log("getting current this? " ,this)
   	 $.ajax({
         url: '/api/users/save',
         type: 'POST',
@@ -53,6 +52,24 @@ class RouteViewRecipe extends Component {
         success: function(bool) {
           this.setState({isSaved: bool})
         	console.log('is saved?????? ', bool)
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.error(status, err.toString());
+        }.bind(this),
+    });
+  }
+
+    removeRecipe() {
+     $.ajax({
+        url: '/api/users/remove',
+        type: 'POST',
+        data: {
+          recipeId: this.state.recipe._id,
+          userId: this.props.userData._id
+        },
+        success: function(bool) {
+          this.setState({isSaved: bool})
+          console.log('is saved?????? ', bool)
         }.bind(this),
         error: function(xhr, status, err) {
             console.error(status, err.toString());
