@@ -45,22 +45,22 @@ class RouteProfile extends Component {
         break;
       default:
         render = 'profile'
-        break;  
+        break;
     }
 
     this.setState({
       renderInputs: render
     });
-    
+
   }
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-flex wholeContainer">
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
-        
-        <div className="row">
+
+        <div className="myProfilePageContainer container-fluid">
           {/*side bar for selecting what you want to change*/}
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
           {/*selected change will show up here*/}
@@ -74,7 +74,7 @@ class RouteProfile extends Component {
 }
 
 function mapStateToProps (state) {
-  return state.userData 
+  return state.userData
 }
 
-export default connect(mapStateToProps)(RouteProfile) 
+export default connect(mapStateToProps)(RouteProfile)

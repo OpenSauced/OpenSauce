@@ -4,7 +4,7 @@ import { Router, Link } from 'react-router';
 // Receives name and link from props in HeaderNavButtons
 const HeaderNavButton = ({name, link}) => {
   return (
-    <li><Link to={link}>{name}</Link></li>
+    <li className="nav-item"><Link to={link}>{name}</Link></li>
   );
 }
 

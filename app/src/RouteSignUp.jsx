@@ -12,9 +12,13 @@ class RouteSignUp extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <AppHeader title={'Sign Up'}/>
-        <SignUp/>
+      <div className="container-flex wholeContainer">
+          <AppHeader title={'Sign Up'}/>
+          <div className="container-fluid authPageContainer row">
+              <div className="authPageContent col-centered col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                  <SignUp/>
+              </div>
+          </div>
         <Footer/>
       </div>
     );

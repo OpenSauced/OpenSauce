@@ -13,7 +13,6 @@ import { fetchRecipes, getUserData } from '../../actions/index'
 import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
 import HPLazyLoader from '../../components/Homepage/HPLazyLoader'
-import SearchBar from '../Homepage/SearchBar'
 
 ///Setting Defaults for OnVisibility
 setDefaultProps({
@@ -49,27 +48,23 @@ class RecipeList extends Component {
   }
 
   render() {
-    
     return (
-      <div>
-        <SearchBar />
-        <ul className="row recipe_card">
+        <div className="row mainRecipeFeed">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes) : "NO RESULTS FOUND"  )  : "LOADING"}
-        </ul>   
-      </div>
+        </div>
     )
   }
-}
 
-const  mapStateToProps = (state) => {
+}
+const mapStateToProps = (state) => {
   return {
     recipes: state.recipes
   }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({ fetchRecipes, getUserData }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
 
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)

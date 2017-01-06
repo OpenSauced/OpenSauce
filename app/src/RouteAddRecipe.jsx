@@ -34,13 +34,15 @@ class RouteAddRecipe extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-flex wholeContainer">
         <HeaderNav/>
-        <AppHeader title={'Catchy Phrase'}>
-          <AddRecipeTypeOfInsert renderClick={this.handleSelectHowToAddRecipe}/>
+        <AppHeader title={'Add a Yummy Recipe!'}>
+        <AddRecipeTypeOfInsert renderClick={this.handleSelectHowToAddRecipe}/>
         </AppHeader>
-        <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
-        <Footer/>
+        <div className="container-fluid addRecipePageContainer">
+          <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
+          <Footer/>
+        </div>
       </div>
     );
   }

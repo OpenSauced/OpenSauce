@@ -24,6 +24,22 @@ class RouteViewRecipe extends Component {
     };
   }
 
+  componentWillMount() {
+    this.getRecipeFromDB(this.props.params.recipe);
+  }
+
+  getRecipeFromDB(recipeId) {
+    $.ajax({
+      url: '/api/recipes/' + recipeId,
+      success: function(recipe) {
+          this.setState({ recipe: recipe });
+      }.bind(this),
+      error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+      }.bind(this),
+    });
+  }
+
   saveRecipe() {
   	 $.ajax({
         url: '/api/users/save',
@@ -72,19 +88,16 @@ class RouteViewRecipe extends Component {
     console.log(this.props.currentRecipe)
     if(this.props.currentRecipe.title){
       return (
-        <div className="container-fluid">
+        <div className="container-flex wholeContainer">
          <HeaderNav/>
-          <AppHeader title={this.props.currentRecipe.title}>
-          <div>
+          <AppHeader title={this.state.currentRecipe.title}/>
+          <div className="row container-fluid recipePageContainer">
             <SaveAndForkButtons isSaved={this.state.isSaved} recipeId={this.props.currentRecipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/></div>
-          </AppHeader>
-
-          <ViewRecipe recipe={this.props.currentRecipe} />
-          <Footer/>
-        </div>
+            <ViewRecipe recipe={this.state.currentRecipe} />
+            <Footer/>
+          </div>
       );
     }
-    return <div></div>
   }
 };
 
@@ -100,5 +113,3 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
-
-
