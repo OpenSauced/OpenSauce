@@ -19,7 +19,8 @@ class RouteViewRecipe extends Component {
     super();
 
     this.state = {
-      recipe: {}
+      recipe: {},
+      isSaved: false
     };
   }
 
@@ -41,7 +42,6 @@ class RouteViewRecipe extends Component {
   }
 
   saveRecipe() {
-    console.log("getting current this? " ,this)
   	 $.ajax({
         url: '/api/users/save',
         type: 'POST',
@@ -49,11 +49,30 @@ class RouteViewRecipe extends Component {
         	recipeId: this.state.recipe._id,
         	userId: this.props.userData._id
         },
-        success: function(recipe) {
-        	console.log('Saved the recipe to the user!')
+        success: function(bool) {
+          this.setState({isSaved: bool})
+        	console.log('is saved?????? ', bool)
         }.bind(this),
         error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
+            console.error(status, err.toString());
+        }.bind(this),
+    });
+  }
+
+    removeRecipe() {
+     $.ajax({
+        url: '/api/users/remove',
+        type: 'POST',
+        data: {
+          recipeId: this.state.recipe._id,
+          userId: this.props.userData._id
+        },
+        success: function(bool) {
+          this.setState({isSaved: bool})
+          console.log('is saved?????? ', bool)
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.error(status, err.toString());
         }.bind(this),
     });
   }
@@ -73,8 +92,7 @@ class RouteViewRecipe extends Component {
          <HeaderNav/>
           <AppHeader title={this.state.recipe.title}>
           <div>
-          	<SaveAndForkButtons recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/>
-          </div>
+            <SaveAndForkButtons isSaved={this.state.isSaved} recipeId={this.state.recipe._id} saveRecipe={this.saveRecipe.bind(this)} forkRecipe={this.forkRecipe}/></div>
           </AppHeader>
 
           <ViewRecipe recipe={this.state.recipe} />
