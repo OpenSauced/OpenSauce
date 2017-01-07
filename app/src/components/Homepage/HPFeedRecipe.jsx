@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 // LazyLoad allows the component to be loaded as  the user scrolls instead of all at once
 import LazyLoad from 'react-lazy-load';
 
@@ -32,7 +33,7 @@ const HPFeedRecipe = ({recipe, savedRecipes, addRecipe, removeRecipe, userId, re
 
               
             </div>
-            <h2 className="card-title"><a href={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</a></h2>
+            <h2 className="card-title"><Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link></h2>
             <p className="card-text">{recipe.description}</p>
             <p> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
           </div>
