@@ -12,6 +12,7 @@ import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import MyRecipes from './RouteMyRecipes'
 import RouteViewRecipe from './RouteViewRecipe'
+import RouteEditRecipe from './RouteEditRecipe'
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
