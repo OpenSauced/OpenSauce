@@ -34,7 +34,7 @@ class RouteViewRecipe extends Component {
 
   render() {
     
-    if(this.props.currentRecipe.title){
+    if (this.props.currentRecipe.title) {
       return (
         <div className="container-fluid">
          <HeaderNav/>
