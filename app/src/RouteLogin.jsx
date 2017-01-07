@@ -8,17 +8,13 @@ import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
 
 const RouteLogin = ({}) => {
-    return (
-        <div className="container-flex wholeContainer">
-            <AppHeader title={'Login'}/>
-            <div className="container-fluid authPageContainer row">
-                <div className="authPageContent col-centered col-xs-12 col-sm-12 col-md-5 col-lg-5">
-                    <Login/>
-                </div>
-            </div>
-          <Footer/>
-        </div>
-    );
+  return (
+    <div className="container-fluid">
+      <AppHeader title={'Login'}/>
+      <Login/>
+      <Footer/>
+    </div>
+  );
 }
 
 export default RouteLogin;

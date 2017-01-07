@@ -10,6 +10,8 @@ const authRoutes = require('./authRoutes.js')
 const path = require('path');
 const fs = require('fs')
 
+const _ = require('lodash');
+
 cloudinary.config(config.cloudConfig);
 
 // var dummyDB = require('../db/dummydata.js')
@@ -27,10 +29,12 @@ router.get('/:userName/profile', function(req, res) {
     var username = req.params.userName
     req.params.password = null;
     req.params.location = null;
-    db.userFunctions.findByUserName(username).then((user) => {
+    db.userFunctions.findByUserName(username).lean().then((user) => {
         user.password = null;
         user.location = null;
         user.session = null;
+        user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
+        user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
         res.send(user)
     }).catch(function(err) {
         res.send(err);
@@ -42,24 +46,36 @@ router.post('/save', function(req, res) {
     console.log("in save")
     var recipeId = req.body.recipeId
     var userId = req.body.userId
-    db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).then((bool) => {
-        console.log(bool)
-        res.send(bool);
-    }).catch((err) => {
+    db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).lean()
+      .then((user) => {
+        user.password = null;
+        user.location = null;
+        user.session = null;
+        user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
+        user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
+        res.send(user);
+      })
+      .catch((err) => {
         res.send(err);
-    })
+      })
 })
 
 router.post('/remove', function(req, res){
     var recipeId = req.body.recipeId
     var userId = req.body.userId
-    db.userFunctions.RemoveRecipeFromSavedRecipes(userId, recipeId).then((bool) => {
-        res.send(bool);
-    }).catch((err) => {
+    db.userFunctions.RemoveRecipeFromSavedRecipes(userId, recipeId).lean()
+      .then((user) => {
+        user.password = null;
+        user.location = null;
+        user.session = null;
+        user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
+        user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
+        res.send(user);
+      })
+      .catch((err) => {
         res.send(err);
     })
 })
-
 
 router.post('/updateInfo/profilePicture', authRoutes.ensureAuthenticated, upload.single('ProfilePicture'), (req, res) => {
     if (req.file !== undefined) {

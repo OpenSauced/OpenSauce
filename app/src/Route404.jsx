@@ -7,13 +7,12 @@ import Footer from './components/Footer/Footer';
 
 const Route404 = () => {
   return (
-    <div className="container-flex wholeContainer">
+    <div className="container-fluid">
       <HeaderNav/>
-      <AppHeader title={"404 This isn't the recipe you are looking for..."}/>
-      <div className="container-fluid 404PageContainer">
-        <div className='col-xs-12'>
-          <p>We're sorry but the page you are looking for doe not exist.</p>
-        </div>
+      <AppHeader title={'404 :('}/>
+      <div className="row">
+        <p>We're sorry but the page you are looking for doe not exist.</p>
+        <div></div>
       </div>
       <Footer/>
     </div>

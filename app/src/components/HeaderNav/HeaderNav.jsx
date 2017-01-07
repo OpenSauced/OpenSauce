@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 
 import HeaderNavLogo from './HeaderNavLogo';
 import HeaderNavButtons from './HeaderNavButtons';
+import HeaderNavProfile from './HeaderNavProfile';
 
 //Redux and async functions
 import {getUserData} from '../../actions/index';
@@ -18,7 +19,7 @@ class HeaderNav extends Component {
     }
     render() {
         return (
-          <nav className="navbar navbar-dark bg-inverse navbar-static-top">
+          <nav className="navbar navbar-default navbar-static-top">
               <div className="container">
                 <div className="navbar-header">
                   <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navButtonContainer">
@@ -29,9 +30,13 @@ class HeaderNav extends Component {
                   </button>
                   <HeaderNavLogo/>
                 </div>
-                  <ul id="navButtonContainer" className="navbar-collapse collapse">
-                    <HeaderNavButtons />
+                <div id="navButtonContainer" className="navbar-collapse collapse">
+                  <ul className="nav navbar-nav navbar-right">
+                    <li className="active"><a href="/">Home</a></li>
+                    <HeaderNavButtons/>
+                    <HeaderNavProfile/>
                   </ul>
+                </div>
               </div>
             </nav>
         );

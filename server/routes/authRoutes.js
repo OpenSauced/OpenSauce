@@ -30,11 +30,6 @@ router.ensureAuthenticated = function(req, res, next) {
     if (req.url === '/login' || req.url === '/signup') {
         return next();
     } else {
-      //user has no... user?
-      if(req.cookies.user === undefined) {
-        res.redirect('/auth/logout')
-        //logout
-      } else {
         db.userFunctions.findByUserName(req.cookies.user).then(function(userDB) {
             if (userDB == null) {
                 res.redirect('/auth/logout')
@@ -48,7 +43,6 @@ router.ensureAuthenticated = function(req, res, next) {
                 res.redirect('/auth/logout')
             }
         })
-      }
     }
 }
 

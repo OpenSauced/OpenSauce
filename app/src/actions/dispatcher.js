@@ -28,11 +28,7 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
       getStore().dispatch(getRecipeById('recipeId' in location.query ? location.query.recipeId : ''))
       break
 
-    
-
     default:
       console.log('Route_Dispatcher @', location.pathname, ' : nothing to dispatch')
-
   }
-
 }

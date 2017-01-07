@@ -9,11 +9,11 @@ import RecipeList from './containers/AddRecipe/RecipeList.js'
 
 class RouteMyRecipes  extends Component {
   render() {
-
+    
     return (
-      <div className="container-flex wholeContainer">
+      <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={'My Recipes'}>
+        <AppHeader title={'Catchy Phrase'}>
         </AppHeader>
         <div>
           <RecipeList route={this.props.route.path}/>

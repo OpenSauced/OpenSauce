@@ -185,32 +185,11 @@ xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
 
 //Adds a recipe id reference to the user's saved recipe object
 xPorts.addRecipeToSavedRecipes = function(userId, recipeId) {
-    return userModel.findOneAndUpdate({
-        _id: userId
-    }, {
-        $push: {
-            'saved_recipes': recipeId
-        }
-    }).then((oldUser) => {
-        // return userModel.findOne({_id: oldUser._id})
-        return true
-    }).catch((err) => {
-        console.log("error in userFunctions 3", err)
-    })
+    return userModel.findOneAndUpdate({_id: userId}, {$addToSet: {'saved_recipes': recipeId} }, {new: true})
 }
 
 xPorts.RemoveRecipeFromSavedRecipes = function(userId, recipeId) {
-    return userModel.findOneAndUpdate({
-        _id: userId
-    }, {
-        $pull: {
-            'saved_recipes': recipeId
-        }
-    }).catch((err) => {
-        console.log("error in userFunctions 4", err)
-    }).then((oldUser) => {
-        return false
-    })
+    return userModel.findOneAndUpdate({_id: userId}, {$pull: {'saved_recipes': recipeId}}, {new: true})
 }
 
 module.exports = xPorts;

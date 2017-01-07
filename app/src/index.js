@@ -30,7 +30,7 @@ const store = createStoreWithMiddleware(reducers);
 store.dispatch( getUserData() ).then( (data) => renderApplication () )
 
 function renderApplication () {
-
+  
   routeDispatcher()
   browserHistory.listen((location) => {
     routeDispatcher(location)
@@ -39,19 +39,19 @@ function renderApplication () {
   ReactDOM.render((
     <Provider store={store}>
       <Router history={browserHistory}>
-
+        
         <Route path="/" component={App}>
           {/* Homepage route */}
           <IndexRoute component={RouteHomepage}/>
           {/* Current User Profile Settings route */}
           <Route path="/profile" component={RouteProfile}/>
-
+                  
           {/* Signup route */}
           <Route path="/signup" component={RouteSignUp}/>
-
+        
           {/* Login route */ }
           <Route path="/login" component={RouteLogin}/>
-
+     
           {/* Recipe Routes */}
           <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
           <Route path="/viewrecipe(?:recipeId)" component={RouteViewRecipe}/>
@@ -64,7 +64,7 @@ function renderApplication () {
           <Route path="/**/*" component={Route404}/>
 
         </Route>
-
+        
       </Router>
     </Provider>
   ), document.getElementById('root'));
