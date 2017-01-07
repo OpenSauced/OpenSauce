@@ -32,6 +32,8 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
+.floo
+.flooignore
 
 # Optional REPL history
 .node_repl_history
