@@ -9,12 +9,10 @@ const ViewRecipe = ({recipe}) => {
 	if (recipe){
   return (
     <div>
-   <RecipeDescription recipeDescription={recipe.description} />
-   <RecipeCreator recipeCreator={recipe.creator}/>
-   <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
-   <RecipeDirections recipeDirections={recipe.directions}/>
-
-    
+      <RecipeDescription recipeDescription={recipe.description} />
+      <RecipeCreator recipeCreator={recipe.creator}/>
+      <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
+      <RecipeDirections recipeDirections={recipe.directions}/>
     </div>
   );
 }
