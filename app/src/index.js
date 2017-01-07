@@ -12,6 +12,7 @@ import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
 import MyRecipes from './RouteMyRecipes'
 import RouteViewRecipe from './RouteViewRecipe'
+import RouteEditRecipe from './RouteEditRecipe'
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -55,6 +56,7 @@ function renderApplication () {
           {/* Recipe Routes */}
           <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
           <Route path="/viewrecipe(?:recipeId)" component={RouteViewRecipe}/>
+          <Route path="/editrecipe(?:recipeId)" component={RouteEditRecipe}/>
           <Route path="/myrecipes" component={MyRecipes}/>
 
           {/* Test Routes*/}

@@ -33,8 +33,8 @@ class RouteViewRecipe extends Component {
   }
 
   render() {
-    
-    if (this.props.currentRecipe.title) {
+    console.log('REcipe Props in RouteViewRecipe: ', this.props.currentRecipe)
+    if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
          <HeaderNav/>
@@ -51,7 +51,7 @@ class RouteViewRecipe extends Component {
           </div>
           </AppHeader>
 
-          <ViewRecipe recipe={this.props.currentRecipe} />
+          <ViewRecipe recipe={this.props.currentRecipe} recipeId={this.props.currentRecipe._id}/>
           <Footer/>
         </div>
       );
@@ -72,5 +72,6 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
+
 
 
