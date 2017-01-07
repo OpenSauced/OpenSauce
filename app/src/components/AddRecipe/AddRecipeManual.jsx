@@ -104,7 +104,7 @@ class AddRecipeManual extends Component {
     })
     .then((recipe) => {
       //console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe/${recipe._id}`;
+      const path = `/viewrecipe?recipeId=${recipe._id}`;
       browserHistory.push(path);
     })
   }

@@ -16,7 +16,7 @@ const AddRecipeFromLink = (props) => {
       },
       success: function (recipe) {
       console.log("recipe was saved to the DB", recipe);
- 		  const path = `/viewrecipe/${recipe}`
+ 		  const path = `/viewrecipe?recipeId=${recipe}`
       browserHistory.push(path);
     },
       error: function(xhr, status, err) {
