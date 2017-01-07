@@ -7,7 +7,7 @@ import axios from 'axios'
 // REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchRecipes, getUserData } from '../../actions/index'
+import { fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe } from '../../actions/index'
 
 //Components
 import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
@@ -31,30 +31,26 @@ class RecipeList extends Component {
     }
   }
 
-  // loadMoreReduxRecipes () {
-  //   const newSkip = this.state.skip + this.state.limit;
-  //   console.log( 'new Skip: ', newSkip )
-  //   axios.get('/api/recipes/', { params: { skip: newSkip } } )
-  //   .then( (data) => { this.setState({ skip: newSkip }); })
-  // }
-
-  // showElem () {
-  //   console.log(this)
-  // }
-
   renderRecipes(recipe) {
     return(
-      <HPFeedRecipe key={recipe._id} recipe={recipe}/>
+      <HPFeedRecipe 
+        key={recipe._id} 
+        recipe={recipe}
+        userId={this.props.userData.userData._id}
+        recipeId={recipe._id} 
+        savedRecipes={this.props.userData.userData.saved_recipes}
+        addRecipe={this.props.addUserSavedRecipe}
+        removeRecipe={this.props.removeUserSavedRecipe}
+      />
     )
   }
 
   render() {
-    
     return (
       <div>
         <SearchBar />
         <ul className="row recipe_card">
-          {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes) : "NO RESULTS FOUND"  )  : "LOADING"}
+          {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
         </ul>   
       </div>
     )
@@ -63,12 +59,13 @@ class RecipeList extends Component {
 
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    userData: state.userData
   }
 }
  
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes, getUserData }, dispatch)
+  return bindActionCreators ({ fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)

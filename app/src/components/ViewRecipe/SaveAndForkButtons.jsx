@@ -7,7 +7,7 @@ const SaveAndForkButtons = ({recipeId, userId, saveRecipe, forkRecipe, removeRec
     <i className="fa fa-star fa-3x blue"></i><br></br><div>Remove this Recipe from My Cookbook</div></div>
   : <div onClick={() => saveRecipe(recipeId, userId)}>
     <i className="fa fa-star fa-3x black"></i><br></br><div>Add this Recipe to My Cookbook</div></div>  
-  console.log(savedRecipes)
+  
   return (
     <div>
     <div>
