@@ -33,7 +33,7 @@ class RouteViewRecipe extends Component {
   }
 
   render() {
-    console.log(this.props.userData.userData)
+    
     if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
