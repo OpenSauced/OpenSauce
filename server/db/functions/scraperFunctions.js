@@ -21,7 +21,9 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
-    if (url.includes('epicurious') && url.includes('/recipes/')) {
+    if (!url.includes('epicurious') && !url.includes('foodnetwork') && !url.includes('allrecipes')) {
+        return Promise.reject("Sorry! We don't support that site")
+    } else if (url.includes('epicurious') && url.includes('/recipes/')) {
         return xPorts.scrapeEpicurious(url)
     } else if (url.indexOf('foodnetwork') !== -1) {
         return xPorts.scrapeFoodNetwork(url)
@@ -29,7 +31,7 @@ xPorts.scrapeRecipe = function(url) {
         return xPorts.scrapeAllRecipes(url)
     } 
     else {
-        return Promise.reject('This site is not supported')
+        return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
     }
 
 }
@@ -51,7 +53,7 @@ xPorts.scrapeEpicurious = function(url) {
             description: 'div.dek p'
         })
         .catch((err) => {
-            throw new Error('Epicurious Scraping Error')
+            throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
         })
         .then(recipeObj => {
             var directions = recipeObj.directions.join(' ');
@@ -73,12 +75,12 @@ xPorts.scrapeFoodNetwork = function(url) {
             }
         })
         .catch((err) => {
-            throw new Error('Food Network Scraping Error')
+            throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
         })
         .then(recipeObj => {
             console.log("FOOOOOOOOD NETWORRRRRRRRK ", recipeObj)
             if (recipeObj.ingredients.length < 1){
-                return Promise.reject('This page did not include a recipe')
+                return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
             } else {
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions
@@ -99,7 +101,7 @@ xPorts.scrapeAllRecipes = function(url) {
             description: 'div.submitter__description',
         })
         .catch((err) => {
-            throw new Error('All Recipes Scraping Error')
+            throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
         })
         .then(recipeObj => {
             for (var i = 0; i < recipeObj.ingredients.length; i++) {

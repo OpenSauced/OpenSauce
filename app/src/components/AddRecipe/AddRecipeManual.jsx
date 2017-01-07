@@ -100,7 +100,7 @@ class AddRecipeManual extends Component {
       processData: false,
     })
     .catch((err) => {
-      console.error('Recipe did not post. Please enter all required information', err);
+      console.error('didnt post', xhr.responseText);
     })
     .then((recipe) => {
       console.log('Getting current data? ', recipe);

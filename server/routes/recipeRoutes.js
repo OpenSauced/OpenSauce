@@ -57,6 +57,9 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
             response = recipe
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
         })
+        .catch((err) => {
+            res.status(500).send("Error in the addNewRecipe function")
+        })
         .then((user) => {
         // checks to see if req.file is empty
           if (req.file !== undefined) {
@@ -79,8 +82,7 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
           }
         })
         .catch((err) => {
-            console.log("THE ERROR. DUN DUN DUUUUUN ", err)
-            res.send(500, err);
+            res.status(500).send("Error in the addRecipeToMyRecipes function")
         })
 
 })
@@ -105,7 +107,7 @@ router.post('/:username/saveforkedrecipe', function(req, res) {
             res.send(recipe);
         })
         .catch((err) => {
-            res.send(500, err);
+            res.status(500).send(err.message)
         })
 })
 
