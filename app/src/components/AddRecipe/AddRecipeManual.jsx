@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
+import Dropzone from 'react-dropzone';
+
 //Redux and async functions
 import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
@@ -16,13 +18,15 @@ class AddRecipeManual extends Component {
       title: '',
       description: '',
       directions: '',
-      ingredients: ['']
+      ingredients: [''],
+      images: []
     }
 
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.addNewIngredient = this.addNewIngredient.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   componentWillMount() {
@@ -80,26 +84,27 @@ class AddRecipeManual extends Component {
     //   ingredient.replace(' ', '') === '' ? null : ingredient; 
     // });
 
-    let recipe = {
-      title: this.state.title,
-      description: this.state.description,
-      ingredients: ingredients,
-      directions: this.state.directions,
-    }
+    let recipe = new FormData();
+    recipe.append('title', this.state.title);
+    recipe.append('description', this.state.description);
+    recipe.append('ingredients', JSON.stringify(ingredients));
+    recipe.append('directions', this.state.directions);
+    recipe.append('images', this.state.images[0]);
 
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData.username}/addrecipe`,
       data: recipe,
-      dataType: 'json'
+      cache: false,
+      contentType: false,
+      processData: false,
     })
     .catch((err) => {
       console.error('Recipe did not post. Please enter all required information', err);
-      alert('Message: ', err)
     })
     .then((recipe) => {
-      console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe/${recipe._id}`
+      //console.log('Getting current data? ', recipe);
+      const path = `/viewrecipe?recipeId=${recipe._id}`;
       browserHistory.push(path);
     })
   }
@@ -125,11 +130,29 @@ class AddRecipeManual extends Component {
     this.setState({ingredients: newIngredients})
   }
 
+  // Handle the image file upload. This accepts clicking and drag and drop.
+  onDrop(acceptedFiles) {
+    this.setState({
+      // This is required for multiple images
+      // images: this.state.images.concat(acceptedFiles)
+      // This is for single image uploads
+      images: acceptedFiles
+    });
+  }
+
   render() {
     return (
       <div className="row">
         <div className="container">
-          <form onSubmit={this.onFormSubmit.bind(this)}>
+          <form id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
+            <div className="row">
+              <Dropzone multiple={false} onDrop={this.onDrop}>
+                <div>Try dropping some files here, or click to select files to upload.</div>
+              </Dropzone>
+              {this.state.images.length > 0 ? <div>
+                <div>{this.state.images.map((image) => <img key={1} src={image.preview} /> )}</div>
+                </div> : null}
+            </div>
             <div className="row">
               <label htmlFor="">
                 <span>Recipe Title:</span>

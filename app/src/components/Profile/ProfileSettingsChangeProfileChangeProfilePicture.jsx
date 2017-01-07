@@ -1,54 +1,64 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 
-import axios from 'axios';
 
 class ChangeProfilePicture extends Component {
     constructor() {
-        super();
-        this.state = {
-            files: []
-        };
+      super();
+      this.state = {
+        image: []
+      };
 
-        this.onDrop = this.onDrop.bind(this);
-        this.onOpenClick = this.onOpenClick.bind(this);
+      this.onDrop = this.onDrop.bind(this);
     }
 
-    onDrop(files) {
-        this.setState( { files: files } );
+    // Puts the image into the component state
+    onDrop(image) {
+      this.setState( { image: image } );
     }
 
-    onOpenClick() {
-        this.handleImageUpload();
-    }
+    // Handles the input for the submit button
+    // ****CURRENTLY NOT IMPLEMENTED****
+    handleImageUpload(e) {
+      e.preventDefault();
 
-    handleImageUpload() {
-        axios({
-            method: 'POST',
-            url: '/api/users/updateInfo/profilePicture',
-            data: {
-                file: this.state.files[0].preview
-            },
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then((res) => {
-            console.log(res);
-        }).catch((err) => {
-            console.log(err);
-        })
+      let image = new FormData();
+      image.append('ProfilePicture', this.state.image[0]);
+
+      $.ajax({
+        method: 'POST',
+        url: `/api/users/updateInfo/profilePicture`,
+        data: 'image',
+        cache: false,
+        contentType: false,
+        processData: false,
+      })
+      .catch((err) => {
+        console.error('Image did not upload: ', err);
+      })
+      .then((res) => {
+        console.log('Getting current data? ', recipe);
+        const path = '/profile';
+        //browserHistory.push(path);
+      })
     }
 
     render() {
-        return (
-            <form action="/api/users/updateInfo/profilePicture" method="post" enctype="multipart/form-data" target="_top">
-                <label className="col-xs-2 col-form-label" for="ProfilePicture">Profile Picture:</label>
-                <input className="form-control" type="file" name="ProfilePicture" accept="image/*"/>
-                <div>
-                    <input type="submit" value="save"/>
-                </div>
-            </form>
-        );
+      return (
+        <form action="/api/users/updateInfo/profilePicture" method="post" encType="multipart/form-data" target="_top">
+          <label className="col-xs-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
+          <Dropzone name="ProfilePicture" multiple={false} onDrop={this.onDrop}>
+            <div>Click or drag an image inside of the box to upload.</div>
+          </Dropzone>
+          {this.state.image.length > 0 ? <div>
+          <h2>Your image:</h2>
+          <div>{<img src={this.state.image[0].preview} />}</div>
+          </div> : null}
+          <div>
+            <input type="submit" value="save"/>
+          </div>
+        </form>
+      );
     }
 }
 

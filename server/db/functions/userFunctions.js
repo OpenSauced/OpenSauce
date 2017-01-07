@@ -1,5 +1,5 @@
-const userModel = require('../models/user.js')
-const xPorts = {}
+const userModel = require('../models/user.js');
+const xPorts = {};
 
 // xPorts.findByUserName = function(name) {
 //     console.log('looking for user userFunctions.js', name);
