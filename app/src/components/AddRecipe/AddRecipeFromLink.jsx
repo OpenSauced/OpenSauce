@@ -3,7 +3,6 @@ import {browserHistory} from 'react-router';
 
 
 const AddRecipeFromLink = (props) => {
-  console.log("getting current user?", props)
   var userId = props.userData._id
   var formSubmit = function(e) {
     e.preventDefault();
@@ -20,6 +19,8 @@ const AddRecipeFromLink = (props) => {
       browserHistory.push(path);
     },
       error: function(xhr, status, err) {
+        var responseMessage = xhr.responseText
+          props.openModal(xhr.responseText)
           console.error("did not post to DB from link ", status, xhr.responseText);
       }
 
