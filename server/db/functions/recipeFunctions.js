@@ -18,8 +18,24 @@ xPorts.findRecentRecipes = function(currentLimit) {
     .populate('creator', 'username')
 }
 
-//adds a new recipe to the DB
+xPorts.editRecipe = function(username, recipe){
+    console.log('editrecipe function')
+    return recipeModel.findOneAndUpdate({ _id: recipe.recipeId }, 
+      {
+        $set: {
+          'title': recipe.title,
+          'description': recipe.description,
+          'ingredients': recipe.ingredients,
+          'directions': recipe.directions
+        }
+      },
+      { 
+        new: true 
+      }
+    )
+}
 
+//adds a new recipe to the DB
 xPorts.addNewRecipe = (userId, recipe) => {
     recipe.creator = userId
     if (typeof recipe.ingredients === 'string') {
