@@ -55,6 +55,7 @@ function renderApplication () {
           {/* Recipe Routes */}
           <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
           <Route path="/viewrecipe(?:recipeId)" component={RouteViewRecipe}/>
+          <Route path="/editrecipe(?:recipeId)" component={RouteEditRecipe}/>
           <Route path="/myrecipes" component={MyRecipes}/>
 
           {/* Test Routes*/}
