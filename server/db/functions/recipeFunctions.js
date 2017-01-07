@@ -15,7 +15,7 @@ xPorts.findRecentRecipes = function(currentLimit) {
     .sort([
       ['_id', -1]
     ])
-    .populate('creator')
+    .populate('creator', 'username')
 }
 
 //adds a new recipe to the DB
@@ -47,7 +47,7 @@ xPorts.addPhotoUrl = function(id, result) {
 //finds and returns one recipe based on recipe ID
 xPorts.findRecipeById = function(recipeId) {
   return recipeModel.findOne({ _id: recipeId })
-    .populate('creator')
+    .populate('creator', 'username')
     .exec((err, recipe) => {
       if (err) console.log("recipeFunctions 2: ", err);
     })
@@ -89,7 +89,7 @@ xPorts.searchRecipes = function(term) {
       { $text: { $search: term } },
       { score: { $meta: "textScore" } }
     )
-    .populate('creator')
+    .populate('creator', 'username')
     .sort( 
       { score: { $meta: "textScore"} }
     )
