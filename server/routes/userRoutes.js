@@ -63,17 +63,17 @@ router.post('/remove', function(req, res){
 
 router.post('/updateInfo/profilePicture', authRoutes.ensureAuthenticated, upload.single('ProfilePicture'), (req, res) => {
     if (req.file !== undefined) {
-      cloudinary.uploader.upload(req.file.path, (result) => {
+    cloudinary.uploader.upload(req.file.path, (result) => {
         fs.unlink(req.file.path, (err) => {
-          if (err) {
-            console.error('Error on image delete:', err);
-          } else {
-            db.userFunctions.addPhotoUrl(req.cookies.user, result).then(function(userDB) {
-                res.redirect(301, '/profile');
-            })
-          }
+            if (err) {
+                console.error('Error on image delete:', err);
+            } else {
+                db.userFunctions.addPhotoUrl(req.cookies.user, result).then(function(userDB) {
+                    res.redirect(301, '/profile');
+                })
+            }
         });
-      });
+    });
   } else {
     res.redirect(301, '/profile')
   }

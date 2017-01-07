@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
-import Dropzone from 'react-dropzone';
-
 //Redux and async functions
 import { getUserData } from '../../actions/index';
 import { connect } from 'react-redux';
@@ -18,21 +16,19 @@ class AddRecipeManual extends Component {
       title: '',
       description: '',
       directions: '',
-      ingredients: [''],
-      images: []
+      ingredients: ['']
     }
 
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
     this.addNewIngredient = this.addNewIngredient.bind(this);
-    this.onDrop = this.onDrop.bind(this);
   }
 
   componentWillMount() {
     this.props.getUserData()
     .then((user) => {
-      //console.log("id in componentWillMount ", this.props.recipeId)
+      console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
         console.log("id" ,this.props.recipeId)
         this.getRecipeFromDB(this.props.recipeId)
@@ -44,7 +40,7 @@ class AddRecipeManual extends Component {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-        //console.log("RECIPE ", recipe.directions)
+        console.log("RECIPE ", recipe.directions)
           this.setState({ 
             title: recipe.title,
             description: recipe.description,
@@ -84,27 +80,26 @@ class AddRecipeManual extends Component {
     //   ingredient.replace(' ', '') === '' ? null : ingredient; 
     // });
 
-    let recipe = new FormData();
-    recipe.append('title', this.state.title);
-    recipe.append('description', this.state.description);
-    recipe.append('ingredients', JSON.stringify(ingredients));
-    recipe.append('directions', this.state.directions);
-    recipe.append('images', this.state.images[0]);
+    let recipe = {
+      title: this.state.title,
+      description: this.state.description,
+      ingredients: ingredients,
+      directions: this.state.directions,
+    }
 
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData.username}/addrecipe`,
       data: recipe,
-      cache: false,
-      contentType: false,
-      processData: false,
+      dataType: 'json'
     })
     .catch((err) => {
       console.error('Recipe did not post. Please enter all required information', err);
+      alert('Message: ', err)
     })
     .then((recipe) => {
-      //console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe/${recipe._id}`;
+      console.log('Getting current data? ', recipe);
+      const path = `/viewrecipe/${recipe._id}`
       browserHistory.push(path);
     })
   }
@@ -130,26 +125,11 @@ class AddRecipeManual extends Component {
     this.setState({ingredients: newIngredients})
   }
 
-  onDrop(acceptedFiles) {
-    console.log(this)
-    this.setState({
-      images: this.state.images.concat(acceptedFiles)
-    });
-  }
-
   render() {
     return (
       <div className="row">
         <div className="container">
-          <form id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
-            <div className="row">
-              <Dropzone multiple={false} onDrop={this.onDrop}>
-                <div>Try dropping some files here, or click to select files to upload.</div>
-              </Dropzone>
-              {this.state.images.length > 0 ? <div>
-                <div>{this.state.images.map((image) => <img src={image.preview} /> )}</div>
-                </div> : null}
-            </div>
+          <form onSubmit={this.onFormSubmit.bind(this)}>
             <div className="row">
               <label htmlFor="">
                 <span>Recipe Title:</span>
@@ -161,7 +141,6 @@ class AddRecipeManual extends Component {
                 />
               </label>
             </div>
-
             <h3>Recipe Description:</h3>
             <textarea
               placeholder="Please enter a description"

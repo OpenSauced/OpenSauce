@@ -10,15 +10,12 @@ var RecipeSchema = new Schema({
 	description: String,
 	ingredients: {type: [String], required: true},
 	directions: {type: String, required: true},
-	// The recipe_images is plural but only accepts one image currently.
-	// Will refactor to allow multiple images later
-	recipe_images: {
-		public_url: String,
-		secure_url: String,
-		public_id: String,
-		signature: String,
+	recipe_images: [{
+		image_data: {type: Buffer, default: null},
+		image_name: {type: String, default: null},
+		mimetype: {type: String, default: null},
 		placeholder: {type: String, default: 'https://placehold.it/900x600'}
-	},
+	}],
 	forked_parent:{
 		type: Schema.Types.ObjectId,
 		ref: 'recipes',
