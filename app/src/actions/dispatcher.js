@@ -12,7 +12,7 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
 
   getStore().dispatch(updateSearchTerm('term' in location.query ? location.query.term : ''))
   //console.log(location)
-  switch (location.pathname) {
+  switch (location.pathname.toLowerCase()) {
     case '/':
       getStore().dispatch(clearRecipes())
       getStore().dispatch(fetchRecipes(location.search))
