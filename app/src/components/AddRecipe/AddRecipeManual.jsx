@@ -11,8 +11,8 @@ import { bindActionCreators } from 'redux';
 import AddRecipeManualList from './AddRecipeManualList';
 
 class AddRecipeManual extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       title: '',
@@ -32,9 +32,8 @@ class AddRecipeManual extends Component {
   componentWillMount() {
     this.props.getUserData()
     .then((user) => {
-      console.log("id in componentWillMount ", this.props.recipeId)
+      // console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
-        console.log("id" ,this.props.recipeId)
         this.getRecipeFromDB(this.props.recipeId)
       } 
     })
@@ -54,7 +53,7 @@ class AddRecipeManual extends Component {
            });
       }.bind(this),
       error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
+          console.error(status, err.toString());
       }.bind(this),
     });
   }
@@ -101,6 +100,7 @@ class AddRecipeManual extends Component {
     })
     .catch((err) => {
       console.error('didnt post', xhr.responseText);
+      props.openModal(xhr.responseText)
     })
     .then((recipe) => {
       console.log('Getting current data? ', recipe);
