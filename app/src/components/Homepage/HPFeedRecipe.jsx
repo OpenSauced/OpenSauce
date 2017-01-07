@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 // LazyLoad allows the component to be loaded as  the user scrolls instead of all at once
 import LazyLoad from 'react-lazy-load';
 
-const HPFeedRecipe = ({recipe, savedRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
+const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
   return (
     <LazyLoad offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}
@@ -20,15 +20,19 @@ const HPFeedRecipe = ({recipe, savedRecipes, addRecipe, removeRecipe, userId, re
                 href={`/addrecipe?recipe=${recipe._id}`} 
                 className="btn btn-primary recipeCardBtn">Fork Recipe</a>
               {
-                recipe._id in savedRecipes ?
+                recipe._id in myRecipes ?
                   <div 
                     className="btn btn-secondary recipe_card-like_button recipeCardBtn"
-                    onClick={() => {removeRecipe(recipeId, userId)}}
-                  >Unlike Recipe</div>
-                : <div 
-                    className="btn btn-secondary recipe_card-like_button recipeCardBtn"
-                    onClick={() => {addRecipe(recipeId, userId)}}
-                  >Like Recipe</div>
+                  >OWNED RECIPE</div>
+                : recipe._id in savedRecipes ?
+                    <div 
+                      className="btn btn-secondary recipe_card-like_button recipeCardBtn"
+                      onClick={() => {removeRecipe(recipeId, userId)}}
+                    >Unlike Recipe</div>
+                  : <div 
+                      className="btn btn-secondary recipe_card-like_button recipeCardBtn"
+                      onClick={() => {addRecipe(recipeId, userId)}}
+                    >Like Recipe</div>
               }
 
               

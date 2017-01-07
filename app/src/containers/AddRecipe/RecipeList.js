@@ -38,6 +38,7 @@ class RecipeList extends Component {
         recipe={recipe}
         userId={this.props.userData.userData._id}
         recipeId={recipe._id} 
+        myRecipes={this.props.userData.userData.my_recipes}
         savedRecipes={this.props.userData.userData.saved_recipes}
         addRecipe={this.props.addUserSavedRecipe}
         removeRecipe={this.props.removeUserSavedRecipe}
