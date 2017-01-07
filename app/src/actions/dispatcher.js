@@ -24,7 +24,12 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
       break
 
     case '/viewrecipe':
-      console.log('we are at: ', location.pathname)
+      console.log('Route_Dispatcher OK ', location.pathname)
+      getStore().dispatch(getRecipeById('recipeId' in location.query ? location.query.recipeId : ''))
+      break
+
+    case '/editrecipe':
+      console.log('Route_Dispatcher OK ', location.pathname)
       getStore().dispatch(getRecipeById('recipeId' in location.query ? location.query.recipeId : ''))
       break
 
