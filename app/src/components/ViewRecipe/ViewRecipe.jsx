@@ -15,7 +15,7 @@ const ViewRecipe = ({recipe}) => {
       <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
       <RecipeDirections recipeDirections={recipe.directions}/>
       {/* this button takes you to edit a recipe*/}
-      <button> <Link to={`/editRecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
+      <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
     </div>
   );
 }
