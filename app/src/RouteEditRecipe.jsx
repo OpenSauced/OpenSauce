@@ -37,14 +37,15 @@ class RouteEditRecipe extends Component {
   componentWillMount () {
     console.log('derka derka I will mount')
     console.log('RouteEditRecipe props',this.props)
-    const userData= this.props.userData
-    this.recipeData = {
-      title: userData.title,
-      description: userData.description,
-      ingredients: userData.ingredients,
-      directions: userData.directions,
-      recipeId: userData._id
-    }
+    let currentRecipe = this.props.currentRecipe
+    this.setState({ 
+      title: currentRecipe.title,
+      description: currentRecipe.description,
+      ingredients: currentRecipe.ingredients,
+      directions: currentRecipe.directions,
+      recipeId: currentRecipe._id,
+      forkedParent: currentRecipe.forkedParent || 'none'
+    });
   }
 
   //function to track changes in the ingredient text and set it to state
@@ -115,11 +116,11 @@ class RouteEditRecipe extends Component {
 
   render() {
     console.log('current props', this.props)
-    return (
+    console.log('current state', this.state)
+    return (  
       <div>
-        
+        edit recipe
       </div>
-  
     )
   }
 }
@@ -141,56 +142,56 @@ function mapStateToProps (state) {
 
 export default connect(mapStateToProps)(RouteEditRecipe)
 
- // <div className="row">
- //        <div className="container">
- //          <form onSubmit={this.onFormSubmit}>
- //            <div className="row">
- //              <label htmlFor="">
- //                <span>Recipe Title:</span>
- //                <input
- //                  placeholder="Please enter Recipe Name"
- //                  id="recipe-title"
- //                  value={this.recipeData.title}
- //                  onChange={'nerp'/*this.onInputChange.bind(this)*/}
- //                />
- //              </label>
- //            </div>
- //            <h3>Recipe Description:</h3>
- //            <textarea
- //              placeholder="Please enter a description"
- //              className=""
- //              id="recipe-description"
- //              value={this.recipeData.description}
- //              onChange={'nerp'/*this.onInputChange.bind(this)*/}
- //            ></textarea>
+      //  <div className="row">
+      //   <div className="container">
+      //     <form onSubmit={this.onFormSubmit}>
+      //       <div className="row">
+      //         <label htmlFor="">
+      //           <span>Recipe Title:</span>
+      //           <input
+      //             placeholder="Please enter Recipe Name"
+      //             id="recipe-title"
+      //             value={this.recipeData.title}
+      //             onChange={'nerp'/*this.onInputChange.bind(this)*/}
+      //           />
+      //         </label>
+      //       </div>
+      //       <h3>Recipe Description:</h3>
+      //       <textarea
+      //         placeholder="Please enter a description"
+      //         className=""
+      //         id="recipe-description"
+      //         value={this.recipeData.description}
+      //         onChange={'nerp'/*this.onInputChange.bind(this)*/}
+      //       ></textarea>
 
- //            <h3>Directions </h3>
- //            <textarea
- //              placeholder="Please enter directions"
- //              className=""
- //              id="recipe-directions"
- //              value={this.recipeData.directions}
- //              onChange={'nerp'/*this.onInputChange.bind(this)*/}
- //            ></textarea>
+      //       <h3>Directions </h3>
+      //       <textarea
+      //         placeholder="Please enter directions"
+      //         className=""
+      //         id="recipe-directions"
+      //         value={this.recipeData.directions}
+      //         onChange={'nerp'/*this.onInputChange.bind(this)*/}
+      //       ></textarea>
 
- //            <h3>Ingredients</h3>
- //            {
- //              this.recipeData.ingredients.map((ingredient, index) => {
- //                return (
- //                  <EditRecipeIngredient
- //                    key={index}
- //                    ingredient={this.recipeData.ingredients[index]}
- //                    index={index}
- //                    handleIngredientOnChange={this.onIngredientChange}
- //                    handleRemoveIngredient={this.removeIngredient}
- //                  />
- //                )
- //              })
- //            }
- //            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
- //            <span className="">
- //              <button type="submit" className="btn btn-secondary">Submit</button>
- //            </span>
- //          </form>
- //        </div>
- //      </div> 
+      //       <h3>Ingredients</h3>
+      //       {
+      //         this.recipeData.ingredients.map((ingredient, index) => {
+      //           return (
+      //             <EditRecipeIngredient
+      //               key={index}
+      //               ingredient={this.recipeData.ingredients[index]}
+      //               index={index}
+      //               handleIngredientOnChange={this.onIngredientChange}
+      //               handleRemoveIngredient={this.removeIngredient}
+      //             />
+      //           )
+      //         })
+      //       }
+      //       <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+      //       <span className="">
+      //         <button type="submit" className="btn btn-secondary">Submit</button>
+      //       </span>
+      //     </form>
+      //   </div>
+      // </div> 
