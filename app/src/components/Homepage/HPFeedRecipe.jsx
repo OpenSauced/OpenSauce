@@ -38,6 +38,8 @@ const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe,
               
             </div>
             <h2 className="card-title"><Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link></h2>
+            <h3 className="card-title"><Link to={`/recipesbyuser?userId=${recipe.creator.username}`}>Author: {recipe.creator.username}</Link></h3>
+            <p className="card-text">{recipe.description}</p>
             <p className="card-text">{recipe.description}</p>
             <p> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
           </div>

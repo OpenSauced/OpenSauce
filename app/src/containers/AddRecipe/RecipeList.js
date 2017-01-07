@@ -47,6 +47,7 @@ class RecipeList extends Component {
   }
 
   render() {
+    console.log(this.props.recipes)
     return (
       <div>
         <SearchBar />
