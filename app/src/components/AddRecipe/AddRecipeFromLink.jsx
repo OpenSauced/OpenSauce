@@ -4,14 +4,14 @@ import {browserHistory} from 'react-router';
 
 const AddRecipeFromLink = (props) => {
   console.log("getting current user?", props)
-  var username = props.userData.username
+  var userId = props.userData._id
   var formSubmit = function(e) {
     e.preventDefault();
     $.ajax({
       url: '/api/recipes/scraperecipe',
       type: 'POST',
       data: {
-        username: username,
+        userId: userId,
         url: $('input[name=url]').val()
       },
       success: function (recipe) {
@@ -20,7 +20,7 @@ const AddRecipeFromLink = (props) => {
       browserHistory.push(path);
     },
       error: function(xhr, status, err) {
-          console.error("did not post to DB from link ", status, err.toString());
+          console.error("did not post to DB from link ", status, xhr.responseText);
       }
 
     })

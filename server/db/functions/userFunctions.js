@@ -170,17 +170,7 @@ xPorts.findUserRecipes = function(username) {
 
 //Adds a recipe id reference to the user's my_recipe object
 xPorts.addRecipeToMyRecipes = function(userId, recipeId) {
-    return userModel.findOneAndUpdate({
-        _id: userId
-    }, {
-        $push: {
-            'my_recipes': recipeId
-        }
-    }).then((user) => {
-        return user
-    }).catch((err) => {
-        console.log("error in userFunctions 2", err)
-    })
+    return userModel.findOneAndUpdate({_id: userId}, {$addToSet: {'my_recipes': recipeId}}, {new: true})
 }
 
 //Adds a recipe id reference to the user's saved recipe object
