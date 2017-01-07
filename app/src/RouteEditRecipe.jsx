@@ -29,9 +29,9 @@ class RouteEditRecipe extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this)
     //recipeData is variable that can be set and used for the whole component
     this.recipeData = {}
-    // this.onIngredientChange = this.onIngredientChange.bind(this);
-    // this.removeIngredient   = this.removeIngredient.bind(this);
-    // this.addNewIngredient   = this.addNewIngredient.bind(this);
+    this.onIngredientChange = this.onIngredientChange.bind(this);
+    this.removeIngredient   = this.removeIngredient.bind(this);
+    this.addNewIngredient   = this.addNewIngredient.bind(this);
   }
 
   componentWillMount () {
@@ -70,20 +70,20 @@ class RouteEditRecipe extends Component {
     this.setState({ingredients: newIngredients})
   }
 
-  // onInputChange(event) {
-  //   //create a case and match it to the element id, update state accordingly
-  //   switch(event.target.id) {
-  //     case 'recipe-title':
-  //       this.setState({title: event.target.value})
-  //       break;
-  //     case 'recipe-description':
-  //       this.setState({description: event.target.value})
-  //       break;
-  //     case 'recipe-directions':
-  //       this.setState({directions: event.target.value})
-  //       break;
-  //   }
-  // }
+  onInputChange(event) {
+    //create a case and match it to the element id, update state accordingly
+    switch(event.target.id) {
+      case 'recipe-title':
+        this.setState({title: event.target.value})
+        break;
+      case 'recipe-description':
+        this.setState({description: event.target.value})
+        break;
+      case 'recipe-directions':
+        this.setState({directions: event.target.value})
+        break;
+    }
+  }
 
   onFormSubmit(e) {
     e.preventDefault();
@@ -116,60 +116,10 @@ class RouteEditRecipe extends Component {
   render() {
     console.log('current props', this.props)
     return (
-
-    <div className="row">
-        <div className="container">
-          <form onSubmit={this.onFormSubmit}>
-            <div className="row">
-              <label htmlFor="">
-                <span>Recipe Title:</span>
-                <input
-                  placeholder="Please enter Recipe Name"
-                  id="recipe-title"
-                  value={this.recipeData.title}
-                  onChange={'nerp'/*this.onInputChange.bind(this)*/}
-                />
-              </label>
-            </div>
-            <h3>Recipe Description:</h3>
-            <textarea
-              placeholder="Please enter a description"
-              className=""
-              id="recipe-description"
-              value={this.recipeData.description}
-              onChange={'nerp'/*this.onInputChange.bind(this)*/}
-            ></textarea>
-
-            <h3>Directions </h3>
-            <textarea
-              placeholder="Please enter directions"
-              className=""
-              id="recipe-directions"
-              value={this.recipeData.directions}
-              onChange={'nerp'/*this.onInputChange.bind(this)*/}
-            ></textarea>
-
-            <h3>Ingredients</h3>
-            {
-              this.recipeData.ingredients.map((ingredient, index) => {
-                return (
-                  <EditRecipeIngredient
-                    key={index}
-                    ingredient={this.recipeData.ingredients[index]}
-                    index={index}
-                    handleIngredientOnChange={this.onIngredientChange}
-                    handleRemoveIngredient={this.removeIngredient}
-                  />
-                )
-              })
-            }
-            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
-            <span className="">
-              <button type="submit" className="btn btn-secondary">Submit</button>
-            </span>
-          </form>
-        </div>
-      </div> 
+      <div>
+        
+      </div>
+  
     )
   }
 }
@@ -191,3 +141,56 @@ function mapStateToProps (state) {
 
 export default connect(mapStateToProps)(RouteEditRecipe)
 
+ // <div className="row">
+ //        <div className="container">
+ //          <form onSubmit={this.onFormSubmit}>
+ //            <div className="row">
+ //              <label htmlFor="">
+ //                <span>Recipe Title:</span>
+ //                <input
+ //                  placeholder="Please enter Recipe Name"
+ //                  id="recipe-title"
+ //                  value={this.recipeData.title}
+ //                  onChange={'nerp'/*this.onInputChange.bind(this)*/}
+ //                />
+ //              </label>
+ //            </div>
+ //            <h3>Recipe Description:</h3>
+ //            <textarea
+ //              placeholder="Please enter a description"
+ //              className=""
+ //              id="recipe-description"
+ //              value={this.recipeData.description}
+ //              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+ //            ></textarea>
+
+ //            <h3>Directions </h3>
+ //            <textarea
+ //              placeholder="Please enter directions"
+ //              className=""
+ //              id="recipe-directions"
+ //              value={this.recipeData.directions}
+ //              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+ //            ></textarea>
+
+ //            <h3>Ingredients</h3>
+ //            {
+ //              this.recipeData.ingredients.map((ingredient, index) => {
+ //                return (
+ //                  <EditRecipeIngredient
+ //                    key={index}
+ //                    ingredient={this.recipeData.ingredients[index]}
+ //                    index={index}
+ //                    handleIngredientOnChange={this.onIngredientChange}
+ //                    handleRemoveIngredient={this.removeIngredient}
+ //                  />
+ //                )
+ //              })
+ //            }
+ //            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+ //            <span className="">
+ //              <button type="submit" className="btn btn-secondary">Submit</button>
+ //            </span>
+ //          </form>
+ //        </div>
+ //      </div> 
