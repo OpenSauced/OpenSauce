@@ -93,18 +93,18 @@ class AddRecipeManual extends Component {
 
     $.ajax({
       method: 'POST',
-      url: `/api/recipes/${this.props.userData.username}/addrecipe`,
+      url: `/api/recipes/${this.props.userData._id}/addrecipe`,
       data: recipe,
       cache: false,
       contentType: false,
       processData: false,
     })
     .catch((err) => {
-      console.error('Recipe did not post. Please enter all required information', err);
+      console.error('didnt post', xhr.responseText);
     })
     .then((recipe) => {
-      //console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe?recipeId=${recipe._id}`;
+      console.log('Getting current data? ', recipe);
+      const path = `/viewrecipe?recipeId=${recipe._id}`
       browserHistory.push(path);
     })
   }

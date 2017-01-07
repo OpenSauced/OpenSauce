@@ -18,39 +18,13 @@ xPorts.findRecentRecipes = function(currentLimit) {
 }
 
 //adds a new recipe to the DB
-//calls addRecipeToMyRecipes to update 'my_recipes' in user document
-xPorts.addNewRecipe = function(username, recipe, images) {
-  // checks to see if the ingredients come across as a JSON string and then parses them
-  if (typeof recipe.ingredients === 'string') {
-    recipe.ingredients = JSON.parse(recipe.ingredients);
-  }
-  return userFunctions.findByUserName(username)
-    .then((userObj) => {
-      return xPorts.checkRecipeTitleRepeats(userObj, recipe.title)
-    })
-    .catch((err) => {
-      console.log("recipeFunctions 1 ", err)
-      throw err
-    })
-    .then((user) => {
-      //console.log("int the ekjehgsdb;then")
-      recipe.creator = user._id
-      return new recipeModel(recipe)
-        .save()
-        .then((recipe) => {
-          userFunctions.addRecipeToMyRecipes(user._id, recipe._id)
-          return recipe;
-        })
-        .catch((err) => {
-          console.log("recipeFunctions 1.1 ", err)
-          return err
-        })
-    })
-    .catch((err) => {
-        console.log("recipeFunctions 1.2 ", err)
-        throw err
-    })
 
+xPorts.addNewRecipe = (userId, recipe) => {
+    recipe.creator = userId
+    if (typeof recipe.ingredients === 'string') {
+        recipe.ingredients = JSON.parse(recipe.ingredients);
+    }
+    return recipeModel.findOneAndUpdate({title: recipe.title, creator: recipe.creator}, recipe, {upsert: true, new: true})
 }
 
 // Adds a single photo to the recipe that the user has uploaded
@@ -122,16 +96,6 @@ xPorts.searchRecipes = function(term) {
 //GET RECIPES PER USER
 xPorts.findRecipesByUserName = function(username) {
   return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes')
-}
-
-xPorts.checkRecipeTitleRepeats = function(user, recipeTitle) {
-  console.log("checkRecipeTitleRepeats", recipeTitle)
-  for (var i = 0; i < user.my_recipes.length; i++) {
-    if (user.my_recipes[i].title === recipeTitle) {
-      throw new Error("Sorry! You've already created a recipe for " + recipeTitle + " . Add a new recipe instead!")
-    } 
-  }
-  return user
 }
 
 module.exports = xPorts;
