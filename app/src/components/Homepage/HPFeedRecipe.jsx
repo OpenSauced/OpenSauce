@@ -3,7 +3,6 @@ import React from 'react';
 import LazyLoad from 'react-lazy-load';
 
 const HPFeedRecipe = ({recipe, savedRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
-  console.log(recipe._id)
   return (
     <LazyLoad offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}

@@ -65,7 +65,7 @@ export const addUserSavedRecipe = (recipeId, userId) => {
     recipeId: recipeId,
     userId: userId
   })
-  console.log('ACTION FIRED: -ADD RECIPE-', recipeId, userId)
+  //console.log('ACTION FIRED: -ADD RECIPE-', recipeId, userId)
   return {
     type: ADD_USER_SAVED_RECIPE,
     payload: request
@@ -78,7 +78,7 @@ export const removeUserSavedRecipe = (recipeId, userId) => {
     recipeId: recipeId,
     userId: userId
   })
-  console.log('ACTION FIRED: -REMOVE RECIPE-', recipeId, userId)
+  //console.log('ACTION FIRED: -REMOVE RECIPE-', recipeId, userId)
   return {
     type: REMOVE_USER_SAVED_RECIPE,
     payload: request
