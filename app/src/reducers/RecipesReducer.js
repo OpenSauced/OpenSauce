@@ -7,9 +7,7 @@ export default (state = null, action) => {
       return action.payload.data
 
     case GET_USER_RECIPES:
-      //SAVED RECIPES ARE DUPLICATES
-      console.log('TODO: CHECK FOR DUPLICATES',action.payload.data.my_recipes.concat(action.payload.data.saved_recipes))
-      return action.payload.data.my_recipes
+      return action.payload.data.my_recipes.concat(action.payload.data.saved_recipes)
     
     case CLEAR_RECIPES:
       return action.payload
