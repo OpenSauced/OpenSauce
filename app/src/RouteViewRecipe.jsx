@@ -41,12 +41,12 @@ class RouteViewRecipe extends Component {
           <AppHeader title={this.props.currentRecipe.title}>
           <div>
             <SaveAndForkButtons 
-              isSaved={this.state.isSaved} 
               recipeId={this.props.currentRecipe._id}
               userId={this.props.userData.userData._id}
               saveRecipe={this.props.addUserSavedRecipe.bind(this)}
               forkRecipe={this.forkRecipe} 
               removeRecipe={this.props.removeUserSavedRecipe.bind(this)}
+              savedRecipes={this.props.userData.userData.saved_recipes}
           />
           </div>
           </AppHeader>
