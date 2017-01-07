@@ -19,11 +19,8 @@ xPorts.findRecentRecipes = function(currentLimit) {
 
 //adds a new recipe to the DB
 //calls addRecipeToMyRecipes to update 'my_recipes' in user document
-xPorts.addNewRecipe = function(username, recipe, images) {
-    // checks to see if the ingredients come across as a JSON string and then parses them
-    if (typeof recipe.ingredients === 'string') {
-      recipe.ingredients = JSON.parse(recipe.ingredients);
-    }
+xPorts.addNewRecipe = function(username, recipe) {
+    console.log("in add new recipe")
     return userFunctions.findByUserName(username)
         .then((userObj) => {
             return xPorts.checkRecipeTitleRepeats(userObj, recipe.title)
@@ -33,7 +30,7 @@ xPorts.addNewRecipe = function(username, recipe, images) {
             throw err
         })
         .then((user) => {
-            //console.log("int the ekjehgsdb;then")
+            console.log("int the ekjehgsdb;then")
             recipe.creator = user._id
             return new recipeModel(recipe)
                 .save()
@@ -51,23 +48,6 @@ xPorts.addNewRecipe = function(username, recipe, images) {
             throw err
         })
 
-}
-
-
-// Adds a single photo to the recipe that the user has uploaded
-xPorts.addPhotoUrl = function(id, result) {
-    //console.log('finding a recipe by id for image add: ', id);
-    return xPorts.findRecipeById(id).then(function(recipeDB) {
-        // console.log('Recipe from DB: ', recipeDB.recipe_images)
-        // console.log(result)
-        recipeDB.recipe_images.public_url = result.url
-        recipeDB.recipe_images.secure_url = result.secure_url
-        recipeDB.recipe_images.public_id = result.public_id
-        recipeDB.recipe_images.signature = result.signature
-        recipeDB.update();
-        recipeDB.save();
-        return recipeDB
-    })
 }
 
 //finds and returns one recipe based on recipe ID
