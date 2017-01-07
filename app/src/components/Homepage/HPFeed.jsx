@@ -11,7 +11,9 @@ class HPFeed extends Component {
   run
   render() {
     return (
-      <RecipeList/>
+      <div className="flex-row homePageContainer">
+        <RecipeList/>
+      </div>
     )
   }
 }

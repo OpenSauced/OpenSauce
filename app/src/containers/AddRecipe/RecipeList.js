@@ -13,7 +13,6 @@ import { fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe } 
 import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
 import HPLazyLoader from '../../components/Homepage/HPLazyLoader'
-import SearchBar from '../Homepage/SearchBar'
 
 ///Setting Defaults for OnVisibility
 setDefaultProps({
@@ -33,11 +32,11 @@ class RecipeList extends Component {
 
   renderRecipes(recipe) {
     return(
-      <HPFeedRecipe 
-        key={recipe._id} 
+      <HPFeedRecipe
+        key={recipe._id}
         recipe={recipe}
         userId={this.props.userData.userData._id}
-        recipeId={recipe._id} 
+        recipeId={recipe._id}
         myRecipes={this.props.userData.userData.my_recipes}
         savedRecipes={this.props.userData.userData.saved_recipes}
         addRecipe={this.props.addUserSavedRecipe}
@@ -49,10 +48,9 @@ class RecipeList extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
         <ul className="row recipe_card">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
-        </ul>   
+        </ul>
       </div>
     )
   }
@@ -64,10 +62,9 @@ const  mapStateToProps = (state) => {
     userData: state.userData
   }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({ fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
-

@@ -1,23 +1,55 @@
-// NAV : #fff39d
-
 body {
-    background-color: #fff;
+    font-size: 16px; //most other sizes are EM so this should scale.
+}
+
+a, a:hover, a:active {
+  // color: ghostwhite;
 }
 
 #navButtonContainer {
-  overflow: hidden;
+
 }
 
-.recipe img {
+.recipeCard img {
+    width: 100%;
+}
+
+.recipeCard, .recipeCard a {
   width: 100%;
+  color: #373a3c;
+  text-align: center;
+  // margin: 0 4% 0 4% !important;
+}
+
+.card-buttons a {
+  color: white;
+}
+
+.cardRecipeCol {
+  display: flex;
 }
 
 .recipeCardBtn {
     margin: 0 1%;
 }
 
-.searchHomePageContainer {
-  margin-bottom: 20px
+.searchBarButtonCombo {
+    width: 100%;
+}
+
+.titleBarContainer {
+  color: ghostwhite;
+  background-color: ghostwhite;
+    margin: 96px -15px 15px;
+    padding-bottom: 55px;
+    padding-top: 55px;
+    text-align: center;
+    background-image: url('/assets/loginBackground.png');
+}
+
+.mainTitle, .subTitle {
+  // background-color: lightsteelblue;
+  // color: white;/
 }
 
 .navProfPic {
@@ -36,9 +68,19 @@ body {
 
 //image and seperator have no padding
 .dropdown-menu .divider {
-  padding: 2px !important;
-  background-color: grey;
-  margin-top: 10px;
+    padding: 2px !important;
+    background-color: grey;
+    margin-top: 10px;
+}
+
+.navbar-toggle .icon-bar, .navbar-toggle {
+  border-color: ghostwhite;
+  color: ghostwhite;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+  color: grey;
+  // background-color: ghostwhite;
 }
 
 .dropdown-menu {
@@ -48,12 +90,12 @@ body {
 }
 
 .dropdown-menu > li {
-  padding: 5px !important;
-  text-align: center;
+    padding: 5px !important;
+    text-align: center;
 }
 
 .dropdown-menu > li > a {
-  color: #0275d8;
+    color: #0275d8;
 }
 
 .navbar-brand {
@@ -67,10 +109,50 @@ body {
 }
 
 .navbar {
-  padding: 0 !important;
+  margin-bottom: 0;
+}
+
+.navbar, .navbar a {
+  color: ghostwhite;
 }
 
 .navbar-toggle {
     padding: 10px;
     margin: 25px 15px 25px 0;
+}
+
+.recipePageContainer {
+  color: #373a3c;
+}
+
+// login stuff
+.authPageContainer {
+  background: transparent;
+}
+
+.authPageContent {
+  margin: 5% 0 25% 0;
+  z-index: 99;
+  background-color: ghostwhite !important;
+  border-radius: 25px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  width: 50% !important;
+}
+
+
+.mainRecipeFeed {
+  flex-direction: column;
+  padding: 0;
+  .cardRecipeCol {
+    list-style: none;
+    .card-img-top {
+      width: 100%;
+    }
+  }
+}
+
+.app-header-child {
+  margin-top: 15px;
 }

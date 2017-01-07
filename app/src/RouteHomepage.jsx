@@ -6,15 +6,16 @@ import AppHeader from './components/App/AppHeader';
 import Footer from './components/Footer/Footer';
 
 //Feed components
-import HPFeedSearch from './components/Homepage/HPFeedSearch';
 import HPFeed from './components/Homepage/HPFeed';
+import SearchBar from './containers/Homepage/SearchBar';
 
 const RouteHomepage = () => {
   return (
     <div className="container-fluid">
       <HeaderNav/>
-      <AppHeader title={'Welcome to OpenSauce'}>
-      </AppHeader>
+        <AppHeader title={'Welcome to OpenSauce'}>
+          <SearchBar />
+        </AppHeader>
       <HPFeed/>
       <Footer/>
     </div>
