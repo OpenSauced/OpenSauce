@@ -47,7 +47,6 @@ class RouteEditRecipe extends Component {
       description: currentRecipe.description,
       ingredients: currentRecipe.ingredients,
       directions: currentRecipe.directions,
-      recipeId: currentRecipe._id,
       forkedParent: currentRecipe.forkedParent || 'none'
     });
   }
@@ -92,13 +91,13 @@ class RouteEditRecipe extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-
+    console.log('onFormSubmit: ', this.state)
     let recipe = {
-      title: userData.title,
-      description: userData.description,
-      ingredients: userData.ingredients,
-      directions: userData.directions,
-      recipeId: userData._id
+      title: this.state.title,
+      description: this.state.description,
+      ingredients: this.state.ingredients,
+      directions: this.state.directions,
+      recipeId: this.props.currentRecipe._id
     }
     //Does the end of this route handle recipe.recipeId?
     $.ajax({
@@ -112,9 +111,8 @@ class RouteEditRecipe extends Component {
       alert('Message: ', err)
     })
     .then((recipe) => {
-      const path = `/viewrecipe?recipeId=${recipe.recipeId}`
+      const path = `/viewrecipe?recipeId=${this.props.currentRecipe._id}`
       browserHistory.push(path);
-      window.location.href = path
     })
   }
 
@@ -122,75 +120,59 @@ class RouteEditRecipe extends Component {
     console.log('current props', this.props)
     console.log('current state', this.state)
     return (  
-      <div className="container-fluid">
-        <HeaderNav/>
-        <AppHeader title={this.props.currentRecipe.title}>
-        <div>
-          <SaveAndForkButtons 
-            recipeId={this.props.currentRecipe._id}
-            userId={this.props.userData.userData._id}
-            saveRecipe={this.props.addUserSavedRecipe.bind(this)}
-            forkRecipe={this.forkRecipe} 
-            removeRecipe={this.props.removeUserSavedRecipe.bind(this)}
-            savedRecipes={this.props.userData.userData.saved_recipes}
-        />
-        </div>
-        </AppHeader>
-        <div className="row">
-          <div className="container">
-            <form onSubmit={this.onFormSubmit}>
-              <div className="row">
-                <label htmlFor="">
-                  <span>Recipe Title:</span>
-                  <input
-                    placeholder="Please enter Recipe Name"
-                    id="recipe-title"
-                    value={this.state.title}
-                    onChange={'nerp'/*this.onInputChange.bind(this)*/}
+      <div className="row">
+        <div className="container">
+          <form onSubmit={this.onFormSubmit}>
+            <div className="row">
+              <label htmlFor="">
+                <span>Recipe Title:</span>
+                <input
+                  placeholder="Please enter Recipe Name"
+                  id="recipe-title"
+                  value={this.state.title}
+                  onChange={'nerp'/*this.onInputChange.bind(this)*/}
+                />
+              </label>
+            </div>
+            <h3>Recipe Description:</h3>
+            <textarea
+              placeholder="Please enter a description"
+              className=""
+              id="recipe-description"
+              value={this.state.description}
+              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+            ></textarea>
+
+            <h3>Directions </h3>
+            <textarea
+              placeholder="Please enter directions"
+              className=""
+              id="recipe-directions"
+              value={this.state.directions}
+              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+            ></textarea>
+
+            <h3>Ingredients</h3>
+            {
+              this.state.ingredients.map((ingredient, index) => {
+                return (
+                  <EditRecipeIngredient
+                    key={index}
+                    ingredient={this.state.ingredients[index]}
+                    index={index}
+                    handleIngredientOnChange={this.onIngredientChange}
+                    handleRemoveIngredient={this.removeIngredient}
                   />
-                </label>
-              </div>
-              <h3>Recipe Description:</h3>
-              <textarea
-                placeholder="Please enter a description"
-                className=""
-                id="recipe-description"
-                value={this.state.description}
-                onChange={'nerp'/*this.onInputChange.bind(this)*/}
-              ></textarea>
-
-              <h3>Directions </h3>
-              <textarea
-                placeholder="Please enter directions"
-                className=""
-                id="recipe-directions"
-                value={this.state.directions}
-                onChange={'nerp'/*this.onInputChange.bind(this)*/}
-              ></textarea>
-
-              <h3>Ingredients</h3>
-              {
-                this.state.ingredients.map((ingredient, index) => {
-                  return (
-                    <EditRecipeIngredient
-                      key={index}
-                      ingredient={this.state.ingredients[index]}
-                      index={index}
-                      handleIngredientOnChange={this.onIngredientChange}
-                      handleRemoveIngredient={this.removeIngredient}
-                    />
-                  )
-                })
-              }
-              <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
-              <span className="">
-                <button type="submit" className="btn btn-secondary">Submit</button>
-              </span>
-            </form>
-          </div>
-        </div> 
-        <Footer/>
-      </div>
+                )
+              })
+            }
+            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+            <span className="">
+              <button type="submit" className="btn btn-secondary">Submit</button>
+            </span>
+          </form>
+        </div>
+      </div> 
     )
   }
 }
