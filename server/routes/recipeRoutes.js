@@ -89,8 +89,11 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
 
 router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, function(req, res) {
   var recipeId = req.params._id
+  console.log('recipeId: ', recipeId)
+  console.log('req.body', req.body)
   db.recipeFunctions.editRecipe(recipeId, req.body)
   .then((recipe) => {
+    console.log('recipe in recipe routes:', recipe)
     res.send(recipe)
   })
   .catch((err)=>{

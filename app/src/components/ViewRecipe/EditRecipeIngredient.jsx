@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const AddRecipeManualList = ({ingredient, index, handleIngredientOnChange, handleRemoveIngredient}) => {
+const EditRecipeIngredient = ({ingredient, index, handleIngredientOnChange, handleRemoveIngredient}) => {
   return (
     <div key={index}>
       <input
@@ -24,4 +24,4 @@ const AddRecipeManualList = ({ingredient, index, handleIngredientOnChange, handl
   );
 }
 
-export default AddRecipeManualList;
+export default EditRecipeIngredient;

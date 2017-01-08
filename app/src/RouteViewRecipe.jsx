@@ -22,8 +22,6 @@ import {
   ModalFooter
 } from 'react-modal-bootstrap';
 
-
-
 class RouteViewRecipe extends Component {
   constructor() {
     super();
@@ -48,21 +46,18 @@ class RouteViewRecipe extends Component {
   }
 
   openModal = (message) => {
-  this.setState({
-    isOpen: true,
-    errorMessage: message
-  });
-};
- 
-hideModal = () => {
-  this.setState({
-    isOpen: false
-  });
-};
+    this.setState({
+      isOpen: true,
+      errorMessage: message
+    });
+  };
+   
+  hideModal = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
   
-
- 
-
   forkRecipe() {
   	var title = this.props.currentRecipe.title
   	var description = this.props.currentRecipe.description
