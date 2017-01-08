@@ -157,7 +157,12 @@ router.post('/scraperecipe', function(req, res) {
                         res.status(500).send(err.message)
                     })
             } else if (recipe !== null) {
-                res.send(200, recipeResponse._id)
+                var statusObj = {
+                    recipeId: recipe._id,
+                    saved: true
+                }
+                console.log('bold assumption', recipe)
+                res.status(200).send(statusObj)
             }
         })
         .catch((err) => {
