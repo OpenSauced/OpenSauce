@@ -7,7 +7,7 @@ export default (state = null, action) => {
       return action.payload.data
 
     case GET_USER_RECIPES:
-      return action.payload.data.my_recipes.concat(action.payload.data.saved_recipes)
+      return action.payload
     
     case CLEAR_RECIPES:
       return action.payload

@@ -58,7 +58,7 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
         })
         .catch((err) => {
-            res.status(500).send("Error in the addNewRecipe function")
+            res.status(500).send(err)
         })
         .then((user) => {
         // checks to see if req.file is empty
@@ -82,9 +82,23 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
           }
         })
         .catch((err) => {
-            res.status(500).send("Error in the addRecipeToMyRecipes function")
+            res.status(500).send(err)
         })
 
+})
+
+router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, function(req, res) {
+  var recipeId = req.params._id
+  console.log('recipeId: ', recipeId)
+  console.log('req.body', req.body)
+  db.recipeFunctions.editRecipe(recipeId, req.body)
+  .then((recipe) => {
+    console.log('recipe in recipe routes:', recipe)
+    res.send(recipe)
+  })
+  .catch((err)=>{
+    res.status(500).send(err)
+  })
 })
 
 //route to return a single recipe
@@ -98,6 +112,7 @@ router.get('/:recipeId', function(req, res) {
             res.send(recipe);
         })
 })
+
 
 //save a forked recipe
 router.post('/:username/saveforkedrecipe', function(req, res) {
@@ -145,7 +160,12 @@ router.post('/scraperecipe', function(req, res) {
                         res.status(500).send(err.message)
                     })
             } else if (recipe !== null) {
-                res.send(200, recipeResponse._id)
+                var statusObj = {
+                    recipeId: recipe._id,
+                    saved: true
+                }
+                console.log('bold assumption', recipe)
+                res.status(200).send(statusObj)
             }
         })
         .catch((err) => {

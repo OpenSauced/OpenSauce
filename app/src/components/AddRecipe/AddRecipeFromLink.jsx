@@ -3,7 +3,6 @@ import {browserHistory} from 'react-router';
 
 
 const AddRecipeFromLink = (props) => {
-  console.log("getting current user?", props)
   var userId = props.userData._id
   var formSubmit = function(e) {
     e.preventDefault();
@@ -14,12 +13,18 @@ const AddRecipeFromLink = (props) => {
         userId: userId,
         url: $('input[name=url]').val()
       },
-      success: function (recipe) {
-      console.log("recipe was saved to the DB", recipe);
- 		  const path = `/viewrecipe?recipeId=${recipe}`
+      success: function (statusObj) {
+      console.log("recipe was saved to the DB", statusObj);
+      if (statusObj.saved) {
+        var path = `/viewrecipe?recipeId=${statusObj.recipeId}&savedAlready=true`
+      } else {
+        var path = `/viewrecipe?recipeId=${statusObj}`
+      }
       browserHistory.push(path);
     },
       error: function(xhr, status, err) {
+        var responseMessage = xhr.responseText
+          props.openModal(xhr.responseText)
           console.error("did not post to DB from link ", status, xhr.responseText);
       }
 

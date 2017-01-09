@@ -13,6 +13,14 @@ import { getUserData, addUserSavedRecipe, removeUserSavedRecipe } from './action
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter
+} from 'react-modal-bootstrap';
 
 class RouteViewRecipe extends Component {
   constructor() {
@@ -20,10 +28,36 @@ class RouteViewRecipe extends Component {
 
     this.state = {
       recipe: {},
-      isSaved: false
+      isSaved: false,
+      isOpen: false,
     };
   }
 
+  componentDidMount(){
+    console.log("IN THE COMPONENT WILL MOUNT ", this.props.location.query.savedAlready)
+    this.alreadyExistsModal()
+  }
+
+  alreadyExistsModal() {
+    var path = this.props.location.query.savedAlready;
+     if(path){
+      this.setState({isOpen: true})
+     }
+  }
+
+  openModal = (message) => {
+    this.setState({
+      isOpen: true,
+      errorMessage: message
+    });
+  };
+   
+  hideModal = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
+  
   forkRecipe() {
   	var title = this.props.currentRecipe.title
   	var description = this.props.currentRecipe.description
@@ -33,10 +67,24 @@ class RouteViewRecipe extends Component {
   }
 
   render() {
-    
+    console.log('REcipe Props in RouteViewRecipe: ', this.props.currentRecipe)
     if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
+           <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
+        <ModalHeader>
+          <ModalClose onClick={this.hideModal}/>
+          <ModalTitle>Good News!</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+          Someone else already added that recipe. But you can save this to your cookbook or fork it from here.
+        </ModalBody>
+        <ModalFooter>
+          <button className='btn btn-default' onClick={this.hideModal}>
+            Close
+          </button>
+        </ModalFooter>
+      </Modal>
          <HeaderNav/>
           <AppHeader title={this.props.currentRecipe.title}>
           <div>
@@ -51,7 +99,7 @@ class RouteViewRecipe extends Component {
           </div>
           </AppHeader>
 
-          <ViewRecipe recipe={this.props.currentRecipe} />
+          <ViewRecipe recipe={this.props.currentRecipe} recipeId={this.props.currentRecipe._id}/>
           <Footer/>
         </div>
       );
@@ -72,5 +120,6 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
+
 
 

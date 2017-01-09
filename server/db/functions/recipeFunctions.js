@@ -15,10 +15,27 @@ xPorts.findRecentRecipes = function(currentLimit) {
     .sort([
       ['_id', -1]
     ])
+    .populate('creator', 'username')
+}
+
+xPorts.editRecipe = function(recipeId, recipe){
+   // console.log('editrecipe function --- recipe', recipe )
+    return recipeModel.findOneAndUpdate({ _id: recipeId }, 
+      {
+        $set: {
+          'title': recipe.title,
+          'description': recipe.description,
+          'ingredients': recipe.ingredients,
+          'directions': recipe.directions
+        }
+      },
+      { 
+        new: true 
+      }
+    )
 }
 
 //adds a new recipe to the DB
-
 xPorts.addNewRecipe = (userId, recipe) => {
     recipe.creator = userId
     if (typeof recipe.ingredients === 'string') {
@@ -46,7 +63,7 @@ xPorts.addPhotoUrl = function(id, result) {
 //finds and returns one recipe based on recipe ID
 xPorts.findRecipeById = function(recipeId) {
   return recipeModel.findOne({ _id: recipeId })
-    .populate('creator')
+    .populate('creator', 'username')
     .exec((err, recipe) => {
       if (err) console.log("recipeFunctions 2: ", err);
     })
@@ -81,13 +98,14 @@ xPorts.addChildRecipe = function(parentId, childId) {
     })
 }
 
-//SEARCH RECIPES
+//SEARCH RECIPES TODO POPULATE USER INFO
 xPorts.searchRecipes = function(term) {
   return recipeModel
     .find(
       { $text: { $search: term } },
       { score: { $meta: "textScore" } }
     )
+    .populate('creator', 'username')
     .sort( 
       { score: { $meta: "textScore"} }
     )
@@ -95,7 +113,8 @@ xPorts.searchRecipes = function(term) {
 
 //GET RECIPES PER USER
 xPorts.findRecipesByUserName = function(username) {
-  return userModel.findOne({username: username}).populate('my_recipes').populate('saved_recipes')
+  return userModel
+    .findOne({username: username}).populate('my_recipes saved_recipes')
 }
 
 module.exports = xPorts;
