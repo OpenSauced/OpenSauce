@@ -30,12 +30,13 @@ class RouteEditRecipe extends Component {
       ingredients: ['']
     }
 
+    this.recipeData = {}
     this.onFormSubmit = this.onFormSubmit.bind(this)
     //recipeData is variable that can be set and used for the whole component
-    this.recipeData = {}
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient   = this.removeIngredient.bind(this);
     this.addNewIngredient   = this.addNewIngredient.bind(this);
+    this.spliceBlankIngredients = this.spliceBlankIngredients.bind(this)
   }
 
   componentWillMount () {
@@ -89,13 +90,25 @@ class RouteEditRecipe extends Component {
     }
   }
 
+  // Push out all blank ingredients from this.state.ingredients list 
+  // only used in onFormSubmit
+  spliceBlankIngredients(ingredients){
+    let idx = ingredients.indexOf('');
+    if (idx === -1){
+      return ingredients
+    } else {
+      ingredients.splice(idx,1)
+      return this.spliceBlankIngredients(ingredients)
+    }
+  }
+
   onFormSubmit(e) {
     e.preventDefault();
-    console.log('onFormSubmit: ', this.state)
+    let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
     let recipe = {
       title: this.state.title,
       description: this.state.description,
-      ingredients: this.state.ingredients,
+      ingredients: newIngredients,
       directions: this.state.directions,
       recipeId: this.props.currentRecipe._id
     }
@@ -130,7 +143,7 @@ class RouteEditRecipe extends Component {
                   placeholder="Please enter Recipe Name"
                   id="recipe-title"
                   value={this.state.title}
-                  onChange={'nerp'/*this.onInputChange.bind(this)*/}
+                  onChange={this.onInputChange.bind(this)}
                 />
               </label>
             </div>
@@ -140,7 +153,7 @@ class RouteEditRecipe extends Component {
               className=""
               id="recipe-description"
               value={this.state.description}
-              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+              onChange={this.onInputChange.bind(this)}
             ></textarea>
 
             <h3>Directions </h3>
@@ -149,7 +162,7 @@ class RouteEditRecipe extends Component {
               className=""
               id="recipe-directions"
               value={this.state.directions}
-              onChange={'nerp'/*this.onInputChange.bind(this)*/}
+              onChange={this.onInputChange.bind(this)}
             ></textarea>
 
             <h3>Ingredients</h3>

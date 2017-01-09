@@ -52,13 +52,18 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
     var userId = req.params._id
     var response = null
 
+    
+    // if(arrayOfRecipes.includes(recipeTitle)){
+    //   throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
+    // }
+  
     db.recipeFunctions.addNewRecipe(userId, req.body)
         .then((recipe) => {
             response = recipe
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
         })
         .catch((err) => {
-            res.status(500).send(err)
+            res.status(500).send(err.message)
         })
         .then((user) => {
         // checks to see if req.file is empty
@@ -82,7 +87,7 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
           }
         })
         .catch((err) => {
-            res.status(500).send(err)
+            res.status(500).send(err.message)
         })
 
 })

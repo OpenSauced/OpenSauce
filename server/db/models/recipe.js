@@ -5,9 +5,10 @@ var RecipeSchema = new Schema({
 	title: {type: String, required: true},
 	creator: {
 		type: Schema.Types.ObjectId,
-		ref: 'user'
+		ref: 'user',
+		required: true
 	},
-	description: String,
+	description: {type: String, require: true},
 	ingredients: {type: [String], required: true},
 	directions: {type: String, required: true},
 	// The recipe_images is plural but only accepts one image currently.
