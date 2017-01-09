@@ -20,7 +20,7 @@ const ViewRecipe = ({recipe, user}) => {
           user._id === recipe.creator._id 
           ? <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button> 
           : ( <div>
-                <h6> Want to put your own spin on this recipe? Try forking it! </h6>
+                <h5> Want to put your own spin on this recipe? Try forking it! </h5>
               </div>
             )
         }
