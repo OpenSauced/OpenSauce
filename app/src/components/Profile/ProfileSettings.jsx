@@ -18,6 +18,7 @@ class ProfileSettings extends Component {
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
         */}
+        <button name="profile"        onClick={ this.props.renderClick }> My profile </button>
         <button name="name"           onClick={ this.props.renderClick }> Change your name </button>
         <button name="username"       onClick={ this.props.renderClick }> Change your username </button>
         <button name="bio"            onClick={ this.props.renderClick }> Change your bio </button>

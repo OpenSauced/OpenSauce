@@ -16,9 +16,13 @@ const ViewRecipe = ({recipe, user}) => {
         <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
         <RecipeDirections recipeDirections={recipe.directions}/>
         {/* If you own a recipe, this button takes you to edit a recipe*/}
-        {
-          user._id === recipe.creator._id ?
-          <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button> : <div></div>
+        { 
+          user._id === recipe.creator._id
+          ? <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
+          : ( <div>
+                <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+              </div>
+            )
         }
       </div>
     );

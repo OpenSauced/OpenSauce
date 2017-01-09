@@ -106,6 +106,7 @@ xPorts.findOrCreateUser = function(userData) {
                 first_name: userData.firstName,
                 last_name: userData.lastName,
                 email: userData.email,
+                bio: userData.bio,
                 session: 'null',
                 username: userData.username,
                 picture: 'null',
