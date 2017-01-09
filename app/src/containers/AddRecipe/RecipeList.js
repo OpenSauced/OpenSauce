@@ -49,7 +49,7 @@ class RecipeList extends Component {
     console.log(this.props.recipes)
     return (
       <div>
-        <ul className="row recipe_card">
+        <ul className="flex-row d-flex flex-wrap recipe_card">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
         </ul>
       </div>

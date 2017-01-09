@@ -142,9 +142,12 @@ a, a:hover, a:active {
 }
 
 
-.mainRecipeFeed {
-  flex-direction: column;
-  padding: 0;
+.homePageContainer {
+  .recipe_card {
+    padding: 0;
+    margin: 0;
+  }
+
   .cardRecipeCol {
     list-style: none;
     .card-img-top {
