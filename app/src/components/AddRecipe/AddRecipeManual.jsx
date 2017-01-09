@@ -167,7 +167,7 @@ class AddRecipeManual extends Component {
                   id="recipe-title"
                   value={this.state.title}
                   onChange={this.onInputChange.bind(this)}
-                  // required
+                  required
                 />
               </label>
             </div>

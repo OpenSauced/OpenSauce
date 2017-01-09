@@ -51,6 +51,12 @@ router.get('/:username/userrecipes', function(req, res) {
 router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), function(req, res) {
     var userId = req.params._id
     var response = null
+
+    
+    // if(arrayOfRecipes.includes(recipeTitle)){
+    //   throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
+    // }
+  
     db.recipeFunctions.addNewRecipe(userId, req.body)
         .then((recipe) => {
             response = recipe
