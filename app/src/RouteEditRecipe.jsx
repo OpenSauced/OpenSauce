@@ -101,7 +101,7 @@ class RouteEditRecipe extends Component {
     let recipe = {
       title: this.state.title,
       description: this.state.description,
-      ingredients: ,
+      ingredients: this.state.ingredients,
       directions: this.state.directions,
       recipeId: this.props.currentRecipe._id
     }
