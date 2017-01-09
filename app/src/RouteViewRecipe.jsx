@@ -67,7 +67,7 @@ class RouteViewRecipe extends Component {
   }
 
   render() {
-    console.log('REcipe Props in RouteViewRecipe: ', this.props.currentRecipe)
+    console.log('REcipe Props in RouteViewRecipe: ', this.props.userData)
     if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
@@ -99,7 +99,8 @@ class RouteViewRecipe extends Component {
           </div>
           </AppHeader>
 
-          <ViewRecipe recipe={this.props.currentRecipe} recipeId={this.props.currentRecipe._id}/>
+          {/* pass down current recipe information and current user to a recipe the user clicks on*/}
+          <ViewRecipe recipe={this.props.currentRecipe} user={this.props.userData.userData}/>
           <Footer/>
         </div>
       );
