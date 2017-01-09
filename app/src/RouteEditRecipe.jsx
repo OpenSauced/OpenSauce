@@ -36,6 +36,7 @@ class RouteEditRecipe extends Component {
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient   = this.removeIngredient.bind(this);
     this.addNewIngredient   = this.addNewIngredient.bind(this);
+    this.spliceBlankIngredients = this.spliceBlankIngredients.bind(this)
   }
 
   componentWillMount () {
@@ -89,19 +90,25 @@ class RouteEditRecipe extends Component {
     }
   }
 
+  // Push out all blank ingredients from this.state.ingredients list 
+  // only used in onFormSubmit
+  spliceBlankIngredients(ingredients){
+    let idx = ingredients.indexOf('');
+    if (idx === -1){
+      return ingredients
+    } else {
+      ingredients.splice(idx,1)
+      return this.spliceBlankIngredients(ingredients)
+    }
+  }
+
   onFormSubmit(e) {
     e.preventDefault();
-    // let ingredients = this.state.ingredients;
-    // // let ingrCheck = ingredients.indexOf("")
-    // // if ( ingrCheck !== -1 ){
-    // //   if (ingrCheck === 0){
-    // //     ingredients
-    // //   }
-    // // }
+    let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
     let recipe = {
       title: this.state.title,
       description: this.state.description,
-      ingredients: this.state.ingredients,
+      ingredients: newIngredients,
       directions: this.state.directions,
       recipeId: this.props.currentRecipe._id
     }
