@@ -33,11 +33,11 @@ class RecipeList extends Component {
 
   renderRecipes(recipe) {
     return(
-      <HPFeedRecipe 
-        key={recipe._id} 
+      <HPFeedRecipe
+        key={recipe._id}
         recipe={recipe}
         userId={this.props.userData.userData._id}
-        recipeId={recipe._id} 
+        recipeId={recipe._id}
         myRecipes={this.props.userData.userData.my_recipes}
         savedRecipes={this.props.userData.userData.saved_recipes}
         addRecipe={this.props.addUserSavedRecipe}
@@ -47,13 +47,13 @@ class RecipeList extends Component {
   }
 
   render() {
-    console.log(this.props.recipes)
+    // console.log(this.props.recipes)
     return (
       <div>
         <SearchBar />
         <ul className="row recipe_card">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
-        </ul>   
+        </ul>
       </div>
     )
   }
@@ -65,10 +65,9 @@ const  mapStateToProps = (state) => {
     userData: state.userData
   }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({ fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList)
-

@@ -8,34 +8,34 @@ const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe,
     <LazyLoad offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}
         <div className="card recipe">
-          <img 
-            className="card-img-top" 
-            src="/assets/tempRecipe.svg" 
+          <img
+            className="card-img-top"
+            src="/assets/tempRecipe.svg"
             alt="Card image cap"/>
           <div className="card-block">
-            <div 
-              className="row flex-items-xs-center recipe_card-fork_like-cont" 
-              style={{'margin-bottom':'1.25rem'}}>
-              <a 
-                href={`/addrecipe?recipe=${recipe._id}`} 
+            <div
+              className="row flex-items-xs-center recipe_card-fork_like-cont"
+              style={{'marginBottom':'1.25rem'}}>
+              <a
+                href={`/addrecipe?recipe=${recipe._id}`}
                 className="btn btn-primary recipeCardBtn">Fork Recipe</a>
               {
                 recipe._id in myRecipes ?
-                  <div 
+                  <div
                     className="btn btn-secondary recipe_card-like_button recipeCardBtn"
                   >OWNED RECIPE</div>
                 : recipe._id in savedRecipes ?
-                    <div 
+                    <div
                       className="btn btn-secondary recipe_card-like_button recipeCardBtn"
                       onClick={() => {removeRecipe(recipeId, userId)}}
                     >Unlike Recipe</div>
-                  : <div 
+                  : <div
                       className="btn btn-secondary recipe_card-like_button recipeCardBtn"
                       onClick={() => {addRecipe(recipeId, userId)}}
                     >Like Recipe</div>
               }
 
-              
+
             </div>
             <h2 className="card-title"><Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link></h2>
             <h3 className="card-title"><Link to={`/recipesbyuser?userId=${recipe.creator.username}`}>Author: {recipe.creator.username}</Link></h3>
