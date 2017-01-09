@@ -16,7 +16,7 @@ class SearchBar extends Component {
   }
 
   sendSearch(isSubmit) {
-    
+
     var location = browserHistory.getCurrentLocation()
     if (isSubmit) {
       var url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
@@ -34,17 +34,19 @@ class SearchBar extends Component {
     this.search(true)
   }
 
+
   renderFilters() {
     return(
      <div> MY RECIPES | SAVED RECIPES | FORKED RECIPES </div>
     )
   }
- 
+
   render() {
     //console.log(this.props.searchTerm)
     return (
+      <div className="d-flex justify-content-center">
       <form
-        className="input-group"
+        className="col-8"
         onSubmit={this.onFormSubmit.bind(this)}
       >
         <input
@@ -53,16 +55,10 @@ class SearchBar extends Component {
           id="searchfield"
           value={this.props.searchTerm}
           onChange={this.onInputChange.bind(this)}
-          
         />
-
-        <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">
-            Submit
-          </button>
-        </span>
         {this.renderFilters()}
       </form>
+      </div>
     )
   }
 }

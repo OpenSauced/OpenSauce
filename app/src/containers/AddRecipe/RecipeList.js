@@ -49,7 +49,6 @@ class RecipeList extends Component {
     console.log(this.props.recipes)
     return (
       <div>
-        <SearchBar />
         <ul className="row recipe_card">
           {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
         </ul>

@@ -18,9 +18,9 @@ class HeaderNavProfile extends Component {
   render() {
 
     return (
-      <li className="dropdown">
-        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile <span className="caret"></span></a>
-        <ul className="dropdown-menu" >
+      <li className="nav-item dropdown">
+        <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Profile</a>
+        <ul className="dropdown-menu">
             <li className="navProfPic" style={{'backgroundImage':"url('" + this.props.userData.user_image.public_url + "')"}} />
             <li role="separator" className="divider"></li>
             <li className="">

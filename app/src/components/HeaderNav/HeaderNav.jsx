@@ -18,28 +18,21 @@ class HeaderNav extends Component {
         super();
     }
     render() {
-        return (
-          <nav className="navbar navbar-default navbar-static-top">
-              <div className="container">
-                <div className="navbar-header">
-                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navButtonContainer">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
+      return (
+        <div className="row">
+              <nav className="navbar fixed-top navbar-toggleable-md navbar-dark bg-inverse">
+                <div className="col-2">
                   <HeaderNavLogo/>
                 </div>
-                <div id="navButtonContainer" className="navbar-collapse collapse">
-                  <ul className="nav navbar-nav navbar-right">
-                    <li className="active"><a href="/">Home</a></li>
-                    <HeaderNavButtons/>
-                    <HeaderNavProfile/>
-                  </ul>
+                <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <HeaderNavButtons/>
                 </div>
-              </div>
-            </nav>
-        );
+              </nav>
+        </div>
+      );
     }
 }
 
@@ -48,3 +41,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(HeaderNav);
+
+
+
