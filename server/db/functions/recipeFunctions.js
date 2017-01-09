@@ -45,9 +45,6 @@ xPorts.addNewRecipe = (userId, recipe) => {
         if(recipe.title === null || recipe.title === undefined || recipe.title === ''){
             throw new Error('Please enter a title for the recipe')
         }
-        if(recipe.description === null || recipe.description === undefined || recipe.description ===  ''){
-            throw new Error('Please enter a description for the recipe')
-        }
         if(recipe.directions === null || recipe.directions === undefined || recipe.directions === ''){
             throw new Error('Please enter a directions for the recipe')        
         }

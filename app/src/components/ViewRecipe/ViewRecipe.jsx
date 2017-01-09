@@ -7,11 +7,12 @@ import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
 
 const ViewRecipe = ({recipe, user}) => {
-  console.log('ViewRecipe - me', user)
+  var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
+
 	if (recipe){
     return (
       <div>
-        <RecipeDescription recipeDescription={recipe.description} />
+        {description}
         <RecipeCreator recipeCreator={recipe.creator}/>
         <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
         <RecipeDirections recipeDirections={recipe.directions}/>

@@ -178,7 +178,7 @@ class AddRecipeManual extends Component {
               id="recipe-description"
               value={this.state.description}
               onChange={this.onInputChange.bind(this)}
-              required
+              // required
             ></textarea>
 
             <h3>Directions </h3>

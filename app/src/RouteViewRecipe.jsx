@@ -34,7 +34,6 @@ class RouteViewRecipe extends Component {
   }
 
   componentDidMount(){
-    console.log("IN THE COMPONENT WILL MOUNT ", this.props.location.query.savedAlready)
     this.alreadyExistsModal()
   }
 
@@ -67,7 +66,6 @@ class RouteViewRecipe extends Component {
   }
 
   render() {
-    console.log('REcipe Props in RouteViewRecipe: ', this.props.userData)
     if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
