@@ -52,51 +52,44 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
     var userId = req.params._id
     var response = null
 
-    db.recipeFunctions.findRecipesByUserId(userId)
-    .then((userObj) => {
-        userObj.my_recipes.forEach((recipe) => {
-            console.log(recipe.title)
-            if(recipe.title === req.body.title){
-                throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
-            } else {
-                    db.recipeFunctions.addNewRecipe(userId, req.body)
-        .then((recipe) => {
+    db.recipeFunctions.findRecipesByUserId(userId).then((userObj) => {
+        if (userObj.my_recipes.length !== 0) {
+            userObj.my_recipes.forEach((recipe) => {
+                if (recipe.title === req.body.title) {
+                    throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
+                }
+            })
+        }
+        db.recipeFunctions.addNewRecipe(userId, req.body).then((recipe) => {
             response = recipe
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
-        })
-        .catch((err) => {
+        }).catch((err) => {
             res.status(500).send(err.message)
-        })
-        .then((user) => {
-        // checks to see if req.file is empty
-          if (req.file !== undefined) {
-            // upload to cloudinary
-            cloudinary.uploader.upload(req.file.path, (result) => {
-              fs.unlink(req.file.path, (err) => {
-                if (err) {
-                  console.error('Error on image delete:', err);
-                } else {
-                  // adds the photo to the recipe in the database
-                  db.recipeFunctions.addPhotoUrl(response._id, result)
-                  .then(function(recipeDB) {
-                    res.send(recipeDB)
-                  })
-                }
-              });
-            });
-          } else {
-            res.send(response);
-          }
-        })
-        .catch((err) => {
-            res.status(500).send(err.message)
-        })
+        }).then((user) => {
+            // checks to see if req.file is empty
+            if (req.file !== undefined) {
+                // upload to cloudinary
+                cloudinary.uploader.upload(req.file.path, (result) => {
+                    fs.unlink(req.file.path, (err) => {
+                        if (err) {
+                            console.error('Error on image delete:', err);
+                        } else {
+                            // adds the photo to the recipe in the database
+                            db.recipeFunctions.addPhotoUrl(response._id, result).then(function(recipeDB) {
+                                res.send(recipeDB)
+                            })
+                        }
+                    });
+                });
+            } else {
+                res.send(response);
             }
-        })
-    })
-    .catch((err) => {
+        }).catch((err) => {
             res.status(500).send(err.message)
         })
+    }).catch((err) => {
+        res.status(500).send(err.message)
+    })
 
 })
 
@@ -139,7 +132,7 @@ router.post('/:username/saveforkedrecipe', function(req, res) {
         })
 })
 
-//go grab a recipe from a url 
+//go grab a recipe from a url
 //save it to the DB
 //send recipe object back to client
 //if invalid website or no recipe is scraped
