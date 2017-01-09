@@ -41,6 +41,26 @@ xPorts.addNewRecipe = (userId, recipe) => {
     if (typeof recipe.ingredients === 'string') {
         recipe.ingredients = JSON.parse(recipe.ingredients);
     }
+        try {
+        if(recipe.title === null || recipe.title === undefined || recipe.title === ''){
+            throw new Error('Please enter a title for the recipe')
+        }
+        if(recipe.description === null || recipe.description === undefined || recipe.description ===  ''){
+            throw new Error('Please enter a description for the recipe')
+        }
+        if(recipe.directions === null || recipe.directions === undefined || recipe.directions === ''){
+            throw new Error('Please enter a directions for the recipe')        
+        }
+        if(recipe.ingredients === null || recipe.ingredients === undefined){
+            throw new Error('Please enter at least one ingredient for the recipe')
+        }
+        if(userId === null || userId === undefined){
+            throw new Error('Sorry. We encountered a problem trying to add your recipe because we couldn\'t find your username. Please try again later.')
+        }
+    }
+    catch(err){
+        return Promise.reject(err)
+    }
     return recipeModel.findOneAndUpdate({title: recipe.title, creator: recipe.creator}, recipe, {upsert: true, new: true})
 }
 

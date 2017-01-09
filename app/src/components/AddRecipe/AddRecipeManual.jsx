@@ -30,6 +30,7 @@ class AddRecipeManual extends Component {
   }
 
   componentWillMount() {
+    console.log("will mount ", this.props)
     this.props.getUserData()
     .then((user) => {
       // console.log("id in componentWillMount ", this.props.recipeId)
@@ -37,6 +38,10 @@ class AddRecipeManual extends Component {
         this.getRecipeFromDB(this.props.recipeId)
       } 
     })
+  }
+
+  componentDidMount(){
+    console.log("did mount ", this.props)
   }
   
   getRecipeFromDB(recipeId) {
@@ -89,7 +94,7 @@ class AddRecipeManual extends Component {
     recipe.append('ingredients', JSON.stringify(ingredients));
     recipe.append('directions', this.state.directions);
     recipe.append('images', this.state.images[0]);
-
+    var props = this.props
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData._id}/addrecipe`,
@@ -97,17 +102,18 @@ class AddRecipeManual extends Component {
       cache: false,
       contentType: false,
       processData: false,
+      success: function(recipe){
+        console.log('Getting current data? ', recipe);
+        const path = `/viewrecipe?recipeId=${recipe._id}`
+        browserHistory.push(path);
+      },
+      error: function(xhr, status, err){
+        var responseMessage = xhr.responseText
+        console.error("did not post to DB manual ", status, xhr.responseText);
+        props.openModal(xhr.responseText)
+      }
     })
-    .catch((err) => {
-      console.error('didnt post', xhr.responseText);
-      props.openModal(xhr.responseText)
-    })
-    .then((recipe) => {
-      console.log('Getting current data? ', recipe);
-      const path = `/viewrecipe?recipeId=${recipe._id}`
-      browserHistory.push(path);
-    })
-  }
+      }
 
   onIngredientChange(e) {
     var index = e.target.id.split('-')[1]
@@ -161,6 +167,7 @@ class AddRecipeManual extends Component {
                   id="recipe-title"
                   value={this.state.title}
                   onChange={this.onInputChange.bind(this)}
+                  required
                 />
               </label>
             </div>
@@ -171,6 +178,7 @@ class AddRecipeManual extends Component {
               id="recipe-description"
               value={this.state.description}
               onChange={this.onInputChange.bind(this)}
+              required
             ></textarea>
 
             <h3>Directions </h3>
@@ -180,6 +188,7 @@ class AddRecipeManual extends Component {
               id="recipe-directions"
               value={this.state.directions}
               onChange={this.onInputChange.bind(this)}
+              required
             ></textarea>
 
             <h3>Ingredients</h3>
@@ -192,6 +201,7 @@ class AddRecipeManual extends Component {
                     index={index}
                     handleIngredientOnChange={this.onIngredientChange}
                     handleRemoveIngredient={this.removeIngredient}
+                    required
                   />
                 )
               })
