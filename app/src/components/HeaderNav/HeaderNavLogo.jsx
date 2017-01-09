@@ -3,7 +3,7 @@ import { Router, Link } from 'react-router';
 
 const HeaderNavLogo = () => {
   return (
-    <div className="navbar-brand col-xs-4">
+    <div className="navbar-brand col-4">
       <Link to={'/'}>
         <img
           src='/assets/icons/cookbook.svg'

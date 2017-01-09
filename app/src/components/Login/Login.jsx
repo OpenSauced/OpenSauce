@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <div>
       <div className="row">
-        <div className="col-xs-2">
+        <div className="col-2">
           <form action="/auth/login" method="post">
             <div>
               <label htmlFor="username">Username:</label>
@@ -21,7 +21,7 @@ const Login = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-xs-2">
+        <div className="col-2">
           <a href="/signup">Create an Account </a>
         </div>
       </div>

@@ -46,7 +46,7 @@ class ChangeProfilePicture extends Component {
     render() {
       return (
         <form action="/api/users/updateInfo/profilePicture" method="post" encType="multipart/form-data" target="_top">
-          <label className="col-xs-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
+          <label className="col-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
           <Dropzone name="ProfilePicture" multiple={false} onDrop={this.onDrop}>
             <div>Click or drag an image inside of the box to upload.</div>
           </Dropzone>
