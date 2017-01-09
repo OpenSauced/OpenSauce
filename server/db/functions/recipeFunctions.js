@@ -145,4 +145,9 @@ xPorts.findRecipesByUserName = function(username) {
     })
 }
 
+xPorts.findRecipesByUserId = function(userId) {
+  return userModel
+    .findOne({_id: userId}).populate('my_recipes saved_recipes')
+}
+
 module.exports = xPorts;

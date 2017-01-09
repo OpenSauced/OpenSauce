@@ -52,12 +52,14 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
     var userId = req.params._id
     var response = null
 
-    
-    // if(arrayOfRecipes.includes(recipeTitle)){
-    //   throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
-    // }
-  
-    db.recipeFunctions.addNewRecipe(userId, req.body)
+    db.recipeFunctions.findRecipesByUserId(userId)
+    .then((userObj) => {
+        userObj.my_recipes.forEach((recipe) => {
+            console.log(recipe.title)
+            if(recipe.title === req.body.title){
+                throw new Error('Looks like you already have a recipe with that title. You can\'t add recipes with the same title twice. Please change the title and submit again.')
+            } else {
+                    db.recipeFunctions.addNewRecipe(userId, req.body)
         .then((recipe) => {
             response = recipe
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
@@ -87,6 +89,12 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
           }
         })
         .catch((err) => {
+            res.status(500).send(err.message)
+        })
+            }
+        })
+    })
+    .catch((err) => {
             res.status(500).send(err.message)
         })
 
