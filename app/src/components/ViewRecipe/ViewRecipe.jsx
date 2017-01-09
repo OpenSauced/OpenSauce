@@ -8,6 +8,7 @@ import RecipeDirections from './RecipeDirections'
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
+  var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
 
 	if (recipe){
     return (
@@ -16,6 +17,7 @@ const ViewRecipe = ({recipe, user}) => {
         <RecipeCreator recipeCreator={recipe.creator}/>
         <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
         <RecipeDirections recipeDirections={recipe.directions}/>
+        {credit}
         {/* If you own a recipe, this button takes you to edit a recipe*/}
         { 
           user._id === recipe.creator._id

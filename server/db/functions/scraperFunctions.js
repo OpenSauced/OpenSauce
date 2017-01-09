@@ -64,6 +64,7 @@ xPorts.scrapeEpicurious = function(url) {
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions;
             recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
+            recipeObj.credit = 'Epicurious'
             return recipeObj
         })
         
@@ -94,6 +95,7 @@ xPorts.scrapeFoodNetwork = function(url) {
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions
             recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
+            recipeObj.credit = 'Food Network'
             return recipeObj
         }
         })
@@ -123,6 +125,8 @@ xPorts.scrapeAllRecipes = function(url) {
                     var ingredients = []
                     ingredients = recipeObj.ingredients.slice(0, i)
                     recipeObj.ingredients = ingredients;
+                    recipeObj.credit = 'All Recipes'
+
                     break
                 }
             }
