@@ -66,17 +66,17 @@ export const getUserRecipes = (recipes) => {
   var username = getStore().getState().userData.userData.username
   var request = axios.get(`/api/recipes/${username}/userrecipes`)
   var requestdata = request
-    // .then((response) => {
-    //   let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
-    //   recipes.forEach(recipe => {
-    //     recipe.creator = {
-    //       _id:recipe.creator,
-    //       username: username
-    //     }
-    //   })
-    //   return recipes
-    // })
-    console.log(request)
+    .then((response) => {
+      response.data.my_recipes.forEach(recipe => {
+        recipe.creator = {
+          _id:recipe.creator,
+          username: username
+        }
+      })
+      let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
+      return recipes
+    })
+    //console.log(request)
   return {
     type: GET_USER_RECIPES,
     payload: requestdata
