@@ -51,7 +51,7 @@ class ProfileSettingsChangeProfileInfo extends Component {
 
     render() {
         return (
-            <div className="col">
+            <div className="col-9">
                 { this.state.componentObj[ this.state.currentComponent ] }
             </div>
         );

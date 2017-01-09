@@ -18,14 +18,24 @@ class ProfileSettings extends Component {
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
         */}
-        <button name="profile"        onClick={ this.props.renderClick }> My profile </button>
-        <button name="name"           onClick={ this.props.renderClick }> Change your name </button>
-        <button name="username"       onClick={ this.props.renderClick }> Change your username </button>
-        <button name="bio"            onClick={ this.props.renderClick }> Change your bio </button>
-        <button name="email"          onClick={ this.props.renderClick }> Change your email </button>
-        <button name="password"       onClick={ this.props.renderClick }> Change your password </button>
-        <button name="profilePicture" onClick={ this.props.renderClick }> Change your profile picture </button>
-      
+        <div class="row">
+          <button name="name" onClick={ this.props.renderClick }> Change your name </button>
+        </div>
+        <div class="row">
+          <button name="username" onClick={ this.props.renderClick }> Change your username </button>
+        </div>
+        <div class="row">
+          <button name="bio" onClick={ this.props.renderClick }> Change your bio </button>
+        </div>
+        <div class="row">
+          <button name="email" onClick={ this.props.renderClick }> Change your email </button>
+        </div>
+        <div class="row">
+          <button name="password" onClick={ this.props.renderClick }> Change your password </button>
+        </div>
+        <div class="row">
+          <button name="profilePicture" onClick={ this.props.renderClick }> Change your profile picture </button>
+        </div>
       </div>
     );
   }
