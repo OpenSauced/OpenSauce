@@ -10,7 +10,6 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     this.props.updateSearchTerm(event.target.value)
-    //this.setState({term: event.target.value})
     this.search(false)
     return null
   }
@@ -36,8 +35,12 @@ class SearchBar extends Component {
 
 
   renderFilters() {
-    return(
-     <div> MY RECIPES | SAVED RECIPES | FORKED RECIPES </div>
+    return (
+      <div>
+        <label><input type="checkbox" />SAVED RECIPES</label>  &nbsp; &nbsp; 
+        <label><input type="checkbox" />FORKED RECIPES</label> &nbsp; &nbsp; 
+        <label><input type="checkbox" />LIKED RECIPES</label>
+      </div>
     )
   }
 
