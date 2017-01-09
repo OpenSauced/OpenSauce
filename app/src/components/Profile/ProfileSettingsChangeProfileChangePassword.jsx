@@ -7,10 +7,10 @@ class ChangePassword extends Component {
 
     render() {
         return (
-            <form action="/api/users/updateInfo/password" method="post" enctype="multipart/form-data" target="_top">
-                <label className="col-2 col-form-label" forHtml="password">Old Password:</label>
+            <form action="/api/users/updateInfo/password" method="post" encType="multipart/form-data" target="_top">
+                <label className="col-2 col-form-label" htmlFor="password">Old Password:</label>
                 <input className="form-control" type="text" name="password"/>
-                <label className="col-2 col-form-label" forHtml="newPassword">New Password:</label>
+                <label className="col-2 col-form-label" htmlFor="newPassword">New Password:</label>
                 <input className="form-control" type="text" name="newPassword"/>
                 <div>
                     <input type="submit" value="Save"/>
