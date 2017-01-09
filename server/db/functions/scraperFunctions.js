@@ -50,7 +50,12 @@ xPorts.scrapeEpicurious = function(url) {
             directions: {
                 listItem: 'li.preparation-step'
             },
-            description: 'div.dek p'
+            description: 'div.dek p',
+             
+            recipe_images: {
+                selector:'picture.photo-wrap img',
+                attr: 'srcset'
+            }
         })
         .catch((err) => {
             throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
@@ -58,6 +63,7 @@ xPorts.scrapeEpicurious = function(url) {
         .then(recipeObj => {
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions;
+            recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
             return recipeObj
         })
         
@@ -72,18 +78,22 @@ xPorts.scrapeFoodNetwork = function(url) {
             },
             directions: {
                 listItem: 'ul.recipe-directions-list li'
+            },
+            recipe_images: {
+                selector:'section.single-photo-recipe a img',
+                attr: 'src'
             }
         })
         .catch((err) => {
             throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
         })
         .then(recipeObj => {
-            console.log("FOOOOOOOOD NETWORRRRRRRRK ", recipeObj)
             if (recipeObj.ingredients.length < 1){
                 return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
             } else {
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions
+            recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
             return recipeObj
         }
         })
@@ -99,6 +109,10 @@ xPorts.scrapeAllRecipes = function(url) {
                 listItem: 'span.recipe-directions__list--item'
             },
             description: 'div.submitter__description',
+            recipe_images: {
+                selector:'span.hero-photo__image img',
+                attr: 'src'
+            }
         })
         .catch((err) => {
             throw new Error('Sorry, we experienced an error trying to get you that recipe. Please try a different link.')
@@ -121,6 +135,8 @@ xPorts.scrapeAllRecipes = function(url) {
                     break
                 }
             }
+            recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
+            console.log(recipeObj)
             return recipeObj;
 
         })

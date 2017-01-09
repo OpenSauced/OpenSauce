@@ -1,5 +1,6 @@
 body {
     font-size: 16px; //most other sizes are EM so this should scale.
+    background-color: #FEFAF7;
 }
 
 a, a:hover, a:active {
@@ -10,6 +11,9 @@ a, a:hover, a:active {
 
 }
 
+.recipeCard {
+  margin-bottom: 1em;
+}
 .recipeCard img {
     width: 100%;
 }
@@ -40,16 +44,20 @@ a, a:hover, a:active {
 .titleBarContainer {
   color: ghostwhite;
   background-color: ghostwhite;
-    margin: 96px -15px 15px;
-    padding-bottom: 55px;
-    padding-top: 55px;
+    margin-bottom: 15px;
+    padding-bottom: 6em;
+    padding-top: 6em;
     text-align: center;
-    background-image: url('/assets/loginBackground.png');
+    background-image: url('https://static.pexels.com/photos/5938/food-salad-healthy-lunch.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
-.mainTitle, .subTitle {
+.mainTitle {
   // background-color: lightsteelblue;
-  // color: white;/
+  color: white;
+  padding: 4em 0;
 }
 
 .navProfPic {
@@ -110,6 +118,8 @@ a, a:hover, a:active {
 
 .navbar {
   margin-bottom: 0;
+  background-color: rgba(60, 114, 80, 0.8)!important;
+  padding: 0;
 }
 
 .navbar, .navbar a {
@@ -156,6 +166,16 @@ a, a:hover, a:active {
   }
 }
 
-.app-header-child {
-  margin-top: 15px;
+// .app-header-child {
+//   margin-top: 15px;
+// }
+
+.btn-primary {
+  background-color: #DA5F51;
+  border-color: #DA5F51;
+}
+
+.btn-primary:hover{
+  background-color: #C14161;
+  border-color: #C14161;
 }
