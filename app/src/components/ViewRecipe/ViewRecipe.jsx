@@ -6,27 +6,24 @@ import RecipeIngredientsList from './RecipeIngredientsList'
 import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
 
-const ViewRecipe = ({recipe}) => {
-  console.log('ViewRecipe - recipe props', recipe)
+const ViewRecipe = ({recipe, user}) => {
+  console.log('ViewRecipe - me', user)
 	if (recipe){
-  return (
-    <div>
-      <RecipeDescription recipeDescription={recipe.description} />
-      <RecipeCreator recipeCreator={recipe.creator}/>
-      <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
-      <RecipeDirections recipeDirections={recipe.directions}/>
-      {/* this button takes you to edit a recipe*/}
-      <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
-    </div>
-  );
+    return (
+      <div>
+        <RecipeDescription recipeDescription={recipe.description} />
+        <RecipeCreator recipeCreator={recipe.creator}/>
+        <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
+        <RecipeDirections recipeDirections={recipe.directions}/>
+        {/* If you own a recipe, this button takes you to edit a recipe*/}
+        { 
+          user._id === recipe.creator._id &&
+          <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
+        }
+      </div>
+    );
+  }
+  return ''
 }
 
-return ''
-}
-
-export default ViewRecipe;
-
-
-
-
-
+export default ViewRecipe 

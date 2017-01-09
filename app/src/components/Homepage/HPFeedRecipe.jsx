@@ -2,7 +2,7 @@ import React from 'react';
 import {Router, Link} from 'react-router';
 
 const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
-  console.log(' this is recipe.creator: ', recipe.creator)
+  console.log(' HPFeedRecipe - recipe props ', recipe)
   return (
     <div className="cardRecipeCol col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}
