@@ -34,6 +34,13 @@ class SearchBar extends Component {
     this.search(true)
   }
 
+
+  renderFilters() {
+    return(
+     <div> MY RECIPES | SAVED RECIPES | FORKED RECIPES </div>
+    )
+  }
+
   render() {
     //console.log(this.props.searchTerm)
     return (
@@ -48,8 +55,8 @@ class SearchBar extends Component {
           id="searchfield"
           value={this.props.searchTerm}
           onChange={this.onInputChange.bind(this)}
-
         />
+        {this.renderFilters()}
       </form>
       </div>
     )
