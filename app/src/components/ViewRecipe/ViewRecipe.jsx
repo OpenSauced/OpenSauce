@@ -7,6 +7,7 @@ import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
 
 const ViewRecipe = ({recipe}) => {
+  console.log('ViewRecipe - recipe props', recipe)
 	if (recipe){
   return (
     <div>
