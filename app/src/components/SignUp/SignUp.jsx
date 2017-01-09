@@ -1,44 +1,62 @@
-import React from 'react';
+import React ,{ Component } from 'react';
+import Recaptcha from 'react-recaptcha'
 
-const SignUp = () => {
-  return (
-    <div className="container">
-      <div className="row">
-        <form action="/auth/signup" method="post">
-          <div className="row">
-            <label htmlFor="firstName">First Name:</label>
-            <input id="firstName" type="firstName" name="firstName"/>
-          </div>
-          <div className="row">
-            <label htmlFor="lastName">Last Name:</label>
-            <input id="lastName" type="lastName" name="lastName"/>
-          </div>
-          <div className="row">
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" name="email"/>
-          </div>
-          <div className="row">
-            <label htmlFor="username">Username:</label>
-            <input id="username" type="text" name="username"/>
-          </div>
-          <div className="row">
-            <label htmlFor="password">Password:</label>
-            <input id="password" type="password" name="password"/>
-          </div>
-          <div>
-            <label htmlFor="bio">Bio:</label>
-            <textarea id="bio" type="bio" name="bio" rows="4" cols="50"></textarea>
-          </div>
-          <div className="row">
-              <input type="submit" value="Sign up"/>
-          </div>
-        </form>
+class SignUp extends Component {
+  constructor () {
+    super ()
+    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
+  }
+
+  loadedRecaptcha () {
+    console.log('Recaptcha loaded!')
+  }
+
+  render () {
+    return (
+      <div className="container">
+        <div className="row">
+          <form action="/auth/signup" method="post">
+            <div className="row">
+              <label htmlFor="firstName">First Name:</label>
+              <input id="firstName" type="firstName" name="firstName"/>
+            </div>
+            <div className="row">
+              <label htmlFor="lastName">Last Name:</label>
+              <input id="lastName" type="lastName" name="lastName"/>
+            </div>
+            <div className="row">
+              <label htmlFor="email">Email:</label>
+              <input id="email" type="email" name="email"/>
+            </div>
+            <div className="row">
+              <label htmlFor="username">Username:</label>
+              <input id="username" type="text" name="username"/>
+            </div>
+            <div className="row">
+              <label htmlFor="password">Password:</label>
+              <input id="password" type="password" name="password"/>
+            </div>
+            <div>
+              <label htmlFor="bio">Bio:</label>
+              <textarea id="bio" type="bio" name="bio" rows="4" cols="50"></textarea>
+            </div>
+            {/* load recaptcha async */}
+            <Recaptcha 
+              sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+              render="explicit"
+              onloadCallback={this.loadedRecaptcha}
+            />
+            <div className="row">
+                <input type="submit" value="Sign up"/>
+            </div>
+          </form>
+        </div>
+        <div className="row">
+            <a href="/login">Login to your account</a>
+        </div>
       </div>
-      <div className="row">
-          <a href="/login">Login to your account</a>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default SignUp;
