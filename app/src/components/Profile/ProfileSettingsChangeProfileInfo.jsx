@@ -31,9 +31,9 @@ class ProfileSettingsChangeProfileInfo extends Component {
                 profile:  <CurrentProfile data={ data }/>,
                 name:     <ChangeName     data={ data }/>,
                 username: <ChangeUsername data={ data.username }/>,
-                bio:      <ChangeBio      data={ 'bio biiiiiiatch' }/>,
+                bio:      <ChangeBio      data={ data.bio }/>,
                 email:    <ChangeEmail    data={ data.email }/>,
-                password: <ChangePassword data={ 'hidden' }/>,
+                password: <ChangePassword data = { '********' }/>,
                 profilePicture: <ChangeProfilePicture data={ data.user_image }/>
             }
         })
