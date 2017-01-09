@@ -16,9 +16,9 @@ const ViewRecipe = ({recipe, user}) => {
         <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
         <RecipeDirections recipeDirections={recipe.directions}/>
         {/* If you own a recipe, this button takes you to edit a recipe*/}
-        { 
-          user._id === recipe.creator._id &&
-          <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
+        {
+          user._id === recipe.creator._id ?
+          <button> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button> : <div></div>
         }
       </div>
     );
@@ -26,4 +26,4 @@ const ViewRecipe = ({recipe, user}) => {
   return ''
 }
 
-export default ViewRecipe 
+export default ViewRecipe
