@@ -52,6 +52,28 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
     var userId = req.params._id
     var response = null
 
+    try {
+        if(req.body.title === null || req.body.title === undefined || req.body.title === ''){
+            throw new Error('Please enter a title for the recipe')
+        }
+        if(req.body.description === null || req.body.description === undefined || req.body.description ===  ''){
+            throw new Error('Please enter a description for the recipe')
+        }
+        if(req.body.directions === null || req.body.directions === undefined || req.body.directions === ''){
+            throw new Error('Please enter a directions for the recipe')        
+        }
+        if(req.body.ingredients === null || req.body.ingredients === undefined){
+            throw new Error('Please enter at least one ingredient for the recipe')
+        }
+        if(userId === null || userId === undefined){
+            throw new Error('Sorry. We encountered a problem trying to add your recipe because we couldn\'t find your username. Please try again later.')
+        }
+    }
+    catch(err){
+        console.log("here", err)
+        res.status(500).send(err.message)
+    }
+
     db.recipeFunctions.addNewRecipe(userId, req.body)
         .then((recipe) => {
             response = recipe
