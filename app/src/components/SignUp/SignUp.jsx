@@ -25,6 +25,10 @@ const SignUp = () => {
             <label htmlFor="password">Password:</label>
             <input id="password" type="password" name="password"/>
           </div>
+          <div>
+            <label htmlFor="bio">Bio:</label>
+            <textarea id="bio" type="bio" name="bio" rows="4" cols="50"></textarea>
+          </div>
           <div className="row">
               <input type="submit" value="Sign up"/>
           </div>
