@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import LazyLoad from 'react-lazy-load';
 
 const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
+  console.log(' this is recipe.creator: ', recipe.creator)
   return (
     <LazyLoad offset={100} className="card-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
       {/* see LazyLoad docs for more offset options (that is really all you can change)*/}
@@ -34,8 +35,6 @@ const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe,
                       onClick={() => {addRecipe(recipeId, userId)}}
                     >Like Recipe</div>
               }
-
-
             </div>
             <h2 className="card-title"><Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link></h2>
             <h3 className="card-title"><Link to={`/recipesbyuser?userId=${recipe.creator.username}`}>Author: {recipe.creator.username}</Link></h3>

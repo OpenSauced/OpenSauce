@@ -12,7 +12,6 @@ import { fetchRecipes, getUserData, addUserSavedRecipe, removeUserSavedRecipe } 
 //Components
 import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
-import HPLazyLoader from '../../components/Homepage/HPLazyLoader'
 import SearchBar from '../Homepage/SearchBar'
 
 ///Setting Defaults for OnVisibility
