@@ -12,7 +12,7 @@ class ProfileSettings extends Component {
   render() {
     // This component will show up as a sidebar on the 'Change Profile' page
     return (
-      <div className="col-xs-3">
+      <div className="col-3">
         <ProfileSettingsUserImage image={ this.props.userData.user_image}/>
         {/* Each of the buttons below corresponds to a case in RouteProfile
           * clicking one of the buttons will change what component renders in

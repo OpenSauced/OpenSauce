@@ -15,7 +15,7 @@ class ChangeBio extends Component {
                     method="post" 
                     enctype="multipart/form-data" 
                     target="_top">
-                    <label className="col-xs-2 col-form-label" forHtml="newBio">Bio:</label>
+                    <label className="col-2 col-form-label" forHtml="newBio">Bio:</label>
                     <textarea className="form-control" name="newBio" rows="4" cols="50"></textarea>
                     <div>
                         <input type="submit" value="Save"/>
