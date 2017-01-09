@@ -134,7 +134,15 @@ xPorts.searchRecipes = function(term) {
 //GET RECIPES PER USER
 xPorts.findRecipesByUserName = function(username) {
   return userModel
-    .findOne({username: username}).populate('my_recipes saved_recipes')
+    .findOne({username: username})
+    .populate('my_recipes')
+    .populate({
+      path: 'saved_recipes',
+      populate: { 
+        path: 'creator',
+        select: 'username'
+        }
+    })
 }
 
 module.exports = xPorts;

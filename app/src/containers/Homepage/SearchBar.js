@@ -33,6 +33,12 @@ class SearchBar extends Component {
     event.preventDefault()
     this.search(true)
   }
+
+  renderFilters() {
+    return(
+     <div> MY RECIPES | SAVED RECIPES | FORKED RECIPES </div>
+    )
+  }
  
   render() {
     //console.log(this.props.searchTerm)
@@ -55,6 +61,7 @@ class SearchBar extends Component {
             Submit
           </button>
         </span>
+        {this.renderFilters()}
       </form>
     )
   }
