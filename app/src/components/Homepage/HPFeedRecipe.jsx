@@ -16,7 +16,7 @@ var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url 
               <Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link>
             </h2>
             <p className="col-12 card-title">
-              <Link to={`/recipesbyuser?userId=${recipe.creator.username}`}>Author: {recipe.creator.username}</Link>
+              <div>Author: {recipe.creator.username}</div>
             </p>
             <p className="col-12 card-text">{recipe.description}</p>
             <p className="col-12"> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
