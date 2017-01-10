@@ -10,17 +10,18 @@ import {browserHistory} from 'react-router';
 
 //Redux and async functions
 import { connect } from 'react-redux';
-// import { getUserData } from '../../../actions/index';
-// import { bindActionCreators } from 'redux';
 
 import EditRecipeIngredient from './components/ViewRecipe/EditRecipeIngredient'
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
+import Footer from './components/Footer/Footer';
+
 
 class RouteEditRecipe extends Component {
   constructor(props) {
     super(props);
+
     // state is used to track changes in the editting boxes
     this.state = {
       title: '',
@@ -185,7 +186,6 @@ class RouteEditRecipe extends Component {
             </form>
           </div>
         </div> 
-        <Footer/>
       </div>
     )
   }
