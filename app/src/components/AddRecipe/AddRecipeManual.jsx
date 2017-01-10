@@ -231,12 +231,14 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
+          <div className="row gtfo-recapture">
           <Recaptcha
             sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
             render="explicit"
             verifyCallback={this.verifyCallback}
             onloadCallback={this.loadedRecaptcha}
           />
+          </div>
           <span className="">
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
