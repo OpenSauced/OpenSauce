@@ -42,16 +42,17 @@ a, a:hover, a:active {
 }
 
 .titleBarContainer {
-  color: ghostwhite;
-  background-color: ghostwhite;
+    color: ghostwhite;
+    background-color: #535353;
+    background-blend-mode: overlay;
     margin-bottom: 15px;
     padding-bottom: 6em;
     padding-top: 6em;
     text-align: center;
-    background-image: url('https://static.pexels.com/photos/5938/food-salad-healthy-lunch.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-position: 0 30%;
 }
 
 .mainTitle {
@@ -120,6 +121,8 @@ a, a:hover, a:active {
   margin-bottom: 0;
   background-color: rgba(60, 114, 80, 0.8)!important;
   padding: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
 .navbar, .navbar a {
@@ -153,6 +156,12 @@ a, a:hover, a:active {
 
 
 .homePageContainer {
+
+  .card {
+    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    box-shadow: 0 1px 8px rgba(0,0,0,.175);
+  }
+
   .recipe_card {
     padding: 0;
     margin: 0;
@@ -160,15 +169,17 @@ a, a:hover, a:active {
 
   .cardRecipeCol {
     list-style: none;
-    .card-img-top {
-      width: 100%;
-    }
   }
 }
 
-// .app-header-child {
-//   margin-top: 15px;
-// }
+.card-img-top {
+  width: 100%;
+}
+
+.card-image-container {
+  // height: 300px;
+  // overflow: hidden;
+}
 
 .btn-primary {
   background-color: #DA5F51;
