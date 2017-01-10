@@ -4,6 +4,7 @@ const path = require('path');
 const bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
+const config = require('../env/config.js')
 const axios = require('axios')
 
 
@@ -28,10 +29,10 @@ router.verifyPassword = function(user, plainPass) {
     })
 }
 
+// MIDDLEWARE that checks authentication of google recaptcha
 router.authRecaptcha = function (req, res, next) {
-
     let captchaRes = req.body['g-recaptcha-response'];
-    let secret = '6LdWOBEUAAAAAEhhIaRv-8o2cm8GpFtrvLt_YhY7';
+    let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
         + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress; 
     
