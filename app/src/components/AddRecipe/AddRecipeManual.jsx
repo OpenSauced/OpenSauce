@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
 import Dropzone from 'react-dropzone';
+import Recaptcha from 'react-recaptcha';
+
 
 //Redux and async functions
 import { getUserData } from '../../actions/index';
@@ -19,7 +21,8 @@ class AddRecipeManual extends Component {
       description: '',
       directions: '',
       ingredients: [''],
-      images: []
+      images: [],
+      verification: ''
     }
 
     // Function bindings for the component
@@ -27,6 +30,17 @@ class AddRecipeManual extends Component {
     this.removeIngredient = this.removeIngredient.bind(this);
     this.addNewIngredient = this.addNewIngredient.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
+    this.verifyCallback = this.verifyCallback.bind(this)
+  }
+
+  verifyCallback (response) {
+    console.log('veriftying her is the response ', response)
+    this.setState({ verification:response })
+  }
+
+  loadedRecaptcha () {
+    console.log('Recaptcha loaded!')
   }
 
   componentWillMount() {
@@ -84,17 +98,20 @@ class AddRecipeManual extends Component {
     e.preventDefault();
 
     let ingredients = this.state.ingredients;
-    // .filter((ingredient) => {
-    //   ingredient.replace(' ', '') === '' ? null : ingredient; 
-    // });
-
+    let props = this.props
     let recipe = new FormData();
+
+    // add form data for ajax response
+    
     recipe.append('title', this.state.title);
     recipe.append('description', this.state.description);
     recipe.append('ingredients', JSON.stringify(ingredients));
     recipe.append('directions', this.state.directions);
+
+    //response from recaptcha and images
+    recipe.append('g-recaptcha-response', this.state.verification)
     recipe.append('images', this.state.images[0]);
-    var props = this.props
+    
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData._id}/addrecipe`,
@@ -103,13 +120,13 @@ class AddRecipeManual extends Component {
       contentType: false,
       processData: false,
       success: function(recipe){
-        console.log('Getting current data? ', recipe);
+        // console.log('Getting current data? ', recipe);
         const path = `/viewrecipe?recipeId=${recipe._id}`
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
         var responseMessage = xhr.responseText
-        console.error("did not post to DB manual ", status, xhr.responseText);
+        // console.error("did not post to DB manual ", status, xhr.responseText);
         props.openModal(xhr.responseText)
       }
     })
@@ -214,6 +231,12 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
+          <Recaptcha 
+            sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+            render="explicit"
+            verifyCallback={this.verifyCallback}
+            onloadCallback={this.loadedRecaptcha}
+          />
           <span className="">
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
