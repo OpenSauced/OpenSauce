@@ -23,6 +23,12 @@ class SignUp extends Component {
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
+              <Recaptcha
+                theme="dark"
+                sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+                render="explicit"
+                onloadCallback={this.loadedRecaptcha}
+              />
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
@@ -30,11 +36,7 @@ class SignUp extends Component {
             <Link to='/login'>Login to your Account</Link>
           </h6>
         </div>
-        <Recaptcha
-          sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-          render="explicit"
-          onloadCallback={this.loadedRecaptcha}
-        />
+
         </div>
     );
   }

@@ -10,6 +10,13 @@ a:hover {
     // color: ghostwhite;
 }
 
+.btn {
+  white-space: normal;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -21,7 +28,6 @@ a:hover {
     left: 15px;
 }
 
-#navButtonContainer {}
 
 .recipeCard {
     margin-bottom: 1em;
@@ -186,14 +192,15 @@ a:hover {
 // login stuff
 
 #g-recaptcha {
-    position: relative;
+    position: static;
     text-align: center;
-    top: 170px;
-    left: 50%;
-    margin: -150px 0 0 -150px;
+    // top: 70%;
+    // left: 50%;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 3% -16px;
     max-width: 300px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    transform: scale(0.9);
 }
 
 .authForm {
@@ -324,25 +331,21 @@ a:hover {
 }
 
 .card-image-container {
-    // height: 300px;
-    // overflow: hidden;
     position: relative;
     height: 234px;
     overflow: hidden;
-
-    img {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
+    background-position: center;
+    background-size: cover;
 }
 
 .btn-primary {
     background-color: #DA5F51;
     border-color: #DA5F51;
+    white-space: normal;
 }
 
 .btn-primary:hover {
     background-color: #C14161;
     border-color: #C14161;
+    white-space: normal;
 }
