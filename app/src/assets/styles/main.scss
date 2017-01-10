@@ -12,6 +12,7 @@ body {
 a, a:hover, a:active {
   color: ghostwhite;
 }
+
 h1, h2, h3, h4, h5, h6 {
   // font-family: 'Nunito', sans-serif;
   font-family: 'PT Serif', serif;
@@ -157,8 +158,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-menu {
     overflow: hidden;
-    left: 50% !important;
     margin-left: -61%;
+    background-color: #FEFAF7;
 }
 
 .dropdown-menu > li {
@@ -355,6 +356,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #DA5F51;
     border-color: #DA5F51;
     white-space: normal;
+    color: ghostwhite!important;
 }
 
 .btn-primary:hover {

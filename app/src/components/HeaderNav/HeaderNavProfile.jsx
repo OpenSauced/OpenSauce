@@ -24,7 +24,7 @@ class HeaderNavProfile extends Component {
             <li className="navProfPic" style={{'backgroundImage':"url('" + this.props.userData.user_image.public_url + "')"}} />
             <li role="separator" className="divider"></li>
             <li className="">
-              <span>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</span>
+              <div>Hey, {`${this.props.userData.first_name} ${this.props.userData.last_name}`}!</div>
               <Link style={{'padding': '0px'}} to="/profile">View Profile Settings</Link>
             </li>
             <HeaderNavLogOutButton name="Logout" link="/login"/>
