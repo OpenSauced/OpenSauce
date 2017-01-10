@@ -33,6 +33,7 @@ router.verifyPassword = function(user, plainPass) {
 // MIDDLEWARE that checks authentication of google recaptcha
 router.authRecaptcha = function (req, res, next) {
 
+    // construct url to send and verify
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
