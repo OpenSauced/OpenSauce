@@ -21,8 +21,7 @@ var pageStyle = {
 }
 
 var modalStyle = {
-  'backgroundImage': randomSameImage,
-  'backgroundSize': 'inherit'
+  'backgroundImage': randomSameImage
 }
 
 var headerStyle = {

@@ -12,7 +12,7 @@ a:hover {
 
 .footer {
       position: fixed;
-      top: 97%;
+      bottom: 0;
       display: block;
       background-color: ghostwhite;
       height: 28px;
@@ -53,15 +53,6 @@ a:hover {
 
 .searchBarButtonCombo {
     width: 100%;
-}
-@media (max-height: 700px) {
-    .titleBarContainer {
-        padding: 0 !important;
-    }
-
-    .authForm .content {
-        top: 65vh !important;
-    }
 }
 
 .titleBarContainer {
@@ -165,17 +156,9 @@ a:hover {
 }
 // login stuff
 .authForm {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    .content {
         position: relative;
         overflow: hidden;
         left: 50vw;
-        top: 50vh;
         margin: -150px 0 0 -150px;
         max-width: 300px;
         background-color: rgba(248, 248, 255, 0.4);
@@ -187,21 +170,6 @@ a:hover {
         form {
             z-index: 99;
             position: inherit;
-        }
-
-        .authFormBg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            background-size: cover;
-            -webkit-filter: blur(5px);
-            -moz-filter: blur(5px);
-            -o-filter: blur(5px);
-            -ms-filter: blur(5px);
-            filter: blur(5px);
         }
 
         h1 {
@@ -272,7 +240,6 @@ a:hover {
             width: 100%;
             display: block;
         }
-    }
 }
 
 .homePageContainer {
