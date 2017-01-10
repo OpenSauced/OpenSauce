@@ -149,68 +149,75 @@ class AddRecipeManual extends Component {
   render() {
     return (
       <div className="row">
-        <div className="container">
-          <form id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
-            <div className="row">
-              <Dropzone multiple={false} onDrop={this.onDrop}>
-                <div>Try dropping some files here, or click to select files to upload.</div>
-              </Dropzone>
-              {this.state.images.length > 0 ? <div>
-                <div>{this.state.images.map((image) => <img key={1} src={image.preview} /> )}</div>
-                </div> : null}
-            </div>
-            <div className="row">
-              <label htmlFor="">
-                <span>Recipe Title:</span>
-                <input
-                  placeholder="Please enter Recipe Name"
-                  id="recipe-title"
-                  value={this.state.title}
-                  onChange={this.onInputChange.bind(this)}
-                  required
-                />
-              </label>
-            </div>
-            <h3>Recipe Description:</h3>
-            <textarea
-              placeholder="Please enter a description"
-              className=""
-              id="recipe-description"
-              value={this.state.description}
-              onChange={this.onInputChange.bind(this)}
-            ></textarea>
-
-            <h3>Directions </h3>
-            <textarea
-              placeholder="Please enter directions"
-              className=""
-              id="recipe-directions"
-              value={this.state.directions}
-              onChange={this.onInputChange.bind(this)}
-              required
-            ></textarea>
-
-            <h3>Ingredients</h3>
-            {
-              this.state.ingredients.map((ingredient, index) => {
-                return (
-                  <AddRecipeManualList
-                    key={index}
-                    ingredient={this.state.ingredients[index]}
-                    index={index}
-                    handleIngredientOnChange={this.onIngredientChange}
-                    handleRemoveIngredient={this.removeIngredient}
-                    required
-                  />
-                )
-              })
-            }
-            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
-            <span className="">
-              <button type="submit" className="btn btn-secondary">Submit</button>
-            </span>
-          </form>
-        </div>
+        <form className="col-12" id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
+          <div className="row">
+            <Dropzone multiple={false} onDrop={this.onDrop}>
+              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
+            </Dropzone>
+          </div>
+          <div className="row">
+            <label htmlFor="recipe-title">
+              <h2>Recipe Title:</h2>
+              <input 
+                className="col-12"
+                placeholder="Please enter Recipe Name"
+                id="recipe-title"
+                value={this.state.title}
+                onChange={this.onInputChange.bind(this)}
+                required
+              />
+            </label>
+          </div>
+          <div className="row">
+            <label htmlFor="recipe-description">
+              <h2>Recipe Description:</h2>
+              <textarea
+                className="col-12"
+                placeholder="Please enter a description"
+                className=""
+                id="recipe-description"
+                value={this.state.description}
+                onChange={this.onInputChange.bind(this)}
+              ></textarea>
+            </label>
+          </div>
+          <div className="row">
+            <label htmlFor="recipe-directions">
+              <h2>Directions </h2>
+              <textarea
+                placeholder="Please enter directions"
+                className=""
+                id="recipe-directions"
+                value={this.state.directions}
+                onChange={this.onInputChange.bind(this)}
+                required
+              ></textarea>
+            </label>
+          </div>
+          <div className="row">
+            <label>
+              <h2>Ingredients</h2>
+              {
+                this.state.ingredients.map((ingredient, index) => {
+                  return (
+                    <AddRecipeManualList
+                      key={index}
+                      ingredient={this.state.ingredients[index]}
+                      index={index}
+                      handleIngredientOnChange={this.onIngredientChange}
+                      handleRemoveIngredient={this.removeIngredient}
+                      required
+                    />
+                  )
+                })
+              }
+              <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
+            </label>
+          </div>
+          <span className="">
+            <button type="submit" className="btn btn-secondary">Submit</button>
+          </span>
+        </form>
       </div>
     );
   }

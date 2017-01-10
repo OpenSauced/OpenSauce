@@ -14,7 +14,7 @@ const AddRecipeManualList = ({ingredient, index, handleIngredientOnChange, handl
         type="button"
         key={`remove_ingredient-${index}`}
         id={`remove_ingredient-${index}`} 
-        className=""
+        className="btn btn-secondary"
         onClick={handleRemoveIngredient}
       >
         Remove
