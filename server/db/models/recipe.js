@@ -33,7 +33,8 @@ var RecipeSchema = new Schema({
 		createdAt: Date, 
 		updatedAt: Date
 	},
-	url: String
+	url: String,
+	credit: String
 })
 
 RecipeSchema.index({title: 'text', descrption: 'text', directions: 'text'})
