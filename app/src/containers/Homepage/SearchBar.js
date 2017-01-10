@@ -35,7 +35,7 @@ class SearchBar extends Component {
           this.props.fetchRecipes(searchstring, filter)
           break
         case '/myrecipes':
-          console.log('TODO: MAKE SEARCHBAR WORK IN MYRECIPES') 
+          console.log('TODO: MAKE SEARCHBAR ALSO WORK IN MYRECIPES') 
       }
     }
   }
@@ -47,31 +47,6 @@ class SearchBar extends Component {
 
   onCheckboxChange(event) {
     this.search(false, event.target.id)
-  }
-
-
-  renderFilters() {
-    return (
-      <div>
-      <h3> now viewing: </h3>
-        <label><input
-          id="saved_recipes_checkbox" 
-          onChange={this.onCheckboxChange.bind(this)} 
-          type="checkbox" defaultChecked="true"
-        />SAVED RECIPES</label>  &nbsp; &nbsp; 
-        <label><input
-          id="forked_recipes_checkbox"  
-          onChange={this.onCheckboxChange.bind(this)} 
-          type="checkbox" defaultChecked="true"
-        />FORKED RECIPES</label> &nbsp; &nbsp; 
-        <label><input 
-          id="my_recipes_checkbox" 
-          onChange={this.onCheckboxChange.bind(this)} 
-          type="checkbox" 
-          defaultChecked="true"
-        />LIKED RECIPES</label>
-      </div>
-    )
   }
 
   render() {
@@ -89,7 +64,7 @@ class SearchBar extends Component {
           value={this.props.searchTerm}
           onChange={this.onInputChange.bind(this)}
         />
-        {this.renderFilters()}
+      
       </form>
       </div>
     )
@@ -103,7 +78,6 @@ import { fetchRecipes, updateSearchTerm, clearRecipes } from '../../actions/inde
 
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes,
     searchTerm: state.searchTerm
   }
 }

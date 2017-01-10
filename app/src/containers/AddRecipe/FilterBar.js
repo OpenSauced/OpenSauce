@@ -5,111 +5,86 @@ import _ from 'lodash'
 class FilterBar extends Component {
   constructor(props) {
     super(props)
-    this.search = _.debounce((isSubmit, filter) => {this.sendSearch(isSubmit, filter)}, 300)
-  }
-
-  onInputChange(event) {
-    this.props.updateSearchTerm(event.target.value)
-    this.search(false)
     this.state = {
-      forkedRecipes: true,
-      savedRecipes: true,
-      myRecipes: true
+        isForkedRecipesChecked: true,
+        isSavedRecipesChecked: true,
+        isMyRecipesChecked: true
     }
-    return null
+    this.search = _.debounce((id) => {this.sendSearch(id)}, 100)
   }
 
-  sendSearch(isSubmit, filter) {
-
-    var location = browserHistory.getCurrentLocation()
-    //console.log(location)
-    if (isSubmit) {
-      var url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
-      browserHistory.push(url)
-
-    } else {
-      this.props.clearRecipes()
-      switch (location.pathname) {
-        case '/':
-          var searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search
-          this.props.fetchRecipes(searchstring, filter)
-          break
-        case '/myrecipes':
-          console.log('TODO: MAKE SEARCHBAR WORK IN MYRECIPES') 
-      }
+  sendSearch(id) {
+    
+    switch(id) {
+      case 'saved_recipes_checkbox':
+        this.setState({isSavedRecipesChecked: this.state.isSavedRecipesChecked ? false : true})
+        break
+      case 'forked_recipes_checkbox':
+        this.setState({isForkedRecipesChecked: this.state.isForkedRecipesChecked ? false : true})
+        break 
+      case 'my_recipes_checkbox':
+        this.setState({isMyRecipesChecked: this.state.isMyRecipesChecked ? false : true})
+        break 
     }
+
+    var filter = {
+      isForkedRecipesChecked: this.state.isForkedRecipesChecked,
+      isSavedRecipesChecked: this.state.isSavedRecipesChecked,
+      isMyRecipesChecked: this.state.isMyRecipesChecked
+    }
+    
+    console.log(filter)
+    this.props.clearRecipes()
+    this.props.getUserRecipes(filter)
   }
 
   onFormSubmit(event) {
     event.preventDefault()
-    this.search(true)
   }
 
   onCheckboxChange(event) {
-    this.search(false, event.target.id)
+    this.search(event.target.id)
   }
 
-
-  renderFilters() {
+  render() {
     return (
       <div>
       <h3> now viewing: </h3>
         <label><input
           id="saved_recipes_checkbox" 
           onChange={this.onCheckboxChange.bind(this)} 
-          type="checkbox" defaultChecked="true"
-        />SAVED RECIPES</label>  &nbsp; &nbsp; 
+          type="checkbox" 
+          checked={this.state.isSavedRecipesChecked}
+        />SAVED RECIPES</label> &nbsp; &nbsp; 
         <label><input
           id="forked_recipes_checkbox"  
           onChange={this.onCheckboxChange.bind(this)} 
-          type="checkbox" defaultChecked="true"
+          type="checkbox" 
+          checked={this.state.isForkedRecipesChecked}
         />FORKED RECIPES</label> &nbsp; &nbsp; 
         <label><input 
           id="my_recipes_checkbox" 
           onChange={this.onCheckboxChange.bind(this)} 
           type="checkbox" 
-          defaultChecked="true"
-        />LIKED RECIPES</label>
-      </div>
-    )
-  }
-
-  render() {
-    //console.log(this.props.searchTerm)
-    return (
-      <div className="d-flex justify-content-center">
-      <form
-        className="col-8"
-        onSubmit={this.onFormSubmit.bind(this)}
-      >
-        <input
-          placeholder="Search for recipes..."
-          className="form-control"
-          id="searchfield"
-          value={this.props.searchTerm}
-          onChange={this.onInputChange.bind(this)}
-        />
-        {this.renderFilters()}
-      </form>
+          checked={this.state.isMyRecipesChecked}
+        />MY RECIPES</label>
       </div>
     )
   }
 }
-
 //REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchRecipes, updateSearchTerm, clearRecipes } from '../../actions/index'
+import { getUserRecipes, clearRecipes } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
-    recipes: state.recipes,
     searchTerm: state.searchTerm
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes, updateSearchTerm, clearRecipes }, dispatch)
+  return bindActionCreators ({ getUserRecipes, clearRecipes }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBar)
