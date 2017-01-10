@@ -27,18 +27,24 @@ const AddRecipeFromLink = (props) => {
           props.openModal(xhr.responseText)
           console.error("did not post to DB from link ", status, xhr.responseText);
       }
-
     })
   }
 
   return (
-    <div>
-      <form id='commentPostForm' onSubmit={formSubmit}>
-      Paste a link to a recipe:
-      <input type='text' name='url' />
-      <input type='submit' value='Get Recipe' />
-    </form>
-
+    <div className="row">
+      <div className="col-12">
+        <form id='commentPostForm' onSubmit={formSubmit}>
+        <div className="row">
+          <label htmlFor="add_recipe_link">
+            <h2>Paste a link to a recipe:</h2>
+            <input id="add_recipe_link" type='text' name='url' />
+          </label>
+        </div>
+          <div className="row">
+            <button type='submit' className="btn btn-secondary">Get Recipe</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

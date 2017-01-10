@@ -6,19 +6,19 @@ class ChangeBio extends Component {
     }
 
     render() {
-
         return (
-            <div>
-                <h1> Current bio: {this.props.data} </h1>
-                <form 
+            <div className="row">
+                <h2 className="col-12">Current bio: {this.props.data}</h2>
+                <form
+                    className="col-12 row" 
                     action="/api/users/updateInfo/bio" 
                     method="post" 
-                    enctype="multipart/form-data" 
+                    encType="multipart/form-data" 
                     target="_top">
-                    <label className="col-xs-2 col-form-label" htmlFor="newBio">Bio:</label>
-                    <textarea className="form-control" name="newBio" rows="4" cols="50"></textarea>
-                    <div>
-                        <input type="submit" value="Save"/>
+                    <label className="col-12 col-form-label" htmlFor="newBio">Bio:</label>
+                    <div className="col-5"><textarea className="form-control" name="newBio" rows="4" cols="50"></textarea></div>
+                    <div className="col-12">
+                        <input className="btn btn-secondary" type="submit" value="Save"/>
                     </div>
                 </form>
             </div>

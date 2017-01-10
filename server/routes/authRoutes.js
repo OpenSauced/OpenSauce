@@ -1,9 +1,13 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const path = require('path');
-var bcrypt = require('bcrypt-nodejs');
+const multer = require('multer'); // Node.js middleware for handling `multipart/form-data
+const bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
+const config = require('../env/config.js')
+const axios = require('axios')
+
 
 //takes a user, and a plain password text, returns true or false.
 //thx bCrypt
@@ -23,6 +27,31 @@ router.verifyPassword = function(user, plainPass) {
         } else {
             return false
         }
+    })
+}
+
+// MIDDLEWARE that checks authentication of google recaptcha
+router.authRecaptcha = function (req, res, next) {
+
+    // construct url to send and verify
+    let captchaRes = req.body['g-recaptcha-response'];
+    let secret = config.recaptcha.secret;
+    let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
+        + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress; 
+    
+    axios.post( verificationURL )
+    .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
+        if (resObj.data.success === true){
+            return next()
+        } else {
+            throw 'There was a problem with your recaptcha response, please try again'
+        }
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.redirect('/login')
+        // handle this route better
+        // res.redirect('/handlefailedrecaptcha')
     })
 }
 
@@ -72,9 +101,6 @@ router.login = function(user) {
     })
 }
 
-// router.get('/signup', function(req, res) {
-//     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
-// })
 
 router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
@@ -113,7 +139,7 @@ router.get('/logout', function(req, res) {
 })
 
 // router.secondarySignupCheck
-router.post('/signup', function(req, res) {
+router.post('/signup', router.authRecaptcha, function(req, res) {
     router.signUp(req.body).then(function(exists) {
         console.log('.then')
         if (exists === true) {

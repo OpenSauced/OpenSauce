@@ -11,6 +11,7 @@ class RouteSignUp extends Component {
 
   render() {
     var randomSameImage = 'url(./assets/imageRotation/hpBg_' +  Math.floor(Math.random() * 13) + '.jpg)'
+
     var pageStyle = {
       'backgroundImage': randomSameImage,
       'height': '100vh',
@@ -32,7 +33,7 @@ class RouteSignUp extends Component {
     }
 
     return (
-      <div className="container-fluid" style={pageStyle}>
+      <div className="container-fluid authPage" style={pageStyle}>
         <AppHeader title={'Welcome to OpenSauce'} style={headerStyle}/>
         <SignUp style={modalStyle}/>
       </div>

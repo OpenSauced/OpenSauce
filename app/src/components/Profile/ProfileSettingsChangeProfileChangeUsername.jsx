@@ -7,15 +7,15 @@ class ChangeUsername extends Component {
 
     render() {
         return (
-            <div>
-                <h1> Current username: {this.props.data} </h1>
-                <form action="/api/users/updateInfo/username" method="post" enctype="multipart/form-data" target="_top" className='basicProfileSettingsForm'>
-                    <label className="col-2 col-form-label" forHtml="newUsername">Username:</label>
-                    <input className="form-control" type="text" name="newUsername"/>
-                    <label className="col-2 col-form-label" forHtml="password">Password:</label>
-                    <input className="form-control" type="text" name="password"/>
-                    <div>
-                        <input type="submit" value="Save"/>
+            <div className="row">
+                <h2 className="col-12"> Current username: {this.props.data} </h2>
+                <form className="col-12 row basicProfileSettingsForm" action="/api/users/updateInfo/username" method="post" encType="multipart/form-data" target="_top">
+                    <label className="col-12 col-form-label" htmlFor="newUsername">Username:</label>
+                    <div className="col-5"><input className="form-control" type="text" name="newUsername"/></div>
+                    <label className="col-12  col-form-label" htmlFor="password">Password:</label>
+                    <div className="col-5"><input className="form-control" type="text" name="password"/></div>
+                    <div className="col-12">
+                        <input className="btn btn-secondary" type="submit" value="Save"/>
                     </div>
                 </form>
             </div>

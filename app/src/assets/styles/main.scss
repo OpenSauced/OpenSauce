@@ -11,14 +11,14 @@ a:hover {
 }
 
 .footer {
-      position: fixed;
-      bottom: 0;
-      display: block;
-      background-color: ghostwhite;
-      height: 28px;
-      width: 100%;
-      text-align: center;
-      left: 15px;
+    position: fixed;
+    bottom: 0;
+    display: block;
+    background-color: ghostwhite;
+    height: 28px;
+    width: 100%;
+    text-align: center;
+    left: 15px;
 }
 
 #navButtonContainer {}
@@ -54,10 +54,38 @@ a:hover {
 .searchBarButtonCombo {
     width: 100%;
 }
+@media (max-height: 780px) and (min-height: 680px) {
+    .authPage {
+            text-align: center;
+            height: 130vh !important;
+    }
+}
+@media (max-height: 680px) {
+    .authPage {
+            height: 150vh !important;
+
+        #g-recaptcha {
+            top: 270px !important;
+        }
+
+        .authForm {
+            top: 100px !important;
+        }
+
+        .titleBarContainer {
+            text-align: center;
+            // height: 100px !important;
+            color: transparent !important;
+            padding-bottom: 0 !important;
+            margin: 0 !important;
+            padding-top: 0 !important;
+        }
+    }
+}
 
 .titleBarContainer {
     color: ghostwhite;
-    background-color: #535353;
+    // background-color: #535353;
     background-blend-mode: overlay;
     margin-bottom: 15px;
     padding-bottom: 6em;
@@ -139,6 +167,7 @@ a:hover {
     padding: 0;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    transition: all ease 0.3s;
 }
 
 .navbar,
@@ -155,104 +184,123 @@ a:hover {
     color: #373a3c;
 }
 // login stuff
+
+#g-recaptcha {
+    position: relative;
+    text-align: center;
+    top: 170px;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    max-width: 300px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
 .authForm {
-        position: relative;
-        overflow: hidden;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    max-width: 300px;
+    background-color: rgba(248, 248, 255, 0.6);
+    border-radius: 25px;
+    padding: 15px !important;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
+    h1 {
+        z-index: 99;
+        position: inherit;
+        color: #fff;
+        text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+        letter-spacing: 1px;
         text-align: center;
-        left: 50%;
-        margin: -150px 0 0 -150px;
-        max-width: 300px;
-        background-color: rgba(248, 248, 255, 0.6);
-        border-radius: 25px;
-        padding: 15px !important;
-        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
 
-        h1 {
-            z-index: 99;
-            position: inherit;
-            color: #fff;
-            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
-            text-align: center;
-        }
+    h6 {
+        margin-top: 10px;
+    }
 
-        h6 {
-          margin-top: 10px;
-        }
+    ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: ghostwhite;
+    }
 
-        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-          color: ghostwhite;
-        }
-        ::-moz-placeholder { /* Firefox 19+ */
-          color: ghostwhite;
-        }
-        :-ms-input-placeholder { /* IE 10+ */
-          color: ghostwhite;
-        }
-        :-moz-placeholder { /* Firefox 18- */
-          color: ghostwhite;
-        }
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: ghostwhite;
+    }
 
-        input {
-            width: 100%;
-            margin-bottom: 10px;
-            background: rgba(0,0,0,0.3);
-            border: none;
-            outline: none;
-            padding: 10px;
-            font-size: 13px;
-            color: #fff !important;
-            // text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-            border: 1px solid rgba(0,0,0,0.5);
-            border-radius: 4px;
-            box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-            // -webkit-transition: box-shadow 0.5s ease;
-            // -moz-transition: box-shadow 0.5s ease;
-            // // -o-transition: box-shadow 0.5s ease;
-            // -ms-transition: box-shadow 0.5s ease;
-            // transition: box-shadow 0.5s ease;
-        }
+    :-ms-input-placeholder {
+        /* IE 10+ */
+        color: ghostwhite;
+    }
 
-        .btn {
-            display: inline-block;
-            *display: inline;
-            *zoom: 1;
-            padding: 4px 10px;
-            margin-bottom: 0;
-            line-height: 18px;
-            color: #fff;
-            text-align: center;
-            font-weight: 600;
-            vertical-align: middle;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-            *margin-left: 0.3em;
-        }
+    :-moz-placeholder {
+        /* Firefox 18- */
+        color: ghostwhite;
+    }
 
-        .btn-large {
-            padding: 9px 14px;
-            font-size: 15px;
-            line-height: normal;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-        }
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+        background: rgba(0,0,0,0.3);
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 13px;
+        color: #fff !important;
+        // text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        border: 1px solid rgba(0,0,0,0.5);
+        border-radius: 4px;
+        box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+        // -webkit-transition: box-shadow 0.5s ease;
+        // -moz-transition: box-shadow 0.5s ease;
+        // // -o-transition: box-shadow 0.5s ease;
+        // -ms-transition: box-shadow 0.5s ease;
+        // transition: box-shadow 0.5s ease;
+    }
 
-        .btn-primary {
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
+    .btn {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        padding: 4px 10px;
+        margin-bottom: 0;
+        line-height: 18px;
+        color: #fff;
+        text-align: center;
+        font-weight: 600;
+        vertical-align: middle;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        *margin-left: 0.3em;
+    }
 
-        .btn-block {
-            width: 100%;
-            display: block;
-        }
+    .btn-large {
+        padding: 9px 14px;
+        font-size: 15px;
+        line-height: normal;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-block {
+        width: 100%;
+        display: block;
+    }
 }
 
 .homePageContainer {
@@ -278,6 +326,15 @@ a:hover {
 .card-image-container {
     // height: 300px;
     // overflow: hidden;
+    position: relative;
+    height: 234px;
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }
 
 .btn-primary {

@@ -46,7 +46,6 @@ class RecipeList extends Component {
   }
 
   render() {
-    // console.log(this.props.recipes)
     return (
       <div>
         <ul className="flex-row d-flex flex-wrap recipe_card">

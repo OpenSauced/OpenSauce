@@ -30,7 +30,7 @@ var headerStyle = {
 
 const RouteLogin = ({}) => {
   return (
-    <div className="container-fluid" style={pageStyle}>
+    <div className="container-fluid authPage" style={pageStyle}>
       <AppHeader title={'Welcome to OpenSauce'} style={headerStyle}/>
       <Login style={modalStyle}/>
     </div>
