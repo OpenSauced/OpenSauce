@@ -5,6 +5,7 @@ import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
 import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
+import ForkButton from './ForkButton'
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
@@ -40,9 +41,10 @@ const ViewRecipe = ({recipe, user}) => {
           <div className="col-2">
             { 
               user._id === recipe.creator._id
-              ? <button className="btn btn-primary"> <Link to={`/editrecipe?recipeId=${recipe._id}`}>Edit this recipizzle</Link> </button>
+              ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary"> Edit this recipizzle</button></Link> 
               : ( <div>
                     <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+                    <ForkButton/>
                   </div>
                 )
             }
