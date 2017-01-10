@@ -11,6 +11,11 @@ class SearchBar extends Component {
   onInputChange(event) {
     this.props.updateSearchTerm(event.target.value)
     this.search(false)
+    this.state = {
+      forkedRecipes: true,
+      savedRecipes: true,
+      myRecipes: true
+    }
     return null
   }
 
@@ -33,13 +38,31 @@ class SearchBar extends Component {
     this.search(true)
   }
 
+  onCheckboxChange(event) {
+    alert(event.target.id)
+  }
+
 
   renderFilters() {
     return (
       <div>
-        <label><input type="checkbox" />SAVED RECIPES</label>  &nbsp; &nbsp; 
-        <label><input type="checkbox" />FORKED RECIPES</label> &nbsp; &nbsp; 
-        <label><input type="checkbox" />LIKED RECIPES</label>
+      <h3> Now serving: </h3>
+        <label><input
+          id="saved_recipes_checkbox" 
+          onChange={this.onCheckboxChange.bind(this)} 
+          type="checkbox" defaultChecked="true"
+        />SAVED RECIPES</label>  &nbsp; &nbsp; 
+        <label><input
+          id="forked_recipes_checkbox"  
+          onChange={this.onCheckboxChange.bind(this)} 
+          type="checkbox" defaultChecked="true"
+        />FORKED RECIPES</label> &nbsp; &nbsp; 
+        <label><input 
+          id="my_recipes_checkbox" 
+          onChange={this.onCheckboxChange.bind(this)} 
+          type="checkbox" 
+          defaultChecked="true"
+        />LIKED RECIPES</label>
       </div>
     )
   }
