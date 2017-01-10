@@ -8,7 +8,7 @@ class ChangeBio extends Component {
     render() {
         return (
             <div className="row">
-                <p className="col-12">Current bio: {this.props.data}</p>
+                <h2 className="col-12">Current bio: {this.props.data}</h2>
                 <form
                     className="col-12 row" 
                     action="/api/users/updateInfo/bio" 

@@ -8,7 +8,7 @@ class ChangeUsername extends Component {
     render() {
         return (
             <div className="row">
-                <p className="col-12"> Current username: {this.props.data} </p>
+                <h2 className="col-12"> Current username: {this.props.data} </h2>
                 <form className="col-12 row basicProfileSettingsForm" action="/api/users/updateInfo/username" method="post" encType="multipart/form-data" target="_top">
                     <label className="col-12 col-form-label" htmlFor="newUsername">Username:</label>
                     <div className="col-5"><input className="form-control" type="text" name="newUsername"/></div>
