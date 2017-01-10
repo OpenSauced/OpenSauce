@@ -2,7 +2,11 @@ import React from 'react';
 import {Router, Link} from 'react-router';
 
 const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
+<<<<<<< HEAD
 var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url : recipe.recipe_images.placeholder
+=======
+  //console.log(' this is recipe.creator: ', recipe.creator)
+>>>>>>> Front end finished need to refactor to own component
   return (
     <div className="cardRecipeCol col-12 col-sm-6 col-md-4 col-lg-3">
         <div className="card recipeCard">

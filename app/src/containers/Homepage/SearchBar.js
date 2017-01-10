@@ -5,7 +5,7 @@ import _ from 'lodash'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    this.search = _.debounce((isSubmit) => {this.sendSearch(isSubmit)}, 500)
+    this.search = _.debounce((isSubmit, filter) => {this.sendSearch(isSubmit, filter)}, 300)
   }
 
   onInputChange(event) {
@@ -19,17 +19,24 @@ class SearchBar extends Component {
     return null
   }
 
-  sendSearch(isSubmit) {
+  sendSearch(isSubmit, filter) {
 
     var location = browserHistory.getCurrentLocation()
+    //console.log(location)
     if (isSubmit) {
       var url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
       browserHistory.push(url)
 
     } else {
       this.props.clearRecipes()
-      var searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search
-      this.props.fetchRecipes(searchstring)
+      switch (location.pathname) {
+        case '/':
+          var searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search
+          this.props.fetchRecipes(searchstring, filter)
+          break
+        case '/myrecipes':
+          console.log('TODO: MAKE SEARCHBAR WORK IN MYRECIPES') 
+      }
     }
   }
 
@@ -39,14 +46,14 @@ class SearchBar extends Component {
   }
 
   onCheckboxChange(event) {
-    alert(event.target.id)
+    this.search(false, event.target.id)
   }
 
 
   renderFilters() {
     return (
       <div>
-      <h3> Now serving: </h3>
+      <h3> now viewing: </h3>
         <label><input
           id="saved_recipes_checkbox" 
           onChange={this.onCheckboxChange.bind(this)} 
