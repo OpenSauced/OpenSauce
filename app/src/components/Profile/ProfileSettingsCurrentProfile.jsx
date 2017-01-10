@@ -6,12 +6,14 @@ import { connect } from 'react-redux'
 const CurrentProfile = ({data}) => { 
     return (
       <div class="row">
-        <span>
+        <span className="col-12">
           <img src={data.user_image.public_url || data.user_image.placeholder} width="150" height="150"/>
         </span>
-        <p> Bio: {data.bio} </p>
-        <p> Name: {data.first_name + ' ' + data.last_name}</p>
-        <p> Email: {data.email}</p>
+        <div className="col-12">
+          <p>Bio: {data.bio}</p>
+          <p>Name: {data.first_name + ' ' + data.last_name}</p>
+          <p>Email: {data.email}</p>
+        </div>
       </div>
     );
 }
