@@ -2,10 +2,13 @@ import React from 'react';
 import {Router, Link} from 'react-router';
 
 const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
+var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url : recipe.recipe_images.placeholder
   return (
     <div className="cardRecipeCol col-12 col-sm-6 col-md-4 col-lg-3">
         <div className="card recipeCard">
-          <img className="card-img-top" src="/assets/tempRecipe.svg" alt="Card image cap"/>
+          <div className="card-image-container">
+            <img className="card-img-top" src={imageOr} alt="Card image cap"/>
+          </div>
           <div className="card-block">
             <div className="row">
               <div className="col-6">

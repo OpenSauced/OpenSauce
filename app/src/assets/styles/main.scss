@@ -156,6 +156,7 @@ a, a:hover, a:active {
 
 
 .homePageContainer {
+
   .card {
     -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
     box-shadow: 0 1px 8px rgba(0,0,0,.175);
@@ -168,15 +169,17 @@ a, a:hover, a:active {
 
   .cardRecipeCol {
     list-style: none;
-    .card-img-top {
-      width: 100%;
-    }
   }
 }
 
-// .app-header-child {
-//   margin-top: 15px;
-// }
+.card-img-top {
+  width: 100%;
+}
+
+.card-image-container {
+  // height: 300px;
+  // overflow: hidden;
+}
 
 .btn-primary {
   background-color: #DA5F51;
