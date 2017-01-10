@@ -54,7 +54,13 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
     
     var userId = req.params._id
     var response = null
-    console.log('/ID/ADDRECIPE -========= req.body   ', req.body)
+    
+    //delete captcha verification string if present - otherwise it will get put into the DB
+    var captchaVerification = req.body['g-recaptcha-response']
+    if ( captchaVerification ){
+        delete captchaVerification
+    }
+
     db.recipeFunctions.findRecipesByUserId(userId).then((userObj) => {
         if (userObj.my_recipes.length !== 0) {
             userObj.my_recipes.forEach((recipe) => {

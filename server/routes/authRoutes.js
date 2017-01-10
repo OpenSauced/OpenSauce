@@ -139,8 +139,6 @@ router.get('/logout', function(req, res) {
 
 // router.secondarySignupCheck
 router.post('/signup', router.authRecaptcha, function(req, res) {
-    //TODO: create middleware to check and see if user is verified via gooogle
-    console.log(' authRoutes pst /signup')
     router.signUp(req.body).then(function(exists) {
         console.log('.then')
         if (exists === true) {
