@@ -1,43 +1,22 @@
 import React from 'react';
+import {Router, Link} from 'react-router';
 
 const SignUp = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <form action="/auth/signup" method="post">
-          <div className="row">
-            <label htmlFor="firstName">First Name:</label>
-            <input id="firstName" type="firstName" name="firstName"/>
-          </div>
-          <div className="row">
-            <label htmlFor="lastName">Last Name:</label>
-            <input id="lastName" type="lastName" name="lastName"/>
-          </div>
-          <div className="row">
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" name="email"/>
-          </div>
-          <div className="row">
-            <label htmlFor="username">Username:</label>
-            <input id="username" type="text" name="username"/>
-          </div>
-          <div className="row">
-            <label htmlFor="password">Password:</label>
-            <input id="password" type="password" name="password"/>
-          </div>
-          <div>
-            <label htmlFor="bio">Bio:</label>
-            <textarea id="bio" type="bio" name="bio" rows="4" cols="50"></textarea>
-          </div>
-          <div className="row">
-              <input type="submit" value="Sign up"/>
-          </div>
+    <div className="authForm">
+        <h1>Sign Up</h1>
+        <form method="post" action='/auth/SignUp'>
+            <input type="text" id="firstName" type="firstName" placeholder="First Name" name="firstName" required="required"/>
+            <input type="text" id="lastName" type="lastName" name="lastName" placeholder="Last Name" required="required"/>
+            <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
+            <input type="text" name="username" placeholder="Username" required="required" />
+            <input type="text" name="password" placeholder="Password" required="required" />
+            <button type="submit" className="btn btn-primary btn-block btn-large"> Log In </button>
         </form>
+        <h6>
+          <Link to='/login'>Login to your Account</Link>
+        </h6>
       </div>
-      <div className="row">
-          <a href="/login">Login to your account</a>
-      </div>
-    </div>
   );
 }
 

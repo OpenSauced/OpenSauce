@@ -1,4 +1,5 @@
 import React from 'react';
+import {Router, Link} from 'react-router';
 
 const Login = (props) => {
   return (
@@ -9,7 +10,9 @@ const Login = (props) => {
             <input type="password" name="password" placeholder="Password" required="required" />
             <button type="submit" className="btn btn-primary btn-block btn-large"> Log In </button>
         </form>
-        {/* <div className="authFormBg" style={props.style}></div> */}
+        <h6>
+          <Link to='/signup'>Create an account</Link>
+        </h6>
       </div>
   );
 }

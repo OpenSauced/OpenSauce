@@ -158,19 +158,15 @@ a:hover {
 .authForm {
         position: relative;
         overflow: hidden;
-        left: 50vw;
+        text-align: center;
+        left: 50%;
         margin: -150px 0 0 -150px;
         max-width: 300px;
-        background-color: rgba(248, 248, 255, 0.4);
+        background-color: rgba(248, 248, 255, 0.6);
         border-radius: 25px;
         padding: 15px !important;
         -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
-
-        form {
-            z-index: 99;
-            position: inherit;
-        }
 
         h1 {
             z-index: 99;
@@ -181,6 +177,23 @@ a:hover {
             text-align: center;
         }
 
+        h6 {
+          margin-top: 10px;
+        }
+
+        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: ghostwhite;
+        }
+        ::-moz-placeholder { /* Firefox 19+ */
+          color: ghostwhite;
+        }
+        :-ms-input-placeholder { /* IE 10+ */
+          color: ghostwhite;
+        }
+        :-moz-placeholder { /* Firefox 18- */
+          color: ghostwhite;
+        }
+
         input {
             width: 100%;
             margin-bottom: 10px;
@@ -189,7 +202,7 @@ a:hover {
             outline: none;
             padding: 10px;
             font-size: 13px;
-            color: #fff;
+            color: #fff !important;
             // text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
             border: 1px solid rgba(0,0,0,0.5);
             border-radius: 4px;

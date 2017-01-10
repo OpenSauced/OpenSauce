@@ -6,8 +6,9 @@ class AppHeader extends Component {
   }
 
   render() {
+    var style = this.props.style ? this.props.style : { 'backgroundImage' : 'url(./assets/imageRotation/hpBg_' +  Math.floor(Math.random() * 13) + '.jpg)' }
     return (
-      <div className="row d-flex flex-column titleBarContainer" style={this.props.style}>
+      <div className="row d-flex flex-column titleBarContainer" style={style}>
         <div className="mainTitle">
           <h1>{this.props.title}</h1>
         </div>
