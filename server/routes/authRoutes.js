@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path');
+const multer = require('multer'); // Node.js middleware for handling `multipart/form-data
 const bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
@@ -31,6 +32,7 @@ router.verifyPassword = function(user, plainPass) {
 
 // MIDDLEWARE that checks authentication of google recaptcha
 router.authRecaptcha = function (req, res, next) {
+
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
@@ -41,11 +43,11 @@ router.authRecaptcha = function (req, res, next) {
         if (resObj.data.success === true){
             return next()
         } else {
-            throw 'there was a problem with your recaptcha response, please try again'
+            throw 'There was a problem with your recaptcha response, please try again'
         }
     })
     .catch((err)=>{
-        console('Error with recaptcha submission please try again')
+        console.log(err)
         res.redirect('/login')
         // handle this route better
         // res.redirect('/handlefailedrecaptcha')
@@ -98,9 +100,6 @@ router.login = function(user) {
     })
 }
 
-// router.get('/signup', function(req, res) {
-//     res.sendFile(path.resolve(__dirname + '/../../app/public/signup.html'));
-// })
 
 router.get('/getUserCookie', function(req, res) {
     var cooks = req.cookies.user
@@ -137,10 +136,6 @@ router.get('/logout', function(req, res) {
     // res.end('LOG')
     res.redirect('/login');
 })
-
-// router.get('/handlefailedrecaptcha', function(req,res) {
-//     res.send('there was an error with recaptcha please try again')
-// })
 
 // router.secondarySignupCheck
 router.post('/signup', router.authRecaptcha, function(req, res) {

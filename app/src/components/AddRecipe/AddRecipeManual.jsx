@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 
 import Dropzone from 'react-dropzone';
+import Recaptcha from 'react-recaptcha';
+
 
 //Redux and async functions
 import { getUserData } from '../../actions/index';
@@ -19,7 +21,8 @@ class AddRecipeManual extends Component {
       description: '',
       directions: '',
       ingredients: [''],
-      images: []
+      images: [],
+      verification: ''
     }
 
     // Function bindings for the component
@@ -27,6 +30,17 @@ class AddRecipeManual extends Component {
     this.removeIngredient = this.removeIngredient.bind(this);
     this.addNewIngredient = this.addNewIngredient.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
+    this.verifyCallback = this.verifyCallback.bind(this)
+  }
+
+  verifyCallback (response) {
+    console.log('veriftying her is the response ', response)
+    this.setState({ verification:response })
+  }
+
+  loadedRecaptcha () {
+    console.log('Recaptcha loaded!')
   }
 
   componentWillMount() {
@@ -84,17 +98,20 @@ class AddRecipeManual extends Component {
     e.preventDefault();
 
     let ingredients = this.state.ingredients;
-    // .filter((ingredient) => {
-    //   ingredient.replace(' ', '') === '' ? null : ingredient; 
-    // });
-
+    let props = this.props
     let recipe = new FormData();
+
+    // add form data for ajax response
+    
     recipe.append('title', this.state.title);
     recipe.append('description', this.state.description);
     recipe.append('ingredients', JSON.stringify(ingredients));
     recipe.append('directions', this.state.directions);
+
+    //response from recaptcha and images
+    recipe.append('g-recaptcha-response', this.state.verification)
     recipe.append('images', this.state.images[0]);
-    var props = this.props
+    
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData._id}/addrecipe`,
@@ -103,13 +120,13 @@ class AddRecipeManual extends Component {
       contentType: false,
       processData: false,
       success: function(recipe){
-        console.log('Getting current data? ', recipe);
+        // console.log('Getting current data? ', recipe);
         const path = `/viewrecipe?recipeId=${recipe._id}`
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
         var responseMessage = xhr.responseText
-        console.error("did not post to DB manual ", status, xhr.responseText);
+        // console.error("did not post to DB manual ", status, xhr.responseText);
         props.openModal(xhr.responseText)
       }
     })
@@ -149,6 +166,7 @@ class AddRecipeManual extends Component {
   render() {
     return (
       <div className="row">
+<<<<<<< c43b4af4fa8f4e73a615e9f5507b576b1a2f0f51
         <form className="col-12" id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
           <div className="row">
             <Dropzone multiple={false} onDrop={this.onDrop}>
@@ -214,10 +232,87 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
+          <Recaptcha 
+            sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+            render="explicit"
+            verifyCallback={this.verifyCallback}
+            onloadCallback={this.loadedRecaptcha}
+          />
           <span className="">
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
         </form>
+=======
+        <div className="container">
+          <form id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
+            <div className="row">
+              <Dropzone multiple={false} onDrop={this.onDrop}>
+                <div>Try dropping some files here, or click to select files to upload.</div>
+              </Dropzone>
+              {this.state.images.length > 0 ? <div>
+                <div>{this.state.images.map((image) => <img key={1} src={image.preview} /> )}</div>
+                </div> : null}
+            </div>
+            <div className="row">
+              <label htmlFor="">
+                <span>Recipe Title:</span>
+                <input
+                  placeholder="Please enter Recipe Name"
+                  id="recipe-title"
+                  value={this.state.title}
+                  onChange={this.onInputChange.bind(this)}
+                  required
+                />
+              </label>
+            </div>
+            <h3>Recipe Description:</h3>
+            <textarea
+              placeholder="Please enter a description"
+              className=""
+              id="recipe-description"
+              value={this.state.description}
+              onChange={this.onInputChange.bind(this)}
+            ></textarea>
+
+            <h3>Directions </h3>
+            <textarea
+              placeholder="Please enter directions"
+              className=""
+              id="recipe-directions"
+              value={this.state.directions}
+              onChange={this.onInputChange.bind(this)}
+              required
+            ></textarea>
+
+            <h3>Ingredients</h3>
+            {
+              this.state.ingredients.map((ingredient, index) => {
+                return (
+                  <AddRecipeManualList
+                    key={index}
+                    ingredient={this.state.ingredients[index]}
+                    index={index}
+                    handleIngredientOnChange={this.onIngredientChange}
+                    handleRemoveIngredient={this.removeIngredient}
+                    required
+                  />
+                )
+              })
+            }
+            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+            {/* load recaptcha async */}
+            <Recaptcha 
+              sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+              render="explicit"
+              verifyCallback={this.verifyCallback}
+              onloadCallback={this.loadedRecaptcha}
+            />
+            <span className="">
+              <button type="submit" className="btn btn-secondary">Submit</button>
+            </span>
+          </form>
+        </div>
+>>>>>>> recaptcha added to add recipe
       </div>
     );
   }
