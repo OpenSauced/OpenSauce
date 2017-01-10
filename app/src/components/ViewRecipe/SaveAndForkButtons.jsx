@@ -3,23 +3,18 @@ import { Link } from 'react-router';
 
 const SaveAndForkButtons = ({recipeId, userId, saveRecipe, forkRecipe, removeRecipe, savedRecipes}) => {
   var star = recipeId in savedRecipes ? 
-    <div onClick={() => removeRecipe(recipeId, userId)}>
-    <i className="fa fa-star fa-3x blue"></i><br></br><div>Remove this Recipe from My Cookbook</div></div>
-  : <div onClick={() => saveRecipe(recipeId, userId)}>
-    <i className="fa fa-star fa-3x black"></i><br></br><div>Add this Recipe to My Cookbook</div></div>  
+    <div className ="col-2 icon" onClick={() => removeRecipe(recipeId, userId)}>
+    <i className="fa fa-star fa-3x"></i><br></br><div className="icon">Remove this Recipe from My Cookbook</div></div>
+  : <div className ="col-2 icon" onClick={() => saveRecipe(recipeId, userId)}>
+    <i className="fa fa-star fa-3x"></i><br></br><div className="icon">Add this Recipe to My Cookbook</div></div>  
   
   return (
-    <div>
-    <div>
+    <div className="row justify-content-center"> 
     {star}
-    </div>
-    <div>
-    <Link to={`/addrecipe?recipe=${recipeId}`}>
-    <i className="fa fa-cutlery fa-3x"></i>
+    <Link className="col-2 icon" to={`/addrecipe?recipe=${recipeId}`}>
+    <i className="fa fa-cutlery fa-3x icon"></i>
     <br></br>
-    Fork this Recipe</Link>
-     
-    </div>
+    <p className="icon">Fork this Recipe</p></Link> 
     </div>
   );
 };
