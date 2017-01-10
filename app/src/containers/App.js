@@ -7,15 +7,20 @@ export default class App extends Component {
   componentDidMount() {
 
   	$(window).scroll(function() {
-  		console.log("this!!!!!!!!! ", $(this).scrollTop())
+  		//console.log("this!!!!!!!!! ", $(this).scrollTop())
     if ($(this).scrollTop() > 400) {
     	console.log("WE DID IT!")
     	console.log($('.navbar'))
         $('.navbar').attr('style',  'background-color:rgb(60, 114, 80)');
     }
     if ($(this).scrollTop() < 400) {
-    	console.log("WE DID IT!")
-    	console.log($('.navbar'))
+    	//console.log("WE DID IT!")
+    	//console.log($('.navbar'))
+
+
+
+
+      
         $('.navbar').attr('style',  'background-color:rgba(60, 114, 80, 0.8)');
     }
 	});
