@@ -53,7 +53,7 @@ xPorts.scrapeEpicurious = function(url) {
             description: 'div.dek p',
              
             recipe_images: {
-                selector:'picture.photo-wrap img',
+                selector:'picture.photo-wrap source',
                 attr: 'srcset'
             }
         })
@@ -92,6 +92,7 @@ xPorts.scrapeFoodNetwork = function(url) {
             if (recipeObj.ingredients.length < 1){
                 return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
             } else {
+            console.log(recipeObj)
             var directions = recipeObj.directions.join(' ');
             recipeObj.directions = directions
             recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
