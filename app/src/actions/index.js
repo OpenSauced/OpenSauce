@@ -14,7 +14,6 @@ export const GET_RECIPE_BY_ID = 'GET_RECIPE_BY_ID'
 
 // SEARCH TERM ACTIONS
 export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM'
-
 export const updateSearchTerm = (term) => {
 
   return {
@@ -61,8 +60,8 @@ export const fetchRecipes = (search) => {
    })
 }
 
-export const getUserRecipes = (recipes) => {
-
+export const getUserRecipes = (filter) => {
+  
   var username = getStore().getState().userData.userData.username
   var request = axios.get(`/api/recipes/${username}/userrecipes`)
   var requestdata = request
@@ -71,12 +70,22 @@ export const getUserRecipes = (recipes) => {
         recipe.creator = {
           _id:recipe.creator,
           username: username
-        }
+        },
+        recipe.type = "my_recipe"
       })
+      response.data.saved_recipes.forEach(recipe => {
+        recipe.type = "saved_recipe"
+      })
+
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
+      console.log(filter)
+      
+     
+      
       return recipes
+
     })
-    //console.log(request)
+
   return {
     type: GET_USER_RECIPES,
     payload: requestdata

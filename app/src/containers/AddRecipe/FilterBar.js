@@ -33,7 +33,7 @@ class FilterBar extends Component {
       isMyRecipesChecked: this.state.isMyRecipesChecked
     }
     
-    console.log(filter)
+    //console.log(filter)
     this.props.clearRecipes()
     this.props.getUserRecipes(filter)
   }
