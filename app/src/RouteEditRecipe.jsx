@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import EditRecipeIngredient from './components/ViewRecipe/EditRecipeIngredient'
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
-import Footer from './components/Footer/Footer';
 import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
 
 class RouteEditRecipe extends Component {
@@ -43,7 +42,7 @@ class RouteEditRecipe extends Component {
     console.log('derka derka I will mount')
     console.log('RouteEditRecipe props',this.props)
     let currentRecipe = this.props.currentRecipe
-    this.setState({ 
+    this.setState({
       title: currentRecipe.title,
       description: currentRecipe.description,
       ingredients: currentRecipe.ingredients,
@@ -58,7 +57,7 @@ class RouteEditRecipe extends Component {
     var newIngredients = this.state.ingredients.slice()
     newIngredients[index] = e.target.value
     this.setState({ingredients: newIngredients})
-  }  
+  }
 
   //function to track changes in the ingredient text and set it to state
   addNewIngredient(e) {
@@ -90,7 +89,7 @@ class RouteEditRecipe extends Component {
     }
   }
 
-  // Push out all blank ingredients from this.state.ingredients list 
+  // Push out all blank ingredients from this.state.ingredients list
   // only used in onFormSubmit
   spliceBlankIngredients(ingredients){
     let idx = ingredients.indexOf('');
@@ -132,7 +131,7 @@ class RouteEditRecipe extends Component {
   render() {
     console.log('current props', this.props)
     console.log('current state', this.state)
-    return (  
+    return (
       <div className="row">
         <div className="container">
           <form onSubmit={this.onFormSubmit}>
@@ -185,7 +184,7 @@ class RouteEditRecipe extends Component {
             </span>
           </form>
         </div>
-      </div> 
+      </div>
     )
   }
 }
@@ -206,4 +205,3 @@ function mapStateToProps (state) {
 
 
 export default connect(mapStateToProps)(RouteEditRecipe)
-

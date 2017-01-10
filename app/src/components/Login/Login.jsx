@@ -1,31 +1,19 @@
 import React from 'react';
+import {Router, Link} from 'react-router';
 
-const Login = () => {
+const Login = (props) => {
   return (
-    <div>
-      <div className="row">
-        <div className="col-2">
-          <form action="/auth/login" method="post">
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input id="username" type="text" name="username"/>
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input id="password" type="password" name="password"/>
-            </div>
-            <div>
-              <input type="submit" value="Login"/>
-            </div>
-          </form>
-        </div>
+    <div className="authForm">
+        <h1>Login</h1>
+        <form method="post" action='/auth/login'>
+        	<input type="text" name="username" placeholder="Username" required="required" />
+            <input type="password" name="password" placeholder="Password" required="required" />
+            <button type="submit" className="btn btn-primary btn-block btn-large"> Log In </button>
+        </form>
+        <h6>
+          <Link to='/signup'>Create an account</Link>
+        </h6>
       </div>
-      <div className="row">
-        <div className="col-2">
-          <a href="/signup">Create an Account </a>
-        </div>
-      </div>
-    </div>
   );
 }
 

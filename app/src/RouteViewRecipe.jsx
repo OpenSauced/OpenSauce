@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 // These are going to be on pretty much every route component page. Its the nav, header, and footer for the page
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
-import Footer from './components/Footer/Footer';
 
 import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
 import ViewRecipe from './components/ViewRecipe/ViewRecipe.jsx'
@@ -50,13 +49,13 @@ class RouteViewRecipe extends Component {
       errorMessage: message
     });
   };
-   
+
   hideModal = () => {
     this.setState({
       isOpen: false
     });
   };
-  
+
   forkRecipe() {
   	var title = this.props.currentRecipe.title
   	var description = this.props.currentRecipe.description
@@ -86,11 +85,11 @@ class RouteViewRecipe extends Component {
          <HeaderNav/>
           <AppHeader title={this.props.currentRecipe.title}>
           <div>
-            <SaveAndForkButtons 
+            <SaveAndForkButtons
               recipeId={this.props.currentRecipe._id}
               userId={this.props.userData.userData._id}
               saveRecipe={this.props.addUserSavedRecipe.bind(this)}
-              forkRecipe={this.forkRecipe} 
+              forkRecipe={this.forkRecipe}
               removeRecipe={this.props.removeUserSavedRecipe.bind(this)}
               savedRecipes={this.props.userData.userData.saved_recipes}
           />
@@ -99,7 +98,6 @@ class RouteViewRecipe extends Component {
 
           {/* pass down current recipe information and current user to a recipe the user clicks on*/}
           <ViewRecipe recipe={this.props.currentRecipe} user={this.props.userData.userData}/>
-          <Footer/>
         </div>
       );
     }
@@ -119,6 +117,3 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteViewRecipe)
-
-
-

@@ -50,20 +50,20 @@ class AddRecipeManual extends Component {
       // console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
         this.getRecipeFromDB(this.props.recipeId)
-      } 
+      }
     })
   }
 
   componentDidMount(){
     console.log("did mount ", this.props)
   }
-  
+
   getRecipeFromDB(recipeId) {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
         console.log("RECIPE ", recipe.directions)
-          this.setState({ 
+          this.setState({
             title: recipe.title,
             description: recipe.description,
             ingredients: recipe.ingredients,
@@ -76,7 +76,7 @@ class AddRecipeManual extends Component {
       }.bind(this),
     });
   }
-  
+
   onInputChange(event) {
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
@@ -102,7 +102,7 @@ class AddRecipeManual extends Component {
     let recipe = new FormData();
 
     // add form data for ajax response
-    
+
     recipe.append('title', this.state.title);
     recipe.append('description', this.state.description);
     recipe.append('ingredients', JSON.stringify(ingredients));
@@ -111,7 +111,7 @@ class AddRecipeManual extends Component {
     //response from recaptcha and images
     recipe.append('g-recaptcha-response', this.state.verification)
     recipe.append('images', this.state.images[0]);
-    
+
     $.ajax({
       method: 'POST',
       url: `/api/recipes/${this.props.userData._id}/addrecipe`,
@@ -135,10 +135,10 @@ class AddRecipeManual extends Component {
   onIngredientChange(e) {
     var index = e.target.id.split('-')[1]
     var newIngredients = this.state.ingredients.slice()
-  
+
     newIngredients[index] = e.target.value
     this.setState({ingredients: newIngredients})
-  }  
+  }
 
   addNewIngredient(e) {
     var newIngredients = this.state.ingredients.slice()
@@ -175,7 +175,7 @@ class AddRecipeManual extends Component {
           <div className="row">
             <label htmlFor="recipe-title">
               <h2>Recipe Title:</h2>
-              <input 
+              <input
                 className="col-12"
                 placeholder="Please enter Recipe Name"
                 id="recipe-title"
@@ -231,7 +231,7 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
-          <Recaptcha 
+          <Recaptcha
             sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
             render="explicit"
             verifyCallback={this.verifyCallback}

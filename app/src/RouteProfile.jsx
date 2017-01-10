@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 // These are going to be on pretty much every route component page. Its the nav, header, and footer for the page
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
-import Footer from './components/Footer/Footer';
 
 import ProfileSettings from './components/Profile/ProfileSettings';
 import ProfileSettingsChangeProfileInfo from './components/Profile/ProfileSettingsChangeProfileInfo'
@@ -45,13 +44,13 @@ class RouteProfile extends Component {
         break;
       default:
         render = 'profile'
-        break;  
+        break;
     }
 
     this.setState({
       renderInputs: render
     });
-    
+
   }
 
   render() {
@@ -59,7 +58,7 @@ class RouteProfile extends Component {
       <div className="container-fluid">
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
-        
+
         <div className="row">
           {/*side bar for selecting what you want to change*/}
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
@@ -67,14 +66,13 @@ class RouteProfile extends Component {
           <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
         </div>
 
-        <Footer/>
       </div>
     );
   }
 }
 
 function mapStateToProps (state) {
-  return state.userData 
+  return state.userData
 }
 
-export default connect(mapStateToProps)(RouteProfile) 
+export default connect(mapStateToProps)(RouteProfile)

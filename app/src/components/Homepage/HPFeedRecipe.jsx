@@ -22,7 +22,7 @@ var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url 
             <p className="col-12"> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
             <div className="row align-self-end mx-auto">
               <div className="col-6">
-                <Link href={`/addrecipe?recipe=${recipe._id}`} className="btn btn-primary recipeCardBtn w-100">Fork Recipe</Link>
+                <Link to={`/addrecipe?recipe=${recipe._id}`} className="btn btn-primary recipeCardBtn w-100">Fork Recipe</Link>
               </div>
                 {
                   recipe._id in myRecipes ?
