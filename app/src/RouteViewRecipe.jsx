@@ -68,20 +68,20 @@ class RouteViewRecipe extends Component {
     if(this.props.currentRecipe.title){
       return (
         <div className="container-fluid">
-           <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
-        <ModalHeader>
-          <ModalClose onClick={this.hideModal}/>
-          <ModalTitle>Good News!</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          Someone else already added that recipe. But you can save this to your cookbook or fork it from here.
-        </ModalBody>
-        <ModalFooter>
-          <button className='btn btn-default' onClick={this.hideModal}>
-            Close
-          </button>
-        </ModalFooter>
-      </Modal>
+          <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
+            <ModalHeader>
+              <ModalClose onClick={this.hideModal}/>
+              <ModalTitle>Good News!</ModalTitle>
+            </ModalHeader>
+            <ModalBody>
+              Someone else already added that recipe. But you can save this to your cookbook or fork it from here.
+            </ModalBody>
+            <ModalFooter>
+              <button className='btn btn-default' onClick={this.hideModal}>
+                Close
+              </button>
+            </ModalFooter>
+          </Modal>
          <HeaderNav/>
           <AppHeader title={this.props.currentRecipe.title}>
           <div>
