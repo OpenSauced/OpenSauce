@@ -26,6 +26,7 @@ class AppHeader extends Component {
         }
         </div>
       </div>
+      </div>
     );
   }
 }
