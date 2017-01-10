@@ -3,7 +3,6 @@ import { Router, Link } from 'react-router';
 
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
-import Footer from './components/Footer/Footer';
 
 const Route404 = () => {
   return (
@@ -14,7 +13,6 @@ const Route404 = () => {
         <p>We're sorry but the page you are looking for doe not exist.</p>
         <div></div>
       </div>
-      <Footer/>
     </div>
   );
 }

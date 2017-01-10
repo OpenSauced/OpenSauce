@@ -1,36 +1,50 @@
 body {
     font-size: 16px; //most other sizes are EM so this should scale.
     background-color: #FEFAF7;
+    height: 100%;
 }
 
-a, a:hover, a:active {
-  // color: ghostwhite;
+a,
+a:active,
+a:hover {
+    // color: ghostwhite;
 }
 
-#navButtonContainer {
-
+.footer {
+      position: fixed;
+      top: 97%;
+      display: block;
+      background-color: ghostwhite;
+      height: 28px;
+      width: 100%;
+      text-align: center;
+      left: 15px;
 }
+
+#navButtonContainer {}
 
 .recipeCard {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
 }
+
 .recipeCard img {
     width: 100%;
 }
 
-.recipeCard, .recipeCard a {
-  width: 100%;
-  color: #373a3c;
-  text-align: center;
-  // margin: 0 4% 0 4% !important;
+.recipeCard,
+.recipeCard a {
+    width: 100%;
+    color: #373a3c;
+    text-align: center;
+    // margin: 0 4% 0 4% !important;
 }
 
 .card-buttons a {
-  color: white;
+    color: white;
 }
 
 .cardRecipeCol {
-  display: flex;
+    display: flex;
 }
 
 .recipeCardBtn {
@@ -39,6 +53,15 @@ a, a:hover, a:active {
 
 .searchBarButtonCombo {
     width: 100%;
+}
+@media (max-height: 700px) {
+    .titleBarContainer {
+        padding: 0 !important;
+    }
+
+    .authForm .content {
+        top: 65vh !important;
+    }
 }
 
 .titleBarContainer {
@@ -56,9 +79,9 @@ a, a:hover, a:active {
 }
 
 .mainTitle {
-  // background-color: lightsteelblue;
-  color: white;
-  padding: 4em 0;
+    // background-color: lightsteelblue;
+    color: white;
+    padding: 4em 0;
 }
 
 .navProfPic {
@@ -74,22 +97,24 @@ a, a:hover, a:active {
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-
 //image and seperator have no padding
+
 .dropdown-menu .divider {
     padding: 2px !important;
     background-color: grey;
     margin-top: 10px;
 }
 
-.navbar-toggler .icon-bar, .navbar-toggler {
-  border-color: ghostwhite;
-  color: ghostwhite;
+.navbar-toggler,
+.navbar-toggler .icon-bar {
+    border-color: ghostwhite;
+    color: ghostwhite;
 }
 
-.nav > li > a:focus, .nav > li > a:hover {
-  color: grey;
-  // background-color: ghostwhite;
+.nav > li > a:focus,
+.nav > li > a:hover {
+    color: grey;
+    // background-color: ghostwhite;
 }
 
 .dropdown-menu {
@@ -118,15 +143,16 @@ a, a:hover, a:active {
 }
 
 .navbar {
-  margin-bottom: 0;
-  background-color: rgba(60, 114, 80, 0.8)!important;
-  padding: 0;
-  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    margin-bottom: 0;
+    background-color: rgba(60, 114, 80, 0.8)!important;
+    padding: 0;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
-.navbar, .navbar a {
-  color: ghostwhite;
+.navbar,
+.navbar a {
+    color: ghostwhite;
 }
 
 .navbar-toggle {
@@ -135,58 +161,151 @@ a, a:hover, a:active {
 }
 
 .recipePageContainer {
-  color: #373a3c;
+    color: #373a3c;
 }
-
 // login stuff
-.authPageContainer {
-  background: transparent;
-}
+.authForm {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
 
-.authPageContent {
-  margin: 5% 0 25% 0;
-  z-index: 99;
-  background-color: ghostwhite !important;
-  border-radius: 25px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block !important;
-  width: 50% !important;
-}
+    .content {
+        position: relative;
+        overflow: hidden;
+        left: 50vw;
+        top: 50vh;
+        margin: -150px 0 0 -150px;
+        max-width: 300px;
+        background-color: rgba(248, 248, 255, 0.4);
+        border-radius: 25px;
+        padding: 15px !important;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
 
+        form {
+            z-index: 99;
+            position: inherit;
+        }
+
+        .authFormBg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-size: cover;
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+        }
+
+        h1 {
+            z-index: 99;
+            position: inherit;
+            color: #fff;
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            // text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,0,0,0.5);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+            // -webkit-transition: box-shadow 0.5s ease;
+            // -moz-transition: box-shadow 0.5s ease;
+            // // -o-transition: box-shadow 0.5s ease;
+            // -ms-transition: box-shadow 0.5s ease;
+            // transition: box-shadow 0.5s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            padding: 4px 10px;
+            margin-bottom: 0;
+            line-height: 18px;
+            color: #fff;
+            text-align: center;
+            font-weight: 600;
+            vertical-align: middle;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            *margin-left: 0.3em;
+        }
+
+        .btn-large {
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+    }
+}
 
 .homePageContainer {
+    .card {
+        -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
+        box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    }
 
-  .card {
-    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
-    box-shadow: 0 1px 8px rgba(0,0,0,.175);
-  }
+    .recipe_card {
+        padding: 0;
+        margin: 0;
+    }
 
-  .recipe_card {
-    padding: 0;
-    margin: 0;
-  }
-
-  .cardRecipeCol {
-    list-style: none;
-  }
+    .cardRecipeCol {
+        list-style: none;
+    }
 }
 
 .card-img-top {
-  width: 100%;
+    width: 100%;
 }
 
 .card-image-container {
-  // height: 300px;
-  // overflow: hidden;
+    // height: 300px;
+    // overflow: hidden;
 }
 
 .btn-primary {
-  background-color: #DA5F51;
-  border-color: #DA5F51;
+    background-color: #DA5F51;
+    border-color: #DA5F51;
 }
 
-.btn-primary:hover{
-  background-color: #C14161;
-  border-color: #C14161;
+.btn-primary:hover {
+    background-color: #C14161;
+    border-color: #C14161;
 }
