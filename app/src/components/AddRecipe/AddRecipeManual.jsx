@@ -32,6 +32,7 @@ class AddRecipeManual extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
     this.verifyCallback = this.verifyCallback.bind(this)
+    this.spliceBlankIngredients = this.spliceBlankIngredients.bind(this)
   }
 
   verifyCallback (response) {
@@ -90,14 +91,23 @@ class AddRecipeManual extends Component {
       this.setState({directions: event.target.value})
       break;
     }
-
     return null
+  }
+
+  spliceBlankIngredients(ingredients){
+    let idx = ingredients.indexOf('');
+    if (idx === -1){
+      return ingredients
+    } else {
+      ingredients.splice(idx,1)
+      return this.spliceBlankIngredients(ingredients)
+    }
   }
 
   onFormSubmit(e) {
     e.preventDefault();
-
-    let ingredients = this.state.ingredients;
+    let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
+    console.log(newIngredients)
     let props = this.props
     let recipe = new FormData();
 
@@ -105,7 +115,7 @@ class AddRecipeManual extends Component {
 
     recipe.append('title', this.state.title);
     recipe.append('description', this.state.description);
-    recipe.append('ingredients', JSON.stringify(ingredients));
+    recipe.append('ingredients', JSON.stringify(newIngredients));
     recipe.append('directions', this.state.directions);
 
     //response from recaptcha and images
