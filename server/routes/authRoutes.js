@@ -37,8 +37,8 @@ router.authRecaptcha = function (req, res, next) {
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
-        + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress; 
-    
+        + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress;
+    console.log('verify captcha url',verificationURL);
     axios.post( verificationURL )
     .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
         if (resObj.data.success === true){
@@ -48,8 +48,8 @@ router.authRecaptcha = function (req, res, next) {
         }
     })
     .catch((err)=>{
-        console.log(err)
-        res.redirect('/login')
+        console.log('error in captcha post to google servers', err)
+        res.redirect('/signup')
         // handle this route better
         // res.redirect('/handlefailedrecaptcha')
     })
