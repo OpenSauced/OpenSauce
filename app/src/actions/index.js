@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getStore } from '../index.js'
+import _ from 'lodash'
 
 //USER ACTIONS
 export const GET_USER_DATA = 'GET_USER_DATA'
@@ -78,9 +79,22 @@ export const getUserRecipes = (filter) => {
       })
 
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
-      console.log(filter)
+      console.log(recipes)
+
+      //Filter Saved Recipes
+      if (filter && filter.isSavedRecipesChecked === false) {
+        recipes = _.reject(recipes, (recipe) => recipe.type === "saved_recipe")
+      }
       
-     
+      //Filter My Recipes
+      if (filter && filter.isMyRecipesChecked === false) {
+        recipes = _.reject(recipes, (recipe) => recipe.type === "my_recipe")
+      }
+
+      //Filter My Recipes
+      if (filter && filter.isForkedRecipesChecked === false) {
+        recipes = _.filter(recipes, (recipe) => recipe.forked_parent === null)
+      }
       
       return recipes
 
