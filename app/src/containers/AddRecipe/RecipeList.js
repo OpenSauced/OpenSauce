@@ -14,20 +14,9 @@ import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
 import SearchBar from '../Homepage/SearchBar'
 
-///Setting Defaults for OnVisibility
-setDefaultProps({
-    bounce: true,
-    visibleClassName: 'appear',
-    percent: 10
-});
-
 class RecipeList extends Component {
   constructor () {
     super ()
-    this.state = {
-      limit: 16,
-      skip: 0
-    }
   }
 
   renderRecipes(recipe) {
