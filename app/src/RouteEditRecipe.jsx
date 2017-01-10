@@ -39,8 +39,6 @@ class RouteEditRecipe extends Component {
   }
 
   componentWillMount () {
-    console.log('derka derka I will mount')
-    console.log('RouteEditRecipe props',this.props)
     let currentRecipe = this.props.currentRecipe
     this.setState({
       title: currentRecipe.title,
@@ -129,79 +127,75 @@ class RouteEditRecipe extends Component {
   }
 
   render() {
-    console.log('current props', this.props)
-    console.log('current state', this.state)
-    return (
-      <div className="row">
-        <div className="container">
-          <form onSubmit={this.onFormSubmit}>
-            <div className="row">
-              <label htmlFor="">
-                <span>Recipe Title:</span>
-                <input
-                  placeholder="Please enter Recipe Name"
-                  id="recipe-title"
-                  value={this.state.title}
-                  onChange={this.onInputChange.bind(this)}
-                />
-              </label>
-            </div>
-            <h3>Recipe Description:</h3>
-            <textarea
-              placeholder="Please enter a description"
-              className=""
-              id="recipe-description"
-              value={this.state.description}
-              onChange={this.onInputChange.bind(this)}
-            ></textarea>
 
-            <h3>Directions </h3>
-            <textarea
-              placeholder="Please enter directions"
-              className=""
-              id="recipe-directions"
-              value={this.state.directions}
-              onChange={this.onInputChange.bind(this)}
-            ></textarea>
-
-            <h3>Ingredients</h3>
-            {
-              this.state.ingredients.map((ingredient, index) => {
-                return (
-                  <EditRecipeIngredient
-                    key={index}
-                    ingredient={this.state.ingredients[index]}
-                    index={index}
-                    handleIngredientOnChange={this.onIngredientChange}
-                    handleRemoveIngredient={this.removeIngredient}
+    return (  
+      <div>
+        <HeaderNav/>
+        <AppHeader title={this.props.currentRecipe.title} notOnHomepage={true}/>
+        <div className="row">
+          <div className="container">
+            <form onSubmit={this.onFormSubmit}>
+              <div className="row">
+                <label htmlFor="">
+                  <span>Recipe Title:</span>
+                  <input
+                    placeholder="Please enter Recipe Name"
+                    id="recipe-title"
+                    value={this.state.title}
+                    onChange={this.onInputChange.bind(this)}
                   />
-                )
-              })
-            }
-            <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
-            <span className="">
-              <button type="submit" className="btn btn-secondary">Submit</button>
-            </span>
-          </form>
-        </div>
+                </label>
+              </div>
+              <h3>Recipe Description:</h3>
+              <textarea
+                placeholder="Please enter a description"
+                className=""
+                id="recipe-description"
+                value={this.state.description}
+                onChange={this.onInputChange.bind(this)}
+              ></textarea>
+
+              <h3>Directions </h3>
+              <textarea
+                placeholder="Please enter directions"
+                className=""
+                id="recipe-directions"
+                value={this.state.directions}
+                onChange={this.onInputChange.bind(this)}
+              ></textarea>
+
+              <h3>Ingredients</h3>
+              {
+                this.state.ingredients.map((ingredient, index) => {
+                  return (
+                    <EditRecipeIngredient
+                      key={index}
+                      ingredient={this.state.ingredients[index]}
+                      index={index}
+                      handleIngredientOnChange={this.onIngredientChange}
+                      handleRemoveIngredient={this.removeIngredient}
+                    />
+                  )
+                })
+              }
+              <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+              <span className="">
+                <button type="submit" className="btn btn-secondary">Submit</button>
+              </span>
+            </form>
+          </div>
+        </div> 
+        <Footer/>
       </div>
     )
   }
 }
 
-// function mapDispatchToProps (dispatch) {
-//   return bindActionCreators ({ getUserData, addUserSavedRecipe, removeUserSavedRecipe }, dispatch)
-// }
 function mapStateToProps (state) {
   return {
     userData: state.userData,
     currentRecipe: state.currentRecipe
   }
 }
-
-// function mapStateToProps (state) {
-//   return state.userData
-// }
-
 
 export default connect(mapStateToProps)(RouteEditRecipe)

@@ -123,6 +123,26 @@ h1, h2, h3, h4, h5, h6 {
     padding: 4em 0;
 }
 
+.titleBarNotOnHomepage {
+    color: ghostwhite;
+    // background-color: #535353;
+    background-blend-mode: overlay;
+    margin-bottom: 15px;
+    padding-bottom: 6em;
+    padding-top: 6em;
+    text-align: center;
+    background-size: cover;
+    max-height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-position: 0 30%;
+}
+
+.mainTitleNotOnHomepage {
+  // background-color: lightsteelblue;
+  color: white;
+  padding: 4em 0;
+}
 .navProfPic {
     overflow: hidden;
     border: 1px solid;
