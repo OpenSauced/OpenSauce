@@ -128,11 +128,10 @@ h1, h2, h3, h4, h5, h6 {
     // background-color: #535353;
     background-blend-mode: overlay;
     margin-bottom: 15px;
-    padding-bottom: 6em;
-    padding-top: 6em;
+    padding-bottom: 1em;
+    padding-top: 1em;
     text-align: center;
     background-size: cover;
-    max-height: 200px;
     background-position: center center;
     background-repeat: no-repeat;
     background-position: 0 30%;
@@ -141,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
 .mainTitleNotOnHomepage {
   // background-color: lightsteelblue;
   color: white;
-  padding: 4em 0;
+  padding: 7em 0 0 0;
 }
 .navProfPic {
     overflow: hidden;
