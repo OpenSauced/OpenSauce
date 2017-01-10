@@ -1,9 +1,11 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const path = require('path');
-var bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 const cookieParser = require('cookie-parser');
 const db = require('./../db/db.js')
+const axios = require('axios')
+
 
 //takes a user, and a plain password text, returns true or false.
 //thx bCrypt
@@ -23,6 +25,29 @@ router.verifyPassword = function(user, plainPass) {
         } else {
             return false
         }
+    })
+}
+
+router.authRecaptcha = function (req, res, next) {
+
+    let captchaRes = req.body['g-recaptcha-response'];
+    let secret = '6LdWOBEUAAAAAEhhIaRv-8o2cm8GpFtrvLt_YhY7';
+    let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
+        + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress; 
+    
+    axios.post( verificationURL )
+    .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
+        if (resObj.data.success === true){
+            return next()
+        } else {
+            throw 'there was a problem with your recaptcha response, please try again'
+        }
+    })
+    .catch((err)=>{
+        console('Error with recaptcha submission please try again')
+        res.redirect('/login')
+        // handle this route better
+        // res.redirect('/handlefailedrecaptcha')
     })
 }
 
@@ -112,10 +137,14 @@ router.get('/logout', function(req, res) {
     res.redirect('/login');
 })
 
+// router.get('/handlefailedrecaptcha', function(req,res) {
+//     res.send('there was an error with recaptcha please try again')
+// })
+
 // router.secondarySignupCheck
-router.post('/signup', function(req, res) {
+router.post('/signup', router.authRecaptcha, function(req, res) {
     //TODO: create middleware to check and see if user is verified via gooogle
-    console.log(' authRoutes req.body ', req.body)
+    console.log(' authRoutes pst /signup')
     router.signUp(req.body).then(function(exists) {
         console.log('.then')
         if (exists === true) {
