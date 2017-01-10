@@ -43,7 +43,7 @@ a, a:hover, a:active {
 
 .titleBarContainer {
     color: ghostwhite;
-    background-color: #535353;
+    // background-color: #535353;
     background-blend-mode: overlay;
     margin-bottom: 15px;
     padding-bottom: 6em;
@@ -119,10 +119,11 @@ a, a:hover, a:active {
 
 .navbar {
   margin-bottom: 0;
-  background-color: rgba(60, 114, 80, 0.8)!important;
+  background-color: rgba(60, 114, 80, 0.8);
   padding: 0;
   -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
   box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  transition: all ease .3s;
 }
 
 .navbar, .navbar a {
