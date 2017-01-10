@@ -18,7 +18,7 @@ class ChangeBio extends Component {
                     <label className="col-12 col-form-label" htmlFor="newBio">Bio:</label>
                     <div className="col-5"><textarea className="form-control" name="newBio" rows="4" cols="50"></textarea></div>
                     <div className="col-12">
-                        <input type="submit" value="Save"/>
+                        <input className="btn btn-secondary" type="submit" value="Save"/>
                     </div>
                 </form>
             </div>

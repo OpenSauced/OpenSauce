@@ -53,7 +53,7 @@ class ChangeProfilePicture extends Component {
               <div>{this.state.image.length > 0 ? <img src={this.state.image[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
             </Dropzone>
             <div className="col-12">
-              <input type="submit" value="save"/>
+              <input className="btn btn-secondary" type="submit" value="save"/>
             </div>
           </form>
         </div>

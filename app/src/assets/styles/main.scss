@@ -178,8 +178,15 @@ a, a:hover, a:active {
 }
 
 .card-image-container {
-  // height: 300px;
-  // overflow: hidden;
+  position: relative;
+  height: 234px;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 
 .btn-primary {
