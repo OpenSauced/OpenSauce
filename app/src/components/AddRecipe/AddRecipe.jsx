@@ -49,26 +49,26 @@ hideModal = () => {
   render() {
 
     return(
-      <div>
-
-      <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
-        <ModalHeader>
-          <ModalClose onClick={this.hideModal}/>
-          <ModalTitle>Oops! We have a problem.</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          {this.state.errorMessage}
-        </ModalBody>
-        <ModalFooter>
-          <button className='btn btn-default' onClick={this.hideModal}>
-            Close
-          </button>
-        </ModalFooter>
-      </Modal>
-      {    this.props.renderInputs === 'manual' 
-      ? <AddRecipeManual recipeId={this.props.recipeId} openModal={this.openModal.bind(this)}/> 
-      : <AddRecipeFromLink userData={this.props.userData} openModal={this.openModal.bind(this)}/>
-    }
+      <div className="container">
+        <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
+          <ModalHeader>
+            <ModalClose onClick={this.hideModal}/>
+            <ModalTitle>Oops! We have a problem.</ModalTitle>
+          </ModalHeader>
+          <ModalBody>
+            {this.state.errorMessage}
+          </ModalBody>
+          <ModalFooter>
+            <button className='btn btn-default' onClick={this.hideModal}>
+              Close
+            </button>
+          </ModalFooter>
+        </Modal>
+        {
+          this.props.renderInputs === 'manual' 
+        ? <AddRecipeManual recipeId={this.props.recipeId} openModal={this.openModal.bind(this)}/> 
+        : <AddRecipeFromLink userData={this.props.userData} openModal={this.openModal.bind(this)}/>
+        }
       </div>
     )
   }
