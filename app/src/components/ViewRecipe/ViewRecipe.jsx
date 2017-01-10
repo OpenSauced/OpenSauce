@@ -9,10 +9,12 @@ import RecipeDirections from './RecipeDirections'
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
   var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
+  var image = recipe.recipe_images.public_url ? <div><img src={recipe.recipe_images.public_url} /></div> : '' 
 
 	if (recipe){
     return (
       <div>
+      {image}
         {description}
         <RecipeCreator recipeCreator={recipe.creator}/>
         <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
