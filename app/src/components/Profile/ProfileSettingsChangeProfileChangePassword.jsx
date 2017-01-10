@@ -15,7 +15,7 @@ class ChangePassword extends Component {
                     <label className="col-12 col-form-label" htmlFor="newPassword">New Password:</label>
                     <div className="col-5"><input className="form-control" type="text" name="newPassword"/></div>
                     <div className="col-12">
-                        <input type="submit" value="Save"/>
+                        <input className="btn btn-secondary" type="submit" value="Save"/>
                     </div>
                 </form>
             </div>
