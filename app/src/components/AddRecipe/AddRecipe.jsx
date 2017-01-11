@@ -29,14 +29,14 @@ class AddRecipe extends Component {
     };
   }
 
-  openModal (message) {
+  openModal = (message) => {
     this.setState({
       isOpen: true,
       errorMessage: message
     });
   };
  
-  hideModal () {
+  hideModal = () => {
     this.setState({
       isOpen: false
     });
