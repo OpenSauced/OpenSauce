@@ -9,12 +9,22 @@ const xPorts = {}
 
 
 //returns the most recent 10 recipes
-xPorts.findRecentRecipes = function(currentLimit) {
+xPorts.findRecentRecipes = function(offset) {
+  if (!offset) {
+    let offset = 0;
+  }
   //find the last id of the most recent recipe and 
-  return recipeModel.find()
+  return recipeModel.find({
+      title: { $ne: null },
+      description: { $ne: null },
+      ingredients: { $ne: null },
+      creator: { $ne: null }
+    })
     .sort([
       ['_id', -1]
     ])
+    .skip(parseInt(offset))
+    .limit(6)
     .populate('creator', 'username')
 }
 
@@ -116,12 +126,23 @@ xPorts.addChildRecipe = function(parentId, childId) {
 }
 
 //SEARCH RECIPES TODO POPULATE USER INFO
-xPorts.searchRecipes = function(term) {
+xPorts.searchRecipes = function(term, offset) {
+  if (!offset) {
+    let offset = 0;
+  }
   return recipeModel
     .find(
-      { $text: { $search: term } },
+      {
+        title: { $ne: null },
+        description: { $ne: null },
+        ingredients: { $ne: null },
+        creator: { $ne: null },
+        $text: { $search: term }
+      },
       { score: { $meta: "textScore" } }
     )
+    .skip(parseInt(offset))
+    .limit(6)
     .populate('creator', 'username')
     .sort( 
       { score: { $meta: "textScore"} }

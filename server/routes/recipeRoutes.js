@@ -13,9 +13,9 @@ cloudinary.config(config.cloudConfig);
 
 //route for homepage which returns recent recipes
 router.get('/', function(req, res) {
+    if (req.query.term && req.query.term !== '') {
     var term = req.query.term
-    if (req.query.term) {
-        db.recipeFunctions.searchRecipes(term)
+        db.recipeFunctions.searchRecipes(term, req.query.offset)
             .then((recipes) => {
                 res.send(recipes)
             })
@@ -23,11 +23,11 @@ router.get('/', function(req, res) {
                 res.send(err)
             })
     } else {
-        var skip = req.query.skip
-        var limit = req.query.limit
-        console.log('  query_skip:  ', skip, 'query_limit ', limit)
-        db.recipeFunctions.findRecentRecipes(limit)
+        db.recipeFunctions.findRecentRecipes(req.query.offset)
             .then((recipes) => {
+                if(recipes.length === 0) {
+                    recipes = 'No Results'
+                }
                 res.send(recipes)
             })
             .catch((err) => {

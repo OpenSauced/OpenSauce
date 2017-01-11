@@ -14,7 +14,6 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
   //console.log(location)
   switch (location.pathname.toLowerCase()) {
     case '/':
-      console.log('Route_Dispatcher "/" OK ', location.pathname)
       getStore().dispatch(clearRecipes())
       getStore().dispatch(fetchRecipes(location.search))
       break

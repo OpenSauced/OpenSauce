@@ -23,42 +23,71 @@ export const updateSearchTerm = (term) => {
   }
 }
 
-export const fetchRecipes = (search) => {
-  const request = axios.get('/api/recipes/' + search)
-   // promise chaining, copyright Bennett Staley 2016
-   return request.then((payload) => {
-     var finalPayload = payload
-     console.log(finalPayload)
-     payload.data.forEach((recipe, index) => {
-       // blank data check
-       if (recipe.title === undefined || recipe.description === undefined || recipe.ingredients === undefined || recipe.creator === null) {
-         // uh oh, someone posted something with blank data!
-         // this shouldn't be possible
-         console.log('index', index, 'is missing something! removed:', recipe.title)
-         //remove that item. Warning, this shouldnt even be needed....
-         finalPayload.data.splice(index, 1)
-       } else {
-         // wasn't missing anything, now we check their lenght
-         // google will penalize you if you hide stuff for no reason. This is the solution
-         // concatinating!
-         //
-         //
-         // side note this would be better on db side, to cut down on weight of packet
-         if (recipe.title.length > 55) {
-          recipe.title = recipe.title.slice(0, 55).concat(' ...')
-         }
-         if (recipe.description.length > 175) {
-          recipe.description = recipe.description.slice(0, 175).concat(' ...')
-         }
-       }
-     })
-     return finalPayload
-   }).then((finalPayload) => {
-     return {
+// check to see if we have a search in our redux state
+// if the state has different search terms then set state to null and search again
+// if the state has the same search terms append the new results to the state
+
+export const fetchRecipes = (search, offset) => {
+  // get the store so we can append instead of remove
+  let previousFeed = getStore().getState().recipes;
+  let reqUrl = '/api/recipes';
+
+  // check to see if a search term was passed to the function
+  if (search) {
+    reqUrl = reqUrl + search;
+  }
+
+  // check to see if an offset was passed to the function
+  if (offset) {
+    // checks to see if an offset was passed and then checks
+    // to see if it needs to prepend a & to the offset string
+    if(search) offset = '&' + offset;
+    else offset = '?' + offset;
+    reqUrl = reqUrl + offset;
+  }
+
+  const request = axios.get(reqUrl);
+  // promise chaining, copyright Bennett Staley 2016
+  return request.then((payload) => {
+    var finalPayload = payload;
+    //loop through the data to see if its missing anything and then remove it
+    if(payload.data.length > 0 && payload.data !== 'No Results') {
+      payload.data.forEach((recipe, index) => {
+      if (recipe.title === undefined || recipe.description === undefined || recipe.ingredients === undefined || recipe.creator === null) {
+        // // uh oh, someone posted something with blank data!
+        // // this shouldn't be possible
+        // console.log('index', index, 'is missing something! removed:', recipe.title)
+        // //remove that item. Warning, this shouldnt even be needed....
+        // finalPayload.data.splice(index, 1)
+        } else {
+          // wasn't missing anything, now we check their length
+          // google will penalize you if you hide stuff for no reason. This is the solution
+          // concatinating!
+          //
+          //
+          // side note this would be better on db side, to cut down on weight of packet
+          if (recipe.title.length > 55) {
+            recipe.title = recipe.title.slice(0, 55).concat('...')
+          }
+          if (recipe.description.length > 175) {
+            recipe.description = recipe.description.slice(0, 175).concat('...')
+          }
+        }
+      })
+      if (previousFeed) {
+        let data = previousFeed.concat(finalPayload.data);
+        finalPayload.data = data;
+      }
+    } else {
+      finalPayload.data = previousFeed;
+    }
+    return finalPayload;
+  }).then((finalPayload) => {
+    return {
       type: FETCH_RECIPES,
       payload: finalPayload
-     }
-   })
+    }
+  })
 }
 
 export const getUserRecipes = (filter) => {

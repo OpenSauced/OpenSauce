@@ -15,9 +15,10 @@ var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url 
             <h2 className="col-12 card-title">
               <Link to={`/viewrecipe?recipeId=${recipe._id}`}>{recipe.title}</Link>
             </h2>
-            <p className="col-12 card-title">
-              <div>Author: {recipe.creator.username}</div>
-            </p>
+            {/*literally all i did was change the <p> tag into a div and turned the <div> into a <p> tag*/}
+            <div className="col-12 card-title">
+              <p>Author: {recipe.creator.username}</p>
+            </div>
             <p className="col-12 card-text">{recipe.description}</p>
             <p className="col-12"> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
             <div className="row align-self-end mx-auto">
