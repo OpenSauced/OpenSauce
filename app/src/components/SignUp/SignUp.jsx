@@ -43,7 +43,6 @@ hideModal = () => {
   }
 
   onFormSubmit(e) {
-    console.log("in the on form submit")
     e.preventDefault();
     var user = new FormData();
     let signUpData = document.getElementById('signUpData')
@@ -62,8 +61,6 @@ hideModal = () => {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
-        var responseMessage = xhr.responseText
-        // console.error("did not post to DB manual ", status, xhr.responseText);
         that.openModal(xhr.responseText)
       }
     })

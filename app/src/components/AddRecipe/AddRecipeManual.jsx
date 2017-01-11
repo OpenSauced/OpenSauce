@@ -25,6 +25,7 @@ class AddRecipeManual extends Component {
       verification: ''
     }
 
+
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
@@ -105,6 +106,7 @@ class AddRecipeManual extends Component {
   }
 
   onFormSubmit(e) {
+    console.log(this.props)
     e.preventDefault();
     if (this.state.verification !== '') {
       let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
@@ -136,12 +138,12 @@ class AddRecipeManual extends Component {
         },
         error: function(xhr, status, err){
           let responseMessage = xhr.responseText
-          // console.error("did not post to DB manual ", status, xhr.responseText);
           props.openModal(xhr.responseText)
         }
       })
-    } else {
-      window.alert('please enter recaptcha reaponse')
+    } 
+    else {
+      this.props.openModal('You forgot to do the captcha. You have to do it to add your recipe.')
     }
   }
 

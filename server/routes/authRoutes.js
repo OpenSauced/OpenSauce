@@ -37,7 +37,7 @@ router.authRecaptcha = function (req, res, next) {
     let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
         + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress;
-    console.log('verify captcha url',verificationURL);
+    // console.log('verify captcha url',verificationURL);
     axios.post( verificationURL )
     .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
         if (resObj.data.success === true){
@@ -47,7 +47,6 @@ router.authRecaptcha = function (req, res, next) {
         }
     })
     .catch((err)=>{
-        console.log('error in captcha post to google servers', err)
         res.status(500).send(err.message)
         // handle this route better
         // res.redirect('/handlefailedrecaptcha')
@@ -117,20 +116,17 @@ router.post('/login', function(req, res) {
             }).cookie('user', cook[0].username, {
                 maxAge: 9000000,
                 httpOnly: true
-            }).redirect('/');
-            console.log('cook', cook);
-            //LOGGED!
-            res.redirect('/')
+            });
+            res.status(200).send('you\'re logged in!')
         } else if (!cook) {
-            res.end('wrong user and passsword combo')
+            throw new Error('Your username and password don\'t match. Please try again.')
         }
     }).catch(function(err) {
-        res.end('wrong user and pass combo')
+        res.status(500).send(err.message)
     })
 })
 
 router.get('/logout', function(req, res) {
-    console.log('loaded logout');
     res.clearCookie("user");
     res.clearCookie("session");
     // res.end('LOG')
@@ -139,7 +135,6 @@ router.get('/logout', function(req, res) {
 
 // router.secondarySignupCheck
 router.post('/signup', multer().any(), router.authRecaptcha, function(req, res) {
-    console.log("in the signup auth route", req.body)
     router.signUp(req.body).then(function(exists) {
         if (exists === true) {
             res.status(500).send('Sorry! That username is taken, please choose another.');
