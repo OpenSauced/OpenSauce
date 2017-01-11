@@ -41,14 +41,15 @@ const ViewRecipe = ({recipe, user}) => {
           <div className="col-4">
             { 
               user._id === recipe.creator._id
-              ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary"> Edit this recipizzle</button></Link> 
-              : ( <div className="row">
-                    <div className="col-6">
-                      <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+                ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary"> Edit this recipizzle</button></Link> 
+                : ( 
+                    <div className="row">
+                      <div className="col-6">
+                        <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+                      </div>
+                      <ForkButton recipeId={recipe._id} cssStyles={{iconColor: 'green'}}/>
                     </div>
-                    <ForkButton recipeId={recipe._id} cssStyles={{iconColor: 'green'}}/>
-                  </div>
-                )
+                  )
             }
           </div>  
         </div> 

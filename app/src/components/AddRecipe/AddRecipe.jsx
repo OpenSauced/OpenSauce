@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 //Redux and async functions
 import { getUserData } from '../../actions/index';
@@ -20,8 +20,8 @@ import {
 
 
 class AddRecipe extends Component {
-  constructor() {
-    super()
+  constructor () {
+    super ()
 
     this.state = {
       isOpen: false,
@@ -29,25 +29,24 @@ class AddRecipe extends Component {
     };
   }
 
-openModal = (message) => {
-  this.setState({
-    isOpen: true,
-    errorMessage: message
-  });
-};
+  openModal = (message) => {
+    this.setState({
+      isOpen: true,
+      errorMessage: message
+    });
+  };
  
-hideModal = () => {
-  this.setState({
-    isOpen: false
-  });
-};
+  hideModal = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
 
   componentWillMount() {
     this.props.getUserData();
   }
 
   render() {
-
     return(
       <div className="container">
         <Modal isOpen={this.state.isOpen} onRequestHide={this.hideModal}>
@@ -59,15 +58,13 @@ hideModal = () => {
             {this.state.errorMessage}
           </ModalBody>
           <ModalFooter>
-            <button className='btn btn-default' onClick={this.hideModal}>
-              Close
-            </button>
+            <button className='btn btn-default' onClick={this.hideModal}>Close</button>
           </ModalFooter>
         </Modal>
         {
           this.props.renderInputs === 'manual' 
-        ? <AddRecipeManual recipeId={this.props.recipeId} openModal={this.openModal.bind(this)}/> 
-        : <AddRecipeFromLink userData={this.props.userData} openModal={this.openModal.bind(this)}/>
+            ? <AddRecipeManual recipeId={this.props.recipeId} openModal={this.openModal.bind(this)}/> 
+            : <AddRecipeFromLink userData={this.props.userData} openModal={this.openModal.bind(this)}/>
         }
       </div>
     )
