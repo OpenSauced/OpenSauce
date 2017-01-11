@@ -13,7 +13,6 @@ xPorts.lookUpRecipeByUrl = function(url) {
         })
 }
 
-
 ///////////////////////////////////////////////////////////
 /////                                                 /////
 /////     supported site scraping functions           /////
@@ -36,10 +35,8 @@ xPorts.scrapeRecipe = function(url) {
 
 }
 
-
 //parse the html and return a recipe object
 // that is returned from a get request to epicurious
-///TODO: change this to accept url and parse epicurious  stuff w/ scrape-it
 
 xPorts.scrapeEpicurious = function(url) {
     return scrapeIt(url, {
@@ -70,7 +67,9 @@ xPorts.scrapeEpicurious = function(url) {
         
 }
 
-// receives FULL url to do parsing
+//////////////////////////////
+///   Food Network Parser  ///
+//////////////////////////////
 xPorts.scrapeFoodNetwork = function(url) {
     return scrapeIt(url, {
             title: "head title",
@@ -93,15 +92,37 @@ xPorts.scrapeFoodNetwork = function(url) {
                 return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
             } else {
             console.log(recipeObj)
-            var directions = recipeObj.directions.join(' ');
+            let directions = recipeObj.directions.join(' ');
+            let title = recipeObj.title
             recipeObj.directions = directions
+            recipeObj.title = xPorts.parseFoodNetworkTitle(title)
             recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
             recipeObj.credit = 'Food Network'
             return recipeObj
         }
-        })
+    })
 };
 
+xPorts.parseFoodNetworkTitle = (titleString) => {
+  // remove colons and spaces around colons
+  let newTitleArray = titleString.split(' : ').slice(0,-1)
+  // remove 'Recipe from title'
+  let titleMinusRecipe = newTitleArray[0].slice(0,newTitleArray[0].indexOf(' Recipe'))
+  //this is the final recipe title
+  let newTitle = ''
+  
+  newTitleArray.length > 1 
+    ? newTitle = titleMinusRecipe + ' by ' + newTitleArray[1]
+    : newTitle = titleMinusRecipe
+  
+  return newTitle
+}
+
+
+
+/////////////////////////////////
+///  AllRecipes.com Scraper  ////
+///// ///////////////////////////
 xPorts.scrapeAllRecipes = function(url) {
     return scrapeIt(url, {
             title: 'h1.recipe-summary__h1',
