@@ -31,19 +31,40 @@ const AddRecipeFromLink = (props) => {
   }
 
   return (
-    <div className="row">
-      <div className="col-12">
-        <form id='commentPostForm' onSubmit={formSubmit}>
-        <div className="row">
-          <label htmlFor="add_recipe_link">
-            <h2>Paste a link to a recipe:</h2>
-            <input id="add_recipe_link" type='text' name='url' />
-          </label>
-        </div>
-          <div className="row">
-            <button type='submit' className="btn btn-secondary">Get Recipe</button>
-          </div>
-        </form>
+    <div className="row view-recipe-container">
+    <div className="col-6">
+      <form id='commentPostForm' onSubmit={formSubmit}>
+      <div>
+        <label className="w-100" htmlFor="add_recipe_link">
+        <input className="form-control" id="add_recipe_link" type='text' name='url' placeholder="Copy and paste a link here..."/>
+        </label>
+      </div>
+      <button type='submit' className="btn btn-primary">Get Recipe</button>
+      </form>
+      </div>
+
+      <div className="col-6">
+      <h4>We support these sites:</h4>
+      <div className="d-flex justify-content-around">
+        <img 
+          src='/assets/Epicurious_Logo_2014.png'
+          alt="Epicurious"
+          height="75"
+          width="100"
+          />
+         <img
+        src='/assets/fn-logo.png'
+        alt="Epicurious"
+        height="75"
+        width="75"
+        />
+         <img
+        src='/assets/allrecipeslogo.svg'
+        alt="Epicurious"
+        height="75"
+        width="75"
+        />
+      </div>
       </div>
     </div>
   );

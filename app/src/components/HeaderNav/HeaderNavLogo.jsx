@@ -6,12 +6,12 @@ const HeaderNavLogo = () => {
     <div className="navbar-brand col-4">
       <Link to={'/'}>
         <img
-          src='/assets/icons/cookbook.svg'
+          src='/assets/opensaucelogo.png'
           alt="Main Logo Icon"
-          height="50"
-          width="50"
+          height="75"
+          width="75"
         />
-        <div className="navName">OpenSauce!</div>
+        <h2 className="nav-name">OpenSauce</h2>
       </Link>
     </div>
   );
