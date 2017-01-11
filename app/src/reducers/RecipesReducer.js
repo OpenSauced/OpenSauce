@@ -4,7 +4,6 @@ export default (state = null, action) => {
   switch (action.type) {
     
     case FETCH_RECIPES:
-      console.log('Recipes Reducer', action.payload)
       return action.payload.data
     break;
 
