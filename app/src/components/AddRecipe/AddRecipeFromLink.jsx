@@ -1,73 +1,155 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
+import Recaptcha from 'react-recaptcha';
 
+class AddRecipeFromLink extends Component {
+  constructor () {
+    super ()
 
-const AddRecipeFromLink = (props) => {
-  var userId = props.userData._id
-  var formSubmit = function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: '/api/recipes/scraperecipe',
-      type: 'POST',
-      data: {
-        userId: userId,
-        url: $('input[name=url]').val()
-      },
-      success: function (statusObj) {
-      console.log("recipe was saved to the DB", statusObj);
-      if (statusObj.saved) {
-        var path = `/viewrecipe?recipeId=${statusObj.recipeId}&savedAlready=true`
-      } else {
-        var path = `/viewrecipe?recipeId=${statusObj}`
-      }
-      browserHistory.push(path);
-    },
-      error: function(xhr, status, err) {
-        var responseMessage = xhr.responseText
-          props.openModal(xhr.responseText)
-          console.error("did not post to DB from link ", status, xhr.responseText);
-      }
+    this.state = {
+      url: '',
+      verificationCode: '',
+      userId: ''
+    }
+
+    this.onIngredientChange = this.onIngredientChange.bind(this)
+    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
+    this.verifyCallback = this.verifyCallback.bind(this)
+    this.formSubmit = this.formSubmit.bind(this)
+    this.validateURL = this.validateURL.bind(this) 
+  }
+
+  componentWillMount () {
+    console.log('AddRecipeFromLink loaded!')
+    this.setState({
+      userId: this.props.userData._id
+    })
+    console.log('state ', this.state)
+  }
+
+  onInputChange (event) {
+    //create a case and match it to the element id, update state accordingly
+    switch(event.target.id) {
+    case 'add_recipe_link':
+      this.setState({ url: event.target.value })
+      break;
+    }
+    return null
+  }
+
+  verifyCallback (response) {
+    console.log('verifying, here is the response ', response)
+    this.setState({ 
+      verificationCode: response
     })
   }
 
-  return (
-    <div className="row view-recipe-container">
-    <div className="col-6">
-      <form id='commentPostForm' onSubmit={formSubmit}>
-      <div>
-        <label className="w-100" htmlFor="add_recipe_link">
-        <input className="form-control" id="add_recipe_link" type='text' name='url' placeholder="Copy and paste a link here..."/>
-        </label>
-      </div>
-      <button type='submit' className="btn btn-primary">Get Recipe</button>
-      </form>
-      </div>
+  loadedRecaptcha () {
+    console.log('Recaptcha loaded!')
+  }
 
+  validateURL (url) {
+    //validate URL
+
+    return true
+  }
+
+  formSubmit (e) {
+    e.preventDefault();
+    if ( this.validateURL( this.state.url ) ) {
+    /// check for url data (by checking for any value)
+      //check for recaptcha token submission
+      if ( this.state.verificationCode !== '' ) {
+
+        let recipe = new FormData();
+        recipe.append('g-recaptcha-response', this.state.title);
+        recipe.append('url', this.state.description);
+        recipe.append('userId', this.state.description);
+
+        $.ajax({
+          url: '/api/recipes/scraperecipe',
+          type: 'POST',
+          data: {
+            'userId': this.state.userId,
+            'url': this.state.url,
+            'g-recaptcha-response': this.state.verificationCode
+          },
+          success: function (statusObj) {
+            console.log("recipe was saved to the DB", statusObj);
+            if (statusObj.saved) {
+              var path = `/viewrecipe?recipeId=${statusObj.recipeId}&savedAlready=true`
+            } else {
+              var path = `/viewrecipe?recipeId=${statusObj}`
+            }
+            browserHistory.push(path);
+          },
+          error: function(xhr, status, err) {
+            var responseMessage = xhr.responseText
+            this.props.openModal(xhr.responseText)
+            console.error("did not post to DB from link ", status, xhr.responseText);
+          }
+        })
+      } else {
+        this.props.openModal('There is a problem with your recaptcha response')
+      }
+    } else {
+      this.props.openModal('Please enter a valid URL')
+
+    }
+  }
+  render() {
+    return (
+      <div className="row view-recipe-container">
       <div className="col-6">
-      <h4>We support these sites:</h4>
-      <div className="d-flex justify-content-around">
-        <img 
-          src='/assets/Epicurious_Logo_2014.png'
+        <form id='commentPostForm' onSubmit={this.formSubmit}>
+        <div>
+          <label className="w-100" htmlFor="add_recipe_link">
+            <input 
+              className="form-control" 
+              onChange={this.onInputChange}
+              id="add_recipe_link" 
+              type='text' 
+              name='url' 
+              placeholder="Copy and paste a link here..."
+            />
+          </label>
+        </div>
+        <Recaptcha
+          sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
+          render="explicit"
+          verifyCallback={this.verifyCallback}
+          onloadCallback={this.loadedRecaptcha}
+        />
+        <button type='submit' className="btn btn-primary">Get Recipe</button>
+        </form>
+        </div>
+
+        <div className="col-6">
+        <h4>We support these sites:</h4>
+        <div className="d-flex justify-content-around">
+          <img 
+            src='/assets/Epicurious_Logo_2014.png'
+            alt="Epicurious"
+            height="75"
+            width="100"
+            />
+           <img
+          src='/assets/fn-logo.png'
           alt="Epicurious"
           height="75"
-          width="100"
+          width="75"
           />
-         <img
-        src='/assets/fn-logo.png'
-        alt="Epicurious"
-        height="75"
-        width="75"
-        />
-         <img
-        src='/assets/allrecipeslogo.svg'
-        alt="Epicurious"
-        height="75"
-        width="75"
-        />
+           <img
+          src='/assets/allrecipeslogo.svg'
+          alt="Epicurious"
+          height="75"
+          width="75"
+          />
+        </div>
+        </div>
       </div>
-      </div>
-    </div>
-  );
+    );
+  };
 };
 
 export default AddRecipeFromLink
