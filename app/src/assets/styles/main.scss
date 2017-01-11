@@ -419,6 +419,15 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+.ingredient-container-fork i {
+    color: #DA5F51;
+}
+
+.ingredient-container-fork i:hover {
+    color: #3C7250;
+}
+
+
 .view-recipe-container{
   background-color: rgba(255,255,255,.175);
   padding: 2em 1em;
