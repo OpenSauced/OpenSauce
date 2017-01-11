@@ -103,6 +103,9 @@ xPorts.scrapeFoodNetwork = function(url) {
     })
 };
 
+//foodNetwork scraper produces a title like this : 
+     // 'Buffalo Wings Recipe : Alton Brown : Food Network'
+// funciton parses out 'Recipe' and 'Food Network' and adds author if there is one 
 xPorts.parseFoodNetworkTitle = (titleString) => {
   // remove colons and spaces around colons
   let newTitleArray = titleString.split(' : ').slice(0,-1)
@@ -111,8 +114,11 @@ xPorts.parseFoodNetworkTitle = (titleString) => {
   //this is the final recipe title
   let newTitle = ''
   
-  newTitleArray.length > 1 
+  // ['title','author','Food NetWork']
+  newTitleArray.length > 1
+    // ----------------  'title'  + ' by ' + 'author' 
     ? newTitle = titleMinusRecipe + ' by ' + newTitleArray[1]
+    //  or just 'title'
     : newTitle = titleMinusRecipe
   
   return newTitle
