@@ -61,8 +61,6 @@ hideModal = () => {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
-        var responseMessage = xhr.responseText
-        // console.error("did not post to DB manual ", status, xhr.responseText);
         that.openModal(xhr.responseText)
       }
     })

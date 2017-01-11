@@ -2,8 +2,6 @@ import {Router, Link} from 'react-router';
 import React ,{ Component } from 'react';
 import {browserHistory} from 'react-router';
 
-
-
 import {
   Modal,
   ModalHeader,
@@ -40,26 +38,22 @@ class Login extends Component {
   onFormSubmit(e) {
     console.log("in the on form submit")
     e.preventDefault();
-    var user = new FormData();
-    let loginData = document.getElementById('loginData')
-    user = new FormData(loginData)
-    var that = this;
+    console.log($('input[name=username]').val())
     
+    var that = this;
+
     $.ajax({
       method: 'POST',
       url: '/auth/login',
-      data: user,
-      cache: false,
-      contentType: false,
-      processData: false,
+      data: {
+      username: $('input[name=username]').val(),
+      password: $('input[name=password]').val()
+      },
       success: function(){
         const path = '/'
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
-
-        var responseMessage = xhr.responseText
-        console.log(responseMessage)
         that.openModal(xhr.responseText)
       }
     })
