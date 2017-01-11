@@ -44,12 +44,12 @@ router.authRecaptcha = function (req, res, next) {
         if (resObj.data.success === true){
             return next()
         } else {
-            throw 'There was a problem with your recaptcha response, please try again'
+            throw new Error('There was a problem with your recaptcha response, please try again')
         }
     })
     .catch((err)=>{
         console.log('error in captcha post to google servers', err)
-        res.redirect('/signup')
+        res.status(500).send(err.message)
         // handle this route better
         // res.redirect('/handlefailedrecaptcha')
     })
