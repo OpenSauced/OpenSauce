@@ -161,6 +161,7 @@ xPorts.findRecipesByUserName = function(username) {
         select: 'username'
         }
     })
+    .sort({_id: -1})
 }
 
 //takes in a string "dec" or "inc" to determine wether you should decrement or increment the like count!

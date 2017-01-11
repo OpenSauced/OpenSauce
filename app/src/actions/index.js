@@ -97,6 +97,15 @@ export const getUserRecipes = (filter) => {
   var requestdata = request
     .then((response) => {
       response.data.my_recipes.forEach(recipe => {
+        // checks to see if the title has too many characters and then removes extra characters and appends
+        // a ... to the end of the string
+        if (recipe.title.length > 55) {
+          recipe.title = recipe.title.slice(0, 55).concat('...')
+        }
+        // does the same thing to the description and replaces it
+        if (recipe.description.length > 175) {
+          recipe.description = recipe.description.slice(0, 175).concat('...')
+        }
         recipe.creator = {
           _id:recipe.creator,
           username: username
@@ -108,7 +117,7 @@ export const getUserRecipes = (filter) => {
       })
 
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
-      console.log(recipes)
+      //console.log(recipes)
 
       //Filter Saved Recipes
       if (filter && filter.isSavedRecipesChecked === false) {
@@ -120,13 +129,12 @@ export const getUserRecipes = (filter) => {
         recipes = _.reject(recipes, (recipe) => recipe.type === "my_recipe")
       }
 
-      //Filter My Recipes
+      //Filter Forked Recipes
       if (filter && filter.isForkedRecipesChecked === false) {
         recipes = _.filter(recipes, (recipe) => recipe.forked_parent === null)
       }
       
       return recipes
-
     })
 
   return {
