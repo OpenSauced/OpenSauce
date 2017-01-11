@@ -15,7 +15,7 @@ a, a:hover, a:active {
 
 h1, h2, h3, h4, h5, h6 {
   // font-family: 'Nunito', sans-serif;
-  font-family: 'PT Serif', serif;
+  // font-family: 'PT Serif', serif;
   // font-family: 'Josefin Sans', sans-serif;
   // font-family: 'Source Sans Pro', sans-serif;
 
@@ -105,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .titleBarContainer {
     color: ghostwhite;
-    // background-color: #535353;
+    background-color: #535353;
     background-blend-mode: overlay;
     margin-bottom: 15px;
     padding-bottom: 6em;
@@ -418,4 +418,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .recipe-description{
   // height: 50%;
+}
+
+.nav-name {
+    display: inline;
+    padding: 5px;
+    vertical-align: middle;
 }
