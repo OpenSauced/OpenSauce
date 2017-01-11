@@ -84,7 +84,7 @@ class RouteViewRecipe extends Component {
           </Modal>
          <HeaderNav/>
           <AppHeader title={this.props.currentRecipe.title}>
-          <div>
+          <div className="row">
             <SaveAndForkButtons
               recipeId={this.props.currentRecipe._id}
               userId={this.props.userData.userData._id}
@@ -92,7 +92,7 @@ class RouteViewRecipe extends Component {
               forkRecipe={this.forkRecipe}
               removeRecipe={this.props.removeUserSavedRecipe.bind(this)}
               savedRecipes={this.props.userData.userData.saved_recipes}
-          />
+            />
           </div>
           </AppHeader>
 
