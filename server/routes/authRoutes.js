@@ -118,14 +118,12 @@ router.post('/login', function(req, res) {
                 maxAge: 9000000,
                 httpOnly: true
             }).redirect('/');
-            console.log('cook', cook);
-            //LOGGED!
             res.redirect('/')
         } else if (!cook) {
-            res.end('wrong user and passsword combo')
+            throw new Error('Your username and password don\'t match. Please try again.')
         }
     }).catch(function(err) {
-        res.end('wrong user and pass combo')
+        res.status(500).send(err.message)
     })
 })
 
