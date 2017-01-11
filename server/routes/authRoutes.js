@@ -32,7 +32,6 @@ router.verifyPassword = function(user, plainPass) {
 
 // MIDDLEWARE that checks authentication of google recaptcha
 router.authRecaptcha = function (req, res, next) {
-
     // construct url to send and verify
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
@@ -139,13 +138,13 @@ router.get('/logout', function(req, res) {
 })
 
 // router.secondarySignupCheck
-router.post('/signup', router.authRecaptcha, function(req, res) {
+router.post('/signup', multer().any(), router.authRecaptcha, function(req, res) {
+    console.log("in the signup auth route", req.body)
     router.signUp(req.body).then(function(exists) {
-        console.log('.then')
         if (exists === true) {
-            res.status(200).send('Erorr username taken, please choose another.');
+            res.status(500).send('Sorry! That username is taken, please choose another.');
         } else if (exists === false) {
-            res.status(200).redirect('/login')
+            res.status(200).send("good job")
         }
     })
 })
