@@ -26,7 +26,7 @@ var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url 
               </div>
                 {
                   recipe._id in myRecipes ?
-                    <div className="col-6 d-flex flex-wrap"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn">OWNED RECIPE</div></div> : recipe._id in savedRecipes ?
+                    <div className="col-6 d-flex flex-wrap"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn">My Recipe</div></div> : recipe._id in savedRecipes ?
                     <div className="col-6 d-flex flex-wrap"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {removeRecipe(recipeId, userId)}}>Unlike Recipe</div></div> :
                     <div className="col-6 d-flex flex-wrap"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {addRecipe(recipeId, userId)}}>Like Recipe</div></div>
                 }

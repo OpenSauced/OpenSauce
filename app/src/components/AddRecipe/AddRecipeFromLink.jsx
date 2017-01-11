@@ -36,8 +36,35 @@ const AddRecipeFromLink = (props) => {
         <form id='commentPostForm' onSubmit={formSubmit}>
         <div className="row">
           <label htmlFor="add_recipe_link">
-            <h2>Paste a link to a recipe:</h2>
-            <input id="add_recipe_link" type='text' name='url' />
+            <h2>We support these sites:</h2>
+            <div className="row">
+            <div className="col-4">
+              <img 
+                src='/assets/Epicurious_Logo_2014.png'
+                alt="Epicurious"
+                height="75"
+                width="100"
+                />
+                </div>
+                <div className="col-4">
+                 <img
+                src='/assets/fn-logo.png'
+                alt="Epicurious"
+                height="75"
+                width="75"
+                />
+                </div>
+                <div className="col-4">
+                 <img
+                src='/assets/allrecipeslogo.svg'
+                alt="Epicurious"
+                height="75"
+                width="75"
+                />
+                </div>
+                </div>
+
+            <input className="form-control" id="add_recipe_link" type='text' name='url' placeholder="Copy and paste a link here..."/>
           </label>
         </div>
           <div className="row">
