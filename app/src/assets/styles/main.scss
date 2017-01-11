@@ -21,6 +21,13 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+.container-fluid {
+    padding-bottom: 45px;
+    //shmerlyn wrote this
+    //its super bad code
+    //she should feel bad
+}
+
 .btn {
   white-space: normal;
   font-size: 14px;
@@ -395,6 +402,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .icon{
   color: ghostwhite;
+}
+
+.icon p {   
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .icon:hover{
