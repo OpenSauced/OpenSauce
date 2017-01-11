@@ -9,7 +9,6 @@ export default class App extends Component {
 
   	$(window).scroll(function() {
     if ($(this).scrollTop() > 400) {
-    	console.log($('.navbar'))
         $('.navbar').attr('style',  'background-color:rgb(60, 114, 80)');
     }
     if ($(this).scrollTop() < 400) {

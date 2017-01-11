@@ -16,7 +16,7 @@ class RouteMyRecipes  extends Component {
         <AppHeader title={'Catchy Phrase'}>
         <FilterBar />
         </AppHeader>
-        <div>
+        <div className="row homePageContainer">
           <RecipeList route={this.props.route.path}/>
         </div>
       </div>

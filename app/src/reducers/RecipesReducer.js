@@ -5,6 +5,7 @@ export default (state = null, action) => {
     
     case FETCH_RECIPES:
       return action.payload.data
+    break;
 
     case GET_USER_RECIPES:
       return action.payload

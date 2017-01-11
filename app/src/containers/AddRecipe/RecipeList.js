@@ -14,20 +14,9 @@ import HPFeedOnVisible from '../../components/Homepage/HPFeedOnVisible'
 import HPFeedRecipe from '../../components/Homepage/HPFeedRecipe'
 import SearchBar from '../Homepage/SearchBar'
 
-///Setting Defaults for OnVisibility
-setDefaultProps({
-    bounce: true,
-    visibleClassName: 'appear',
-    percent: 10
-});
-
 class RecipeList extends Component {
   constructor () {
     super ()
-    this.state = {
-      limit: 16,
-      skip: 0
-    }
   }
 
   renderRecipes(recipe) {
@@ -47,9 +36,9 @@ class RecipeList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="w-100">
         <ul className="flex-row d-flex flex-wrap recipe_card">
-          {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : "NO RESULTS FOUND"  )  : "LOADING"}
+          {this.props.recipes ? (this.props.recipes.length ? this.props.recipes.map(this.renderRecipes.bind(this)) : <h2>No Results</h2>  )  : <h2>Loading</h2>}
         </ul>
       </div>
     )
