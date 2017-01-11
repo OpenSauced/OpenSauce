@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router';
 
-const RecipeLikeCount = ({recipe}) => {
+const RecipeLikeCount = ({likes}) => {
 
   return (
-    <div className="row justify-content-center ml-auto mr-auto"> likes: </div>
+    <div className="row justify-content-center ml-auto mr-auto"> <i className="fa fa-heart"> {likes}</i></div>
   );
 };
 

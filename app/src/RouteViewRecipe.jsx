@@ -5,6 +5,7 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
 
 import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
+import RecipeLikeCount from './components/ViewRecipe/RecipeLikeCount.jsx'
 import ViewRecipe from './components/ViewRecipe/ViewRecipe.jsx'
 
 //Redux and async functions
@@ -50,6 +51,12 @@ class RouteViewRecipe extends Component {
     });
   };
 
+  updateState = (recipe) => {
+    this.setState({
+      recipe: recipe
+    })
+  }
+
   hideModal = () => {
     this.setState({
       isOpen: false
@@ -93,6 +100,9 @@ class RouteViewRecipe extends Component {
               removeRecipe={this.props.removeUserSavedRecipe.bind(this)}
               savedRecipes={this.props.userData.userData.saved_recipes}
             />
+          </div>
+          <div className="row">
+            <RecipeLikeCount likes={this.props.currentRecipe.likes} updateState={this.updateState.bind(this)}/>
           </div>
           </AppHeader>
 

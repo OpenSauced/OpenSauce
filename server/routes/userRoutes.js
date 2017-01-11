@@ -53,10 +53,14 @@ router.post('/save', function(req, res) {
       user.session = null;
       user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
       user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
-      res.send(user);
+      return db.recipeFunctions.decOrIncLikes(recipeId, 'inc').then(function(recipeObj) {
+        res.send(user);
+      }).catch((err) => {
+        res.send(err.message);
+      })
     })
     .catch((err) => {
-      res.send(err);
+      res.send(err.message);
     })
 })
 
@@ -70,7 +74,11 @@ router.post('/remove', function(req, res){
       user.session = null;
       user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
       user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
-      res.send(user);
+      return db.recipeFunctions.decOrIncLikes(recipeId, 'dec').then(function(recipeObj) {
+        res.send(user);
+      }).catch((err) => {
+        res.send(err.message);
+      })
     })
     .catch((err) => {
       res.send(err);
