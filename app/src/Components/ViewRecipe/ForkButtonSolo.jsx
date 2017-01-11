@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router';
-    
-// this is what the Component will look like: 
+
+// this is what the Component will look like:
 // <ForkButton recipeId={recipe._id} cssStyles={{iconColor: 'green'}}/>
 
 const ForkButton = ({ recipeId, cssStyles }) => {
@@ -10,13 +10,13 @@ const ForkButton = ({ recipeId, cssStyles }) => {
   // add to string in classname - will correspond with a css class
   let color = cssStyles || ''
   if ( color.iconColor ){
-    color = color.iconColor 
+    color = color.iconColor
   }
   return (
-    <Link className={"col-6 icon" + color} to={`/addrecipe?recipe=${recipeId}`}>
-      <i className={"fa fa-cutlery fa-3x icon" + color}>
+    <Link className="col-6 icon" to={`/addrecipe?recipe=${recipeId}`}>
+      <i className="fa fa-cutlery fa-3x">
         <br></br>
-        <p className={"icon"+color}>Fork this Recipe</p>
+        <p className="">Fork this Recipe</p>
       </i>
     </Link> 
   )

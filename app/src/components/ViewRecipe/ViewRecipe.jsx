@@ -5,12 +5,12 @@ import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
 import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
-import ForkButton from './ForkButton'
+import ForkButton from './ForkButtonSolo'
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
   var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
-  var image = recipe.recipe_images.public_url ? <div><img src={recipe.recipe_images.public_url} /></div> : '' 
+  var image = recipe.recipe_images.public_url ? <div><img src={recipe.recipe_images.public_url} /></div> : ''
 
   if (recipe){
     return (
@@ -34,32 +34,32 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row justify-content-between view-recipe-container">
-          <div className="col-8"> 
+          <div className="col-8">
           <h3>Ingredients:</h3>
             <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
           </div>
           <div className="col-4">
-            { 
+            {
               user._id === recipe.creator._id
-              ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary"> Edit this recipizzle</button></Link> 
-              : ( <div className="row">
-                    <div className="col-6">
-                      <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+                ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary"> Edit this recipizzle</button></Link>
+              : ( <div className="row ingredient-container-fork">
+                      <div className="col-6">
+                        <h5> Want to put your own spin on this recipe? Try forking it! </h5>
+                      </div>
+                      <ForkButton recipeId={recipe._id}/>
                     </div>
-                    <ForkButton recipeId={recipe._id} cssStyles={{iconColor: 'green'}}/>
-                  </div>
-                )
+                  )
             }
-          </div>  
-        </div> 
-        <div className="row view-recipe-container"> 
+          </div>
+        </div>
+        <div className="row view-recipe-container">
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
           <div>
             <br></br>
             {credit}
-          </div>  
-        </div>  
+          </div>
+        </div>
       </div>
     );
   }

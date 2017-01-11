@@ -106,41 +106,44 @@ class AddRecipeManual extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
-    console.log(newIngredients)
-    let props = this.props
-    let recipe = new FormData();
+    if (this.state.verification !== '') {
+      let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
+      let props = this.props
+      let recipe = new FormData();
 
-    // add form data for ajax response
+      // add form data for ajax response
 
-    recipe.append('title', this.state.title);
-    recipe.append('description', this.state.description);
-    recipe.append('ingredients', JSON.stringify(newIngredients));
-    recipe.append('directions', this.state.directions);
+      recipe.append('title', this.state.title);
+      recipe.append('description', this.state.description);
+      recipe.append('ingredients', JSON.stringify(newIngredients));
+      recipe.append('directions', this.state.directions);
 
-    //response from recaptcha and images
-    recipe.append('g-recaptcha-response', this.state.verification)
-    recipe.append('images', this.state.images[0]);
+      //response from recaptcha and images
+      recipe.append('g-recaptcha-response', this.state.verification)
+      recipe.append('images', this.state.images[0]);
 
-    $.ajax({
-      method: 'POST',
-      url: `/api/recipes/${this.props.userData._id}/addrecipe`,
-      data: recipe,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function(recipe){
-        // console.log('Getting current data? ', recipe);
-        const path = `/viewrecipe?recipeId=${recipe._id}`
-        browserHistory.push(path);
-      },
-      error: function(xhr, status, err){
-        var responseMessage = xhr.responseText
-        // console.error("did not post to DB manual ", status, xhr.responseText);
-        props.openModal(xhr.responseText)
-      }
-    })
-      }
+      $.ajax({
+        method: 'POST',
+        url: `/api/recipes/${this.props.userData._id}/addrecipe`,
+        data: recipe,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(recipe){
+          // console.log('Getting current data? ', recipe);
+          const path = `/viewrecipe?recipeId=${recipe._id}`
+          browserHistory.push(path);
+        },
+        error: function(xhr, status, err){
+          let responseMessage = xhr.responseText
+          // console.error("did not post to DB manual ", status, xhr.responseText);
+          props.openModal(xhr.responseText)
+        }
+      })
+    } else {
+      window.alert('please enter recaptcha reaponse')
+    }
+  }
 
   onIngredientChange(e) {
     var index = e.target.id.split('-')[1]
