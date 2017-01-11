@@ -1,14 +1,15 @@
 
 import React, { Component } from 'react';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 //Redux and async functions
 import { connect } from 'react-redux';
 
-import EditRecipeIngredient from './components/ViewRecipe/EditRecipeIngredient'
+//Components
+import EditRecipeIngredient from './components/ViewRecipe/EditRecipeIngredient';
 import HeaderNav from './components/HeaderNav/HeaderNav';
 import AppHeader from './components/App/AppHeader';
-import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx'
+import SaveAndForkButtons from './components/ViewRecipe/SaveAndForkButtons.jsx';
 import Footer from './components/Footer/Footer';
 
 
@@ -24,17 +25,17 @@ class RouteEditRecipe extends Component {
       ingredients: ['']
     }
 
-    this.recipeData = {}
-    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.recipeData = {};
+    this.onFormSubmit = this.onFormSubmit.bind(this);
     //recipeData is variable that can be set and used for the whole component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient   = this.removeIngredient.bind(this);
     this.addNewIngredient   = this.addNewIngredient.bind(this);
-    this.spliceBlankIngredients = this.spliceBlankIngredients.bind(this)
+    this.spliceBlankIngredients = this.spliceBlankIngredients.bind(this);
   }
 
   componentWillMount () {
-    let currentRecipe = this.props.currentRecipe
+    let currentRecipe = this.props.currentRecipe;
     this.setState({
       title: currentRecipe.title,
       description: currentRecipe.description,
@@ -46,23 +47,23 @@ class RouteEditRecipe extends Component {
 
   //function to track changes in the ingredient text and set it to state
   onIngredientChange(e) {
-    var index = e.target.id.split('-')[1]
-    var newIngredients = this.state.ingredients.slice()
+    let index = e.target.id.split('-')[1]
+    let newIngredients = this.state.ingredients.slice()
     newIngredients[index] = e.target.value
     this.setState({ingredients: newIngredients})
   }
 
   //function to track changes in the ingredient text and set it to state
   addNewIngredient(e) {
-    var newIngredients = this.state.ingredients.slice()
+    let newIngredients = this.state.ingredients.slice()
     newIngredients.push(e.target.value)
     this.setState({ingredients: newIngredients})
   }
 
   //function to remove the number of ingredients and set it to state
   removeIngredient(e) {
-    var index = e.target.id.split('-')[1]
-    var newIngredients = this.state.ingredients.slice()
+    let index = e.target.id.split('-')[1]
+    let newIngredients = this.state.ingredients.slice()
     newIngredients.splice(index, 1)
     this.setState({ingredients: newIngredients})
   }
@@ -117,6 +118,7 @@ class RouteEditRecipe extends Component {
     })
     .then((recipe) => {
       const path = `/viewrecipe?recipeId=${this.props.currentRecipe._id}`
+      //push path to reset react-redux for page
       browserHistory.push(path);
     })
   }
