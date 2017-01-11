@@ -35,7 +35,7 @@ const AddRecipeFromLink = (props) => {
     <div className="col-6">
       <form id='commentPostForm' onSubmit={formSubmit}>
       <div>
-        <label htmlFor="add_recipe_link">
+        <label className="w-100" htmlFor="add_recipe_link">
         <input className="form-control" id="add_recipe_link" type='text' name='url' placeholder="Copy and paste a link here..."/>
         </label>
       </div>
@@ -44,7 +44,7 @@ const AddRecipeFromLink = (props) => {
       </div>
 
       <div className="col-6">
-      <h3>We support these sites:</h3>
+      <h4>We support these sites:</h4>
       <div className="d-flex justify-content-around">
         <img 
           src='/assets/Epicurious_Logo_2014.png'
@@ -66,8 +66,6 @@ const AddRecipeFromLink = (props) => {
         />
       </div>
       </div>
-
-
     </div>
   );
 };
