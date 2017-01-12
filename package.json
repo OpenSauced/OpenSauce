@@ -5,7 +5,7 @@
   "main": "webpack.js",
   "scripts": {
     "start": "nodemon --ignore app/ server/server.js",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack-build.config.js",
     "watch": "node webpack.js"
   },
   "repository": {
