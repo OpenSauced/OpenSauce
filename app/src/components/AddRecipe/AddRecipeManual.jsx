@@ -25,7 +25,6 @@ class AddRecipeManual extends Component {
       verification: ''
     }
 
-
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
@@ -46,7 +45,7 @@ class AddRecipeManual extends Component {
   }
 
   componentWillMount() {
-    console.log("will mount ", this.props)
+    console.log("AddRecipeManual will mount, here are it's props: ", this.props)
     this.props.getUserData()
     .then((user) => {
       // console.log("id in componentWillMount ", this.props.recipeId)
@@ -57,7 +56,29 @@ class AddRecipeManual extends Component {
   }
 
   componentDidMount(){
-    console.log("did mount ", this.props)
+    console.log("AddRecipeManual mounted, here are it's props: ", this.props)
+  }
+
+  // this is set up to detect a change in recipeId props for 
+  // change from /addrecipe to /addrecipe?recipe=########### and load that on screen
+  componentWillReceiveProps( nextProps ) {
+    // only changes state based on recipeId being present
+      // recipeId === undefined? set state to blanks 
+    if ( !(nextProps.recipeId) ){
+      this.setState({
+        title: '',
+        description: '',
+        directions: '',
+        ingredients: [''],
+        images: [],
+        verification: '',
+        forkedParent: ''
+      });
+      // recipeId === a recipe id? get the info from the db 
+    } else if ( nextProps.recipeId ) {
+      this.getRecipeFromDB(nextProps.recipeId)
+    }
+
   }
 
   getRecipeFromDB(recipeId) {
