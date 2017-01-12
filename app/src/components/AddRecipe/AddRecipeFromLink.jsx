@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
 import Recaptcha from 'react-recaptcha';
+import { isURL } from 'validator';
 
 class AddRecipeFromLink extends Component {
-  constructor () {
-    super ()
+  constructor (props) {
+    super (props)
 
     this.state = {
-      url: '',
+      recipeUrl: '',
       verificationCode: '',
       userId: ''
     }
-
-    this.onIngredientChange = this.onIngredientChange.bind(this)
-    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
-    this.verifyCallback = this.verifyCallback.bind(this)
-    this.formSubmit = this.formSubmit.bind(this)
-    this.validateURL = this.validateURL.bind(this) 
+ 
   }
 
   componentWillMount () {
@@ -28,11 +24,14 @@ class AddRecipeFromLink extends Component {
   }
 
   onInputChange (event) {
+    console.log('STATE AddRecipeFromLink  ::: actually state', event.target.id)
+
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
-    case 'add_recipe_link':
-      this.setState({ url: event.target.value })
-      break;
+      case 'add_recipe_link':
+        this.setState({ recipeUrl: event.target.value })
+        // console.log(event.target.value)
+        break;
     }
     return null
   }
@@ -48,22 +47,17 @@ class AddRecipeFromLink extends Component {
     console.log('Recaptcha loaded!')
   }
 
-  validateURL (url) {
-    //validate URL
-
-    return true
-  }
-
   formSubmit (e) {
     e.preventDefault();
-    if ( this.validateURL( this.state.url ) ) {
-    /// check for url data (by checking for any value)
+    console.log(this.state)
+    /// check for valid URL - only checks for structure of the URL
+    if ( isURL( this.state.recipeUrl ) ) {
       //check for recaptcha token submission
       if ( this.state.verificationCode !== '' ) {
 
         let recipe = new FormData();
         recipe.append('g-recaptcha-response', this.state.title);
-        recipe.append('url', this.state.description);
+        recipe.append('recipeUrl', this.state.description);
         recipe.append('userId', this.state.description);
 
         $.ajax({
@@ -71,7 +65,7 @@ class AddRecipeFromLink extends Component {
           type: 'POST',
           data: {
             'userId': this.state.userId,
-            'url': this.state.url,
+            'recipeUrl': this.state.recipeUrl,
             'g-recaptcha-response': this.state.verificationCode
           },
           success: function (statusObj) {
@@ -93,20 +87,20 @@ class AddRecipeFromLink extends Component {
         this.props.openModal('There is a problem with your recaptcha response')
       }
     } else {
-      this.props.openModal('Please enter a valid URL')
-
+      this.props.openModal('Please enter a valid recipe url')
     }
   }
+
   render() {
     return (
       <div className="row view-recipe-container">
       <div className="col-6">
-        <form id='commentPostForm' onSubmit={this.formSubmit}>
+        <form id='commentPostForm' onSubmit={this.formSubmit.bind(this)}>
         <div>
           <label className="w-100" htmlFor="add_recipe_link">
             <input 
               className="form-control" 
-              onChange={this.onInputChange}
+              onChange={this.onInputChange.bind(this)}
               id="add_recipe_link" 
               type='text' 
               name='url' 
@@ -117,12 +111,12 @@ class AddRecipeFromLink extends Component {
         <Recaptcha
           sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
           render="explicit"
-          verifyCallback={this.verifyCallback}
-          onloadCallback={this.loadedRecaptcha}
+          verifyCallback={this.verifyCallback.bind(this)}
+          onloadCallback={this.loadedRecaptcha.bind(this)}
         />
         <button type='submit' className="btn btn-primary">Get Recipe</button>
         </form>
-        </div>
+        {/*</div>
 
         <div className="col-6">
         <h4>We support these sites:</h4>
@@ -145,7 +139,7 @@ class AddRecipeFromLink extends Component {
           height="75"
           width="75"
           />
-        </div>
+        </div>*/}
         </div>
       </div>
     );
