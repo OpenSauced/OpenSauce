@@ -28,7 +28,7 @@ class RecipeList extends Component {
           ]
         }
     ]
-  }   
+  }
   disableDrag() {
     window.requestAnimationFrame(() => {
       [].slice.call(document.getElementsByClassName('rst__moveHandle')).forEach(element => {element.remove()})
@@ -37,6 +37,9 @@ class RecipeList extends Component {
 
   componentDidMount() {
     this.disableDrag()
+  }
+  setTreeData(){
+    
   }
 
   render() {
