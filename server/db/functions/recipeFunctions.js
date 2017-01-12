@@ -51,7 +51,7 @@ xPorts.addNewRecipe = (userId, recipe) => {
     if (typeof recipe.ingredients === 'string') {
         recipe.ingredients = JSON.parse(recipe.ingredients);
     }
-        try {
+    try {
         if(recipe.title === null || recipe.title === undefined || recipe.title === ''){
             throw new Error('Please enter a title for the recipe')
         }
@@ -68,7 +68,14 @@ xPorts.addNewRecipe = (userId, recipe) => {
     catch(err){
         return Promise.reject(err)
     }
-    return recipeModel.findOneAndUpdate({title: recipe.title, creator: recipe.creator}, recipe, {upsert: true, new: true})
+    return recipeModel.findOneAndUpdate(
+                        {
+                          title: recipe.title, 
+                          creator: recipe.creator
+                        }, 
+                        recipe, 
+                        {upsert: true, new: true}
+                      )
 }
 
 // Adds a single photo to the recipe that the user has uploaded
@@ -96,20 +103,6 @@ xPorts.findRecipeById = function(recipeId) {
     })
 }
 
-
-//takes a forked recipe from client and saves it to the DB
-xPorts.saveForkedRecipe = function(username, recipe, parentId) {
-  recipe.forked_parent = parentId
-  return xPorts.addNewRecipe(username, recipe)
-    .then((forkedRecipe) => {
-      xPorts.addChildRecipe(parentId, forkedRecipe._id)
-      return forkedRecipe
-    })
-    .catch((err) => {
-      console.log("recipeFunctions 3 ", err)
-    })
-}
-
 //adds a child (forked) recipe to a parent recipe
 //called when a forked recipe is saved to the DB
 xPorts.addChildRecipe = function(parentId, childId) {
@@ -117,12 +110,6 @@ xPorts.addChildRecipe = function(parentId, childId) {
     $push: {
       'forked_children': childId
     }})
-    .then((recipe) => {
-      return recipe
-    })
-    .catch((err) => {
-      console.log("error in recipeFunctions 4", err)
-    })
 }
 
 //SEARCH RECIPES TODO POPULATE USER INFO

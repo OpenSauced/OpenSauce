@@ -3,8 +3,9 @@ import { Link } from 'react-router'
 
 import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
-import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
+import RecipeCreator from './RecipeCreator'
+import RecipeNotes from './RecipeNotes'
 import ForkButton from './ForkButtonSolo'
 
 const ViewRecipe = ({recipe, user}) => {
@@ -21,13 +22,13 @@ const ViewRecipe = ({recipe, user}) => {
           <div className="col d-flex flex-wrap">
             <div className="row">
               <div className="col-12 recipe-title">
-                <h2 className="">{recipe.title}</h2>
+                <h2>{ recipe.title }</h2>
               </div>
               <div className="col-12 recipe-description">
-                {description}
+                { description }
               </div>
               <div className="align-self-end">
-                <RecipeCreator recipeCreator={recipe.creator}/>
+                <RecipeCreator recipeCreator={ recipe.creator }/>
               </div>
              </div>
           </div>
@@ -35,7 +36,7 @@ const ViewRecipe = ({recipe, user}) => {
         <div className="row justify-content-between view-recipe-container">
           <div className="col-8">
           <h3>Ingredients:</h3>
-            <RecipeIngredientsList recipeIngredients={recipe.ingredients}/>
+            <RecipeIngredientsList recipeIngredients={ recipe.ingredients }/>
           </div>
           <div className="col-4">
             {
@@ -44,9 +45,9 @@ const ViewRecipe = ({recipe, user}) => {
                 : (
                     <div className="row ingredient-container-fork">
                       <div className="col-6">
-                        <p> Want to put your own spin on this recipe? Try forking it! </p>
+                        <p> Want to change this recipe? Try forking it! </p>
                       </div>
-                      <ForkButton recipeId={recipe._id} />
+                      <ForkButton recipeId={ recipe._id } />
                     </div>
                   )
             }
@@ -55,8 +56,34 @@ const ViewRecipe = ({recipe, user}) => {
         <div className="row view-recipe-container">
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
-          <div>
+        </div>
+        <div className="row view-recipe-container">
+          <div className="col d-flex flex-wrap">
+            <h3>
+              {
+                user.username !== recipe.creator.username
+                  ? recipe.creator.username + "'s Recipe Notes: "
+                  : user.username === recipe.creator.username
+                    ? 'Your Recipe Notes:'
+                    : 'Recipe Notes:'
+              }
+            </h3>
+            <RecipeNotes recipeNotes={ recipe.notes }/>
           </div>
+            {
+              user._id === recipe.creator._id
+                ? null
+                : (
+                    <div className="col-4">
+                      <div className="row ingredient-container-fork">
+                        <div className="col-6">
+                          <p> Want to add your own notes? Try forking it! </p>
+                        </div>
+                        <ForkButton recipeId={recipe._id} />
+                      </div>
+                    </div>
+                  )
+            }
         </div>
       </div>
     );
