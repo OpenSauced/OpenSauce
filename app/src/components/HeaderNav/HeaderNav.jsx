@@ -25,7 +25,7 @@ class HeaderNav extends Component {
               <HeaderNavLogo/>
             </div>
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <i className="fa fa-bars"></i>
+              <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <HeaderNavButtons/>
@@ -41,3 +41,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(HeaderNav);
+
+
+
