@@ -13,16 +13,22 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-a, a:hover, a:active {
-  color: ghostwhite;
+a,
+a:active,
+a:hover {
+    color: ghostwhite;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  // font-family: 'Nunito', sans-serif;
-  // font-family: 'PT Serif', serif;
-  // font-family: 'Josefin Sans', sans-serif;
-  // font-family: 'Source Sans Pro', sans-serif;
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    // font-family: 'Nunito', sans-serif;
+    // font-family: 'PT Serif', serif;
+    // font-family: 'Josefin Sans', sans-serif;
+    // font-family: 'Source Sans Pro', sans-serif;
 }
 
 .container-fluid {
@@ -33,10 +39,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
-  white-space: normal;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .footer {
@@ -53,10 +59,8 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px 0;
     font-size: 12px;
 }
-#navButtonContainer {
 
-}
-
+#navButtonContainer {}
 
 .recipeCard {
     margin-bottom: 1em;
@@ -91,13 +95,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (max-height: 780px) and (min-height: 680px) {
     .authPage {
-            text-align: center;
-            height: 130vh !important;
+        text-align: center;
+        height: 130vh !important;
     }
 }
 @media (max-height: 680px) {
     .authPage {
-            height: 150vh !important;
+        height: 150vh !important;
 
         #g-recaptcha {
             top: 270px !important;
@@ -153,10 +157,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mainTitleNotOnHomepage {
-  // background-color: lightsteelblue;
-  color: white;
-  padding: 7em 0 0 0;
+    // background-color: lightsteelblue;
+    color: white;
+    padding: 7em 0 0;
 }
+
 .navProfPic {
     overflow: hidden;
     border: 1px solid;
@@ -176,6 +181,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2px !important;
     background-color: grey;
     margin-top: 10px;
+}
+
+.navbar-toggler {
+    margin: 15px;
+    padding: 8px 15px !important;
+    text-align: center;
+    font-size: 25px;
 }
 
 .navbar-toggler,
@@ -404,26 +416,25 @@ h1, h2, h3, h4, h5, h6 {
     outline: 0;
 }
 
-.btn-primary:hover{
-  background-color: #C14161;
-  border-color: #C14161;
-  color: ghostwhite!important;
-  text-decoration: underline!important;
+.btn-primary:hover {
+    background-color: #C14161;
+    border-color: #C14161;
+    color: ghostwhite!important;
+    text-decoration: underline!important;
 }
 
-.icon{
-  color: ghostwhite;
+.icon {
+    color: ghostwhite;
 }
 
-.icon p {   
+.icon p {
     font-size: 25px;
     font-family: 'Open Sans', sans-serif;
 }
 
-.icon:hover{
-  color: #D78651;
-  text-decoration: none;
-
+.icon:hover {
+    color: #D78651;
+    text-decoration: none;
 }
 
 .ingredient-container-fork i {
@@ -434,22 +445,20 @@ h1, h2, h3, h4, h5, h6 {
     color: #3C7250;
 }
 
-
-.view-recipe-container{
-  background-color: rgba(255,255,255,.175);
-  padding: 2em 1em;
-  -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
-  box-shadow: 0 1px 8px rgba(0,0,0,.175);
-  margin-bottom: 2em;
+.view-recipe-container {
+    background-color: rgba(255,255,255,.175);
+    padding: 2em 1em;
+    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    margin-bottom: 2em;
+}
+//THESE TWO NEED BREAKPOINT STYLING!!!
+.recipe-title {
+    // height: 0%;
 }
 
-//THESE TWO NEED BREAKPOINT STYLING!!!
-.recipe-title{
-  // height: 0%;
- }
-
-.recipe-description{
-  // height: 50%;
+.recipe-description {
+    // height: 50%;
 }
 
 .nav-name {
@@ -458,12 +467,14 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: middle;
 }
 
-.fork i, .fork p {
+.fork i,
+.fork p {
     color: #DA5F51;
 }
 
-.fork:hover p, .fork:hover i{
-    color:#3C7250
+.fork:hover i,
+.fork:hover p {
+    color: #3C7250;
 }
 
 .buffer {
@@ -471,10 +482,50 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 10px;
     border-bottom: 1px solid grey;
     border-top: 1px solid grey;
-
 }
 
 .another-buffer {
     margin-bottom: 20px;
 }
 
+@media (max-width: 991px) {
+    .navbar {
+        background-color: rgba(60, 114, 80, 1) !important;
+    }
+
+    .navbar-nav {
+        .nav-item {
+            font-size: 25px;
+            margin-bottom: 5px;
+            padding-left: 35px;
+            background-color: rgba(0, 0, 0, 0.1) !important;
+
+            .dropdown-menu {
+                margin: 0 35px 10px 0 !important;
+                width: 85%;
+                transition: 0.4s;
+            }
+        }
+    }
+
+    .show > .navbar-nav {
+        right: 0 !important;
+        transition: 0.4s;
+    }
+
+    .collapsing > .navbar-nav {
+        right: -250px;
+        transition: 0.4s;
+    }
+
+    .navbar-nav {
+        right: 0;
+        height: 100vh;
+        background-color: rgba(60, 114, 80, 1);
+        top: 80px;
+        width: 250px;
+        position: fixed;
+        overflow: hidden;
+        transition: 0.4s;
+    }
+}
