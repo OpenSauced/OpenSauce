@@ -16,7 +16,6 @@ class AddRecipeFromLink extends Component {
   }
 
   componentWillMount () {
-    console.log('AddRecipeFromLink loaded!')
     this.setState({
       userId: this.props.userData._id
     })
@@ -24,7 +23,6 @@ class AddRecipeFromLink extends Component {
   }
 
   onInputChange (event) {
-    console.log('STATE AddRecipeFromLink  ::: actually state', event.target.id)
 
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
@@ -87,7 +85,7 @@ class AddRecipeFromLink extends Component {
         this.props.openModal('There is a problem with your recaptcha response')
       }
     } else {
-      this.props.openModal('Please enter a valid recipe url')
+      this.props.openModal('Please enter a valid recipe url (0.o)')
     }
   }
 
@@ -116,30 +114,31 @@ class AddRecipeFromLink extends Component {
         />
         <button type='submit' className="btn btn-primary">Get Recipe</button>
         </form>
-        {/*</div>
+        </div>
 
+      {/* supported sites */}
         <div className="col-6">
-        <h4>We support these sites:</h4>
-        <div className="d-flex justify-content-around">
-          <img 
-            src='/assets/Epicurious_Logo_2014.png'
+          <h4>We support these sites:</h4>
+          <div className="d-flex justify-content-around">
+            <img 
+              src='/assets/Epicurious_Logo_2014.png'
+              alt="Epicurious"
+              height="75"
+              width="100"
+              />
+             <img
+            src='/assets/fn-logo.png'
             alt="Epicurious"
             height="75"
-            width="100"
+            width="75"
             />
-           <img
-          src='/assets/fn-logo.png'
-          alt="Epicurious"
-          height="75"
-          width="75"
-          />
-           <img
-          src='/assets/allrecipeslogo.svg'
-          alt="Epicurious"
-          height="75"
-          width="75"
-          />
-        </div>*/}
+             <img
+            src='/assets/allrecipeslogo.svg'
+            alt="Epicurious"
+            height="75"
+            width="75"
+            />
+          </div>
         </div>
       </div>
     );
