@@ -72,7 +72,7 @@ class AddRecipeManual extends Component {
         ingredients: [''],
         images: [],
         verification: '',
-        forkedParent: ''
+        forked_parent: null
       });
       // recipeId === a recipe id? get the info from the db 
     } else if ( nextProps.recipeId ) {
@@ -91,7 +91,7 @@ class AddRecipeManual extends Component {
             description: recipe.description,
             ingredients: recipe.ingredients,
             directions: recipe.directions,
-            forkedParent: recipe._id
+            forked_parent: recipe._id
            });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -139,6 +139,9 @@ class AddRecipeManual extends Component {
       recipe.append('description', this.state.description);
       recipe.append('ingredients', JSON.stringify(newIngredients));
       recipe.append('directions', this.state.directions);
+      if(this.state.forked_parent){
+        recipe.append('forked_parent', this.state.forked_parent);
+      }
 
       //response from recaptcha and images
       recipe.append('g-recaptcha-response', this.state.verification)

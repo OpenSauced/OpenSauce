@@ -96,20 +96,6 @@ xPorts.findRecipeById = function(recipeId) {
     })
 }
 
-
-//takes a forked recipe from client and saves it to the DB
-xPorts.saveForkedRecipe = function(username, recipe, parentId) {
-  recipe.forked_parent = parentId
-  return xPorts.addNewRecipe(username, recipe)
-    .then((forkedRecipe) => {
-      xPorts.addChildRecipe(parentId, forkedRecipe._id)
-      return forkedRecipe
-    })
-    .catch((err) => {
-      console.log("recipeFunctions 3 ", err)
-    })
-}
-
 //adds a child (forked) recipe to a parent recipe
 //called when a forked recipe is saved to the DB
 xPorts.addChildRecipe = function(parentId, childId) {
@@ -117,12 +103,6 @@ xPorts.addChildRecipe = function(parentId, childId) {
     $push: {
       'forked_children': childId
     }})
-    .then((recipe) => {
-      return recipe
-    })
-    .catch((err) => {
-      console.log("error in recipeFunctions 4", err)
-    })
 }
 
 //SEARCH RECIPES TODO POPULATE USER INFO

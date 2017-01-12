@@ -57,10 +57,9 @@ router.get('/:username/userrecipes', function(req, res) {
 //Note: authROutes.authRecaptcha will only work is multer is called before it
       // there is multipart form data that is being sent in req.body
 router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), authRoutes.authRecaptcha, function(req, res) {
-    
     var userId = req.params._id
     var response = null
-    
+    var parent = req.body.forked_parent
     //delete captcha verification string if present - otherwise it will get put into the DB
     var captchaVerification = req.body['g-recaptcha-response']
     if ( captchaVerification ){
@@ -78,9 +77,19 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
         db.recipeFunctions.addNewRecipe(userId, req.body).then((recipe) => {
             response = recipe
             return db.userFunctions.addRecipeToMyRecipes(userId, recipe._id)
-        }).catch((err) => {
+        })
+        .catch((err) => {
             res.status(500).send(err.message)
-        }).then((user) => {
+        })
+        .then(() => {
+            if(parent){
+               return db.recipeFunctions.addChildRecipe(parent, response._id)
+            }
+        })
+        .catch((err) => {
+            res.status(500).send(err.message)
+        })
+        .then((recipe) => {
             // checks to see if req.file is empty
             if (req.file !== undefined) {
                 // upload to cloudinary
@@ -131,19 +140,6 @@ router.get('/:recipeId', function(req, res) {
         })
         .then((recipe) => {
             res.send(recipe);
-        })
-})
-
-
-//save a forked recipe
-router.post('/:username/saveforkedrecipe', function(req, res) {
-    var username = req.params.username
-    db.recipeFunctions.saveForkedRecipe(username, req.body.recipe, req.body.parentId)
-        .then((recipe) => {
-            res.send(recipe);
-        })
-        .catch((err) => {
-            res.status(500).send(err.message)
         })
 })
 
