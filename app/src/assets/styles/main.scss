@@ -184,9 +184,9 @@ h6 {
 }
 
 .navbar-toggler {
-    top: 0;
-    right: 0;
-    margin: 15px;
+    top: 0 !important;
+    right: 0 !important;
+    margin: 15px !important;
     padding: 8px 15px !important;
     text-align: center;
     font-size: 25px;
