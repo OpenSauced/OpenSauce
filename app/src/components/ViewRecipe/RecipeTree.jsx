@@ -11,23 +11,9 @@ import SortableTree from 'react-sortable-tree';
 class RecipeList extends Component {
   constructor () {
     super ()
-    this.treeData = [
-        { 
-          title: 'MOMS SPAGGETHI',
-          expanded: true,
-          subtitle: (<a href="#">John Rambo</a>) ,
-          children: [ 
-            { title: 'SISTERS SPAGGETHI' }, 
-            { title: 'MY SPAGGETHI',
-              expanded: true,
-              children: [
-                {title: 'SONS SPAGGETHI'},
-                {title: 'DAUGHTERS SPAGGETTH'}
-               ]
-            }
-          ]
-        }
-    ]
+    this.state = {
+      treeData: {}
+    }
   }
   disableDrag() {
     window.requestAnimationFrame(() => {
@@ -37,16 +23,37 @@ class RecipeList extends Component {
 
   componentDidMount() {
     this.disableDrag()
+    this.setTreeData()
   }
-  setTreeData(){
-    
-  }
+  setTreeData() {
+    var currentRecipe = this.props.currentRecipe
 
+    var treeData = [
+        { 
+          title: 'MOMS SPAGGETHI', 
+          expanded: true,
+          subtitle: (<a href="#">John Rambo</a>) ,
+          children: [ 
+            { title: 'SISTERS SPAGGETHI' }, 
+            { title: currentRecipe.title,
+              subtitle: currentRecipe.creator.username,
+              expanded: true,
+              children: [
+                {title: 'SONS SPAGGETHI'},
+                {title: 'DAUGHTERS SPAGGETTH'}
+               ]
+            }
+          ]
+        }
+    ]
+    this.setState({treeData: treeData})
+  }
+  
   render() {
     console.log(this.props.currentRecipe)
     return (
       <SortableTree 
-              treeData={this.treeData}
+              treeData={this.state.treeData}
               isVirtualized={false} 
               onChange={() => {}}
       />
