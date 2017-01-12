@@ -58,12 +58,11 @@ class RouteProfile extends Component {
       <div className="container-fluid">
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
-
         <div className="row">
-          {/*side bar for selecting what you want to change*/}
-          <ProfileSettings renderClick={this.handleSelectChangeProfile}/>
-          {/*selected change will show up here*/}
+        <div className="container view-recipe-container">
           <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
+          <ProfileSettings renderClick={this.handleSelectChangeProfile}/>          
+          </div>
         </div>
 
       </div>

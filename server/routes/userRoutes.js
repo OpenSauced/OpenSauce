@@ -103,7 +103,8 @@ router.post('/updateInfo/profilePicture', authRoutes.ensureAuthenticated, upload
   }
 })
 
-router.post('/updateInfo/:type', function(req, res) {
+router.post('/updateInfo/:type', multer().any(), function(req, res) {
+  console.log(req.body)
   // (user, public_url, secure_url, public_id, signature)
   var user = req.cookies.user
   var type = req.params.type
