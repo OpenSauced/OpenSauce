@@ -54,8 +54,8 @@ h6 {
     width: 100%;
     text-align: center;
     left: 15px;
-    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
-    box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    -webkit-box-shadow: 0 1px 8px rgba(1,-6px, 60px, 1.275);
+    box-shadow: 0 1px 8px rgba(1,-6px, 60px, 1.275);
     padding: 5px 0;
     font-size: 12px;
 }
@@ -228,6 +228,11 @@ h6 {
 }
 
 .navbar {
+    position: fixed;
+    /* top: 0; */
+    right: 0;
+    left: 0;
+    z-index: 1030;
     margin-bottom: 0;
     background-color: rgba(60, 114, 80, 0.8);
     padding: 0;

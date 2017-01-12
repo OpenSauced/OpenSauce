@@ -19,7 +19,7 @@ class HeaderNav extends Component {
     }
     render() {
       return (
-          <nav className="navbar fixed-top navbar-toggleable-md">
+          <nav className="navbar navbar-toggleable-md">
             <div className="col-2">
               <HeaderNavLogo/>
             </div>
