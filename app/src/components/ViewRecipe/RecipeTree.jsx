@@ -13,20 +13,22 @@ class RecipeList extends Component {
     super ()
     this.treeData = [
         { 
-          title: 'Chicken Pasta Parent',
-          subtitle: 'John Rambo' ,
-          children: [ { title: 'Moms Spagetti' }, { title: 'Sister Spagetti' 
-
-        }, { title: 'Brothers Spagetti' } ],
+          title: 'MOMS SPAGGETHI',
           expanded: true,
-        },
-        { 
-          title: 'Chicken Grilled',
-          expanded: true,
-          children: [ { title: 'Egg CHICKEN DOUBLE SAUCE' } ] 
+          subtitle: (<a href="#">John Rambo</a>) ,
+          children: [ 
+            { title: 'SISTERS SPAGGETHI' }, 
+            { title: 'MY SPAGGETHI',
+              expanded: true,
+              children: [
+                {title: 'SONS SPAGGETHI'},
+                {title: 'DAUGHTERS SPAGGETTH'}
+               ]
+            }
+          ]
         }
-      ]
-  }
+    ]
+  }   
   disableDrag() {
     window.requestAnimationFrame(() => {
       [].slice.call(document.getElementsByClassName('rst__moveHandle')).forEach(element => {element.remove()})
@@ -38,6 +40,7 @@ class RecipeList extends Component {
   }
 
   render() {
+    console.log(this.props.currentRecipe)
     return (
       <SortableTree 
               treeData={this.treeData}
@@ -51,7 +54,8 @@ class RecipeList extends Component {
 const  mapStateToProps = (state) => {
   return {
     recipes: state.recipes,
-    userData: state.userData
+    userData: state.userData,
+    currentRecipe: state.currentRecipe
   }
 }
 

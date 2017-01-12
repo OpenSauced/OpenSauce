@@ -109,8 +109,6 @@ class RouteViewRecipe extends Component {
           <ViewRecipe 
             recipe={this.props.currentRecipe} 
             user={this.props.userData.userData} 
-            treeData={this.state.treeData}
-            updateTree={this.updateTree.bind(this)}
 
           />
         </div>

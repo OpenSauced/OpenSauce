@@ -9,7 +9,7 @@ import RecipeCreator from './RecipeCreator'
 import RecipeNotes from './RecipeNotes'
 import ForkButton from './ForkButtonSolo'
 
-const ViewRecipe = ({recipe, user, treeData, updateTree}) => {
+const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
   var image = recipe.recipe_images.public_url ? <div className="imageBlockRecipeView" style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}></div> : ''
 
@@ -69,14 +69,12 @@ const ViewRecipe = ({recipe, user, treeData, updateTree}) => {
           </div>
 
         </div>
-        <div className="row view-recipe-container">
-          <h3>Recipe History Tree:</h3>
-          <div>
-            <br></br>
-            <RecipeTree className="col-12" /> 
 
-          </div>
-          
+
+        <div className="row view-recipe-container">
+          <RecipeTree className="col-12" /> 
+          <h3>Recipe Tree:</h3>
+
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">
