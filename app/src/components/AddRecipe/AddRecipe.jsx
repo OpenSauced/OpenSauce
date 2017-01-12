@@ -29,6 +29,10 @@ class AddRecipe extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getUserData();
+  }
+
   openModal = (message) => {
     this.setState({
       isOpen: true,
@@ -41,10 +45,6 @@ class AddRecipe extends Component {
       isOpen: false
     });
   };
-
-  componentWillMount() {
-    this.props.getUserData();
-  }
 
   render() {
     return(

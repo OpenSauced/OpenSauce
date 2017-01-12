@@ -15,7 +15,6 @@ class AddRecipeTypeOfInsert extends Component {
   componentWillReceiveProps(nextProps) {
     let type = nextProps.renderInputs
     if ( type ) {
-      console.log('next RPops----', type)
       this.setState({
         renderInputs: type
       })

@@ -6,7 +6,8 @@ class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      offset: 0
+      waitForResults: false,
+      previousPayload: []
     }
     this.handleScroll = this.handleScroll.bind(this);
     this.search = _.debounce((isSubmit, offset) => {this.sendSearch(isSubmit, offset)}, 300)
@@ -26,21 +27,17 @@ class SearchBar extends Component {
     const html = document.documentElement;
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight) {
-      this.incOffset();
-      this.search(false, this.state.offset);
+    if (windowBottom >= docHeight && this.state.waitForResults === false) {
+      this.setState({waitForResults: true})
+      this.search(false, this.props.offset);
     }
-  }
-
-  incOffset() {
-    this.setState({offset: this.state.offset+6});
   }
 
   onInputChange(event) {
     this.props.clearRecipes()
-    this.setState({offset: 0})
     this.props.updateSearchTerm(event.target.value)
-    this.search(false, this.state.offset)
+    this.props.setDbOffset(0)
+    this.search(false, this.props.offset)
     this.state = {
       forkedRecipes: true,
       savedRecipes: true,
@@ -63,6 +60,14 @@ class SearchBar extends Component {
           let searchstring = this.props.searchTerm ? '?term=' + this.props.searchTerm : location.search;
           let offsetString = 'offset=' + offset;
           this.props.fetchRecipes(searchstring, offsetString)
+          .then((results) => {
+            this.setState({waitForResults: false});
+            if (this.state.previousPayload !== results.payload.data) {
+              //console.log('inc')
+              this.setState({previousPayload: results.payload.data})
+              this.props.setDbOffset(this.props.offset + 6)
+            }
+          })
           break
         case '/myrecipes':
           console.log('TODO: MAKE SEARCHBAR ALSO WORK IN MYRECIPES') 
@@ -72,7 +77,7 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault()
-    this.search(true)
+    this.search(true, this.props.offset)
   }
 
   // I dont think this is even being used right?
@@ -95,7 +100,6 @@ class SearchBar extends Component {
           value={this.props.searchTerm}
           onChange={this.onInputChange.bind(this)}
         />
-      
       </form>
       </div>
     )
@@ -105,16 +109,17 @@ class SearchBar extends Component {
 //REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchRecipes, updateSearchTerm, clearRecipes } from '../../actions/index'
+import { fetchRecipes, updateSearchTerm, clearRecipes, setDbOffset } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
+    offset: state.offset
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ fetchRecipes, updateSearchTerm, clearRecipes }, dispatch)
+  return bindActionCreators ({ fetchRecipes, updateSearchTerm, clearRecipes, setDbOffset }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

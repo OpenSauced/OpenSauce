@@ -12,29 +12,34 @@ class ProfileSettings extends Component {
   render() {
     // This component will show up as a sidebar on the 'Change Profile' page
     return (
-      <div className="col-3">
-        <ProfileSettingsUserImage image={ this.props.userData.user_image}/>
+      <div className="col-12">
         {/* Each of the buttons below corresponds to a case in RouteProfile
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
         */}
-        <div class="row">
-          <button className="btn btn-secondary" name="name" onClick={ this.props.renderClick }> Change your name </button>
+        <div className="row justify-content-around buffer">
+          <ProfileSettingsUserImage image={ this.props.userData.user_image}/>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="profilePicture" onClick={ this.props.renderClick }> Edit your profile picture </button></a>
         </div>
-        <div class="row">
-          <button className="btn btn-secondary" name="username" onClick={ this.props.renderClick }> Change your username </button>
+        <div className="row justify-content-around buffer">
+          <p className="col-4"><h5>Name:</h5> {this.props.userData.first_name + ' ' + this.props.userData.last_name}</p>        
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="name" onClick={ this.props.renderClick }> Edit your name </button></a>
         </div>
-        <div class="row">
-          <button className="btn btn-secondary" name="bio" onClick={ this.props.renderClick }> Change your bio </button>
+        <div className="row justify-content-around buffer">
+          <p className="col-4"><h5>Email:</h5> {this.props.userData.email}</p>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="email" onClick={ this.props.renderClick }> Edit your email </button></a>
         </div>
-        <div class="row">
-          <button className="btn btn-secondary" name="email" onClick={ this.props.renderClick }> Change your email </button>
+        <div className="row justify-content-around buffer">
+          <p className="col-4"><h5>Username:</h5> {this.props.userData.username}</p>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="username" onClick={ this.props.renderClick }> Edit your username </button> </a> 
         </div>
-        <div class="row">
-          <button className="btn btn-secondary" name="password" onClick={ this.props.renderClick }> Change your password </button>
+        <div className="row justify-content-around buffer">
+          <p className="col-4"><h5>Bio:</h5> {this.props.userData.bio}</p>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="bio" onClick={ this.props.renderClick }> Edit your bio </button></a>
         </div>
-        <div class="row">
-          <button className="btn btn-secondary" name="profilePicture" onClick={ this.props.renderClick }> Change your profile picture </button>
+        <div className="row justify-content-around buffer">
+          <p className="col-4"><h5>Password:</h5>...</p>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="password" onClick={ this.props.renderClick }> Edit your password </button></a>
         </div>
       </div>
     );

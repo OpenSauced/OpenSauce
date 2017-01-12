@@ -150,10 +150,13 @@ xPorts.searchRecipes = function(term, offset) {
 }
 
 //GET RECIPES PER USER
-xPorts.findRecipesByUserName = function(username) {
+xPorts.findRecipesByUserName = function(username, offset) {
+  if(!offset) {
+    let offset = 0;
+  }
   return userModel
     .findOne({username: username})
-    .populate('my_recipes')
+    .populate({path: 'my_recipes', options: {skip: parseInt(offset), sort: {_id: -1}, limit: 6}})
     .populate({
       path: 'saved_recipes',
       populate: {

@@ -43,7 +43,7 @@ router.get('/:userName/profile', function(req, res) {
 
 //route to save a recipe to a user's saved recipes object
 router.post('/save', function(req, res) {
-  console.log("in save")
+  // console.log("in save")
   var recipeId = req.body.recipeId
   var userId = req.body.userId
   db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).lean()
@@ -103,7 +103,8 @@ router.post('/updateInfo/profilePicture', authRoutes.ensureAuthenticated, upload
   }
 })
 
-router.post('/updateInfo/:type', function(req, res) {
+router.post('/updateInfo/:type', multer().any(), function(req, res) {
+  console.log(req.body)
   // (user, public_url, secure_url, public_id, signature)
   var user = req.cookies.user
   var type = req.params.type

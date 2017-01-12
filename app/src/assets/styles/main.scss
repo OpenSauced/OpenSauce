@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-size: 16px; //most other sizes are EM so this should scale.
     background-color: #FEFAF7;
@@ -53,6 +57,7 @@ h6 {
     -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
     box-shadow: 0 1px 8px rgba(0,0,0,.175);
     padding: 5px 0;
+    font-size: 12px;
 }
 
 #navButtonContainer {}
@@ -461,12 +466,12 @@ h6 {
     color: #3C7250;
 }
 
-.view-recipe-container {
-    background-color: rgba(255,255,255,.175);
-    padding: 2em 1em;
-    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
-    box-shadow: 0 1px 8px rgba(0,0,0,.175);
-    margin-bottom: 3em;
+.view-recipe-container{
+  background-color: rgba(255,255,255,.175);
+  padding: 2em 1em;
+  -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
+  box-shadow: 0 1px 8px rgba(0,0,0,.175);
+  margin-bottom: 2em;
 }
 //THESE TWO NEED BREAKPOINT STYLING!!!
 
@@ -535,4 +540,16 @@ h6 {
         overflow: hidden;
         transition: 0.4s;
     }
+}
+
+.buffer {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+
+.another-buffer {
+    margin-bottom: 20px;
 }
