@@ -25,6 +25,7 @@ class AddRecipeManual extends Component {
       verification: ''
     }
 
+
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
@@ -105,6 +106,7 @@ class AddRecipeManual extends Component {
   }
 
   onFormSubmit(e) {
+    console.log(this.props)
     e.preventDefault();
     if (this.state.verification !== '') {
       let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
@@ -112,7 +114,6 @@ class AddRecipeManual extends Component {
       let recipe = new FormData();
 
       // add form data for ajax response
-
       recipe.append('title', this.state.title);
       recipe.append('description', this.state.description);
       recipe.append('ingredients', JSON.stringify(newIngredients));
@@ -137,18 +138,17 @@ class AddRecipeManual extends Component {
         error: function(xhr, status, err){
           let responseMessage = xhr.responseText
           // console.error("did not post to DB manual ", status, xhr.responseText);
-          props.openModal(xhr.responseText)
+          this.props.openModal(xhr.responseText)
         }
       })
     } else {
-      window.alert('please enter recaptcha reaponse')
+      this.props.openModal('There is a problem with your recaptcha response')
     }
   }
 
   onIngredientChange(e) {
     var index = e.target.id.split('-')[1]
     var newIngredients = this.state.ingredients.slice()
-
     newIngredients[index] = e.target.value
     this.setState({ingredients: newIngredients})
   }
@@ -178,18 +178,14 @@ class AddRecipeManual extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row view-recipe-container">
+      <h1 className="col-12 text-center">Add a Recipe</h1>
         <form className="col-12" id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
-          <div className="row">
-            <Dropzone multiple={false} onDrop={this.onDrop}>
-              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
-            </Dropzone>
-          </div>
-          <div className="row">
-            <label htmlFor="recipe-title">
+          <div className="form-group">
+            <label htmlFor="recipe-title" className="w-100">
               <h2>Recipe Title:</h2>
               <input
-                className="col-12"
+                className="col-10 form-control"
                 placeholder="Please enter Recipe Name"
                 id="recipe-title"
                 value={this.state.title}
@@ -198,35 +194,21 @@ class AddRecipeManual extends Component {
               />
             </label>
           </div>
-          <div className="row">
-            <label htmlFor="recipe-description">
+          <div className="form-group">
+            <label htmlFor="recipe-description" className="w-100">
               <h2>Recipe Description:</h2>
               <textarea
-                className="col-12"
+                className="col-10 form-control"
                 placeholder="Please enter a description"
-                className=""
                 id="recipe-description"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
             </label>
           </div>
-          <div className="row">
-            <label htmlFor="recipe-directions">
-              <h2>Directions </h2>
-              <textarea
-                placeholder="Please enter directions"
-                className=""
-                id="recipe-directions"
-                value={this.state.directions}
-                onChange={this.onInputChange.bind(this)}
-                required
-              ></textarea>
-            </label>
-          </div>
-          <div className="row">
-            <label>
-              <h2>Ingredients</h2>
+          <div className="form-group">
+            <label className="w-100">
+              <h2>Ingredients:</h2>
               {
                 this.state.ingredients.map((ingredient, index) => {
                   return (
@@ -244,7 +226,27 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
-          <div className="row gtfo-recapture">
+          <div className="form-group">
+            <label htmlFor="recipe-directions" className="w-100">
+              <h2>Directions:</h2>
+              <textarea
+                className="col-10 form-control"              
+                placeholder="Please enter directions"
+                id="recipe-directions"
+                value={this.state.directions}
+                onChange={this.onInputChange.bind(this)}
+                required
+              ></textarea>
+            </label>
+          </div>
+          <div className="form-group">
+          <h2>Recipe Photo:</h2>
+
+            <Dropzone multiple={false} onDrop={this.onDrop}>
+              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
+            </Dropzone>
+          </div>
+          <div className="form-group gtfo-recapture">
           <Recaptcha
             sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
             render="explicit"
@@ -253,7 +255,7 @@ class AddRecipeManual extends Component {
           />
           </div>
           <span className="">
-            <button type="submit" className="btn btn-secondary">Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
           </span>
         </form>
       </div>

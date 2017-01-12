@@ -146,7 +146,7 @@ router.post('/:username/saveforkedrecipe', function(req, res) {
 //send recipe object back to client
 //if invalid website or no recipe is scraped
 //it sends back and error
-router.post('/scraperecipe', function(req, res) {
+router.post('/scraperecipe', authRoutes.authRecaptcha, function(req, res) {
     var url = req.body.url
     var userId = req.body.userId
     recipeResponse = null

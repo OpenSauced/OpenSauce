@@ -46,9 +46,8 @@ const ViewRecipe = ({recipe, user}) => {
                       <div className="col-6">
                         <h5> Want to put your own spin on this recipe? Try forking it! </h5>
                       </div>
-                      <ForkButton recipeId={recipe._id}/>
                     </div>
-                  )
+                    )
             }
           </div>
         </div>

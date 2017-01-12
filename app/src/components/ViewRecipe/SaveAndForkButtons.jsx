@@ -28,7 +28,7 @@ const SaveAndForkButtons = ({recipeId, userId, saveRecipe, forkRecipe, removeRec
           <br></br>
           <p className="">Fork this Recipe</p>
         </i>
-      </Link> 
+      </Link>
     </div>
   );
 };
