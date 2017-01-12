@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container-fluid {
-    padding-bottom: 45px;
+    padding-bottom: 50px;
     //shmerlyn wrote this
     //its super bad code
     //she should feel bad
@@ -39,11 +39,14 @@ h1, h2, h3, h4, h5, h6 {
     position: fixed;
     bottom: 0;
     display: block;
-    background-color: ghostwhite;
+    background-color: #FEFAF7;
     height: 28px;
     width: 100%;
     text-align: center;
     left: 15px;
+    -webkit-box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    box-shadow: 0 1px 8px rgba(0,0,0,.175);
+    padding: 5px 0;
 }
 #navButtonContainer {
 
@@ -390,7 +393,10 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #C14161;
     white-space: normal;
     color: ghostwhite!important;
+}
 
+.btn-primary:focus {
+    outline: 0;
 }
 
 .btn-primary:hover{
