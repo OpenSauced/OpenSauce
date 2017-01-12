@@ -20,7 +20,6 @@ class ProfileSettingsChangeProfileInfo extends Component {
           currentComponent: '',
           componentObj: {}
         }
-        console.log('state: ',this.state)
     }
 
     componentWillMount () {
@@ -28,7 +27,7 @@ class ProfileSettingsChangeProfileInfo extends Component {
         this.setState({ 
             currentComponent: 'profile', 
             componentObj: {
-                profile:  <CurrentProfile data={ data }/>,
+                profile:  '',
                 name:     <ChangeName     data={ data }/>,
                 username: <ChangeUsername data={ data.username }/>,
                 bio:      <ChangeBio      data={ data.bio }/>,
@@ -51,8 +50,10 @@ class ProfileSettingsChangeProfileInfo extends Component {
 
     render() {
         return (
-            <div className="col-9">
+            <div className="row another-buffer">
+            <div className="col-9  mx-auto">
                 { this.state.componentObj[ this.state.currentComponent ] }
+            </div>
             </div>
         );
     }

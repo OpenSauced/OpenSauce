@@ -2,17 +2,20 @@ import React from 'react';
 
 import { connect } from 'react-redux'
 
+import ProfileSettingsUserImage from './ProfileSettingsUserImage';
+
+
 // component recieves all userData as props
 const CurrentProfile = ({data}) => { 
+  console.log("blaaaaah ", {data})
     return (
-      <div class="row">
-        <span className="col-12">
-          <img src={data.user_image.public_url || data.user_image.placeholder} width="150" height="150"/>
-        </span>
+      <div class="row  mx-auto">
         <div className="col-12">
-          <p>Name: {data.first_name + ' ' + data.last_name}</p>
-          <p>Email: {data.email}</p>
-          <p>Bio: {data.bio}</p>
+          <ProfileSettingsUserImage image={data.user_image}/>
+          <p><h5>Name:</h5> {data.first_name + ' ' + data.last_name}</p>
+          <p><h5>Email:</h5> {data.email}</p>
+          <p><h5>Username:</h5> {data.username}</p>
+          <p><h5>Bio:</h5> {data.bio}</p>
         </div>
       </div>
     );
