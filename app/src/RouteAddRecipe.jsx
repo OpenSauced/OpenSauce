@@ -38,10 +38,11 @@ class RouteAddRecipe extends Component {
         <AppHeader title={'Catchy Phrase'}>
           <AddRecipeTypeOfInsert renderClick={this.handleSelectHowToAddRecipe} renderInputs={this.state.renderInputs}/>
         </AppHeader>
-        <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
+          <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>
       </div>
     );
   }
 };
 
 export default RouteAddRecipe;
+
