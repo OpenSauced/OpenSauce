@@ -92,12 +92,8 @@ class AddRecipeManual extends Component {
             description: recipe.description,
             ingredients: recipe.ingredients,
             directions: recipe.directions,
-<<<<<<< 56b4aff6b9a411267b04c4b873dc5d13f1703380
-            forked_parent: recipe._id
-=======
-            notes: 'placeholder - ADD recipe notes to DB!',
+            notes: recipe.notes,
             forkedParent: recipe._id
->>>>>>> added notes feature to edit recipe
            });
       }.bind(this),
       error: function(xhr, status, err) {
