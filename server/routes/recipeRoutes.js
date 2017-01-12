@@ -57,6 +57,7 @@ router.get('/:username/userrecipes', function(req, res) {
 //Note: authRoutes.authRecaptcha will only work is multer is called before it
       // there is multipart form data that is being sent in req.body
 router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), authRoutes.authRecaptcha, function(req, res) {
+    console.log('ADD RECIPE', req.body.forked_parent)
     var userId = req.params._id
     var response = null
     var parent = req.body.forked_parent

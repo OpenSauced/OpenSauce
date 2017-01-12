@@ -93,7 +93,7 @@ class AddRecipeManual extends Component {
             ingredients: recipe.ingredients,
             directions: recipe.directions,
             notes: recipe.notes,
-            forkedParent: recipe._id
+            forked_parent: recipe._id
            });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -204,6 +204,7 @@ class AddRecipeManual extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="row view-recipe-container">
       <h1 className="col-12 text-center">Add a Recipe</h1>
