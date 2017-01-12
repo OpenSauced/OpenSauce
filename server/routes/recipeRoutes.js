@@ -54,7 +54,7 @@ router.get('/:username/userrecipes', function(req, res) {
 })
 
 //saves a recipe to the DB
-//Note: authROutes.authRecaptcha will only work is multer is called before it
+//Note: authRoutes.authRecaptcha will only work is multer is called before it
       // there is multipart form data that is being sent in req.body
 router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), authRoutes.authRecaptcha, function(req, res) {
     var userId = req.params._id

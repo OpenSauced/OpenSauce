@@ -19,8 +19,9 @@ class AddRecipeManual extends Component {
     this.state = {
       title: '',
       description: '',
-      directions: '',
       ingredients: [''],
+      directions: '',
+      notes: '',
       images: [],
       verification: ''
     }
@@ -68,8 +69,9 @@ class AddRecipeManual extends Component {
       this.setState({
         title: '',
         description: '',
-        directions: '',
         ingredients: [''],
+        directions: '',
+        notes: '',
         images: [],
         verification: '',
         forked_parent: null
@@ -78,7 +80,6 @@ class AddRecipeManual extends Component {
     } else if ( nextProps.recipeId ) {
       this.getRecipeFromDB(nextProps.recipeId)
     }
-
   }
 
   getRecipeFromDB(recipeId) {
@@ -91,7 +92,8 @@ class AddRecipeManual extends Component {
             description: recipe.description,
             ingredients: recipe.ingredients,
             directions: recipe.directions,
-            forked_parent: recipe._id
+            notes: recipe.notes,
+            forkedParent: recipe._id
            });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -111,6 +113,9 @@ class AddRecipeManual extends Component {
       break;
     case 'recipe-directions':
       this.setState({directions: event.target.value})
+      break;
+     case 'recipe-notes':
+      this.setState({notes: event.target.value})
       break;
     }
     return null
@@ -142,7 +147,7 @@ class AddRecipeManual extends Component {
       if(this.state.forked_parent){
         recipe.append('forked_parent', this.state.forked_parent);
       }
-
+      recipe.append('notes', this.state.notes)
       //response from recaptcha and images
       recipe.append('g-recaptcha-response', this.state.verification)
       recipe.append('images', this.state.images[0]);
@@ -260,6 +265,19 @@ class AddRecipeManual extends Component {
                 value={this.state.directions}
                 onChange={this.onInputChange.bind(this)}
                 required
+              ></textarea>
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="recipe-notes" className="w-100">
+              <h2>Recipe Notes:</h2>
+              <textarea
+                className="col-10 form-control"              
+                placeholder="Please enter your notes about this recipe"
+                id="recipe-notes"
+                value={this.state.notes}
+                onChange={this.onInputChange.bind(this)}
+                // {/* removed 'required' from this tag*/}
               ></textarea>
             </label>
           </div>

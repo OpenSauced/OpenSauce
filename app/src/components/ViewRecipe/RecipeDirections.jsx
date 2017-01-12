@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 const RecipeDirections = ({recipeDirections}) => {
 	return (
-  <div>
-    {recipeDirections}
-  </div>
+    <div className="col-12 recipe-directions">
+      {recipeDirections}
+    </div>
   )
 };
 

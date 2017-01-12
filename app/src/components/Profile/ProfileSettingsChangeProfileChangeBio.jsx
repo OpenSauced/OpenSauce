@@ -14,7 +14,8 @@ class ChangeBio extends Component {
                     action="/api/users/updateInfo/bio" 
                     method="post" 
                     encType="multipart/form-data" 
-                    target="_top">
+                    target="_top"
+                >
                     <label className="col-12 col-form-label" htmlFor="newBio">Bio:</label>
                     <div className="col-5"><textarea className="form-control" name="newBio" rows="4" cols="50"></textarea></div>
                     <div className="col-12">
