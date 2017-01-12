@@ -19,7 +19,6 @@ class HeaderNav extends Component {
     }
     render() {
       return (
-        <div className="row">
           <nav className="navbar fixed-top navbar-toggleable-md">
             <div className="col-2">
               <HeaderNavLogo/>
@@ -31,7 +30,6 @@ class HeaderNav extends Component {
               <HeaderNavButtons/>
             </div>
           </nav>
-        </div>
       );
     }
 }

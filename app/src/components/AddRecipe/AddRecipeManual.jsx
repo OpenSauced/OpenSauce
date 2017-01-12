@@ -60,11 +60,11 @@ class AddRecipeManual extends Component {
     console.log("AddRecipeManual mounted, here are it's props: ", this.props)
   }
 
-  // this is set up to detect a change in recipeId props for 
+  // this is set up to detect a change in recipeId props for
   // change from /addrecipe to /addrecipe?recipe=########### and load that on screen
   componentWillReceiveProps( nextProps ) {
     // only changes state based on recipeId being present
-      // recipeId === undefined? set state to blanks 
+      // recipeId === undefined? set state to blanks
     if ( !(nextProps.recipeId) ){
       this.setState({
         title: '',
@@ -76,7 +76,7 @@ class AddRecipeManual extends Component {
         verification: '',
         forked_parent: null
       });
-      // recipeId === a recipe id? get the info from the db 
+      // recipeId === a recipe id? get the info from the db
     } else if ( nextProps.recipeId ) {
       this.getRecipeFromDB(nextProps.recipeId)
     }
@@ -259,7 +259,7 @@ class AddRecipeManual extends Component {
             <label htmlFor="recipe-directions" className="w-100">
               <h2>Directions:</h2>
               <textarea
-                className="col-10 form-control"              
+                className="col-10 form-control"
                 placeholder="Please enter directions"
                 id="recipe-directions"
                 value={this.state.directions}
@@ -283,9 +283,8 @@ class AddRecipeManual extends Component {
           </div>
           <div className="form-group">
           <h2>Recipe Photo:</h2>
-
             <Dropzone multiple={false} onDrop={this.onDrop}>
-              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
+                {this.state.images.length > 0 ? <div className="imageUploadBlock" style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}></div> : `Click or drag an image inside of the box to upload.`}
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
