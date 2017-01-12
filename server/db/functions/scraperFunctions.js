@@ -114,9 +114,9 @@ xPorts.parseFoodNetworkTitle = (titleString) => {
   let newTitleArray = titleString.split(' : ').slice(0,-1)
   // remove 'Recipe from title'
   let titleMinusRecipe = newTitleArray[0].slice(0,newTitleArray[0].indexOf(' Recipe'))
+  
   //this is the final recipe title
   let newTitle = ''
-  
   // ['title','author','Food NetWork']
   newTitleArray.length > 1
     // ----------------  'title'  + ' by ' + 'author' 
@@ -126,8 +126,6 @@ xPorts.parseFoodNetworkTitle = (titleString) => {
   
   return newTitle
 }
-
-
 
 /////////////////////////////////
 ///  AllRecipes.com Scraper  ////

@@ -54,10 +54,10 @@ class SignUp extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    var user = new FormData();
+    let user = new FormData();
     let signUpData = document.getElementById('signUpData')
     user = new FormData(signUpData)
-    var that = this;
+    let that = this;
     
     $.ajax({
       method: 'POST',

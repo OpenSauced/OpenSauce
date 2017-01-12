@@ -8,26 +8,25 @@ class AddRecipeFromLink extends Component {
     super (props)
 
     this.state = {
-      recipeUrl: '',
+      url: '',
       verificationCode: '',
       userId: ''
     }
- 
+
+    // this.recaptchaInstance = null
   }
 
-  componentWillMount () {
-    this.setState({
-      userId: this.props.userData._id
-    })
-    console.log('state ', this.state)
+  componentWillMount() {
+    // console.log('AddREcipeFormLink > componentWillReceiveProps > props ', this.props.userData._id)
+    let userId = this.props.userData._id
+    this.setState({ userId: userId })
   }
 
   onInputChange (event) {
-
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
       case 'add_recipe_link':
-        this.setState({ recipeUrl: event.target.value })
+        this.setState({ url: event.target.value })
         // console.log(event.target.value)
         break;
     }
@@ -41,19 +40,22 @@ class AddRecipeFromLink extends Component {
     })
   }
 
+  // resetRecaptcha () {
+  //   console.log('reset recpatcha this.recaptchaInstance ',this.recaptchaInstance)
+  //   this.recaptchaInstance.reset();
+  // };
+
   loadedRecaptcha () {
     console.log('Recaptcha loaded!')
   }
 
-  formSubmit (e) {
+  onFormSubmit (e) {
     e.preventDefault();
-    console.log(this.state)
+    // console.log(' ADDRECIPEFROM LINK STATE',this.state)
     /// check for valid URL - only checks for structure of the URL
-    if ( isURL( this.state.recipeUrl ) ) {
       //check for recaptcha token submission
+    console.log(' AddREcipeFormLink > onFormSubmit > this', this)
       if ( this.state.verificationCode !== '' ) {
-
-        var that = this;
         $.ajax({
           url: '/api/recipes/scraperecipe',
           type: 'POST',
@@ -73,23 +75,21 @@ class AddRecipeFromLink extends Component {
           },
           error: function(xhr, status, err) {
             var responseMessage = xhr.responseText
-            that.props.openModal(xhr.responseText)
+            this.props.openModal(xhr.responseText)
             console.error("did not post to DB from link ", status, xhr.responseText);
           }
         })
       } else {
-        that.props.openModal('There is a problem with your recaptcha response')
+        this.props.openModal('There is a problem with your recaptcha response')
       }
-    } else {
-      that.props.openModal('Please enter a valid recipe url (0.o)')
-    }
+  
   }
 
   render() {
     return (
       <div className="row view-recipe-container">
       <div className="col-6">
-        <form id='commentPostForm' onSubmit={this.formSubmit.bind(this)}>
+        <form id='commentPostForm' onSubmit={this.onFormSubmit.bind(this)}>
         <div>
           <label className="w-100" htmlFor="add_recipe_link">
             <input 
@@ -103,6 +103,7 @@ class AddRecipeFromLink extends Component {
           </label>
         </div>
         <Recaptcha
+          // ref={e => this.recaptchaInstance = e}
           sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
           render="explicit"
           verifyCallback={this.verifyCallback.bind(this)}
