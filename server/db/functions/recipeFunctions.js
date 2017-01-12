@@ -150,10 +150,14 @@ xPorts.searchRecipes = function(term, offset) {
 }
 
 //GET RECIPES PER USER
-xPorts.findRecipesByUserName = function(username) {
+xPorts.findRecipesByUserName = function(username, offset) {
+  console.log('Find recipe:', offset)
+  if(!offset) {
+    let offset = 0;
+  }
   return userModel
     .findOne({username: username})
-    .populate('my_recipes')
+    .populate({path: 'my_recipes', options: {skip: parseInt(offset), sort: {_id: -1}, limit: 6}})
     .populate({
       path: 'saved_recipes',
       populate: {
@@ -161,7 +165,6 @@ xPorts.findRecipesByUserName = function(username) {
         select: 'username'
         }
     })
-    .sort({_id: -1})
 }
 
 //takes in a string "dec" or "inc" to determine wether you should decrement or increment the like count!

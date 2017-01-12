@@ -90,12 +90,24 @@ export const fetchRecipes = (search, offset) => {
   })
 }
 
-export const getUserRecipes = (filter) => {
-  
+// grab user recipies from the database for our MyCookbook page
+export const getUserRecipes = (filter, offset) => {
+  let previousFeed = getStore().getState().recipes;
+  console.log('Previous Feed', previousFeed)
+  // get the username from the redux state
   var username = getStore().getState().userData.userData.username
-  var request = axios.get(`/api/recipes/${username}/userrecipes`)
-  var requestdata = request
+  // set the url that we are going to make the get request to
+  let url = `/api/recipes/${username}/userrecipes`
+  // check to see if offset is defined and then append it as a query term in our url
+  if (offset) {
+    url = url + '?offset=' + offset;
+  }
+  let request = axios.get(url)
+  let requestdata = request
     .then((response) => {
+      if (response.length === 0) {
+        return previousFeed
+      }
       response.data.my_recipes.forEach(recipe => {
         // checks to see if the title has too many characters and then removes extra characters and appends
         // a ... to the end of the string
@@ -133,7 +145,9 @@ export const getUserRecipes = (filter) => {
       if (filter && filter.isForkedRecipesChecked === false) {
         recipes = _.filter(recipes, (recipe) => recipe.forked_parent === null)
       }
-      
+      if (previousFeed) {
+        recipes = previousFeed.concat(recipes);
+      }
       return recipes
     })
 
