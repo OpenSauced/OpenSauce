@@ -32,12 +32,12 @@ router.verifyPassword = function(user, plainPass) {
 
 // MIDDLEWARE that checks authentication of google recaptcha
 router.authRecaptcha = function (req, res, next) {
-    // construct url to send and verify
+    // construct url to send and verify recaptcha
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
         + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress;
-    // console.log('verify captcha url',verificationURL);
+        
     axios.post( verificationURL )
     .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
         if (resObj.data.success === true){

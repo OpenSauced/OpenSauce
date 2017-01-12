@@ -114,7 +114,6 @@ class AddRecipeManual extends Component {
       let recipe = new FormData();
 
       // add form data for ajax response
-
       recipe.append('title', this.state.title);
       recipe.append('description', this.state.description);
       recipe.append('ingredients', JSON.stringify(newIngredients));
@@ -138,19 +137,18 @@ class AddRecipeManual extends Component {
         },
         error: function(xhr, status, err){
           let responseMessage = xhr.responseText
-          props.openModal(xhr.responseText)
+          // console.error("did not post to DB manual ", status, xhr.responseText);
+          this.props.openModal(xhr.responseText)
         }
       })
-    } 
-    else {
-      this.props.openModal('You forgot to do the captcha. You have to do it to add your recipe.')
+    } else {
+      this.props.openModal('There is a problem with your recaptcha response')
     }
   }
 
   onIngredientChange(e) {
     var index = e.target.id.split('-')[1]
     var newIngredients = this.state.ingredients.slice()
-
     newIngredients[index] = e.target.value
     this.setState({ingredients: newIngredients})
   }
