@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router';
-import ForkButton from './ForkButton';
+import ForkButton from './ForkButtonSolo';
 
 const SaveAndForkButtons = ({recipeId, userId, saveRecipe, forkRecipe, removeRecipe, savedRecipes}) => {
-  let star = recipeId in savedRecipes 
+  let star = recipeId in savedRecipes
     ? <div className ="col-6 icon" onClick={() => removeRecipe(recipeId, userId)}>
         <i className="fa fa-star fa-3x">
           <br></br>
@@ -15,15 +15,20 @@ const SaveAndForkButtons = ({recipeId, userId, saveRecipe, forkRecipe, removeRec
           <br></br>
           <p>Save this Recipe</p>
         </i>
-      </div>  
-    
+      </div>
+
   return (
-    <div className="row justify-content-center ml-auto mr-auto"> 
-      {star} 
+    <div className="row justify-content-center ml-auto mr-auto">
+      {star}
       {/* to change fork icon color, insert the following where 'false' is
-        * {iconColor: 'YOUR_COLOR'} ----THEN -> add a css class titled .icon + your_color 
+        * {iconColor: 'YOUR_COLOR'} ----THEN -> add a css class titled .icon + your_color
       */}
-      <ForkButton recipeId={recipeId} cssStyles={null}/>
+      <Link className="col-6 icon" to={`/addrecipe?recipe=${recipeId}`}>
+        <i className="fa fa-cutlery fa-3x">
+          <br></br>
+          <p className="">Fork this Recipe</p>
+        </i>
+      </Link>
     </div>
   );
 };

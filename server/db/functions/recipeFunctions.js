@@ -13,7 +13,7 @@ xPorts.findRecentRecipes = function(offset) {
   if (!offset) {
     let offset = 0;
   }
-  //find the last id of the most recent recipe and 
+  //find the last id of the most recent recipe and
   return recipeModel.find({
       title: { $ne: null },
       description: { $ne: null },
@@ -30,7 +30,7 @@ xPorts.findRecentRecipes = function(offset) {
 
 xPorts.editRecipe = function(recipeId, recipe){
    // console.log('editrecipe function --- recipe', recipe )
-    return recipeModel.findOneAndUpdate({ _id: recipeId }, 
+    return recipeModel.findOneAndUpdate({ _id: recipeId },
       {
         $set: {
           'title': recipe.title,
@@ -39,8 +39,8 @@ xPorts.editRecipe = function(recipeId, recipe){
           'directions': recipe.directions
         }
       },
-      { 
-        new: true 
+      {
+        new: true
       }
     )
 }
@@ -56,7 +56,7 @@ xPorts.addNewRecipe = (userId, recipe) => {
             throw new Error('Please enter a title for the recipe')
         }
         if(recipe.directions === null || recipe.directions === undefined || recipe.directions === ''){
-            throw new Error('Please enter a directions for the recipe')        
+            throw new Error('Please enter a directions for the recipe')
         }
         if(recipe.ingredients === null || recipe.ingredients === undefined){
             throw new Error('Please enter at least one ingredient for the recipe')
@@ -144,7 +144,7 @@ xPorts.searchRecipes = function(term, offset) {
     .skip(parseInt(offset))
     .limit(6)
     .populate('creator', 'username')
-    .sort( 
+    .sort(
       { score: { $meta: "textScore"} }
     )
 }
@@ -156,11 +156,35 @@ xPorts.findRecipesByUserName = function(username) {
     .populate('my_recipes')
     .populate({
       path: 'saved_recipes',
-      populate: { 
+      populate: {
         path: 'creator',
         select: 'username'
         }
     })
+}
+
+//takes in a string "dec" or "inc" to determine wether you should decrement or increment the like count!
+//READ THE COMMENT ^
+xPorts.decOrIncLikes = function(recipeId, decOrInc) {
+  return xPorts.findRecipeById(recipeId).then(function(recipeDB) {
+    if (recipeDB.likes === undefined || recipeDB.likes === null) {
+      recipeDB.likes = 0
+      recipeDB.save()
+      return recipeDB
+    }
+    if (decOrInc === 'dec') {
+      //check for greater than 0, redundancy check. DB spam maybe? dont want negative values.
+      if (recipeDB.likes > 0) {
+        recipeDB.likes = (recipeDB.likes - 1)
+        recipeDB.save()
+      }
+    } else if (decOrInc === 'inc') {
+      recipeDB.likes = (recipeDB.likes + 1)
+      recipeDB.save()
+    } else {
+      throw new Error("you must specify a decrement or increment, use string values 'dec' or 'inc'!!!")
+    }
+  })
 }
 
 xPorts.findRecipesByUserId = function(userId) {

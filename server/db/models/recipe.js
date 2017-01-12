@@ -29,10 +29,11 @@ var RecipeSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'recipes'
 	}],
-	timestamps: { 
-		createdAt: Date, 
+	timestamps: {
+		createdAt: Date,
 		updatedAt: Date
 	},
+	likes : {type: Number, default: 0},
 	url: String,
 	credit: String
 })
