@@ -184,6 +184,8 @@ h6 {
 }
 
 .navbar-toggler {
+    top: 0;
+    right: 0;
     margin: 15px;
     padding: 8px 15px !important;
     text-align: center;
@@ -239,11 +241,6 @@ h6 {
 .navbar,
 .navbar a {
     color: ghostwhite;
-}
-
-.navbar-toggle {
-    padding: 10px;
-    margin: 25px 15px 25px 0;
 }
 
 .recipePageContainer {
