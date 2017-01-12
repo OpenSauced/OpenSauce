@@ -10,11 +10,10 @@ const ForkButton = ({ recipeId, cssStyles }) => {
   // add to string in classname - will correspond with a css class
 
   return (
-    <Link className="col-6 icon" to={`/addrecipe?recipe=${recipeId}`}>
+    <Link className="col-6 fork" to={`/addrecipe?recipe=${recipeId}`}>
       <i className="fa fa-cutlery fa-3x">
-        <br></br>
-        <p className="">Fork this Recipe</p>
       </i>
+      <p className="">Fork</p>
     </Link>
   )
 }

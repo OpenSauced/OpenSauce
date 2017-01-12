@@ -415,10 +415,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans', sans-serif;
 }
 
-.icongreen {
-  color: green;
-}
-
 .icon:hover{
   color: #D78651;
   text-decoration: none;
@@ -455,4 +451,12 @@ h1, h2, h3, h4, h5, h6 {
     display: inline;
     padding: 5px;
     vertical-align: middle;
+}
+
+.fork i, .fork p {
+    color: #DA5F51;
+}
+
+.fork:hover p, .fork:hover i{
+    color:#3C7250
 }
