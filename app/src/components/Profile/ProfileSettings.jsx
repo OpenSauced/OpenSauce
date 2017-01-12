@@ -19,27 +19,27 @@ class ProfileSettings extends Component {
         */}
         <div className="row justify-content-around buffer">
           <ProfileSettingsUserImage image={ this.props.userData.user_image}/>
-          <button className="btn btn-secondary col-2" name="profilePicture" onClick={ this.props.renderClick }> Edit your profile picture </button>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="profilePicture" onClick={ this.props.renderClick }> Edit your profile picture </button></a>
         </div>
         <div className="row justify-content-around buffer">
           <p className="col-4"><h5>Name:</h5> {this.props.userData.first_name + ' ' + this.props.userData.last_name}</p>        
-          <button className="btn btn-secondary col-2" name="name" onClick={ this.props.renderClick }> Edit your name </button>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="name" onClick={ this.props.renderClick }> Edit your name </button></a>
         </div>
         <div className="row justify-content-around buffer">
           <p className="col-4"><h5>Email:</h5> {this.props.userData.email}</p>
-          <button className="btn btn-secondary col-2" name="email" onClick={ this.props.renderClick }> Edit your email </button>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="email" onClick={ this.props.renderClick }> Edit your email </button></a>
         </div>
         <div className="row justify-content-around buffer">
           <p className="col-4"><h5>Username:</h5> {this.props.userData.username}</p>
-          <button className="btn btn-secondary col-2" name="username" onClick={ this.props.renderClick }> Edit your username </button>  
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="username" onClick={ this.props.renderClick }> Edit your username </button> </a> 
         </div>
         <div className="row justify-content-around buffer">
           <p className="col-4"><h5>Bio:</h5> {this.props.userData.bio}</p>
-          <button className="btn btn-secondary col-2" name="bio" onClick={ this.props.renderClick }> Edit your bio </button>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="bio" onClick={ this.props.renderClick }> Edit your bio </button></a>
         </div>
         <div className="row justify-content-around buffer">
           <p className="col-4"><h5>Password:</h5>...</p>
-          <button className="btn btn-secondary col-2" name="password" onClick={ this.props.renderClick }> Edit your password </button>
+          <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="password" onClick={ this.props.renderClick }> Edit your password </button></a>
         </div>
       </div>
     );
