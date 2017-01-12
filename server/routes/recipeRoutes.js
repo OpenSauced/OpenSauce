@@ -37,8 +37,14 @@ router.get('/', function(req, res) {
 })
 
 router.get('/:username/userrecipes', function(req, res) {
-    var username = req.params.username
-    db.recipeFunctions.findRecipesByUserName(username)
+    let offset = 0;
+    let username = req.params.username
+    // check to see if we are passed a query variable in the request
+    if (req.query.offset) {
+        // set offset to the query string
+        offset = req.query.offset;
+    }
+    db.recipeFunctions.findRecipesByUserName(username, offset)
         .then((recipes) => {
             res.send(recipes);
         })

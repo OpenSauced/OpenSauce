@@ -23,6 +23,14 @@ export const updateSearchTerm = (term) => {
   }
 }
 
+export const DB_OFFSET = 'DB_OFFSET'
+export const setDbOffset = (offset) => {
+  return {
+    type: DB_OFFSET,
+    payload: offset
+  }
+}
+
 // check to see if we have a search in our redux state
 // if the state has different search terms then set state to null and search again
 // if the state has the same search terms append the new results to the state
@@ -90,13 +98,34 @@ export const fetchRecipes = (search, offset) => {
   })
 }
 
-export const getUserRecipes = (filter) => {
-  
+// grab user recipies from the database for our MyCookbook page
+export const getUserRecipes = (filter, offset) => {
+  let previousFeed = getStore().getState().recipes;
+  //console.log('Previous Feed', previousFeed)
+  // get the username from the redux state
   var username = getStore().getState().userData.userData.username
-  var request = axios.get(`/api/recipes/${username}/userrecipes`)
-  var requestdata = request
+  // set the url that we are going to make the get request to
+  let url = `/api/recipes/${username}/userrecipes`
+  // check to see if offset is defined and then append it as a query term in our url
+  if (offset) {
+    url = url + '?offset=' + offset;
+  }
+  let request = axios.get(url)
+  let requestdata = request
     .then((response) => {
+      if (response.length === 0) {
+        return _.union(previousFeed)
+      }
       response.data.my_recipes.forEach(recipe => {
+        // checks to see if the title has too many characters and then removes extra characters and appends
+        // a ... to the end of the string
+        if (recipe.title.length > 55) {
+          recipe.title = recipe.title.slice(0, 55).concat('...')
+        }
+        // does the same thing to the description and replaces it
+        if (recipe.description.length > 175) {
+          recipe.description = recipe.description.slice(0, 175).concat('...')
+        }
         recipe.creator = {
           _id:recipe.creator,
           username: username
@@ -108,7 +137,8 @@ export const getUserRecipes = (filter) => {
       })
 
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
-      console.log(recipes)
+      //console.log(recipes)
+      recipes = _.union(recipes)
 
       //Filter Saved Recipes
       if (filter && filter.isSavedRecipesChecked === false) {
@@ -120,13 +150,14 @@ export const getUserRecipes = (filter) => {
         recipes = _.reject(recipes, (recipe) => recipe.type === "my_recipe")
       }
 
-      //Filter My Recipes
+      //Filter Forked Recipes
       if (filter && filter.isForkedRecipesChecked === false) {
         recipes = _.filter(recipes, (recipe) => recipe.forked_parent === null)
       }
-      
+      if (previousFeed) {
+        recipes = previousFeed.concat(recipes);
+      }
       return recipes
-
     })
 
   return {

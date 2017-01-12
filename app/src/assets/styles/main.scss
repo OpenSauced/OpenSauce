@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-size: 16px; //most other sizes are EM so this should scale.
     background-color: #FEFAF7;
