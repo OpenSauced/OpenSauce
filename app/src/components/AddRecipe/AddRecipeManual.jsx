@@ -180,18 +180,14 @@ class AddRecipeManual extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row view-recipe-container">
+      <h1 className="col-12 text-center">Add a Recipe</h1>
         <form className="col-12" id="addRecipeManualForm" onSubmit={this.onFormSubmit.bind(this)} encType="multipart/form-data">
-          <div className="row">
-            <Dropzone multiple={false} onDrop={this.onDrop}>
-              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
-            </Dropzone>
-          </div>
-          <div className="row">
-            <label htmlFor="recipe-title">
+          <div className="form-group">
+            <label htmlFor="recipe-title" className="w-100">
               <h2>Recipe Title:</h2>
               <input
-                className="col-12"
+                className="col-10 form-control"
                 placeholder="Please enter Recipe Name"
                 id="recipe-title"
                 value={this.state.title}
@@ -200,35 +196,21 @@ class AddRecipeManual extends Component {
               />
             </label>
           </div>
-          <div className="row">
-            <label htmlFor="recipe-description">
+          <div className="form-group">
+            <label htmlFor="recipe-description" className="w-100">
               <h2>Recipe Description:</h2>
               <textarea
-                className="col-12"
+                className="col-10 form-control"
                 placeholder="Please enter a description"
-                className=""
                 id="recipe-description"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
             </label>
           </div>
-          <div className="row">
-            <label htmlFor="recipe-directions">
-              <h2>Directions </h2>
-              <textarea
-                placeholder="Please enter directions"
-                className=""
-                id="recipe-directions"
-                value={this.state.directions}
-                onChange={this.onInputChange.bind(this)}
-                required
-              ></textarea>
-            </label>
-          </div>
-          <div className="row">
-            <label>
-              <h2>Ingredients</h2>
+          <div className="form-group">
+            <label className="w-100">
+              <h2>Ingredients:</h2>
               {
                 this.state.ingredients.map((ingredient, index) => {
                   return (
@@ -246,7 +228,27 @@ class AddRecipeManual extends Component {
               <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
             </label>
           </div>
-          <div className="row gtfo-recapture">
+          <div className="form-group">
+            <label htmlFor="recipe-directions" className="w-100">
+              <h2>Directions:</h2>
+              <textarea
+                className="col-10 form-control"              
+                placeholder="Please enter directions"
+                id="recipe-directions"
+                value={this.state.directions}
+                onChange={this.onInputChange.bind(this)}
+                required
+              ></textarea>
+            </label>
+          </div>
+          <div className="form-group">
+          <h2>Recipe Photo:</h2>
+
+            <Dropzone multiple={false} onDrop={this.onDrop}>
+              <div>{this.state.images.length > 0 ? <img src={this.state.images[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
+            </Dropzone>
+          </div>
+          <div className="form-group gtfo-recapture">
           <Recaptcha
             sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
             render="explicit"
@@ -255,7 +257,7 @@ class AddRecipeManual extends Component {
           />
           </div>
           <span className="">
-            <button type="submit" className="btn btn-secondary">Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
           </span>
         </form>
       </div>
