@@ -98,6 +98,7 @@ xPorts.addPhotoUrl = function(id, result) {
 xPorts.findRecipeById = function(recipeId) {
   return recipeModel.findOne({ _id: recipeId })
     .populate('creator', 'username')
+    .populate('forked_children')
     .exec((err, recipe) => {
       if (err) console.log("recipeFunctions.findRecipeById ", err);
     })
