@@ -495,9 +495,8 @@ h6 {
 }
 @media (max-width: 991px) {
     .navbar {
-        background-image: url("/assets/green texture.png");
-        background-size: contain;
         background-color: #3c7250 !important;
+        height: 80px;
     }
 
     .navbar-nav {
