@@ -130,12 +130,14 @@ class RouteEditRecipe extends Component {
         <HeaderNav/>
         <AppHeader title={this.props.currentRecipe.title} notOnHomepage={true}/>
         <div className="row">
-          <div className="container">
+          <div className="container view-recipe-container">
+          <p>Here you can edit your recipe. Click submit to save your changes.</p>
             <form onSubmit={this.onFormSubmit}>
-              <div className="row">
-                <label htmlFor="">
-                  <span>Recipe Title:</span>
+              <div className="form-group">
+                <label htmlFor="" className="w-100">
+                  <h3>Recipe Title:</h3>
                   <input
+                  className="col-10 form-control"
                     placeholder="Please enter Recipe Name"
                     id="recipe-title"
                     value={this.state.title}
@@ -143,24 +145,27 @@ class RouteEditRecipe extends Component {
                   />
                 </label>
               </div>
+              <div className="form-group">
               <h3>Recipe Description:</h3>
               <textarea
                 placeholder="Please enter a description"
-                className=""
+                className="col-10 form-control"
                 id="recipe-description"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
-
+              </div>
+              <div className="form-group">
               <h3>Directions </h3>
               <textarea
                 placeholder="Please enter directions"
-                className=""
+                className="col-10 form-control"
                 id="recipe-directions"
                 value={this.state.directions}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
-
+              </div>
+              <div className="w-100 form-group">
               <h3>Ingredients</h3>
               {
                 this.state.ingredients.map((ingredient, index) => {
@@ -175,9 +180,10 @@ class RouteEditRecipe extends Component {
                   )
                 })
               }
-              <button type="button" className="" onClick={this.addNewIngredient}>Add New Ingredient</button>
+              <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
+              </div>
               <span className="">
-                <button type="submit" className="btn btn-secondary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
               </span>
             </form>
           </div>
