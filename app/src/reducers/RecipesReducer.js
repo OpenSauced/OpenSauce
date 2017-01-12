@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, GET_USER_RECIPES, SEARCH_RECIPES, CLEAR_RECIPES } from '../actions/index'
+import { FETCH_RECIPES, GET_USER_RECIPES, SEARCH_RECIPES, CLEAR_RECIPES, FETCH_OFFSET } from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

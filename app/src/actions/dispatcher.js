@@ -5,7 +5,8 @@ import {
   clearRecipes, 
   fetchRecipes,
   getUserRecipes,
-  getRecipeById
+  getRecipeById,
+  setDbOffset
   } from './index'
 
 export const routeDispatcher = (location = browserHistory.getCurrentLocation()) =>  {
@@ -16,12 +17,14 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
     case '/':
       console.log('Route_Dispatcher "/" OK ', location.pathname)
       getStore().dispatch(clearRecipes())
+      getStore().dispatch(setDbOffset(6))
       getStore().dispatch(fetchRecipes(location.search))
       break
 
     case '/myrecipes':
       console.log('Route_Dispatcher myrecipe OK ', location.pathname)
       getStore().dispatch(clearRecipes())
+      getStore().dispatch(setDbOffset(6))
       getStore().dispatch(getUserRecipes())
       break
 

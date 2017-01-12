@@ -151,7 +151,6 @@ xPorts.searchRecipes = function(term, offset) {
 
 //GET RECIPES PER USER
 xPorts.findRecipesByUserName = function(username, offset) {
-  console.log('Find recipe:', offset)
   if(!offset) {
     let offset = 0;
   }

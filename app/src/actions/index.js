@@ -23,6 +23,14 @@ export const updateSearchTerm = (term) => {
   }
 }
 
+export const DB_OFFSET = 'DB_OFFSET'
+export const setDbOffset = (offset) => {
+  return {
+    type: DB_OFFSET,
+    payload: offset
+  }
+}
+
 // check to see if we have a search in our redux state
 // if the state has different search terms then set state to null and search again
 // if the state has the same search terms append the new results to the state
@@ -93,7 +101,7 @@ export const fetchRecipes = (search, offset) => {
 // grab user recipies from the database for our MyCookbook page
 export const getUserRecipes = (filter, offset) => {
   let previousFeed = getStore().getState().recipes;
-  console.log('Previous Feed', previousFeed)
+  //console.log('Previous Feed', previousFeed)
   // get the username from the redux state
   var username = getStore().getState().userData.userData.username
   // set the url that we are going to make the get request to
@@ -106,7 +114,7 @@ export const getUserRecipes = (filter, offset) => {
   let requestdata = request
     .then((response) => {
       if (response.length === 0) {
-        return previousFeed
+        return _.union(previousFeed)
       }
       response.data.my_recipes.forEach(recipe => {
         // checks to see if the title has too many characters and then removes extra characters and appends
@@ -130,6 +138,7 @@ export const getUserRecipes = (filter, offset) => {
 
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
       //console.log(recipes)
+      recipes = _.union(recipes)
 
       //Filter Saved Recipes
       if (filter && filter.isSavedRecipesChecked === false) {

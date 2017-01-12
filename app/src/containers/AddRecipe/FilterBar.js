@@ -9,7 +9,8 @@ class FilterBar extends Component {
         isForkedRecipesChecked: true,
         isSavedRecipesChecked: true,
         isMyRecipesChecked: true,
-        offset: 0
+        waitForResults: false,
+        previousPayload: []
     }
     this.handleScroll = this.handleScroll.bind(this);
     this.search = _.debounce((id, offset) => {this.sendSearch(id, offset)}, 100)
@@ -29,17 +30,13 @@ class FilterBar extends Component {
     const html = document.documentElement;
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight) {
-      this.incOffset();
-      this.search(false, this.state.offset);
+    if (windowBottom >= docHeight && this.state.waitForResults === false && document.body.scrollTop !== 10) {
+      this.setState({waitForResults: true})
+      this.search(false, this.props.offset);
     }
   }
 
-  incOffset() {
-    this.setState({offset: this.state.offset+6});
-  }
-
-  sendSearch(id) {
+  sendSearch(id, offset) {
     
     switch(id) {
       case 'saved_recipes_checkbox':
@@ -62,7 +59,14 @@ class FilterBar extends Component {
       isMyRecipesChecked: this.state.isMyRecipesChecked
     }
 
-    this.props.getUserRecipes(filter, this.state.offset)
+    this.props.getUserRecipes(filter, offset)
+    .then((results) => {
+      this.setState({waitForResults: false})
+      if (this.state.previousPayload !== results.payload) {
+        this.setState({previousPayload: results.payload})
+        this.props.setDbOffset(this.props.offset + 6)
+      }
+    })
   }
 
   onFormSubmit(event) {
@@ -70,6 +74,7 @@ class FilterBar extends Component {
   }
 
   onCheckboxChange(event) {
+    this.props.setDbOffset(0)
     this.search(event.target.id, this.state.offset)
   }
 
@@ -102,16 +107,17 @@ class FilterBar extends Component {
 //REDUX STUFF
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getUserRecipes, clearRecipes } from '../../actions/index'
+import { getUserRecipes, clearRecipes, setDbOffset } from '../../actions/index'
 
 const  mapStateToProps = (state) => {
   return {
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
+    offset: state.offset
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators ({ getUserRecipes, clearRecipes }, dispatch)
+  return bindActionCreators ({ getUserRecipes, clearRecipes, setDbOffset }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterBar)
