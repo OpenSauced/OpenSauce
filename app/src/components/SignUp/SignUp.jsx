@@ -24,6 +24,7 @@ class SignUp extends Component {
 
     this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
+    // recaptchaInstance needs to store the recatcha event instance so it can be accessed in resetcaptcha
     this.recaptchaInstance = null
   }
 
@@ -40,10 +41,12 @@ class SignUp extends Component {
     });
   };
   
+  //verifies recaptcha was loaded in console
   loadedRecaptcha () {
     console.log('Recaptcha loaded!')
   }
-    // handle recaptcha reset
+  
+  // handle recaptcha reset
   resetRecaptcha () {
     console.log(this.recaptchaInstance)
     this.recaptchaInstance.reset();
@@ -68,7 +71,9 @@ class SignUp extends Component {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
+        // if this errors out, reset the recaptcha
         that.recaptchaInstance.reset()
+        // user friendly error response
         that.openModal(xhr.responseText)
       }
     })
@@ -109,8 +114,6 @@ class SignUp extends Component {
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
-          <button className="recaptcha reset" onClick={this.resetRecaptcha.bind(this)}> reset recaptcha</button>
-
           <h6>
             <Link to='/login'>Login to your Account</Link>
           </h6>
