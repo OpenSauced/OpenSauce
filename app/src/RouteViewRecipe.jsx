@@ -51,12 +51,6 @@ class RouteViewRecipe extends Component {
     });
   };
 
-  updateState = (recipe) => {
-    this.setState({
-      recipe: recipe
-    })
-  }
-
   hideModal = () => {
     this.setState({
       isOpen: false
@@ -102,7 +96,7 @@ class RouteViewRecipe extends Component {
             />
           </div>
           <div className="row">
-            <RecipeLikeCount likes={this.props.currentRecipe.likes} updateState={this.updateState.bind(this)}/>
+            <RecipeLikeCount likes={this.props.currentRecipe.likes} />
           </div>
           </AppHeader>
 

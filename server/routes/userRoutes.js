@@ -48,12 +48,12 @@ router.post('/save', function(req, res) {
   var userId = req.body.userId
   db.userFunctions.addRecipeToSavedRecipes(userId, recipeId).lean()
     .then((user) => {
-      user.password = null;
-      user.location = null;
-      user.session = null;
-      user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
-      user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
-      return db.recipeFunctions.decOrIncLikes(recipeId, 'inc').then(function(recipeObj) {
+      db.recipeFunctions.decOrIncLikes(recipeId, 'inc').then(function(recipeObj) {
+        user.password = null;
+        user.location = null;
+        user.session = null;
+        user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
+        user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
         res.send(user);
       }).catch((err) => {
         res.send(err.message);
@@ -69,12 +69,12 @@ router.post('/remove', function(req, res){
   var userId = req.body.userId
   db.userFunctions.RemoveRecipeFromSavedRecipes(userId, recipeId).lean()
     .then((user) => {
-      user.password = null;
-      user.location = null;
-      user.session = null;
-      user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
-      user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
-      return db.recipeFunctions.decOrIncLikes(recipeId, 'dec').then(function(recipeObj) {
+      db.recipeFunctions.decOrIncLikes(recipeId, 'dec').then(function(recipeObj) {
+        user.password = null;
+        user.location = null;
+        user.session = null;
+        user.my_recipes = _.zipObject(user.my_recipes, user.my_recipes)
+        user.saved_recipes = _.zipObject(user.saved_recipes, user.saved_recipes)
         res.send(user);
       }).catch((err) => {
         res.send(err.message);
