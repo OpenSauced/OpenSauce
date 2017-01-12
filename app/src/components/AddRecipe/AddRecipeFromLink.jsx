@@ -53,17 +53,13 @@ class AddRecipeFromLink extends Component {
       //check for recaptcha token submission
       if ( this.state.verificationCode !== '' ) {
 
-        let recipe = new FormData();
-        recipe.append('g-recaptcha-response', this.state.title);
-        recipe.append('recipeUrl', this.state.description);
-        recipe.append('userId', this.state.description);
-
+        var that = this;
         $.ajax({
           url: '/api/recipes/scraperecipe',
           type: 'POST',
           data: {
             'userId': this.state.userId,
-            'recipeUrl': this.state.recipeUrl,
+            'url': this.state.recipeUrl,
             'g-recaptcha-response': this.state.verificationCode
           },
           success: function (statusObj) {
@@ -77,15 +73,15 @@ class AddRecipeFromLink extends Component {
           },
           error: function(xhr, status, err) {
             var responseMessage = xhr.responseText
-            this.props.openModal(xhr.responseText)
+            that.props.openModal(xhr.responseText)
             console.error("did not post to DB from link ", status, xhr.responseText);
           }
         })
       } else {
-        this.props.openModal('There is a problem with your recaptcha response')
+        that.props.openModal('There is a problem with your recaptcha response')
       }
     } else {
-      this.props.openModal('Please enter a valid recipe url (0.o)')
+      that.props.openModal('Please enter a valid recipe url (0.o)')
     }
   }
 
