@@ -99,6 +99,7 @@ xPorts.findRecipeById = function(recipeId) {
   return recipeModel.findOne({ _id: recipeId })
     .populate('creator', 'username')
     .populate('forked_children')
+    .populate('forked_parent')
     .exec((err, recipe) => {
       if (err) console.log("recipeFunctions.findRecipeById ", err);
     })
