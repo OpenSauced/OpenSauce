@@ -453,6 +453,7 @@ h6 {
     margin-bottom: 2em;
 }
 //THESE TWO NEED BREAKPOINT STYLING!!!
+
 .recipe-title {
     // height: 0%;
 }
@@ -487,9 +488,10 @@ h6 {
 .another-buffer {
     margin-bottom: 20px;
 }
-
 @media (max-width: 991px) {
     .navbar {
+        background-image: url("/assets/green texture.png");
+        background-size: contain;
         background-color: #3c7250 !important;
     }
 
