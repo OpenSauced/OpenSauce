@@ -82,6 +82,7 @@ router.signUp = function(userData) {
 
 //actial login function
 router.login = function(user) {
+    console.log("user in login _____________ ", user)
     return router.verifyPassword(user.username, user.password).then(function(verified) {
         if (verified) {
             //cool you got verified, now lets give you a session
@@ -117,7 +118,7 @@ router.post('/login', function(req, res) {
                 maxAge: 9000000,
                 httpOnly: true
             });
-            res.status(200).send('you\'re logged in!')
+            res.status(200).send(cook)
         } else if (!cook) {
             throw new Error('Your username and password don\'t match. Please try again.')
         }

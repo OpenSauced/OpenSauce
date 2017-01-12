@@ -49,9 +49,9 @@ class Login extends Component {
       username: $('input[name=username]').val(),
       password: $('input[name=password]').val()
       },
-      success: function(){
+      success: function(user){
         const path = '/'
-        browserHistory.push(path);
+        window.location.replace(path);
       },
       error: function(xhr, status, err){
         that.openModal(xhr.responseText)
