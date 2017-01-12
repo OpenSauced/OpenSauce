@@ -9,13 +9,15 @@ import ForkButton from './ForkButtonSolo'
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
-  var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
-  var image = recipe.recipe_images.public_url ? <div><img src={recipe.recipe_images.public_url} /></div> : ''
+  var image = recipe.recipe_images.public_url ? <div className="imageBlockRecipeView" style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}></div> : ''
 
   if (recipe){
     return (
       <div className="container">
         <div className="row view-recipe-container">
+          <div className="col-12 flex-wrap">
+            {image}
+          </div>
           <div className="col d-flex flex-wrap">
             <div className="row">
               <div className="col-12 recipe-title">
@@ -29,9 +31,6 @@ const ViewRecipe = ({recipe, user}) => {
               </div>
              </div>
           </div>
-          <div className="col">
-            {image}
-          </div>
         </div>
         <div className="row justify-content-between view-recipe-container">
           <div className="col-8">
@@ -42,7 +41,7 @@ const ViewRecipe = ({recipe, user}) => {
             {
               user._id === recipe.creator._id
                 ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary offset-6"> Edit this recipizzle</button></Link>
-                : ( 
+                : (
                     <div className="row ingredient-container-fork">
                       <div className="col-6">
                         <p> Want to put your own spin on this recipe? Try forking it! </p>
@@ -57,8 +56,6 @@ const ViewRecipe = ({recipe, user}) => {
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
           <div>
-            <br></br>
-            {credit}
           </div>
         </div>
       </div>

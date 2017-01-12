@@ -183,6 +183,21 @@ h6 {
     margin-top: 10px;
 }
 
+.imageUploadBlock {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.imageBlockRecipeView {
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: block;
+  overflow: hidden;
+}
+
 .navbar-toggler {
     top: 0 !important;
     right: 0 !important;
