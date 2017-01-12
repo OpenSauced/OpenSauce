@@ -51,7 +51,7 @@ xPorts.addNewRecipe = (userId, recipe) => {
     if (typeof recipe.ingredients === 'string') {
         recipe.ingredients = JSON.parse(recipe.ingredients);
     }
-        try {
+    try {
         if(recipe.title === null || recipe.title === undefined || recipe.title === ''){
             throw new Error('Please enter a title for the recipe')
         }
@@ -68,7 +68,14 @@ xPorts.addNewRecipe = (userId, recipe) => {
     catch(err){
         return Promise.reject(err)
     }
-    return recipeModel.findOneAndUpdate({title: recipe.title, creator: recipe.creator}, recipe, {upsert: true, new: true})
+    return recipeModel.findOneAndUpdate(
+                        {
+                          title: recipe.title, 
+                          creator: recipe.creator
+                        }, 
+                        recipe, 
+                        {upsert: true, new: true}
+                      )
 }
 
 // Adds a single photo to the recipe that the user has uploaded

@@ -3,8 +3,9 @@ import { Link } from 'react-router'
 
 import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
-import RecipeCreator from './RecipeCreator'
 import RecipeDirections from './RecipeDirections'
+import RecipeCreator from './RecipeCreator'
+import RecipeNotes from './RecipeNotes'
 import ForkButton from './ForkButtonSolo'
 
 const ViewRecipe = ({recipe, user}) => {
@@ -22,7 +23,7 @@ const ViewRecipe = ({recipe, user}) => {
                 <h2 className="">{recipe.title}</h2>
               </div>
               <div className="col-12 recipe-description">
-                {description}
+                { description }
               </div>
               <div className="align-self-end">
                 <RecipeCreator recipeCreator={recipe.creator}/>
@@ -30,7 +31,7 @@ const ViewRecipe = ({recipe, user}) => {
              </div>
           </div>
           <div className="col">
-            {image}
+            { image }
           </div>
         </div>
         <div className="row justify-content-between view-recipe-container">
@@ -54,11 +55,19 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
-          <h3>Directions:</h3>
-          <RecipeDirections recipeDirections={recipe.directions}/>
-          <div>
-            <br></br>
-            {credit}
+          <div className="col d-flex flex-wrap">
+            <h3>Directions:</h3>
+            <RecipeDirections recipeDirections={recipe.directions}/>
+            <div>
+              <br></br>
+              {credit}
+            </div>
+          </div>
+        </div>
+        <div className="row view-recipe-container">
+          <div className="col d-flex flex-wrap">
+            <h3> { user.first_name + "'s" || ''} Recipe Notes:</h3>
+            <RecipeNotes recipeNotes={recipe.notes}/>
           </div>
         </div>
       </div>
