@@ -152,9 +152,12 @@ router.post('/scraperecipe', authRoutes.authRecaptcha, function(req, res) {
     var url = req.body.url
     var userId = req.body.userId
     recipeResponse = null
+    console.log(url)
     db.scraperFunctions.lookUpRecipeByUrl(url)
         .then((recipe) => {
+            console.log("recipe ", recipe)
             if (recipe === null) {
+                console.log("in the null")
                 db.scraperFunctions.scrapeRecipe(url)
                     .catch((err) => {
                         throw new Error(err)

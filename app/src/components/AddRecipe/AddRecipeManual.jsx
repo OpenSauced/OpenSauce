@@ -132,7 +132,6 @@ class AddRecipeManual extends Component {
   }
 
   onFormSubmit(e) {
-    console.log(this.props)
     e.preventDefault();
     if (this.state.verification !== '') {
       let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
@@ -151,7 +150,7 @@ class AddRecipeManual extends Component {
       //response from recaptcha and images
       recipe.append('g-recaptcha-response', this.state.verification)
       recipe.append('images', this.state.images[0]);
-
+      var that = this
       $.ajax({
         method: 'POST',
         url: `/api/recipes/${this.props.userData._id}/addrecipe`,
@@ -166,12 +165,11 @@ class AddRecipeManual extends Component {
         },
         error: function(xhr, status, err){
           let responseMessage = xhr.responseText
-          // console.error("did not post to DB manual ", status, xhr.responseText);
-          this.props.openModal(xhr.responseText)
+          that.props.openModal(xhr.responseText)
         }
       })
     } else {
-      this.props.openModal('There is a problem with your recaptcha response')
+      that.props.openModal('There is a problem with your recaptcha response')
     }
   }
 
