@@ -11,9 +11,13 @@ class ChangeEmail extends Component {
                 <h2 className="col-12">Current email: {this.props.data}</h2>
                 <form className="col-12 row" action="/api/users/updateInfo/email" method="post" encType="multipart/form-data" target="_top">
                     <label className="col-12 col-form-label" htmlFor="newEmail">Email:</label>
-                    <div className="col-5"><input className="form-control" type="text" name="newEmail"/></div>
+                    <div className="col-5">
+                        <input className="form-control" type="text" name="newEmail"/>
+                    </div>
                     <label className="col-12 col-form-label" htmlFor="password">Password:</label>
-                    <div className="col-5"><input className="form-control" type="text" name="password"/></div>
+                    <div className="col-5">
+                        <input className="form-control" type="text" name="password"/>
+                    </div>
                     <div className="col-12">
                         <input className="btn btn-secondary" type="submit" value="Save"/>
                     </div>
