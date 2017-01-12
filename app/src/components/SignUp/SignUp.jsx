@@ -16,31 +16,41 @@ import {
 class SignUp extends Component {
   constructor () {
     super ()
-    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
 
     this.state = {
       isOpen: false,
       errorMessage: ''
     };
+
+    this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
+    // recaptchaInstance needs to store the recatcha event instance so it can be accessed in resetcaptcha
+    this.recaptchaInstance = null
   }
 
   openModal = (message) => {
-  this.setState({
-    isOpen: true,
-    errorMessage: message
-  });
-};
- 
-hideModal = () => {
-  this.setState({
-    isOpen: false
-  });
-};
-
+    this.setState({
+      isOpen: true,
+      errorMessage: message
+    });
+  };
+   
+  hideModal = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
   
+  //verifies recaptcha was loaded in console
   loadedRecaptcha () {
     console.log('Recaptcha loaded!')
   }
+  
+  // handle recaptcha reset
+  resetRecaptcha () {
+    console.log(this.recaptchaInstance)
+    this.recaptchaInstance.reset();
+  };
 
   onFormSubmit(e) {
     e.preventDefault();
@@ -61,11 +71,13 @@ hideModal = () => {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
+        // if this errors out, reset the recaptcha
+        that.recaptchaInstance.reset()
+        // user friendly error response
         that.openModal(xhr.responseText)
       }
     })
   }
-
 
   render () {
     return (
@@ -86,13 +98,14 @@ hideModal = () => {
         </Modal>
       <div className="authForm">
           <h1>Sign Up</h1>
-          <form method="post" id="signUpData" onSubmit={this.onFormSubmit.bind(this)}>
+          <form method="post" id="signUpData" onSubmit={this.onFormSubmit}>
               <input type="text" id="firstName" type="firstName" placeholder="First Name" name="firstName" required="required"/>
               <input type="text" id="lastName" type="lastName" name="lastName" placeholder="Last Name" required="required"/>
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
               <Recaptcha
+                ref={e => this.recaptchaInstance = e}
                 theme="dark"
                 sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
                 render="explicit"
