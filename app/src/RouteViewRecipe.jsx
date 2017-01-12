@@ -30,11 +30,16 @@ class RouteViewRecipe extends Component {
       recipe: {},
       isSaved: false,
       isOpen: false,
+      
     };
+  }
+  updateTree(treeData) {
+    this.setState({treeData: treeData})
   }
 
   componentDidMount(){
     this.alreadyExistsModal()
+    
   }
 
   alreadyExistsModal() {
@@ -101,7 +106,13 @@ class RouteViewRecipe extends Component {
           </AppHeader>
 
           {/* pass down current recipe information and current user to a recipe the user clicks on*/}
-          <ViewRecipe recipe={this.props.currentRecipe} user={this.props.userData.userData}/>
+          <ViewRecipe 
+            recipe={this.props.currentRecipe} 
+            user={this.props.userData.userData} 
+            treeData={this.state.treeData}
+            updateTree={this.updateTree.bind(this)}
+
+          />
         </div>
       );
     }

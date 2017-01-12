@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
+import RecipeTree from './RecipeTree';
 
 import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
@@ -8,13 +9,15 @@ import RecipeCreator from './RecipeCreator'
 import RecipeNotes from './RecipeNotes'
 import ForkButton from './ForkButtonSolo'
 
-const ViewRecipe = ({recipe, user}) => {
+const ViewRecipe = ({recipe, user, treeData, updateTree}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
   var image = recipe.recipe_images.public_url ? <div className="imageBlockRecipeView" style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}></div> : ''
 
   if (recipe){
+
     return (
       <div className="container">
+        
         <div className="row view-recipe-container">
           <div className="col-12 flex-wrap">
             {image}
@@ -23,6 +26,7 @@ const ViewRecipe = ({recipe, user}) => {
             <div className="row">
               <div className="col-12 recipe-title">
                 <h2>{ recipe.title }</h2>
+
               </div>
               <div className="col-12 recipe-description">
                 { description }
@@ -54,8 +58,25 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
+
+
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
+          <div>
+            <br></br>
+            {credit}
+            
+          </div>
+
+        </div>
+        <div className="row view-recipe-container">
+          <h3>Recipe History Tree:</h3>
+          <div>
+            <br></br>
+            <RecipeTree className="col-12" /> 
+
+          </div>
+          
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">
