@@ -29,7 +29,6 @@ xPorts.findRecentRecipes = function(offset) {
 }
 
 xPorts.editRecipe = function(recipeId, recipe){
-   // console.log('editrecipe function --- recipe', recipe )
     return recipeModel.findOneAndUpdate({ _id: recipeId },
       {
         $set: {
@@ -81,10 +80,7 @@ xPorts.addNewRecipe = (userId, recipe) => {
 
 // Adds a single photo to the recipe that the user has uploaded
 xPorts.addPhotoUrl = function(id, result) {
-  //console.log('finding a recipe by id for image add: ', id);
   return xPorts.findRecipeById(id).then(function(recipeDB) {
-    // console.log('Recipe from DB: ', recipeDB.recipe_images)
-    // console.log(result)
     recipeDB.recipe_images.public_url = result.url
     recipeDB.recipe_images.secure_url = result.secure_url
     recipeDB.recipe_images.public_id = result.public_id
@@ -126,7 +122,6 @@ xPorts.findRecipeById = function(recipeId) {
       ]
     })
     .exec((err, recipe) => {
-      if (err) console.log("recipeFunctions.findRecipeById ", err);
     })
 }
 

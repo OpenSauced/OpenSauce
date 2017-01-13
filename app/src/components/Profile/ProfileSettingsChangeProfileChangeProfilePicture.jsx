@@ -37,7 +37,6 @@ class ChangeProfilePicture extends Component {
         console.error('Image did not upload: ', err);
       })
       .then((res) => {
-        console.log('Getting current data? ', recipe);
         const path = '/profile';
         //browserHistory.push(path);
       })

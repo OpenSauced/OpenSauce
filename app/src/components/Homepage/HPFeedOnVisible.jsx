@@ -23,7 +23,6 @@ class OnVisible extends Component {
         this.stopListening();
     }
     runFunc() {
-        console.log('hello')
     }
     debounce(fn, time) {
         let timeout;

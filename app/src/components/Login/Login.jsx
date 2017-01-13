@@ -28,7 +28,7 @@ class Login extends Component {
       errorMessage: message
     });
   };
- 
+
   hideModal = () => {
     this.setState({
       isOpen: false
@@ -36,12 +36,8 @@ class Login extends Component {
   };
 
   onFormSubmit(e) {
-    console.log("in the on form submit")
     e.preventDefault();
-    console.log($('input[name=username]').val())
-    
     var that = this;
-
     $.ajax({
       method: 'POST',
       url: '/auth/login',

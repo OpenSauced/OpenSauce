@@ -48,7 +48,6 @@ class SearchBar extends Component {
 
   sendSearch(isSubmit, offset) {
     let location = browserHistory.getCurrentLocation()
-    //console.log(location)
     if (isSubmit) {
       let url = location.pathname + (this.props.searchTerm ? '?term=' + this.props.searchTerm : '')
       browserHistory.push(url)
@@ -63,14 +62,12 @@ class SearchBar extends Component {
           .then((results) => {
             this.setState({waitForResults: false});
             if (this.state.previousPayload !== results.payload.data) {
-              //console.log('inc')
               this.setState({previousPayload: results.payload.data})
               this.props.setDbOffset(this.props.offset + 6)
             }
           })
           break
         case '/myrecipes':
-          console.log('TODO: MAKE SEARCHBAR ALSO WORK IN MYRECIPES') 
       }
     }
   }
@@ -86,7 +83,6 @@ class SearchBar extends Component {
   // }
 
   render() {
-    //console.log(this.props.searchTerm)
     return (
       <div className="d-flex justify-content-center">
       <form

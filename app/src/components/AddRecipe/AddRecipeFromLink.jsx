@@ -18,14 +18,13 @@ class AddRecipeFromLink extends Component {
   }
 
   componentWillMount() {
-    // console.log('AddREcipeFormLink > componentWillReceiveProps > props ', this.props.userData._id)
     let userId = this.props.userData._id
     this.setState({ userId: userId })
   }
 
   componentDidMount () {
     this.recaptchaInstance = grecaptcha.render('recaptchaLink', {
-        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX',
         callback: this.verifyCallback.bind(this),
         theme : 'limit',
         render: 'explicit',
@@ -40,28 +39,23 @@ class AddRecipeFromLink extends Component {
     switch(event.target.id) {
       case 'add_recipe_link':
         this.setState({ url: event.target.value })
-        console.log(event.target.value)
         break;
     }
     return null
   }
 
   verifyCallback (response) {
-    console.log('verifying, here is the response ', response)
-    this.setState({ 
+    this.setState({
       verificationCode: response
     })
   }
 
   loadedRecaptcha () {
-    console.log('Recaptcha loaded!')
   }
 
   formSubmit (e) {
     e.preventDefault();
-    console.log('ADDRECIPEFROM LINK > formSubmit > this.state ', this.state)
     /// check for valid URL - only checks for structure of the URL
-    // console.log("REcipe URLs ", this.state.url)
     ///////// check for valid url
     let validURL = isURL( this.state.url )
 
@@ -70,7 +64,6 @@ class AddRecipeFromLink extends Component {
 
       if ( this.state.verificationCode !== '' ) {
 
-        console.log( 'recaptchaInstance value ====', this.recaptchaInstance )
         var that = this;
         $.ajax({
           url: '/api/recipes/scraperecipe',
@@ -81,7 +74,6 @@ class AddRecipeFromLink extends Component {
             'g-recaptcha-response': this.state.verificationCode
           },
           success: function (statusObj) {
-            console.log("recipe was saved to the DB", statusObj);
             if (statusObj.saved) {
               var path = `/viewrecipe?recipeId=${statusObj.recipeId}&savedAlready=true`
             } else {
@@ -112,12 +104,12 @@ class AddRecipeFromLink extends Component {
         <form id='commentPostForm' onSubmit={this.formSubmit.bind(this)}>
         <div>
           <label className="w-100" htmlFor="add_recipe_link">
-            <input 
-              className="form-control" 
+            <input
+              className="form-control"
               onChange={this.onInputChange.bind(this)}
-              id="add_recipe_link" 
-              type='text' 
-              name='url' 
+              id="add_recipe_link"
+              type='text'
+              name='url'
               placeholder="Copy and paste a link here..."
             />
           </label>
@@ -131,7 +123,7 @@ class AddRecipeFromLink extends Component {
         <div className="col-12 col-md-6">
           <h4>We support these sites:</h4>
           <div className="d-flex justify-content-around">
-            <img 
+            <img
               src='/assets/Epicurious_Logo_2014.png'
               alt="Epicurious"
               height="75"

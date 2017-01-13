@@ -33,7 +33,6 @@ class RouteEditRecipe extends Component {
 
   // Puts the image into the component state
   onDrop(image) {
-    console.log('got it')
     this.setState( { image: image } );
   }
 
@@ -57,7 +56,6 @@ class RouteEditRecipe extends Component {
       console.error('Image did not upload: ', err);
     })
     .then((res) => {
-      console.log('Getting current data? ', recipe);
       const path = '/profile';
       //browserHistory.push(path);
     })
@@ -73,7 +71,6 @@ class RouteEditRecipe extends Component {
   }
 
   componentWillMount () {
-    console.log('ROUTEEDITRECIPE props -- currentRecipe ', this.props.currentRecipe)
     let currentRecipe = this.props.currentRecipe;
     let notes = ( currentRecipe.notes ) && currentRecipe.notes !== 'undefined' && currentRecipe.notes !== 'null'
                   ? currentRecipe.notes
@@ -91,7 +88,6 @@ class RouteEditRecipe extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(' componentWillReceiveProps --- this is next props', nextProps)
   }
 
   //function to track changes in the ingredient text and set it to state

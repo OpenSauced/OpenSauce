@@ -37,7 +37,6 @@ describe('Creating recipes', () => {
         }
         var cherryPie = recipeFunctions.addNewRecipe('bjorn', recipe)
             .then((recipe) => {
-                console.log(recipe)
                 assert(!cherryPie.isNew);
                 done()
             })

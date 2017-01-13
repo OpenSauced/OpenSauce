@@ -20,15 +20,14 @@ class RecipeList extends Component {
   }
 
   render() {
-    console.log('RECIPETREE - this.props.treeData ', this.props.treeData)
     return (
-      <SortableTree 
+      <SortableTree
         treeData={this.props.treeData}
-        isVirtualized={false} 
+        isVirtualized={false}
         onChange={() => {}}
         ref={() => {this.disableDrag();window.scrollTo(0, 0)}}
       />
-      
+
     )
   }
 }

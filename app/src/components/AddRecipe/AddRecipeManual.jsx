@@ -40,16 +40,13 @@ class AddRecipeManual extends Component {
   }
 
   verifyCallback (response) {
-    console.log('veriftying her is the response ', response)
     this.setState({ verification:response })
   }
 
   loadedRecaptcha () {
-    console.log('Recaptcha loaded!')
   }
 
   componentWillMount() {
-    console.log("AddRecipeManual will mount, here are it's props: ", this.props)
     this.props.getUserData()
     .then((user) => {
       if(this.props.recipeId){
@@ -59,9 +56,8 @@ class AddRecipeManual extends Component {
   }
 
   componentDidMount(){
-    console.log("AddRecipeManual mounted, here are it's props: ", this.props)
     this.recaptchaInstance = grecaptcha.render('recaptchaManual', {
-        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX',
         callback: this.verifyCallback.bind(this),
         theme : 'limit',
         render: 'explicit',
@@ -169,7 +165,6 @@ class AddRecipeManual extends Component {
         contentType: false,
         processData: false,
         success: function(recipe){
-          // console.log('Getting current data? ', recipe);
           const path = `/viewrecipe?recipeId=${recipe._id}`
           browserHistory.push(path);
         },
@@ -283,7 +278,7 @@ class AddRecipeManual extends Component {
             <label htmlFor="recipe-notes" className="w-100">
               <h2>Recipe Notes:</h2>
               <textarea
-                className="col-10 form-control"              
+                className="col-10 form-control"
                 placeholder="Please enter your notes about this recipe"
                 id="recipe-notes"
                 row="7"
@@ -296,17 +291,17 @@ class AddRecipeManual extends Component {
           <h2>Recipe Photo:</h2>
             <Dropzone multiple={false} onDrop={this.onDrop}>
                 {
-                  this.state.images.length > 0 
-                    ? <div 
-                        className="imageUploadBlock" 
+                  this.state.images.length > 0
+                    ? <div
+                        className="imageUploadBlock"
                         style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}
-                      ></div> 
+                      ></div>
                     : `Click or drag an image inside of the box to upload.`
                 }
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
-            <div id="recaptchaManual"></div> 
+            <div id="recaptchaManual"></div>
           </div>
           <span className="">
             <button type="submit" className="btn btn-primary">Submit</button>
