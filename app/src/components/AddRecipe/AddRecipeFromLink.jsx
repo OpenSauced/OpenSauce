@@ -162,12 +162,3 @@ class AddRecipeFromLink extends Component {
 };
 
 export default AddRecipeFromLink
-
-// <Recaptcha
-//           ref={e => this.recaptchaInstance = e}
-//           // id="yahdude"
-//           sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-//           render="explicit"
-//           verifyCallback={this.verifyCallback.bind(this)}
-//           onloadCallback={this.loadedRecaptcha.bind(this)}
-//         />
