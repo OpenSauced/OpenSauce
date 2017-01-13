@@ -10,7 +10,7 @@ const EditRecipeIngredient = ({ingredient, index, handleIngredientOnChange, hand
         id={`ingredients-${index}`}
         onChange={handleIngredientOnChange}
         value={ingredient}
-        placeholder="Ingredient"
+        placeholder="Please enter a single ingredient."
       />
       <button
         type="button"

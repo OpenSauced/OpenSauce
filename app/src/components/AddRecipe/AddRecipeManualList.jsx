@@ -9,7 +9,7 @@ const AddRecipeManualList = ({ingredient, index, handleIngredientOnChange, handl
         id={`ingredients-${index}`}
         onChange={handleIngredientOnChange}
         value={ingredient}
-        placeholder="Ingredient"
+        placeholder="Please enter a single ingredient."
       />
       <button
         type="button"

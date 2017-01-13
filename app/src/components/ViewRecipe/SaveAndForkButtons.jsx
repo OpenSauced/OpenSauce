@@ -21,7 +21,7 @@ const SaveAndForkButtons = ({recipe,userId, saveRecipe, forkRecipe, removeRecipe
     <div className="row justify-content-center mx-auto">
       { 
         userId === recipe.creator._id 
-          ? <h3>Try Forking!</h3>
+          ? ''
           : heart
       }
       <Link className="col-6 icon" to={`/addrecipe?recipe=${recipe._id}`}>
