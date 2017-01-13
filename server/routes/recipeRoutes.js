@@ -119,6 +119,8 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
 
 router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, upload.single('images'), function(req, res) {
   var recipeId = req.body.id
+  req.body.ingredients = JSON.parse(req.body.ingredients)
+  console.log(req.body.ingredients);
   db.recipeFunctions.editRecipe(recipeId, req.body)
   .then((recipe) => {
     if (req.file !== undefined) {

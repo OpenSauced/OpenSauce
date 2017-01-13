@@ -22,8 +22,8 @@ const RouteAbout = () => {
         <div className="col-9 mx-auto">
           <div className="text-center">
             <h3>The Team</h3>
-            <div className="imageBlockRecipeView w-100" 
-                    style={{'backgroundImage': 'url(/assets/team-boyfriend-trainer.jpg)' }}>
+            <div className="imageBlockRecipeView w-100"
+                    style={{'backgroundImage': 'url(/assets/team-boyfriend-trainer.jpg)', 'background-size': 'contain', 'background-repeat': 'no-repeat' }}>
             </div>
           </div>
           <ul className="team-list">
@@ -34,7 +34,7 @@ const RouteAbout = () => {
             <li><h5>Henry Hedges</h5><p>I am an amateur autonomist. Coding-wise: I've got big plans.</p></li>
           </ul>
         </div>
-      </div>  
+      </div>
       </div>
     </div>
   );

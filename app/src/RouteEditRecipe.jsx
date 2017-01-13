@@ -134,15 +134,16 @@ class RouteEditRecipe extends Component {
 
   // Push out all blank ingredients from this.state.ingredients list
   // only used in onFormSubmit
-  spliceBlankIngredients(ingredients){
-    let idx = ingredients.indexOf('');
-    if (idx === -1){
-      return ingredients
-    } else {
-      ingredients.splice(idx,1)
-      return this.spliceBlankIngredients(ingredients)
+  spliceBlankIngredients(ingredients) {
+    var newIngredients = ingredients
+    for (var i = 0; i < newIngredients; i++) {
+      if (newIngredients[i] === '') {
+        newIngredients = newIngredients.splice(i, 1)
+      }
     }
+    return newIngredients
   }
+
 
   onFormSubmit(e) {
     e.preventDefault();
@@ -152,7 +153,7 @@ class RouteEditRecipe extends Component {
     recipe.append('title', this.state.title);
     recipe.append('id', this.state.id)
     recipe.append('description', this.state.description);
-    recipe.append('ingredients', JSON.stringify(newIngredients));
+    recipe.append('ingredients', JSON.stringify(newIngredients))
     recipe.append('directions', this.state.directions);
     recipe.append('notes', this.state.notes)
     //response from recaptcha and images
@@ -220,13 +221,13 @@ class RouteEditRecipe extends Component {
                         key={index}
                         ingredient={this.state.ingredients[index]}
                         index={index}
-                        handleIngredientOnChange={this.onIngredientChange}
-                        handleRemoveIngredient={this.removeIngredient}
+                        handleIngredientOnChange={this.onIngredientChange.bind(this)}
+                        handleRemoveIngredient={this.removeIngredient.bind(this)}
                       />
                     )
                   })
                 }
-                <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient}>Add New Ingredient</button>
+                <button type="button" className="btn btn-secondary" onClick={this.addNewIngredient.bind(this)}>Add New Ingredient</button>
               </div>
               <div className="form-group">
                 <h3>Directions: </h3>

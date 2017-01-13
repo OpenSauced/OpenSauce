@@ -126,7 +126,7 @@ h6 {
     .authPage {
         height: 150vh !important;
 
-        #g-recaptcha {
+        #recaptchaSignUp {
             top: 270px !important;
         }
 
@@ -301,7 +301,7 @@ h6 {
 }
 // login stuff
 
-#g-recaptcha {
+#recaptchaSignUp, #recaptchaManual, #recaptchaLink {
     position: static;
     text-align: center;
     // top: 70%;
@@ -312,7 +312,7 @@ h6 {
     max-width: 300px;
 }
 
-#signUpData > #g-recaptcha  {
+#signUpData > #recaptchaSignUp  {
   transform: scale(0.9);
 }
 
