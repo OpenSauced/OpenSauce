@@ -20,7 +20,7 @@ class RecipeList extends Component {
   }
 
   render() {
-    //console.log(this.props.treeData)
+    console.log(this.props.treeData)
     return (
       <SortableTree 
         treeData={this.props.treeData}

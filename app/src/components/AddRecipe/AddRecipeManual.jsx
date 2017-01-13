@@ -26,6 +26,9 @@ class AddRecipeManual extends Component {
       verification: ''
     }
 
+    //variable to hold recaptcha instance
+    this.recaptchaInstance = null
+
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
@@ -49,7 +52,6 @@ class AddRecipeManual extends Component {
     console.log("AddRecipeManual will mount, here are it's props: ", this.props)
     this.props.getUserData()
     .then((user) => {
-      // console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
         this.getRecipeFromDB(this.props.recipeId)
       }
@@ -58,6 +60,15 @@ class AddRecipeManual extends Component {
 
   componentDidMount(){
     console.log("AddRecipeManual mounted, here are it's props: ", this.props)
+    this.recaptchaInstance = grecaptcha.render('recaptchaManual', {
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        callback: this.verifyCallback.bind(this),
+        theme : 'limit',
+        render: 'explicit',
+        type: 'image',
+        size: 'normal',
+        tabindex: '0'
+    });
   }
 
   // this is set up to detect a change in recipeId props for
@@ -86,7 +97,6 @@ class AddRecipeManual extends Component {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-        console.log("RECIPE ", recipe.directions)
           this.setState({
             title: recipe.title,
             description: recipe.description,
@@ -164,12 +174,13 @@ class AddRecipeManual extends Component {
           browserHistory.push(path);
         },
         error: function(xhr, status, err){
-          let responseMessage = xhr.responseText
           that.props.openModal(xhr.responseText)
+          grecaptcha.reset(this.recaptchaInstance)
         }
       })
     } else {
-      that.props.openModal('There is a problem with your recaptcha response')
+      this.props.openModal('There is a problem with your recaptcha response')
+      grecaptcha.reset(this.recaptchaInstance)
     }
   }
 
@@ -195,16 +206,15 @@ class AddRecipeManual extends Component {
 
   // Handle the image file upload. This accepts clicking and drag and drop.
   onDrop(acceptedFiles) {
-    this.setState({
-      // This is required for multiple images
+    // This is required for multiple images
       // images: this.state.images.concat(acceptedFiles)
-      // This is for single image uploads
+    // This is for single image uploads
+    this.setState({
       images: acceptedFiles
     });
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="row view-recipe-container">
       <h1 className="col-12 text-center">Add a Recipe</h1>
@@ -229,6 +239,7 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"
                 placeholder="Please enter a description"
                 id="recipe-description"
+                row="7"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
@@ -261,6 +272,7 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"
                 placeholder="Please enter directions"
                 id="recipe-directions"
+                row="7"
                 value={this.state.directions}
                 onChange={this.onInputChange.bind(this)}
                 required
@@ -274,25 +286,27 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"              
                 placeholder="Please enter your notes about this recipe"
                 id="recipe-notes"
+                row="7"
                 value={this.state.notes}
                 onChange={this.onInputChange.bind(this)}
-                // {/* removed 'required' from this tag*/}
               ></textarea>
             </label>
           </div>
           <div className="form-group">
           <h2>Recipe Photo:</h2>
             <Dropzone multiple={false} onDrop={this.onDrop}>
-                {this.state.images.length > 0 ? <div className="imageUploadBlock" style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}></div> : `Click or drag an image inside of the box to upload.`}
+                {
+                  this.state.images.length > 0 
+                    ? <div 
+                        className="imageUploadBlock" 
+                        style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}
+                      ></div> 
+                    : `Click or drag an image inside of the box to upload.`
+                }
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
-          <Recaptcha
-            sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-            render="explicit"
-            verifyCallback={this.verifyCallback}
-            onloadCallback={this.loadedRecaptcha}
-          />
+            <div id="recaptchaManual"></div> 
           </div>
           <span className="">
             <button type="submit" className="btn btn-primary">Submit</button>

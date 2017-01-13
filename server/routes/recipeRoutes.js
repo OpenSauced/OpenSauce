@@ -140,6 +140,7 @@ router.get('/:recipeId', function(req, res) {
             res.send(err);
         })
         .then((recipe) => {
+            console.log('recipeRoutes -- .then((recipe) ==> ', recipe)
             res.send(recipe);
         })
 })

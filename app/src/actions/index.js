@@ -169,7 +169,7 @@ export const getUserRecipes = (filter, offset) => {
 export const getRecipeById = (recipeId) => {
   var url = '/api/recipes/' + recipeId
   var request = axios.get(url)
-  //console.log('ACTION DISPATCHED', recipeId)
+  console.log('ACTION DISPATCHED', recipeId)
   return {
     type: GET_RECIPE_BY_ID,
     payload: request
