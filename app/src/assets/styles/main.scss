@@ -93,6 +93,13 @@ h6 {
 .searchBarButtonCombo {
     width: 100%;
 }
+
+.results {
+  text-align: center;
+  color: #d8d7d3;
+  margin-top: 50px;
+}
+
 @media (max-height: 780px) and (min-height: 680px) {
     .authPage {
         text-align: center;
