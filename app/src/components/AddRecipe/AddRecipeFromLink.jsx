@@ -90,11 +90,9 @@ class AddRecipeFromLink extends Component {
             browserHistory.push(path);
           },
           error: function(xhr, status, err) {
-            // console.log(' THIS =====', this, "==== AND THAT =====", that)
             that.props.openModal(xhr.responseText)
             grecaptcha.reset(that.recaptchaInstance)
-            // console.log('that.recaptchaInstance =====>',  that.recaptchaInstance)
-            // console.error("did not post to DB from link ", status, xhr.responseText);
+            console.error("did not post to DB from link ", status, xhr.responseText);
           }
 
         })
