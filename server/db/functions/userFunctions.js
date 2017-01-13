@@ -1,11 +1,6 @@
 const userModel = require('../models/user.js');
 const xPorts = {};
 
-// xPorts.findByUserName = function(name) {
-//     console.log('looking for user userFunctions.js', name);
-//     return userModel.findOne({username: name})
-// }
-
 xPorts.updateSession = function(user, hash) {
     return xPorts.findByUserName(user.username).then(function(userDB) {
             userDB.session = hash
@@ -38,16 +33,13 @@ xPorts.secondarySignupCheck = function(user) {
 }
 
 xPorts.saveUserFn = function(user) {
-    console.log('saving user...');
     new userModel(user).save().then((data) => {
-        console.log('saved user!', data);
     }).catch((err) => {
         console.error('ERROR IN USER FUNCTIONS SAVING:', err);
     })
 }
 
 xPorts.updateInfoBatch = function(user, data) {
-    console.log('updateInfoBatch', data);
     return xPorts.addBio(user, data.Bio).then(function() {
         return xPorts.addLocation(user, [data.Country, data.State, data.zip]).then(function() {
             return xPorts.secondSignup(user)
@@ -86,7 +78,6 @@ xPorts.addLocation = function(user, location) {
 }
 
 xPorts.addPhotoUrl = function(user, result) {
-    console.log('finding a user for image add', user);
     return xPorts.findByUserName(user).then(function(userDB) {
         userDB.user_image.public_url = result.url
         userDB.user_image.secure_url = result.secure_url
@@ -101,7 +92,6 @@ xPorts.addPhotoUrl = function(user, result) {
 xPorts.findOrCreateUser = function(userData) {
     return xPorts.findByUserName(userData.username).then(function(data) {
         if (!data) { //no data, user isnt in the db
-            console.log('didnt find a user, creating one', userData);
             xPorts.saveUserFn({
                 first_name: userData.firstName,
                 last_name: userData.lastName,
@@ -113,7 +103,6 @@ xPorts.findOrCreateUser = function(userData) {
                 password: userData.password,
                 secondary_signup_needed: 'True'
             })
-            console.log('returned faslse');
             return false
         } else if (data) { //got data
             return true

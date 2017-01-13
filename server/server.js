@@ -16,9 +16,9 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.connection.on('error', console.error.bind(console, 'MongoDB connection error: Mongod is unhappy'));
 db.connection.on('open', function() {
-   console.log('Mongdb connection open');
+   console.log('Mongdb connection open, all hail the MongoD');
 })
 
 app.use('/api/users', userRoutes);

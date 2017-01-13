@@ -31,18 +31,16 @@ class SignUp extends Component {
   }
 
   loadedRecaptcha () {
-     console.log('Recaptcha loaded!')
   }
 
   verifyCallback (response) {
     if (response){
-      console.log('verifying your recaptcha response...')
     }
   }
 
   componentDidMount () {
     this.recaptchaInstance = grecaptcha.render('recaptchaSignUp', {
-        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX',
         callback: this.verifyCallback.bind(this),
         theme : 'dark',
         render: 'explicit',
@@ -58,25 +56,24 @@ class SignUp extends Component {
       errorMessage: message
     });
   };
-   
+
   hideModal = () => {
     this.setState({
       isOpen: false
     });
   };
-  
+
   //verifies recaptcha was loaded in console
   loadedRecaptcha () {
-    console.log('Recaptcha loaded!')
   }
-  
+
   onFormSubmit(e) {
     e.preventDefault();
     let user = new FormData();
     let signUpData = document.getElementById('signUpData')
     user = new FormData(signUpData)
     let that = this;
-    
+
     $.ajax({
       method: 'POST',
       url: '/auth/signup',

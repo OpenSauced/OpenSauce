@@ -64,7 +64,6 @@ export const fetchRecipes = (search, offset) => {
       if (recipe.title === undefined || recipe.description === undefined || recipe.ingredients === undefined || recipe.creator === null) {
         // // uh oh, someone posted something with blank data!
         // // this shouldn't be possible
-        // console.log('index', index, 'is missing something! removed:', recipe.title)
         // //remove that item. Warning, this shouldnt even be needed....
         // finalPayload.data.splice(index, 1)
         } else {
@@ -101,7 +100,6 @@ export const fetchRecipes = (search, offset) => {
 // grab user recipies from the database for our MyCookbook page
 export const getUserRecipes = (filter, offset) => {
   let previousFeed = getStore().getState().recipes;
-  //console.log('Previous Feed', previousFeed)
   // get the username from the redux state
   var username = getStore().getState().userData.userData.username
   // set the url that we are going to make the get request to
@@ -137,14 +135,13 @@ export const getUserRecipes = (filter, offset) => {
       })
 
       let recipes = response.data.my_recipes.concat(response.data.saved_recipes)
-      //console.log(recipes)
       recipes = _.union(recipes)
 
       //Filter Saved Recipes
       if (filter && filter.isSavedRecipesChecked === false) {
         recipes = _.reject(recipes, (recipe) => recipe.type === "saved_recipe")
       }
-      
+
       //Filter My Recipes
       if (filter && filter.isMyRecipesChecked === false) {
         recipes = _.reject(recipes, (recipe) => recipe.type === "my_recipe")
@@ -169,7 +166,6 @@ export const getUserRecipes = (filter, offset) => {
 export const getRecipeById = (recipeId) => {
   var url = '/api/recipes/' + recipeId
   var request = axios.get(url)
-  console.log('ACTION DISPATCHED', recipeId)
   return {
     type: GET_RECIPE_BY_ID,
     payload: request
@@ -189,7 +185,6 @@ export const addUserSavedRecipe = (recipeId, userId) => {
     recipeId: recipeId,
     userId: userId
   })
-  //console.log('ACTION FIRED: -ADD RECIPE-', recipeId, userId)
   return {
     type: ADD_USER_SAVED_RECIPE,
     payload: request
@@ -202,7 +197,6 @@ export const removeUserSavedRecipe = (recipeId, userId) => {
     recipeId: recipeId,
     userId: userId
   })
-  //console.log('ACTION FIRED: -REMOVE RECIPE-', recipeId, userId)
   return {
     type: REMOVE_USER_SAVED_RECIPE,
     payload: request

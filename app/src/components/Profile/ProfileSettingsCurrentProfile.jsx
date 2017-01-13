@@ -6,8 +6,7 @@ import ProfileSettingsUserImage from './ProfileSettingsUserImage';
 
 
 // component recieves all userData as props
-const CurrentProfile = ({data}) => { 
-  console.log("blaaaaah ", {data})
+const CurrentProfile = ({data}) => {
     return (
       <div class="row  mx-auto">
         <div className="col-12">

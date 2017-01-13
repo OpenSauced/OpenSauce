@@ -57,7 +57,6 @@ router.get('/:username/userrecipes', function(req, res) {
 //Note: authRoutes.authRecaptcha will only work is multer is called before it
       // there is multipart form data that is being sent in req.body
 router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('images'), authRoutes.authRecaptcha, function(req, res) {
-    console.log('ADD RECIPE', req.body.forked_parent)
     var userId = req.params._id
     var response = null
     var parent = req.body.forked_parent
@@ -120,13 +119,9 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
 
 router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, upload.single('images'), function(req, res) {
   var recipeId = req.body.id
-  // console.log('recipeId: ', recipeId)
-  // console.log('req.body', req.body)
   db.recipeFunctions.editRecipe(recipeId, req.body)
   .then((recipe) => {
-    console.log('was edited');
     if (req.file !== undefined) {
-      console.log('image WAS sent')
         // upload to cloudinary
         cloudinary.uploader.upload(req.file.path, (result) => {
             fs.unlink(req.file.path, (err) => {
@@ -141,7 +136,6 @@ router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, upload.single('
             });
         });
     } else {
-      console.log('image NOT sent')
         res.send(recipe);
     }
   })
@@ -158,7 +152,6 @@ router.get('/:recipeId', function(req, res) {
             res.send(err);
         })
         .then((recipe) => {
-            console.log('recipeRoutes -- .then((recipe) ==> ', recipe)
             res.send(recipe);
         })
 })
@@ -172,12 +165,9 @@ router.post('/scraperecipe', authRoutes.authRecaptcha, function(req, res) {
     var url = req.body.url
     var userId = req.body.userId
     recipeResponse = null
-    console.log(url)
     db.scraperFunctions.lookUpRecipeByUrl(url)
         .then((recipe) => {
-            console.log("recipe ", recipe)
             if (recipe === null) {
-                console.log("in the null")
                 db.scraperFunctions.scrapeRecipe(url)
                     .catch((err) => {
                         throw new Error(err)
@@ -204,7 +194,6 @@ router.post('/scraperecipe', authRoutes.authRecaptcha, function(req, res) {
                     recipeId: recipe._id,
                     saved: true
                 }
-                console.log('bold assumption', recipe)
                 res.status(200).send(statusObj)
             }
         })

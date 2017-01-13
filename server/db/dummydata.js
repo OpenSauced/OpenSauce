@@ -1,5 +1,5 @@
 var data = {
-  users: [ 
+  users: [
     {
       id: 'u001',
       first_name: 'Rub',
@@ -31,7 +31,7 @@ var data = {
 }
 
 data.getUser = (userName) => {
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     setTimeout(() => {
       var result = data.users.filter(x => x.user_name === userName).pop() || 'No User Found in Dummy DB'
       resolve(result);
@@ -41,7 +41,7 @@ data.getUser = (userName) => {
 }
 
 data.insertUser = (userData) => {
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     setTimeout(() => {
       data.users.push(userData)
       resolve("Insert OK");
@@ -53,21 +53,17 @@ data.insertUser = (userData) => {
 module.exports = data;
 
 data.getRecipes = (userName) => {
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     setTimeout(() => {
       var userId = data.users
         .filter(x => x.user_name === userName) // Get single item array of profile information.
         .pop() // Get item [0] from the array
         .id  //return the ID Field
         || 'User not found in Database'
-      console.log(userId)
       var recipes = data.recipes
         .filter(x => x.creator === userId) //Get All recipes that match user ID
-      console.log(recipes)
       resolve(recipes);
       reject('Unexpected Dummy DB Error');
     }, 300);
   });
 }
-
-

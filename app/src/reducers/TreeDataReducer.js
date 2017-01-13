@@ -7,7 +7,6 @@ export default (state = '', action) => {
   switch (action.type) {
 
     case GET_RECIPE_BY_ID:
-      console.log('TreeDataReducer FIred')
       return setTreeData(action.payload.data)
 
   }
@@ -23,7 +22,7 @@ function setTreeData(recipe) {
   //push currentRecipeInfo to the tree
   currentNode.push({title: currentRecipe.title, expanded: true})
   treeData = currentNode
-  
+
   //check for children
   if (currentRecipe.forked_children.length) {
     currentNode[0].children = []
@@ -50,16 +49,16 @@ function setTreeData(recipe) {
       currentRecipe.forked_parent.forked_children.forEach(child => {
         if (child._id !== currentRecipe._id) currentNode.unshift(
           {
-            title: (<Link className="tree-link" to={`/viewrecipe?recipeId=${child._id}`}>{child.title}</Link>), 
+            title: (<Link className="tree-link" to={`/viewrecipe?recipeId=${child._id}`}>{child.title}</Link>),
             subtitle: child.creator.username
           }
-        ) 
+        )
       })
     }
 
     treeData = [parentNode]
   }
 
-  
+
   return treeData
 }

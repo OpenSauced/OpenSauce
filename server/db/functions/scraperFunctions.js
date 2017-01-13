@@ -28,7 +28,7 @@ xPorts.scrapeRecipe = function(url) {
         return xPorts.scrapeFoodNetwork(url)
     } else if (url.includes('allrecipes') && url.includes('/recipe/')) {
         return xPorts.scrapeAllRecipes(url)
-    } 
+    }
     else {
         return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
     }
@@ -48,7 +48,7 @@ xPorts.scrapeEpicurious = function(url) {
                 listItem: 'li.preparation-step'
             },
             description: 'div.dek p',
-             
+
             recipe_images: {
                 selector:'picture.photo-wrap source',
                 attr: 'srcset'
@@ -64,7 +64,7 @@ xPorts.scrapeEpicurious = function(url) {
             recipeObj.credit = 'Epicurious'
             return recipeObj
         })
-        
+
 }
 
 //////////////////////////////
@@ -91,7 +91,6 @@ xPorts.scrapeFoodNetwork = function(url) {
             if (recipeObj.ingredients.length < 1){
                 return Promise.reject('There wasn\'t a recipe for us to scrape on that link. Try a different link.')
             } else {
-            console.log(recipeObj)
             let directions = recipeObj.directions.join(' ');
             let title = recipeObj.title
             recipeObj.directions = directions
@@ -103,24 +102,24 @@ xPorts.scrapeFoodNetwork = function(url) {
     })
 };
 
-//foodNetwork scraper produces a title like this : 
+//foodNetwork scraper produces a title like this :
      // 'Buffalo Wings Recipe : Alton Brown : Food Network'
-// funciton parses out 'Recipe' and 'Food Network' and adds author if there is one 
+// funciton parses out 'Recipe' and 'Food Network' and adds author if there is one
 xPorts.parseFoodNetworkTitle = (titleString) => {
   // remove colons and spaces around colons
   let newTitleArray = titleString.split(' : ').slice(0,-1)
   // remove 'Recipe from title'
   let titleMinusRecipe = newTitleArray[0].slice(0,newTitleArray[0].indexOf(' Recipe'))
-  
+
   //this is the final recipe title
   let newTitle = ''
   // ['title','author','Food NetWork']
   newTitleArray.length > 1
-    // ----------------  'title'  + ' by ' + 'author' 
+    // ----------------  'title'  + ' by ' + 'author'
     ? newTitle = titleMinusRecipe + ' by ' + newTitleArray[1]
     //  or just 'title'
     : newTitle = titleMinusRecipe
-  
+
   return newTitle
 }
 
@@ -166,7 +165,6 @@ xPorts.scrapeAllRecipes = function(url) {
                 }
             }
             recipeObj.recipe_images = {public_url: recipeObj.recipe_images}
-            console.log(recipeObj)
             return recipeObj;
 
         })
@@ -176,9 +174,9 @@ module.exports = xPorts;
 
 // DON't DELETE -
 //  - Todo: work on dynamic way to match domain name with function name
-//    Example: getSiteName(https://www.google.com) 
-//        ==> return google 
-//        ==> getFunctionName(google) 
+//    Example: getSiteName(https://www.google.com)
+//        ==> return google
+//        ==> getFunctionName(google)
 //        ==> calls scrapeGoogle()
 
 //  xPorts.parseSiteNameFromUrl = function (url) {

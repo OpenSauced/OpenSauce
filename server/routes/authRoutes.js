@@ -35,7 +35,6 @@ router.authRecaptcha = function (req, res, next) {
     // construct url to send and verify recaptcha
     let captchaRes = req.body['g-recaptcha-response'];
     let secret = config.recaptcha.secret;
-    // console.log('authRecaptcha ===== ', captchaRes)
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
         + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress;
 
@@ -147,7 +146,7 @@ router.get('/logout', function(req, res) {
 
 // router.secondarySignupCheck
 router.post('/signup', multer().any(), router.authRecaptcha, function(req, res) {
-    
+
     router.signUp(req.body).then(function(exists) {
         if (exists === true) {
             res.status(500).send('Sorry! That username is taken, please choose another.');
