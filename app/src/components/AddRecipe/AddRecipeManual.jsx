@@ -169,7 +169,7 @@ class AddRecipeManual extends Component {
         }
       })
     } else {
-      that.props.openModal('There is a problem with your recaptcha response')
+      this.props.openModal('There is a problem with your recaptcha response')
     }
   }
 
@@ -283,7 +283,14 @@ class AddRecipeManual extends Component {
           <div className="form-group">
           <h2>Recipe Photo:</h2>
             <Dropzone multiple={false} onDrop={this.onDrop}>
-                {this.state.images.length > 0 ? <div className="imageUploadBlock" style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}></div> : `Click or drag an image inside of the box to upload.`}
+                {
+                  this.state.images.length > 0 
+                    ? <div 
+                        className="imageUploadBlock" 
+                        style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}
+                      ></div> 
+                    : `Click or drag an image inside of the box to upload.`
+                }
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
