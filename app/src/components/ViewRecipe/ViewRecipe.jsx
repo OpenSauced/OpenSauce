@@ -11,30 +11,29 @@ import ForkButton from './ForkButtonSolo'
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
+  var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
   var image = recipe.recipe_images.public_url ? <div className="imageBlockRecipeView" style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}></div> : ''
 
   if (recipe){
 
     return (
       <div className="container">
-        
         <div className="row view-recipe-container">
-          <div className="col-12 flex-wrap">
-            {image}
-          </div>
           <div className="col d-flex flex-wrap">
             <div className="row">
               <div className="col-12 recipe-title">
-                <h2>{ recipe.title }</h2>
-
+                <h2 className="">{recipe.title}</h2>
               </div>
               <div className="col-12 recipe-description">
-                { description }
+                {description}
               </div>
               <div className="align-self-end">
-                <RecipeCreator recipeCreator={ recipe.creator }/>
+                <RecipeCreator recipeCreator={recipe.creator}/>
               </div>
              </div>
+          </div>
+          <div className="col">
+            {image}
           </div>
         </div>
         <div className="row justify-content-between view-recipe-container">
