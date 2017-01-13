@@ -5,6 +5,14 @@ const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe,
 
 var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url : '/assets/cat.gif'
 
+function getScore(score = 0) {
+ var result = new Array(Math.floor(score * 5)).fill(' ')
+
+ return result.map(x => {
+  return <i className="fa fa-star"></i>
+ })
+}
+
   return (
     <div className="cardRecipeCol col-12 col-sm-12 col-md-6 col-lg-4">
         <div className="card recipeCard">
@@ -20,7 +28,7 @@ var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url 
               <p>Author: {recipe.creator.username}</p>
             </div>
             <p className="col-12 card-text">{recipe.description}</p>
-            <p className="col-12"> {'score' in recipe ? "Search Score: " + recipe.score : ''}</p>
+            <p className="col-12"> {'score' in recipe ? getScore(recipe.score) : ''}</p>
             <div className="row align-self-end mx-auto">
               <div className="col-6 d-flex flex-wrap">
                 <Link to={`/addrecipe?recipe=${recipe._id}`} className="btn btn-primary recipeCardBtn w-100">Fork Recipe</Link>
