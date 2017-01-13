@@ -26,7 +26,7 @@ class RecipeList extends Component {
         treeData={this.props.treeData}
         isVirtualized={false} 
         onChange={() => {}}
-        ref={() => {this.disableDrag()}}
+        ref={() => {this.disableDrag();window.scrollTo(0, 0)}}
       />
       
     )
