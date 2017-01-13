@@ -118,14 +118,32 @@ router.post('/:_id/addrecipe', authRoutes.ensureAuthenticated, upload.single('im
 
 })
 
-router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, function(req, res) {
-  var recipeId = req.params._id
-  console.log('recipeId: ', recipeId)
-  console.log('req.body', req.body)
+router.post('/:_id/editrecipe/', authRoutes.ensureAuthenticated, upload.single('images'), function(req, res) {
+  var recipeId = req.body.id
+  // console.log('recipeId: ', recipeId)
+  // console.log('req.body', req.body)
   db.recipeFunctions.editRecipe(recipeId, req.body)
   .then((recipe) => {
-    console.log('recipe in recipe routes:', recipe)
-    res.send(recipe)
+    console.log('was edited');
+    if (req.file !== undefined) {
+      console.log('image WAS sent')
+        // upload to cloudinary
+        cloudinary.uploader.upload(req.file.path, (result) => {
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    console.error('Error on image delete:', err);
+                } else {
+                    // adds the photo to the recipe in the database
+                    db.recipeFunctions.addPhotoUrl(recipe._id, result).then(function(recipeDB) {
+                        res.send(recipeDB)
+                    })
+                }
+            });
+        });
+    } else {
+      console.log('image NOT sent')
+        res.send(recipe);
+    }
   })
   .catch((err)=>{
     res.status(500).send(err)

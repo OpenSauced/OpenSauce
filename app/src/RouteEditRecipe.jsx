@@ -28,6 +28,40 @@ class RouteEditRecipe extends Component {
       images: []
     }
 
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+  // Puts the image into the component state
+  onDrop(image) {
+    console.log('got it')
+    this.setState( { image: image } );
+  }
+
+  // Handles the input for the submit button
+  // ****CURRENTLY NOT IMPLEMENTED****
+  handleImageUpload(e) {
+    e.preventDefault();
+
+    let image = new FormData();
+    image.append('ProfilePicture', this.state.image[0]);
+
+    $.ajax({
+      method: 'POST',
+      url: `/api/users/updateInfo/profilePicture`,
+      data: 'image',
+      cache: false,
+      contentType: false,
+      processData: false,
+    })
+    .catch((err) => {
+      console.error('Image did not upload: ', err);
+    })
+    .then((res) => {
+      console.log('Getting current data? ', recipe);
+      const path = '/profile';
+      //browserHistory.push(path);
+    })
+
     this.recipeData = {};
     this.onDrop = this.onDrop.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -46,6 +80,7 @@ class RouteEditRecipe extends Component {
                   : ''
 
     this.setState({
+      id: currentRecipe._id,
       title: currentRecipe.title,
       description: currentRecipe.description,
       ingredients: currentRecipe.ingredients,
@@ -116,20 +151,24 @@ class RouteEditRecipe extends Component {
   onFormSubmit(e) {
     e.preventDefault();
     let newIngredients = this.spliceBlankIngredients(this.state.ingredients);
-    let recipe = {
-      title: this.state.title,
-      description: this.state.description,
-      ingredients: newIngredients,
-      directions: this.state.directions,
-      images: this.state.images[0],
-      recipeId: this.props.currentRecipe._id
-    }
+    let recipe = new FormData();
+    // add form data for ajax response
+    recipe.append('title', this.state.title);
+    recipe.append('id', this.state.id)
+    recipe.append('description', this.state.description);
+    recipe.append('ingredients', JSON.stringify(newIngredients));
+    recipe.append('directions', this.state.directions);
+    recipe.append('notes', this.state.notes)
+    //response from recaptcha and images
+    recipe.append('images', this.state.image[0]);
     //Does the end of this route handle recipe.recipeId?
     $.ajax({
       method: 'POST',
-      url: `/api/recipes/${recipe.recipeId}/editrecipe`,
+      url: `/api/recipes/${this.state.id}/editrecipe`,
       data: recipe,
-      dataType: 'json'
+      cache: false,
+      contentType: false,
+      processData: false,
     })
     .catch((err) => {
       console.error('Recipe did not post. Please enter all required information', err);
@@ -142,26 +181,17 @@ class RouteEditRecipe extends Component {
     })
   }
 
-    // Handle the image file upload. This accepts clicking and drag and drop.
-  onDrop(acceptedFiles) {
-    // This is required for multiple images
-      // images: this.state.images.concat(acceptedFiles)
-    // This is for single image uploads
-    this.setState({
-      images: acceptedFiles
-    });
-  }
 
   render() {
 
-    return (  
+    return (
       <div>
         <HeaderNav/>
         <AppHeader title={this.props.currentRecipe.title} notOnHomepage={true}/>
         <div className="row">
           <div className="container view-recipe-container">
           <p>Here you can edit your recipe. Click submit to save your changes.</p>
-            <form onSubmit={this.onFormSubmit}>
+            <form onSubmit={this.onFormSubmit.bind(this)} method="post" encType="multipart/form-data" target="_top">
               <div className="form-group">
                 <label htmlFor="" className="w-100">
                   <h3>Recipe Title:</h3>
@@ -216,34 +246,33 @@ class RouteEditRecipe extends Component {
               <div className="form-group">
                 <h3>Recipe Notes:</h3>
                 <textarea
-                  className="col-10 form-control"              
+                  className="col-10 form-control"
                   placeholder="Please enter your notes about this recipe"
                   id="recipe-notes"
-                  row="7"
+                  rows="7"
                   value={this.state.notes}
                   onChange={this.onInputChange.bind(this)}
                 ></textarea>
               </div>
               <div className="form-group">
                 <h2>Recipe Photo:</h2>
-               {/* THis errors out - Uncaught TypeError: Illegal invocation
-                *} <Dropzone multiple={false} onDrop={this.onDrop}>
+                <Dropzone multiple={false} onDrop={this.onDrop}>
                     {
-                      this.state.images.length > 0 
-                        ? <div 
-                            className="imageUploadBlock" 
-                            style={{'backgroundImage': 'url(' + this.state.images[0].preview + ')' }}
-                          ></div> 
-                        : `Click or drag an image inside of the box to upload.`
+                      this.state.image
+                        ? <div
+                            className="imageUploadBlock"
+                            style={{'backgroundImage': 'url(' + this.state.image[0].preview + ')' }}
+                          ></div>
+                        : <div>`Click or drag an image inside of the box to upload.`</div>
                     }
-                </Dropzone> */}
+                </Dropzone>
               </div>
               <span className="">
                 <button type="submit" className="btn btn-primary">Submit</button>
               </span>
             </form>
           </div>
-        </div> 
+        </div>
       </div>
     )
   }

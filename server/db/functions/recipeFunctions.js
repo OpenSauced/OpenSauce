@@ -36,7 +36,8 @@ xPorts.editRecipe = function(recipeId, recipe){
           'title': recipe.title,
           'description': recipe.description,
           'ingredients': recipe.ingredients,
-          'directions': recipe.directions
+          'directions': recipe.directions,
+          'notes': recipe.notes
         }
       },
       {
@@ -70,10 +71,10 @@ xPorts.addNewRecipe = (userId, recipe) => {
     }
     return recipeModel.findOneAndUpdate(
                         {
-                          title: recipe.title, 
+                          title: recipe.title,
                           creator: recipe.creator
-                        }, 
-                        recipe, 
+                        },
+                        recipe,
                         {upsert: true, new: true}
                       )
 }
