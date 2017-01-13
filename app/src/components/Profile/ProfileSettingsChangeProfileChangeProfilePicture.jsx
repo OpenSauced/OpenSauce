@@ -50,7 +50,14 @@ class ChangeProfilePicture extends Component {
           <form className="col-12 row" action="/api/users/updateInfo/profilePicture" method="post" encType="multipart/form-data" target="_top">
             <label className="col-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
             <Dropzone name="ProfilePicture" multiple={false} onDrop={this.onDrop}>
-              <div>{this.state.image.length > 0 ? <img src={this.state.image[0].preview} /> : `Click or drag an image inside of the box to upload.`}</div>
+                {
+                  this.state.image.length > 0
+                    ? <div
+                        className="imageUploadBlock"
+                        style={{'backgroundImage': 'url(' + this.state.image[0].preview + ')' }}
+                      ></div>
+                    : <div>`Click or drag an image inside of the box to upload.`</div>
+                }
             </Dropzone>
             <div className="col-12">
               <input className="btn btn-secondary" type="submit" value="save"/>
