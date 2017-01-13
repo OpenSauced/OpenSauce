@@ -8,7 +8,13 @@ Open source recipe books for open source people.
   - **Scrum Master of Disaster**: Chris Angelkos
   - **Dev Team Extreme**: Caroline Commons, Bennett Staley, Henry Hedges
 
-### Table of Contents
+## Table of Contents
+1. [Stack Attack](#Stack-Attack)
+1. [Usage](#Usage)
+1. [Installing Dependencies](#installing-dependencies)
+1. [Roadmap](#roadmap)
+1. [Contributing](#contributing)
+1. [Credit](#credit)
 
 ## Stack Attack (and requirements)
 #### Our combo for the win:
