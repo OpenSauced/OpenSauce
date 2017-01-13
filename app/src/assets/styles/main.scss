@@ -21,6 +21,10 @@ a:focus {
     text-decoration: none;
 }
 
+a {
+    color: #DA5F51
+}
+
 h1,
 h2,
 h3,
@@ -75,9 +79,14 @@ h6 {
 .recipeCard,
 .recipeCard a {
     width: 100%;
-    color: #373a3c;
+    //color: #373a3c;
     text-align: center;
     // margin: 0 4% 0 4% !important;
+}
+
+.recipeCard a:hover {
+    text-decoration: underline;
+    color: #C14161
 }
 
 .card-buttons a {
@@ -90,6 +99,10 @@ h6 {
 
 .recipeCardBtn {
     margin: 0 1%;
+}
+
+.recipeCard a.recipeCardBtn:hover {
+    text-decoration: none;
 }
 
 .searchBarButtonCombo {
