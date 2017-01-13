@@ -19,13 +19,37 @@ class SignUp extends Component {
 
     this.state = {
       isOpen: false,
-      errorMessage: ''
+      errorMessage: '',
+      verificationCode: ''
     };
 
+    this.recaptchaInstance = null
+
+    this.verifyCallback = this.verifyCallback.bind(this)
     this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
-    // recaptchaInstance needs to store the recatcha event instance so it can be accessed in resetcaptcha
-    this.recaptchaInstance = null
+  }
+
+  loadedRecaptcha () {
+     console.log('Recaptcha loaded!')
+  }
+
+  verifyCallback (response) {
+    if (response){
+      console.log('verifying your recaptcha response...')
+    }
+  }
+
+  componentDidMount () {
+    this.recaptchaInstance = grecaptcha.render('recaptchaSignUp', {
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        callback: this.verifyCallback.bind(this),
+        theme : 'limit',
+        render: 'explicit',
+        type: 'image',
+        size: 'normal',
+        tabindex: '0'
+    });
   }
 
   openModal = (message) => {
@@ -46,18 +70,12 @@ class SignUp extends Component {
     console.log('Recaptcha loaded!')
   }
   
-  // handle recaptcha reset
-  resetRecaptcha () {
-    console.log(this.recaptchaInstance)
-    this.recaptchaInstance.reset();
-  };
-
   onFormSubmit(e) {
     e.preventDefault();
-    var user = new FormData();
+    let user = new FormData();
     let signUpData = document.getElementById('signUpData')
     user = new FormData(signUpData)
-    var that = this;
+    let that = this;
     
     $.ajax({
       method: 'POST',
@@ -71,10 +89,10 @@ class SignUp extends Component {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
-        // if this errors out, reset the recaptcha
-        that.recaptchaInstance.reset()
         // user friendly error response
         that.openModal(xhr.responseText)
+        // if this errors out, reset the recaptcha
+        grecaptcha.reset(that.recaptchaInstance)
       }
     })
   }
@@ -104,13 +122,8 @@ class SignUp extends Component {
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
-              <Recaptcha
-                ref={e => this.recaptchaInstance = e}
-                theme="dark"
-                sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-                render="explicit"
-                onloadCallback={this.loadedRecaptcha}
-              />
+              {/* recaptcha will go here*/}
+              <div id="recaptchaSignUp"></div>
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
