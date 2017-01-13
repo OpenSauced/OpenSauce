@@ -33,11 +33,13 @@ class RouteViewRecipe extends Component {
       
     };
   }
+  
   updateTree(treeData) {
     this.setState({treeData: treeData})
   }
 
   componentDidMount(){
+    console.log('this.props --- route view recipe---', this.props)
     this.alreadyExistsModal()
     
   }

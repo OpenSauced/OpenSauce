@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import RecipeTree from './RecipeTree';
+import { Link } from 'react-router';
 
-import RecipeDescription from './RecipeDescription'
-import RecipeIngredientsList from './RecipeIngredientsList'
-import RecipeDirections from './RecipeDirections'
-import RecipeCreator from './RecipeCreator'
-import RecipeNotes from './RecipeNotes'
-import ForkButton from './ForkButtonSolo'
+import RecipeTree from './RecipeTree';
+import RecipeDescription from './RecipeDescription';
+import RecipeIngredientsList from './RecipeIngredientsList';
+import RecipeDirections from './RecipeDirections';
+import RecipeCreator from './RecipeCreator';
+import RecipeNotes from './RecipeNotes';
+import ForkButton from './ForkButtonSolo';
 
 const ViewRecipe = ({recipe, user}) => {
   var description = recipe.description || <RecipeDescription recipeDescription={recipe.description} />
-  var credit = recipe.credit ? <div>This fantastic recipe comes from: {recipe.credit}</div> : ''
-  var image = recipe.recipe_images.public_url ? <div className="imageBlockRecipeView" style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}></div> : ''
-
+  
+  var credit = recipe.credit 
+                ? <div>This fantastic recipe comes from: {recipe.credit}</div> 
+                : ''
+  
+  var image = recipe.recipe_images.public_url 
+                ? <div 
+                    className="imageBlockRecipeView w-100" 
+                    style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}
+                  ></div> 
+                : ''
+  
   if (recipe){
-
     return (
       <div className="container">
         <div className="row view-recipe-container">
-          <div className="col d-flex flex-wrap">
+          <div className="col-12 col-lg-6">
+            {image}
+          </div>
+          <div className="col-12 col-lg-6 d-flex flex-wrap">
             <div className="row">
               <div className="col-12 recipe-title">
                 <h2 className="">{recipe.title}</h2>
@@ -30,10 +41,7 @@ const ViewRecipe = ({recipe, user}) => {
               <div className="align-self-end">
                 <RecipeCreator recipeCreator={recipe.creator}/>
               </div>
-             </div>
-          </div>
-          <div className="col">
-            {image}
+            </div>
           </div>
         </div>
         <div className="row justify-content-between view-recipe-container">
@@ -57,23 +65,16 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
-
-
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
           <div>
             <br></br>
-            {credit}
-            
+            {/*credit*/}
           </div>
-
         </div>
-
-
         <div className="row view-recipe-container">
-          <RecipeTree className="col-12" /> 
           <h3>Recipe Tree:</h3>
-
+          <RecipeTree className="col-12" />
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">
