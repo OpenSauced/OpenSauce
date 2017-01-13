@@ -122,14 +122,8 @@ class SignUp extends Component {
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="password" name="password" placeholder="Password" required="required" autocomplete="off" />
-              <Recaptcha
-                ref={e => this.recaptchaInstance = e}
-                theme="dark"
-                sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-                render="explicit"
-                onloadCallback={this.loadedRecaptcha}
-              />
-              {/* load recaptcha async */}
+              {/* load recaptcha here*/}
+              <div id="recaptchaSignUp"></div>
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
           <h6>
