@@ -28,7 +28,6 @@ class SignUp extends Component {
     this.verifyCallback = this.verifyCallback.bind(this)
     this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
-    
   }
 
   loadedRecaptcha () {
@@ -36,10 +35,9 @@ class SignUp extends Component {
   }
 
   verifyCallback (response) {
-    console.log('verifying, here is the response ', response)
-  //   this.setState({ 
-  //     verificationCode: response
-  //   })
+    if (response){
+      console.log('verifying your recaptcha response...')
+    }
   }
 
   componentDidMount () {
@@ -91,11 +89,10 @@ class SignUp extends Component {
         browserHistory.push(path);
       },
       error: function(xhr, status, err){
-        // if this errors out, reset the recaptcha
-        console.log('SIGNUP RECAPTCHA INSTANCE: ', that.recaptchaInstance)
         // user friendly error response
-        grecaptcha.reset(that.recaptchaInstance)
         that.openModal(xhr.responseText)
+        // if this errors out, reset the recaptcha
+        grecaptcha.reset(that.recaptchaInstance)
       }
     })
   }
@@ -125,15 +122,8 @@ class SignUp extends Component {
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
+              {/* recaptcha will go here*/}
               <div id="recaptchaSignUp"></div>
-              
-              {/*<Recaptcha
-                ref={e => this.recaptchaInstance = e}
-                theme="dark"
-                sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-                render="explicit"
-                onloadCallback={this.loadedRecaptcha}
-              />*/}
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
