@@ -31,7 +31,7 @@ class AddRecipeTypeOfInsert extends Component {
                 // this will render the 'link' button to navigate out of manual edit
 
             // Add the manual link recipe button
-            ? <div className="col-2">
+            ? <div className="col-12">
                 <button 
                   className="btn btn-primary" 
                   name="manual" 
@@ -40,7 +40,7 @@ class AddRecipeTypeOfInsert extends Component {
                 </button>
               </div>
             //add the recipe via link button
-            : <div className="col-2">
+            : <div className="col-12">
                 <button 
                   className="btn btn-primary" 
                   name="link" 
