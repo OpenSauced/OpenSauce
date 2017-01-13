@@ -24,7 +24,7 @@ class AddRecipeFromLink extends Component {
   }
 
   componentDidMount () {
-    this.recaptchaInstance = grecaptcha.render('recaptcha1', {
+    this.recaptchaInstance = grecaptcha.render('recaptchaLink', {
         sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
         callback: this.verifyCallback.bind(this),
         theme : 'limit',
@@ -90,14 +90,11 @@ class AddRecipeFromLink extends Component {
             browserHistory.push(path);
           },
           error: function(xhr, status, err) {
-            // var responseMessage = xhr.responseText
-            console.log(' THIS =====', this, "==== AND THAT =====", that)
-            // that.recaptchaInstance.reset()
-            grecaptcha.reset(that.recaptchaInstance)
+            // console.log(' THIS =====', this, "==== AND THAT =====", that)
             that.props.openModal(xhr.responseText)
-            
-            console.log('that.recaptchaInstance =====>',  that.recaptchaInstance)
-            console.error("did not post to DB from link ", status, xhr.responseText);
+            grecaptcha.reset(that.recaptchaInstance)
+            // console.log('that.recaptchaInstance =====>',  that.recaptchaInstance)
+            // console.error("did not post to DB from link ", status, xhr.responseText);
           }
 
         })
@@ -127,7 +124,7 @@ class AddRecipeFromLink extends Component {
             />
           </label>
         </div>
-        <div id="recaptcha1"></div>
+        <div id="recaptchaLink"></div>
         <button type='submit' className="btn btn-primary">Get Recipe</button>
         </form>
         </div>
