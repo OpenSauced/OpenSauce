@@ -287,12 +287,12 @@ class AddRecipeManual extends Component {
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
-          <Recaptcha
+          {/*<Recaptcha
             sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
             render="explicit"
             verifyCallback={this.verifyCallback}
             onloadCallback={this.loadedRecaptcha}
-          />
+          />*/}
           </div>
           <span className="">
             <button type="submit" className="btn btn-primary">Submit</button>

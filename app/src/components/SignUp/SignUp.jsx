@@ -72,6 +72,7 @@ class SignUp extends Component {
       },
       error: function(xhr, status, err){
         // if this errors out, reset the recaptcha
+        console.log('SIGNUP RECAPTCHA INSTANCE: ', that.recaptchaInstance)
         that.recaptchaInstance.reset()
         // user friendly error response
         that.openModal(xhr.responseText)
