@@ -44,10 +44,10 @@ class SignUp extends Component {
     this.recaptchaInstance = grecaptcha.render('recaptchaSignUp', {
         sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
         callback: this.verifyCallback.bind(this),
-        theme : 'limit',
+        theme : 'dark',
         render: 'explicit',
         type: 'image',
-        size: 'normal',
+        size: 'small',
         tabindex: '0'
     });
   }
@@ -123,7 +123,7 @@ class SignUp extends Component {
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
               {/* recaptcha will go here*/}
-              <div id="recaptchaSignUp"></div>
+              <div id="recaptchaSignUp" ></div>
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>

@@ -239,6 +239,7 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"
                 placeholder="Please enter a description"
                 id="recipe-description"
+                row="7"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
@@ -271,6 +272,7 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"
                 placeholder="Please enter directions"
                 id="recipe-directions"
+                row="7"
                 value={this.state.directions}
                 onChange={this.onInputChange.bind(this)}
                 required
@@ -284,6 +286,7 @@ class AddRecipeManual extends Component {
                 className="col-10 form-control"              
                 placeholder="Please enter your notes about this recipe"
                 id="recipe-notes"
+                row="7"
                 value={this.state.notes}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
