@@ -74,7 +74,15 @@ const ViewRecipe = ({recipe, user}) => {
         </div>
         <div className="row view-recipe-container">
           <h3>Recipe Tree:</h3>
-          <RecipeTree className="col-12" /> 
+          {/* Commented out the recipe tree because while it works, it seems to cause 
+            * race conditions and the component runs all of its processes before it can
+            * get the data from redux. 
+            *
+            * There are a few console logs that can help illustrate this (was replicated 
+            * on my computer, yours might complete the processes in time though
+            * it might not happen on yours. Please check. )}
+            *
+          {/*<RecipeTree className="col-12" />*/} 
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">

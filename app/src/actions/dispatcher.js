@@ -35,6 +35,7 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
 
     case '/editrecipe':
       console.log('Route_Dispatcher editrecipe OK ', location.pathname)
+      console.log('Route_Dispatcher editrecipe - location.query ', location.query)
       getStore().dispatch(getRecipeById('recipeId' in location.query ? location.query.recipeId : ''))
       break
 

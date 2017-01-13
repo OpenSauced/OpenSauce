@@ -38,6 +38,7 @@ class RouteViewRecipe extends Component {
   }
 
   componentDidMount(){
+    console.log('this.props --- route view recipe---', this.props)
     this.alreadyExistsModal()
     
   }

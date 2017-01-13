@@ -46,6 +46,8 @@ class RouteEditRecipe extends Component {
     });
   }
 
+  // componentWill
+
   //function to track changes in the ingredient text and set it to state
   onIngredientChange(e) {
     let index = e.target.id.split('-')[1]
@@ -152,7 +154,6 @@ class RouteEditRecipe extends Component {
                 placeholder="Please enter a description"
                 className="col-10 form-control"
                 id="recipe-description"
-                style="height:200px; width:600px"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
