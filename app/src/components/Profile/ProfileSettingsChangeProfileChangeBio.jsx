@@ -17,7 +17,7 @@ class ChangeBio extends Component {
                     target="_top"
                 >
                     <label className="col-12 col-form-label" htmlFor="newBio">Bio:</label>
-                    <div className="col-12">
+                    <div className="col-12 col-md-5">
                         <textarea className="form-control" name="newBio" rows="4" cols="70"></textarea>
                     </div>
                     <div className="col-12">

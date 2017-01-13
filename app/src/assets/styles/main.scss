@@ -15,8 +15,14 @@ body {
 
 a,
 a:active,
-a:hover {
+a:hover,
+a:focus {
     color: ghostwhite;
+    text-decoration: none;
+}
+
+a {
+    color: #DA5F51
 }
 
 h1,
@@ -73,9 +79,14 @@ h6 {
 .recipeCard,
 .recipeCard a {
     width: 100%;
-    color: #373a3c;
+    //color: #373a3c;
     text-align: center;
     // margin: 0 4% 0 4% !important;
+}
+
+.recipeCard a:hover {
+    text-decoration: underline;
+    color: #C14161
 }
 
 .card-buttons a {
@@ -88,6 +99,10 @@ h6 {
 
 .recipeCardBtn {
     margin: 0 1%;
+}
+
+.recipeCard a.recipeCardBtn:hover {
+    text-decoration: none;
 }
 
 .searchBarButtonCombo {
@@ -462,6 +477,9 @@ h6 {
     border-color: #C14161;
     color: ghostwhite!important;
 }
+.btn:hover {
+    cursor: pointer;
+}
 
 .icon {
     color: ghostwhite;
@@ -577,13 +595,12 @@ h6 {
 
 .profile-border {
     border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
 }
 
-.team-list{
+.team-list {
     margin-top: 2em;
 }
 
-.modal-content{
+.modal-content {
     background-color: #FEFAF7;
 }
