@@ -62,8 +62,8 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
-          <RecipeTree className="col-12" /> 
           <h3>Recipe Tree:</h3>
+          <RecipeTree className="col-12" /> 
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">
