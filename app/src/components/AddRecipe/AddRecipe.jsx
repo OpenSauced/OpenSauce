@@ -58,7 +58,7 @@ class AddRecipe extends Component {
             {this.state.errorMessage}
           </ModalBody>
           <ModalFooter>
-            <button className='btn btn-default' onClick={this.hideModal}>Close</button>
+            <button className='btn btn-default btn-primary' onClick={this.hideModal}>Close</button>
           </ModalFooter>
         </Modal>
         {

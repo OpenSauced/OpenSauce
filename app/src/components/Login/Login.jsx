@@ -71,7 +71,7 @@ render(){
             {this.state.errorMessage}
           </ModalBody>
           <ModalFooter>
-            <button className='btn btn-default' onClick={this.hideModal}>
+            <button className='btn btn-default btn-primary' onClick={this.hideModal}>
               Close
             </button>
           </ModalFooter>
