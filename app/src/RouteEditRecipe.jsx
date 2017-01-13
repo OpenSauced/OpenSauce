@@ -35,6 +35,7 @@ class RouteEditRecipe extends Component {
   }
 
   componentWillMount () {
+    console.log('ROUTEEDITRECIPE pros ', this.props)
     let currentRecipe = this.props.currentRecipe;
     this.setState({
       title: currentRecipe.title,
@@ -137,7 +138,7 @@ class RouteEditRecipe extends Component {
                 <label htmlFor="" className="w-100">
                   <h3>Recipe Title:</h3>
                   <input
-                  className="col-10 form-control"
+                    className="col-10 form-control"
                     placeholder="Please enter Recipe Name"
                     id="recipe-title"
                     value={this.state.title}
@@ -151,6 +152,7 @@ class RouteEditRecipe extends Component {
                 placeholder="Please enter a description"
                 className="col-10 form-control"
                 id="recipe-description"
+                style="height:200px; width:600px"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
