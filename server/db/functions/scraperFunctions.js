@@ -6,7 +6,6 @@ const scrapeIt = require('scrape-it');
 const xPorts = {};
 
 xPorts.lookUpRecipeByUrl = function(url) {
-    console.log("in look lookUpRecipeByUrl")
     return recipeModel.findOne({ url: url })
         .populate('creator')
         .then((recipe) => {
@@ -21,7 +20,6 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
-    console.log("in scrape function ", url)
     if (!url.includes('epicurious') && !url.includes('foodnetwork') && !url.includes('allrecipes')) {
         return Promise.reject("Sorry! We don't support that site")
     } else if (url.includes('epicurious') && url.includes('/recipes/')) {
@@ -41,7 +39,6 @@ xPorts.scrapeRecipe = function(url) {
 // that is returned from a get request to epicurious
 
 xPorts.scrapeEpicurious = function(url) {
-    console.log("in scrape epic ", url)
     return scrapeIt(url, {
             title: 'div.title-source h1',
             ingredients: {
