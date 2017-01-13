@@ -26,6 +26,9 @@ class AddRecipeManual extends Component {
       verification: ''
     }
 
+    //variable to hold recaptcha instance
+    this.recaptchaInstance = null
+
     // Function bindings for the component
     this.onIngredientChange = this.onIngredientChange.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
@@ -58,6 +61,15 @@ class AddRecipeManual extends Component {
 
   componentDidMount(){
     console.log("AddRecipeManual mounted, here are it's props: ", this.props)
+    this.recaptchaInstance = grecaptcha.render('recaptchaManual', {
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        callback: this.verifyCallback.bind(this),
+        theme : 'limit',
+        render: 'explicit',
+        type: 'image',
+        size: 'normal',
+        tabindex: '0'
+    });
   }
 
   // this is set up to detect a change in recipeId props for
@@ -166,10 +178,12 @@ class AddRecipeManual extends Component {
         error: function(xhr, status, err){
           let responseMessage = xhr.responseText
           that.props.openModal(xhr.responseText)
+          grecaptcha.reset(this.recaptchaInstance)
         }
       })
     } else {
       this.props.openModal('There is a problem with your recaptcha response')
+      grecaptcha.reset(this.recaptchaInstance)
     }
   }
 
@@ -301,6 +315,7 @@ class AddRecipeManual extends Component {
             onloadCallback={this.loadedRecaptcha}
           />*/}
           </div>
+          <div id="recaptchaManual"></div>
           <span className="">
             <button type="submit" className="btn btn-primary">Submit</button>
           </span>
