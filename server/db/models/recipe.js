@@ -15,7 +15,7 @@ var RecipeSchema = new Schema({
 	// The recipe_images is plural but only accepts one image currently.
 	// Will refactor to allow multiple images later
 	recipe_images: {
-		public_url: String,
+		public_url: {type: String, default: '/assets/cat.gif'},
 		secure_url: String,
 		public_id: String,
 		signature: String,

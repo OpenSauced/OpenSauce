@@ -175,7 +175,7 @@ class AddRecipeManual extends Component {
         },
         error: function(xhr, status, err){
           that.props.openModal(xhr.responseText)
-          grecaptcha.reset(this.recaptchaInstance)
+          grecaptcha.reset(that.recaptchaInstance)
         }
       })
     } else {

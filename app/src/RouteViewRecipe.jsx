@@ -85,7 +85,7 @@ class RouteViewRecipe extends Component {
               Someone else already added that recipe. But you can save this to your cookbook or fork it from here.
             </ModalBody>
             <ModalFooter>
-              <button className='btn btn-default' onClick={this.hideModal}>
+              <button className='btn btn-default btn-primary' onClick={this.hideModal}>
                 Close
               </button>
             </ModalFooter>

@@ -48,7 +48,7 @@ class ChangeProfilePicture extends Component {
         <div className="row">
           <h2 className="col-12">Change Your Profile Picture</h2>
           <form className="col-12 row" action="/api/users/updateInfo/profilePicture" method="post" encType="multipart/form-data" target="_top">
-            <label className="col-2 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
+            <label className="col-12 col-md-5 col-form-label" htmlFor="ProfilePicture">Profile Picture:</label>
             <Dropzone name="ProfilePicture" multiple={false} onDrop={this.onDrop}>
                 {
                   this.state.image.length > 0
