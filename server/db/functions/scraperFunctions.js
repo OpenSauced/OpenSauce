@@ -6,7 +6,6 @@ const scrapeIt = require('scrape-it');
 const xPorts = {};
 
 xPorts.lookUpRecipeByUrl = function(url) {
-    console.log("in look lookUpRecipeByUrl")
     return recipeModel.findOne({ url: url })
         .populate('creator')
         .then((recipe) => {
@@ -21,7 +20,6 @@ xPorts.lookUpRecipeByUrl = function(url) {
 ///////////////////////////////////////////////////////////
 
 xPorts.scrapeRecipe = function(url) {
-    console.log("in scrape function ", url)
     if (!url.includes('epicurious') && !url.includes('foodnetwork') && !url.includes('allrecipes')) {
         return Promise.reject("Sorry! We don't support that site")
     } else if (url.includes('epicurious') && url.includes('/recipes/')) {
@@ -41,7 +39,6 @@ xPorts.scrapeRecipe = function(url) {
 // that is returned from a get request to epicurious
 
 xPorts.scrapeEpicurious = function(url) {
-    console.log("in scrape epic ", url)
     return scrapeIt(url, {
             title: 'div.title-source h1',
             ingredients: {
@@ -114,9 +111,9 @@ xPorts.parseFoodNetworkTitle = (titleString) => {
   let newTitleArray = titleString.split(' : ').slice(0,-1)
   // remove 'Recipe from title'
   let titleMinusRecipe = newTitleArray[0].slice(0,newTitleArray[0].indexOf(' Recipe'))
+  
   //this is the final recipe title
   let newTitle = ''
-  
   // ['title','author','Food NetWork']
   newTitleArray.length > 1
     // ----------------  'title'  + ' by ' + 'author' 
@@ -126,8 +123,6 @@ xPorts.parseFoodNetworkTitle = (titleString) => {
   
   return newTitle
 }
-
-
 
 /////////////////////////////////
 ///  AllRecipes.com Scraper  ////

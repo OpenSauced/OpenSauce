@@ -14,7 +14,7 @@ export default (state = {}, action) => {
         return newRecipe
 
     case GET_RECIPE_BY_ID:
-      //console.log('REDUCER FIRED', action.payload.data)
+      console.log('GET RECIPE BY REDUCER FIRED', action.payload.data)
       return action.payload.data
   }
   return state;

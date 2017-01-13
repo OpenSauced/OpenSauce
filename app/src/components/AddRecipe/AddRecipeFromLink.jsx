@@ -8,27 +8,39 @@ class AddRecipeFromLink extends Component {
     super (props)
 
     this.state = {
-      recipeUrl: '',
+      url: '',
       verificationCode: '',
       userId: ''
     }
- 
+
+    this.recaptchaInstance = null
+    // this.resetRecaptcha = this.resetRecaptcha.bind(this)
   }
 
-  componentWillMount () {
-    this.setState({
-      userId: this.props.userData._id
-    })
-    console.log('state ', this.state)
+  componentWillMount() {
+    // console.log('AddREcipeFormLink > componentWillReceiveProps > props ', this.props.userData._id)
+    let userId = this.props.userData._id
+    this.setState({ userId: userId })
+  }
+
+  componentDidMount () {
+    this.recaptchaInstance = grecaptcha.render('recaptchaLink', {
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        callback: this.verifyCallback.bind(this),
+        theme : 'limit',
+        render: 'explicit',
+        type: 'image',
+        size: 'normal',
+        tabindex: '0'
+    });
   }
 
   onInputChange (event) {
-
     //create a case and match it to the element id, update state accordingly
     switch(event.target.id) {
       case 'add_recipe_link':
-        this.setState({ recipeUrl: event.target.value })
-        // console.log(event.target.value)
+        this.setState({ url: event.target.value })
+        console.log(event.target.value)
         break;
     }
     return null
@@ -47,19 +59,25 @@ class AddRecipeFromLink extends Component {
 
   formSubmit (e) {
     e.preventDefault();
-    console.log(this.state)
+    console.log('ADDRECIPEFROM LINK > formSubmit > this.state ', this.state)
     /// check for valid URL - only checks for structure of the URL
-    if ( isURL( this.state.recipeUrl ) ) {
+    // console.log("REcipe URLs ", this.state.url)
+    ///////// check for valid url
+    let validURL = isURL( this.state.url )
+
+    if ( validURL ) {
       //check for recaptcha token submission
+
       if ( this.state.verificationCode !== '' ) {
 
+        console.log( 'recaptchaInstance value ====', this.recaptchaInstance )
         var that = this;
         $.ajax({
           url: '/api/recipes/scraperecipe',
           type: 'POST',
           data: {
             'userId': this.state.userId,
-            'url': this.state.recipeUrl,
+            'url': this.state.url,
             'g-recaptcha-response': this.state.verificationCode
           },
           success: function (statusObj) {
@@ -72,16 +90,18 @@ class AddRecipeFromLink extends Component {
             browserHistory.push(path);
           },
           error: function(xhr, status, err) {
-            var responseMessage = xhr.responseText
             that.props.openModal(xhr.responseText)
+            grecaptcha.reset(that.recaptchaInstance)
             console.error("did not post to DB from link ", status, xhr.responseText);
           }
+
         })
       } else {
-        that.props.openModal('There is a problem with your recaptcha response')
+        this.props.openModal('There is a problem with your recaptcha response')
+        grecaptcha.reset(this.recaptchaInstance)
       }
     } else {
-      that.props.openModal('Please enter a valid recipe url (0.o)')
+      this.props.openModal('Please enter a valid recipe url (0.o)')
     }
   }
 
@@ -102,12 +122,7 @@ class AddRecipeFromLink extends Component {
             />
           </label>
         </div>
-        <Recaptcha
-          sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-          render="explicit"
-          verifyCallback={this.verifyCallback.bind(this)}
-          onloadCallback={this.loadedRecaptcha.bind(this)}
-        />
+        <div id="recaptchaLink"></div>
         <button type='submit' className="btn btn-primary">Get Recipe</button>
         </form>
         </div>
