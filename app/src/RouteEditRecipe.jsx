@@ -41,12 +41,16 @@ class RouteEditRecipe extends Component {
   componentWillMount () {
     console.log('ROUTEEDITRECIPE props -- currentRecipe ', this.props.currentRecipe)
     let currentRecipe = this.props.currentRecipe;
+    let notes = ( currentRecipe.notes ) && currentRecipe.notes !== 'undefined' && currentRecipe.notes !== 'null'
+                  ? currentRecipe.notes
+                  : ''
+
     this.setState({
       title: currentRecipe.title,
       description: currentRecipe.description,
       ingredients: currentRecipe.ingredients,
       directions: currentRecipe.directions,
-      notes: currentRecipe.notes || 'null',
+      notes: notes,
       forkedParent: currentRecipe.forkedParent || 'none'
     });
   }
@@ -222,7 +226,8 @@ class RouteEditRecipe extends Component {
               </div>
               <div className="form-group">
                 <h2>Recipe Photo:</h2>
-                <Dropzone multiple={false} onDrop={this.onDrop}>
+               {/* THis errors out - Uncaught TypeError: Illegal invocation
+                *} <Dropzone multiple={false} onDrop={this.onDrop}>
                     {
                       this.state.images.length > 0 
                         ? <div 
@@ -231,7 +236,7 @@ class RouteEditRecipe extends Component {
                           ></div> 
                         : `Click or drag an image inside of the box to upload.`
                     }
-                </Dropzone>
+                </Dropzone> */}
               </div>
               <span className="">
                 <button type="submit" className="btn btn-primary">Submit</button>
