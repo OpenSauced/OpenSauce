@@ -121,7 +121,7 @@ class SignUp extends Component {
               <input type="text" id="lastName" type="lastName" name="lastName" placeholder="Last Name" required="required"/>
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
-              <input type="password" name="password" placeholder="Password" required="required" />
+              <input type="password" name="password" placeholder="Password" required="required" autocomplete="off" />
               <Recaptcha
                 ref={e => this.recaptchaInstance = e}
                 theme="dark"
