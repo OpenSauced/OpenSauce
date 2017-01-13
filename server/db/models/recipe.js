@@ -11,7 +11,7 @@ var RecipeSchema = new Schema({
 	description: {type: String, require: true},
 	ingredients: {type: [String], required: true},
 	directions: {type: String, required: true},
-	notes: {type:String, required: false},
+	notes: {type:String, default: 'There are no notes for this recipe, yet.'},
 	// The recipe_images is plural but only accepts one image currently.
 	// Will refactor to allow multiple images later
 	recipe_images: {
