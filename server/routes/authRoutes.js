@@ -38,7 +38,7 @@ router.authRecaptcha = function (req, res, next) {
     // console.log('authRecaptcha ===== ', captchaRes)
     let verificationURL = 'https://www.google.com/recaptcha/api/siteverify?secret='
         + secret + '&response='+ captchaRes + '&remoteip=' + req.connection.remoteAddress;
-        
+
     axios.post( verificationURL )
     .then((resObj) => { // google verification obj returned ---> https://developers.google.com/recaptcha/docs/verify
         if (resObj.data.success === true){
@@ -81,16 +81,26 @@ router.signUp = function(userData) {
     return db.userFunctions.findOrCreateUser(userData)
 }
 
+router.randomString = function() {
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+  var string_length = 25;
+  var randomstring = '';
+  for (var i=0; i<string_length; i++) {
+      var rnum = Math.floor(Math.random() * chars.length);
+      randomstring += chars.substring(rnum,rnum+1);
+  }
+  return randomstring
+}
+
+
 //actial login function
 router.login = function(user) {
-    console.log("user in login _____________ ", user)
     return router.verifyPassword(user.username, user.password).then(function(verified) {
         if (verified) {
             //cool you got verified, now lets give you a session
             //this could be its own function... whatever...
             return db.userFunctions.findByUserName(user.username).then(function(userDB) {
-                //not really a hash. whatever. bcrypt was too slow.
-                var hash = Math.floor(Math.random() * 100000000000)
+                var hash = router.randomString()
                 return db.userFunctions.updateSession(user, hash).then(function(userDB) {
                     return [userDB, hash]
                 })
