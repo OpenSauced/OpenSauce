@@ -15,8 +15,10 @@ body {
 
 a,
 a:active,
-a:hover {
+a:hover,
+a:focus {
     color: ghostwhite;
+    text-decoration: none;
 }
 
 h1,
@@ -461,6 +463,9 @@ h6 {
     background-color: #C14161;
     border-color: #C14161;
     color: ghostwhite!important;
+}
+.btn:hover {
+    cursor: pointer;
 }
 
 .icon {
