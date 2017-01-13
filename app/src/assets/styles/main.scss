@@ -113,7 +113,6 @@ h6 {
 
         .titleBarContainer {
             text-align: center;
-            // height: 100px !important;
             color: transparent !important;
             padding-bottom: 0 !important;
             margin: 0 !important;
@@ -185,7 +184,6 @@ h6 {
 
 .imageUploadBlock {
   width: 100%;
-  height: 100%;
   background-size: cover;
   background-position: center;
 }
@@ -272,7 +270,10 @@ h6 {
     padding: 0;
     margin: 0 0 3% -16px;
     max-width: 300px;
-    transform: scale(0.9);
+}
+
+#signUpData > #g-recaptcha  {
+  transform: scale(0.9);
 }
 
 .authForm {
