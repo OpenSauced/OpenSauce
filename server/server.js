@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 module.exports.app = app;
-module.exports.NODEPORT = process.env.PORT || 4040;
+module.exports.NODEPORT = process.env.PORT || 80;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
