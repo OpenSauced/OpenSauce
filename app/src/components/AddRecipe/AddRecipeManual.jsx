@@ -52,7 +52,6 @@ class AddRecipeManual extends Component {
     console.log("AddRecipeManual will mount, here are it's props: ", this.props)
     this.props.getUserData()
     .then((user) => {
-      // console.log("id in componentWillMount ", this.props.recipeId)
       if(this.props.recipeId){
         this.getRecipeFromDB(this.props.recipeId)
       }
