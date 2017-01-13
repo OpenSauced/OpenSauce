@@ -39,6 +39,9 @@ export const routeDispatcher = (location = browserHistory.getCurrentLocation()) 
       getStore().dispatch(getRecipeById('recipeId' in location.query ? location.query.recipeId : ''))
       break
 
+    case '/login':
+      console.log(browserHistory)
+
     default:
       console.log('Route_Dispatcher default @', location.pathname, ' : nothing to dispatch')
   }
