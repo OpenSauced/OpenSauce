@@ -59,6 +59,8 @@ class RouteProfile extends Component {
         <HeaderNav/>
         <AppHeader title={`Welcome ${this.props.userData.first_name} ${this.props.userData.last_name}!`}/>
         <div className="row">
+
+        <a name="profile" className="profile-anchor"></a>
         <div className="container view-recipe-container">
           <ProfileSettingsChangeProfileInfo renderInputs={this.state.renderInputs}/>
           <ProfileSettings renderClick={this.handleSelectChangeProfile}/>          
