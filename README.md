@@ -10,7 +10,7 @@ Open source recipe books for open source people.
 
 ## Table of Contents
 1. [Stack Attack](#Stack-Attack)
-1. [Usage](#Usage)
+1. [Usage](#usage)
 1. [Installing Dependencies](#installing-dependencies)
 1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
@@ -55,7 +55,7 @@ npm run watch // starts webpack/browsersync
 ### Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
-### CREDIT (where credit is due):
+### CREDIT
 -Iconography (happy-pot) by Julien Deveaux from The Noun Project
 -Recipes from Epicurious, The Food Network, All Recipes
 -Cat Chef from Tabby Cat Chrome Extension
