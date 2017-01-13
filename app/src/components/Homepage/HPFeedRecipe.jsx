@@ -3,7 +3,7 @@ import {Router, Link} from 'react-router';
 
 const HPFeedRecipe = ({recipe, savedRecipes, myRecipes, addRecipe, removeRecipe, userId, recipeId}) => {
 
-var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url : recipe.recipe_images.placeholder
+var imageOr = recipe.recipe_images.public_url ? recipe.recipe_images.public_url : '/assets/cat.gif'
 
   return (
     <div className="cardRecipeCol col-12 col-sm-12 col-md-6 col-lg-4">
