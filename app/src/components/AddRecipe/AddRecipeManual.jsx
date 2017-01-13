@@ -97,7 +97,6 @@ class AddRecipeManual extends Component {
     $.ajax({
       url: '/api/recipes/' + recipeId,
       success: function(recipe) {
-        console.log("RECIPE ", recipe.directions)
           this.setState({
             title: recipe.title,
             description: recipe.description,
@@ -216,7 +215,6 @@ class AddRecipeManual extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="row view-recipe-container">
       <h1 className="col-12 text-center">Add a Recipe</h1>

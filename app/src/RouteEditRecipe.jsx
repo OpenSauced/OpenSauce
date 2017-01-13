@@ -35,7 +35,7 @@ class RouteEditRecipe extends Component {
   }
 
   componentWillMount () {
-    console.log('ROUTEEDITRECIPE pros ', this.props)
+    console.log('ROUTEEDITRECIPE props -- currentRecipe ', this.props.currentRecipe)
     let currentRecipe = this.props.currentRecipe;
     this.setState({
       title: currentRecipe.title,
@@ -46,7 +46,9 @@ class RouteEditRecipe extends Component {
     });
   }
 
-  // componentWill
+  componentWillReceiveProps(nextProps){
+    console.log(' componentWillReceiveProps --- this is next props', nextProps)
+  }
 
   //function to track changes in the ingredient text and set it to state
   onIngredientChange(e) {
@@ -154,6 +156,7 @@ class RouteEditRecipe extends Component {
                 placeholder="Please enter a description"
                 className="col-10 form-control"
                 id="recipe-description"
+                rows="7"
                 value={this.state.description}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
@@ -164,6 +167,7 @@ class RouteEditRecipe extends Component {
                 placeholder="Please enter directions"
                 className="col-10 form-control"
                 id="recipe-directions"
+                rows="7"
                 value={this.state.directions}
                 onChange={this.onInputChange.bind(this)}
               ></textarea>
