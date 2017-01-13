@@ -52,12 +52,9 @@ const ViewRecipe = ({recipe, user}) => {
           <div className="col-4">
             {
               user._id === recipe.creator._id
-                ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary offset-6"> Edit this recipizzle</button></Link>
+                ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary offset-6"> Edit this recipe</button></Link>
                 : (
                     <div className="row ingredient-container-fork">
-                      <div className="col-6">
-                        <p> Want to change this recipe? Try forking it! </p>
-                      </div>
                       <ForkButton recipeId={ recipe._id } />
                     </div>
                   )
@@ -73,8 +70,10 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
-          <h3>Recipe Tree:</h3>
-          <RecipeTree className="col-12" />
+          <h3>Recipe Family Tree:</h3>
+          <div className="col-12 col-md-6">
+          <RecipeTree />
+          </div>
         </div>
         <div className="row view-recipe-container">
           <div className="col d-flex flex-wrap">
@@ -83,7 +82,7 @@ const ViewRecipe = ({recipe, user}) => {
                 user.username !== recipe.creator.username
                   ? recipe.creator.username + "'s Recipe Notes: "
                   : user.username === recipe.creator.username
-                    ? 'Your Recipe Notes:'
+                    ? 'Notes on This Recipe:'
                     : 'Recipe Notes:'
               }
             </h3>
@@ -95,9 +94,6 @@ const ViewRecipe = ({recipe, user}) => {
                 : (
                     <div className="col-4">
                       <div className="row ingredient-container-fork">
-                        <div className="col-6">
-                          <p> Want to add your own notes? Try forking it! </p>
-                        </div>
                         <ForkButton recipeId={recipe._id} />
                       </div>
                     </div>

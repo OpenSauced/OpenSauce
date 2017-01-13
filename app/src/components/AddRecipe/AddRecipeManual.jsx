@@ -219,7 +219,7 @@ class AddRecipeManual extends Component {
               <h2>Recipe Title:</h2>
               <input
                 className="col-10 form-control"
-                placeholder="Please enter Recipe Name"
+                placeholder="Please enter recipe title."
                 id="recipe-title"
                 value={this.state.title}
                 onChange={this.onInputChange.bind(this)}
@@ -232,7 +232,7 @@ class AddRecipeManual extends Component {
               <h2>Recipe Description:</h2>
               <textarea
                 className="col-10 form-control"
-                placeholder="Please enter a description"
+                placeholder="Please enter a description of the recipe."
                 id="recipe-description"
                 row="7"
                 value={this.state.description}
@@ -265,7 +265,7 @@ class AddRecipeManual extends Component {
               <h2>Directions:</h2>
               <textarea
                 className="col-10 form-control"
-                placeholder="Please enter directions"
+                placeholder="Please enter directions."
                 id="recipe-directions"
                 row="7"
                 value={this.state.directions}
@@ -279,7 +279,7 @@ class AddRecipeManual extends Component {
               <h2>Recipe Notes:</h2>
               <textarea
                 className="col-10 form-control"
-                placeholder="Please enter your notes about this recipe"
+                placeholder="(Optional) Please enter your notes about this recipe."
                 id="recipe-notes"
                 row="7"
                 value={this.state.notes}

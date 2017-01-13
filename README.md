@@ -20,3 +20,7 @@ Other moves we got:
 - tesseract
 - React DnD
 
+CREDIT (where credit is due):
+-Iconography (happy-pot) by Julien Deveaux from The Noun Project
+-Recipes from Epicurious, The Food Network, All Recipes
+-Cat Chef from Tabby Cat Chrome Extension

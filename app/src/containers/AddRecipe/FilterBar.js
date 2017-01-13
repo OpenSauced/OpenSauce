@@ -81,25 +81,24 @@ class FilterBar extends Component {
   render() {
     return (
       <div>
-      <h3> now viewing: </h3>
         <label><input
           id="saved_recipes_checkbox" 
           onChange={this.onCheckboxChange.bind(this)} 
           type="checkbox" 
           checked={this.state.isSavedRecipesChecked}
-        />SAVED RECIPES</label> &nbsp; &nbsp; 
+        /> SAVED RECIPES</label> &nbsp; &nbsp; 
         <label><input
           id="forked_recipes_checkbox"  
           onChange={this.onCheckboxChange.bind(this)} 
           type="checkbox" 
           checked={this.state.isForkedRecipesChecked}
-        />FORKED RECIPES</label> &nbsp; &nbsp; 
+        /> FORKED RECIPES</label> &nbsp; &nbsp; 
         <label><input 
           id="my_recipes_checkbox" 
           onChange={this.onCheckboxChange.bind(this)} 
           type="checkbox" 
           checked={this.state.isMyRecipesChecked}
-        />MY RECIPES</label>
+        /> MY RECIPES</label>
       </div>
     )
   }

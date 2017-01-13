@@ -90,7 +90,7 @@ class SearchBar extends Component {
         onSubmit={this.onFormSubmit.bind(this)}
       >
         <input
-          placeholder="Search for recipes..."
+          placeholder="Search for something delicious..."
           className="form-control"
           id="searchfield"
           value={this.props.searchTerm}

@@ -13,7 +13,7 @@ class RouteMyRecipes  extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={'Catchy Phrase'}>
+        <AppHeader title={'Time to Get Cooking!'}>
         <FilterBar />
         </AppHeader>
         <div className="row homePageContainer">
