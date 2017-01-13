@@ -57,7 +57,7 @@ const ViewRecipe = ({recipe, user}) => {
           <RecipeDirections recipeDirections={recipe.directions}/>
           <div>
             <br></br>
-            {/*credit*/}
+            {credit}
             
           </div>
         </div>
