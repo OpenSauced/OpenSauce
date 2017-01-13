@@ -176,7 +176,6 @@ class AddRecipeManual extends Component {
           browserHistory.push(path);
         },
         error: function(xhr, status, err){
-          let responseMessage = xhr.responseText
           that.props.openModal(xhr.responseText)
           grecaptcha.reset(this.recaptchaInstance)
         }
@@ -209,10 +208,10 @@ class AddRecipeManual extends Component {
 
   // Handle the image file upload. This accepts clicking and drag and drop.
   onDrop(acceptedFiles) {
-    this.setState({
-      // This is required for multiple images
+    // This is required for multiple images
       // images: this.state.images.concat(acceptedFiles)
-      // This is for single image uploads
+    // This is for single image uploads
+    this.setState({
       images: acceptedFiles
     });
   }
@@ -290,7 +289,6 @@ class AddRecipeManual extends Component {
                 id="recipe-notes"
                 value={this.state.notes}
                 onChange={this.onInputChange.bind(this)}
-                // {/* removed 'required' from this tag*/}
               ></textarea>
             </label>
           </div>
@@ -308,14 +306,8 @@ class AddRecipeManual extends Component {
             </Dropzone>
           </div>
           <div className="form-group gtfo-recapture">
-          {/*<Recaptcha
-            sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
-            render="explicit"
-            verifyCallback={this.verifyCallback}
-            onloadCallback={this.loadedRecaptcha}
-          />*/}
+            <div id="recaptchaManual"></div> 
           </div>
-          <div id="recaptchaManual"></div>
           <span className="">
             <button type="submit" className="btn btn-primary">Submit</button>
           </span>

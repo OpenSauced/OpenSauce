@@ -19,13 +19,39 @@ class SignUp extends Component {
 
     this.state = {
       isOpen: false,
-      errorMessage: ''
+      errorMessage: '',
+      verificationCode: ''
     };
 
+    this.recaptchaInstance = null
+
+    this.verifyCallback = this.verifyCallback.bind(this)
     this.loadedRecaptcha = this.loadedRecaptcha.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
-    // recaptchaInstance needs to store the recatcha event instance so it can be accessed in resetcaptcha
-    this.recaptchaInstance = null
+    
+  }
+
+  loadedRecaptcha () {
+     console.log('Recaptcha loaded!')
+  }
+
+  verifyCallback (response) {
+    console.log('verifying, here is the response ', response)
+  //   this.setState({ 
+  //     verificationCode: response
+  //   })
+  }
+
+  componentDidMount () {
+    this.recaptchaInstance = grecaptcha.render('recaptchaSignUp', {
+        sitekey : '6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX', 
+        callback: this.verifyCallback.bind(this),
+        theme : 'limit',
+        render: 'explicit',
+        type: 'image',
+        size: 'normal',
+        tabindex: '0'
+    });
   }
 
   openModal = (message) => {
@@ -46,12 +72,6 @@ class SignUp extends Component {
     console.log('Recaptcha loaded!')
   }
   
-  // handle recaptcha reset
-  resetRecaptcha () {
-    console.log(this.recaptchaInstance)
-    this.recaptchaInstance.reset();
-  };
-
   onFormSubmit(e) {
     e.preventDefault();
     let user = new FormData();
@@ -73,8 +93,8 @@ class SignUp extends Component {
       error: function(xhr, status, err){
         // if this errors out, reset the recaptcha
         console.log('SIGNUP RECAPTCHA INSTANCE: ', that.recaptchaInstance)
-        that.recaptchaInstance.reset()
         // user friendly error response
+        grecaptcha.reset(that.recaptchaInstance)
         that.openModal(xhr.responseText)
       }
     })
@@ -105,13 +125,15 @@ class SignUp extends Component {
               <input type="text" id="email" type="email" name="email" placeholder="Email" required="required"/>
               <input type="text" name="username" placeholder="Username" required="required" />
               <input type="text" name="password" placeholder="Password" required="required" />
-              <Recaptcha
+              <div id="recaptchaSignUp"></div>
+              
+              {/*<Recaptcha
                 ref={e => this.recaptchaInstance = e}
                 theme="dark"
                 sitekey="6LdWOBEUAAAAACTUSdYkHEjqeJIVtR7zM-yK0dbX"
                 render="explicit"
                 onloadCallback={this.loadedRecaptcha}
-              />
+              />*/}
               {/* load recaptcha async */}
               <button type="submit" className="btn btn-primary btn-block btn-large"> Sign Up </button>
           </form>
