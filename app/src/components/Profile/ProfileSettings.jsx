@@ -17,27 +17,27 @@ class ProfileSettings extends Component {
           * clicking one of the buttons will change what component renders in
           * ProfileSettingsChangeProfileInfo.js
         */}
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4 border-top-1">
           <ProfileSettingsUserImage image={ this.props.userData.user_image}/>
           <a className="col-2" href="#profile"><button className="btn btn-secondary w-100" name="profilePicture" onClick={ this.props.renderClick }> Edit your profile picture </button></a>
         </div>
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4">
           <p className="col-4"><h5>Name:</h5> {this.props.userData.first_name + ' ' + this.props.userData.last_name}</p>        
           <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="name" onClick={ this.props.renderClick }> Edit your name </button></a>
         </div>
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4">
           <p className="col-4"><h5>Email:</h5> {this.props.userData.email}</p>
           <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="email" onClick={ this.props.renderClick }> Edit your email </button></a>
         </div>
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4">
           <p className="col-4"><h5>Username:</h5> {this.props.userData.username}</p>
           <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="username" onClick={ this.props.renderClick }> Edit your username </button> </a> 
         </div>
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4">
           <p className="col-4"><h5>Bio:</h5> {this.props.userData.bio}</p>
           <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="bio" onClick={ this.props.renderClick }> Edit your bio </button></a>
         </div>
-        <div className="row justify-content-around">
+        <div className="row justify-content-around my-4">
           <p className="col-4"><h5>Password:</h5>...</p>
           <a className="col-2" href="#"><button className="btn btn-secondary w-100" name="password" onClick={ this.props.renderClick }> Edit your password </button></a>
         </div>
