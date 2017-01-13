@@ -22,14 +22,16 @@ const RouteAbout = () => {
         <div className="col-9 mx-auto">
           <div className="text-center">
             <h3>The Team</h3>
-            <img src="/assets/opensaucelogo.png" alt="Main Logo Icon" height="150" width="150" />
+            <div className="imageBlockRecipeView w-100" 
+                    style={{'backgroundImage': 'url(/assets/team-boyfriend-trainer.jpg)' }}>
+            </div>
           </div>
-          <ul className="">
-            <li><h5>Bennett Staley</h5><p></p></li>
-            <li><h5>Christopher Angelkos</h5><p></p></li>
+          <ul className="team-list">
+            <li><h5>Will Schwanke</h5><p>I like ranch dressing. Coding is cool too.</p></li>
+            <li><h5>Bennett Staley</h5><p>If it ain't broke, break it. Then fix that bug.</p></li>
+            <li><h5>Christopher Angelkos</h5><p>Looking forward to social night.</p></li>
             <li><h5>Carolyn Commons</h5><p>I like coding things that improve people's lives. And I love cats and sunshine.</p></li>
             <li><h5>Henry Hedges</h5><p>I am an amateur autonomist. Coding-wise: I've got big plans.</p></li>
-            <li><h5>Will Schwanke</h5><p>I like ranch dressing. Coding is cool too.</p></li>
           </ul>
         </div>
       </div>  
