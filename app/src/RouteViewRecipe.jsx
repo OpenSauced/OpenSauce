@@ -33,7 +33,7 @@ class RouteViewRecipe extends Component {
       
     };
   }
-  
+
   updateTree(treeData) {
     this.setState({treeData: treeData})
   }
@@ -94,7 +94,7 @@ class RouteViewRecipe extends Component {
           <AppHeader title={this.props.currentRecipe.title}>
           <div className="row">
             <SaveAndForkButtons
-              recipeId={this.props.currentRecipe._id}
+              recipe={this.props.currentRecipe}
               userId={this.props.userData.userData._id}
               saveRecipe={this.props.addUserSavedRecipe.bind(this)}
               forkRecipe={this.forkRecipe}
@@ -111,7 +111,6 @@ class RouteViewRecipe extends Component {
           <ViewRecipe 
             recipe={this.props.currentRecipe} 
             user={this.props.userData.userData} 
-
           />
         </div>
       );

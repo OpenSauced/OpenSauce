@@ -108,7 +108,7 @@ class AddRecipeFromLink extends Component {
   render() {
     return (
       <div className="row view-recipe-container">
-      <div className="col-6">
+      <div className="col-12 col-md-6 mb-sm-2">
         <form id='commentPostForm' onSubmit={this.formSubmit.bind(this)}>
         <div>
           <label className="w-100" htmlFor="add_recipe_link">
@@ -128,7 +128,7 @@ class AddRecipeFromLink extends Component {
         </div>
 
       {/* supported sites */}
-        <div className="col-6">
+        <div className="col-12 col-md-6">
           <h4>We support these sites:</h4>
           <div className="d-flex justify-content-around">
             <img 

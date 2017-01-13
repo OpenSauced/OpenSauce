@@ -1,10 +1,3 @@
-/////////////////////////////////
-/* Commented out this file, it seemed to cause issues when rendering RouteEditRecipe.
- * 
- * I also noticed GET_RECIPE_BY_ID is used a couple of times by different reducers,
- * maybe this has something to do with it?
- */
-
 
 import { GET_RECIPE_BY_ID } from '../actions/index'
 import { Link } from 'react-router'

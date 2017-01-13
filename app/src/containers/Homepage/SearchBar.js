@@ -27,7 +27,7 @@ class SearchBar extends Component {
     const html = document.documentElement;
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight && this.state.waitForResults === false) {
+    if (windowBottom + 600 >= docHeight && this.state.waitForResults === false) {
       this.setState({waitForResults: true})
       this.search(false, this.props.offset);
     }

@@ -10,9 +10,10 @@ import RouteHomepage from './RouteHomepage';
 import RouteProfile from './RouteProfile';
 import RouteAddRecipe from './RouteAddRecipe';
 import Route404 from './Route404';
-import MyRecipes from './RouteMyRecipes'
-import RouteViewRecipe from './RouteViewRecipe'
-import RouteEditRecipe from './RouteEditRecipe'
+import MyRecipes from './RouteMyRecipes';
+import RouteViewRecipe from './RouteViewRecipe';
+import RouteEditRecipe from './RouteEditRecipe';
+import RouteAbout from './RouteAbout';
 
 //Redux Stuff
 import { createStore, applyMiddleware } from 'redux';
@@ -52,6 +53,9 @@ function renderApplication () {
         
           {/* Login route */ }
           <Route path="/login" component={RouteLogin}/>
+
+          {/*About route */}
+          <Route path="/about" component={RouteAbout}/>
      
           {/* Recipe Routes */}
           <Route path="/addrecipe(?:recipeId)" component={RouteAddRecipe}/>
