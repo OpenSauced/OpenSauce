@@ -35,7 +35,7 @@ class RouteAddRecipe extends Component {
     return (
       <div className="container-fluid">
         <HeaderNav/>
-        <AppHeader title={'Catchy Phrase'}>
+        <AppHeader title={'Add Something Delicious'}>
           <AddRecipeTypeOfInsert renderClick={this.handleSelectHowToAddRecipe} renderInputs={this.state.renderInputs}/>
         </AppHeader>
           <AddRecipe renderInputs={this.state.renderInputs} recipeId={this.props.location.query.recipe}/>

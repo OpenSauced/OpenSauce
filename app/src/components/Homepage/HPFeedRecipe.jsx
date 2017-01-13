@@ -25,7 +25,7 @@ function getScore(score = 0) {
             </h2>
             {/*literally all i did was change the <p> tag into a div and turned the <div> into a <p> tag*/}
             <div className="col-12 card-title">
-              <p>Author: {recipe.creator.username}</p>
+              <p>Chef: {recipe.creator.username}</p>
             </div>
             <p className="col-12 card-text">{recipe.description}</p>
             <p className="col-12"> {'score' in recipe ? getScore(recipe.score) : ''}</p>
@@ -37,8 +37,8 @@ function getScore(score = 0) {
                 {
                   recipe._id in myRecipes ?
                     <div className="col-12 col-sm-6 mt-2 mt-sm-0"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn">My Recipe</div></div> : recipe._id in savedRecipes ?
-                    <div className="col-12 col-sm-6 mt-2 mt-sm-0"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {removeRecipe(recipeId, userId)}}>Unlike Recipe</div></div> :
-                    <div className="col-12 col-sm-6 mt-2 mt-sm-0"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {addRecipe(recipeId, userId)}}>Like Recipe</div></div>
+                    <div className="col-12 col-sm-6 mt-2 mt-sm-0"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {removeRecipe(recipeId, userId)}}>Unsave Recipe</div></div> :
+                    <div className="col-12 col-sm-6 mt-2 mt-sm-0"><div className="w-100 btn btn-primary recipe_card-like_button recipeCardBtn" onClick={() => {addRecipe(recipeId, userId)}}>Save Recipe</div></div>
                 }
             </div>
           </div>
