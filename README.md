@@ -1,6 +1,7 @@
 
 # OpenSauce
 Open source recipe books for open source people.
+Check us out! http://opensauce.site/
 
 # Team Members
 
