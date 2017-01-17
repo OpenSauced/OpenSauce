@@ -28,7 +28,7 @@ class SignUp extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
-  verifyCallback(){
+  verifyCallback(response){
     console.log('Recaptcha checked, ready to send!')
   }
 
