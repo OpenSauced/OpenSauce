@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+// Component handles each individual ingredient on the Edit view in RouteEditRecipe
 const EditRecipeIngredient = ({ingredient, index, handleIngredientOnChange, handleRemoveIngredient}) => {
   return (
     <div key={index} className="form-group">

@@ -22,7 +22,7 @@ const ViewRecipe = ({recipe, user}) => {
                     style={{'backgroundImage': 'url(' + recipe.recipe_images.public_url + ')' }}
                   ></div> 
                 : ''
-  
+  {/* there must be a recipe passed into this component for it to work */}
   if (recipe){
     return (
       <div className="container">
@@ -39,6 +39,7 @@ const ViewRecipe = ({recipe, user}) => {
                 {description}
               </div>
               <div className="align-self-end">
+                {/* shows a the creator of the recipe*/}
                 <RecipeCreator recipeCreator={recipe.creator}/>
               </div>
             </div>
@@ -46,11 +47,17 @@ const ViewRecipe = ({recipe, user}) => {
         </div>
         <div className="row justify-content-between view-recipe-container">
           <div className="col-8">
+          {/* shows a list of ingredients*/}
           <h3>Ingredients:</h3>
             <RecipeIngredientsList recipeIngredients={ recipe.ingredients }/>
           </div>
-          <div className="col-4">
+             <div className="col-4">
             {
+              {/* If the recipe is NOT the user's, show a 'fork this' button, in the ingredients box.
+                * If the recipe IS the user's, shows an edit button.
+                * This is geared toward user experience and to remind/encourage users to use the features of 
+                * our app.
+              */}
               user._id === recipe.creator._id
                 ? <Link to={`/editrecipe?recipeId=${recipe._id}`}><button className="btn btn-primary offset-6"> Edit this recipe</button></Link>
                 : (
@@ -62,14 +69,19 @@ const ViewRecipe = ({recipe, user}) => {
           </div>
         </div>
         <div className="row view-recipe-container">
+          {/* Shows the directions of the recipe */}
           <h3>Directions:</h3>
           <RecipeDirections recipeDirections={recipe.directions}/>
-          <div>
+          
+          {/*<div>
             <br></br>
-            {/*credit*/}
-          </div>
+            credit
+          </div>*/}
         </div>
         <div className="row view-recipe-container">
+          {/* Shows the recipe family tree feature 
+            * - each recipe has parents/siblings/children that are shown here
+          */}
           <h3>Recipe Family Tree:</h3>
           <div className="col-12 col-md-6">
           <RecipeTree />
@@ -79,16 +91,19 @@ const ViewRecipe = ({recipe, user}) => {
           <div className="col d-flex flex-wrap">
             <h3>
               {
+                {/* This introduces recipe notes to the user in a nice way  */}
                 user.username !== recipe.creator.username
                   ? recipe.creator.username + "'s Recipe Notes: "
                   : user.username === recipe.creator.username
-                    ? 'Notes on This Recipe:'
+                    ? 'Your Recipe Notes:'
                     : 'Recipe Notes:'
+                }
               }
             </h3>
             <RecipeNotes recipeNotes={ recipe.notes }/>
           </div>
             {
+              {/* If this recipe is not the user's, show the fork button to encourage feature use */}
               user._id === recipe.creator._id
                 ? null
                 : (
@@ -103,7 +118,7 @@ const ViewRecipe = ({recipe, user}) => {
       </div>
     );
   }
-  return ''
+  return 'No recipe...'
 }
 
 export default ViewRecipe

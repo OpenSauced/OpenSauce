@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+// Change bio component
 class ChangeBio extends Component {
     constructor() {
         super();

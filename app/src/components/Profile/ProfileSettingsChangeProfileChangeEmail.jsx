@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+// Change email component
 class ChangeEmail extends Component {
     constructor() {
         super();
@@ -14,6 +15,7 @@ class ChangeEmail extends Component {
                     <div className="col-12 col-md-5">
                         <input className="form-control" type="text" name="newEmail"/>
                     </div>
+                    {/* Added password verification because email is a vulnerability to the user*/}
                     <label className="col-12 col-form-label" htmlFor="password">Password:</label>
                     <div className="col-12 col-md-5">
                         <input className="form-control" type="text" name="password"/>
